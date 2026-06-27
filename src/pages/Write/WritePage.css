@@ -78,6 +78,7 @@
   display: flex;
   flex-direction: column;
   min-height: calc(100vh - 160px);
+  padding-top: 80px;
 }
 
 /* ---- Header ---- */
@@ -92,15 +93,25 @@
 
 .write-title-input {
   width: 100%;
-  padding: 6px 0;
-  border: none;
-  background: transparent;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
   color: var(--text-primary);
   font-size: var(--font-size-2xl);
   font-weight: 700;
   font-family: var(--font-display);
   outline: none;
   box-sizing: border-box;
+  transition: border-color var(--transition-fast);
+}
+
+.write-title-input:focus {
+  border-color: var(--accent);
+}
+
+.write-title-input::placeholder {
+  color: var(--text-tertiary);
 }
 
 .write-title-input::placeholder {

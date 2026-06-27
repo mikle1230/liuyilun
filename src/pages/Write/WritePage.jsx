@@ -32,19 +32,15 @@ export default function WritePage() {
   const textareaRef = useRef(null)
 
   const handlePublish = async () => {
-    if (!title.trim() || !content.trim()) return
-
     setPublishing(true)
     setMessage(null)
 
-    const isDev = import.meta.env.DEV
-
     try {
-      if (isDev) {
-        // Simulate in dev mode
-        await new Promise((r) => setTimeout(r, 800))
+      if (import.meta.env.DEV) {
+        await new Promise((r) => setTimeout(r, 600))
+        setPublishing(false)
         setMessage({ type: 'success', text: '✅ 本地模式：发布成功（模拟）' })
-        setTimeout(() => setMessage(null), 2000)
+        setTimeout(() => setMessage(null), 2500)
         return
       }
 
@@ -60,18 +56,17 @@ export default function WritePage() {
       })
 
       const data = await res.json()
+
       if (!res.ok) {
         throw new Error(data.error || '发布失败')
       }
 
-      setMessage({ type: 'success', text: '✅ 发布成功！即将跳转…' })
-      setTimeout(() => {
-        navigate(`/blog/${data.slug}`)
-      }, 1500)
-    } catch (err) {
-      setMessage({ type: 'error', text: `❌ ${err.message}` })
-    } finally {
       setPublishing(false)
+      setMessage({ type: 'success', text: '✅ 发布成功！即将跳转…' })
+      setTimeout(() => navigate(`/blog/${data.slug}`), 1500)
+    } catch (err) {
+      setPublishing(false)
+      setMessage({ type: 'error', text: `❌ ${err.message}` })
     }
   }
 
