@@ -73,6 +73,25 @@
   background: var(--accent-hover);
 }
 
+.write-gate-btn-secondary {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.write-gate-btn-secondary:hover {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border-color: var(--border-light);
+}
+
+.write-success-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
 /* ---- Editor layout ---- */
 .write-page {
   display: flex;

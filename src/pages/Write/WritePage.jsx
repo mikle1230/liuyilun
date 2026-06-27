@@ -27,20 +27,28 @@ export default function WritePage() {
   const [tags, setTags] = useState('')
   const [content, setContent] = useState('')
   const [publishing, setPublishing] = useState(false)
-  const [message, setMessage] = useState(null)
+  const [published, setPublished] = useState(false)
+  const [publishError, setPublishError] = useState(null)
   const navigate = useNavigate()
   const textareaRef = useRef(null)
 
+  const resetForm = () => {
+    setPublished(false)
+    setTitle('')
+    setTags('')
+    setContent('')
+    setPublishError(null)
+  }
+
   const handlePublish = async () => {
     setPublishing(true)
-    setMessage(null)
+    setPublishError(null)
 
     try {
       if (import.meta.env.DEV) {
         await new Promise((r) => setTimeout(r, 600))
         setPublishing(false)
-        setMessage({ type: 'success', text: '✅ 本地模式：发布成功（模拟）' })
-        setTimeout(() => setMessage(null), 2500)
+        setPublished(true)
         return
       }
 
@@ -62,11 +70,10 @@ export default function WritePage() {
       }
 
       setPublishing(false)
-      setMessage({ type: 'success', text: '✅ 发布成功！即将跳转…' })
-      setTimeout(() => navigate(`/blog/${data.slug}`), 1500)
+      setPublished(true)
     } catch (err) {
       setPublishing(false)
-      setMessage({ type: 'error', text: `❌ ${err.message}` })
+      setPublishError(err.message)
     }
   }
 
@@ -89,6 +96,33 @@ export default function WritePage() {
       textareaRef.current.focus()
     }
   }, [authed])
+
+  if (published) {
+    return (
+      <div className="write-page">
+        <div className="write-gate">
+          <div className="write-gate-card">
+            <h2>✅ 发送成功</h2>
+            <p className="write-gate-desc">
+              文章已发送到 GitHub，Vercel 正在自动部署。<br />
+              大约 30 秒后上线。
+            </p>
+            <div className="write-success-actions">
+              <button className="write-gate-btn" onClick={() => navigate('/')}>
+                返回首页
+              </button>
+              <button
+                className="write-gate-btn write-gate-btn-secondary"
+                onClick={resetForm}
+              >
+                继续写新文章
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   if (!authed) {
     return (
@@ -135,9 +169,9 @@ export default function WritePage() {
         />
       </div>
 
-      {message && (
-        <div className={`write-message ${message.type}`}>
-          {message.text}
+      {publishError && (
+        <div className="write-message error">
+          ❌ {publishError}
         </div>
       )}
 
