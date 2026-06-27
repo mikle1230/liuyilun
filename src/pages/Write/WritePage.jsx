@@ -4,20 +4,20 @@ import MarkdownRenderer from '../../components/MarkdownRenderer'
 import './WritePage.css'
 
 const MD_SYNTAX = [
-  { syntax: '# H1', desc: '一级标题', example: '# 文章标题' },
-  { syntax: '## H2', desc: '二级标题', example: '## 章节标题' },
-  { syntax: '### H3', desc: '三级标题', example: '### 小节标题' },
-  { syntax: '**文字**', desc: '加粗', example: '这是**重要**内容' },
-  { syntax: '*文字*', desc: '斜体', example: '这是*斜体*文字' },
-  { syntax: '[文字](url)', desc: '超链接', example: '[点击访问](https://example.com)' },
-  { syntax: '![alt](url)', desc: '图片', example: '![风景](/image.jpg)' },
-  { syntax: '- 项目', desc: '无序列表', example: '- 第一项\n- 第二项' },
-  { syntax: '1. 项目', desc: '有序列表', example: '1. 第一步\n2. 第二步' },
-  { syntax: '> 引用', desc: '引用块', example: '> 这是一段引用' },
-  { syntax: '`代码`', desc: '行内代码', example: '使用 `console.log()`' },
-  { syntax: '```\n代码\n```', desc: '代码块', example: '```python\nprint("hello")\n```' },
+  { syntax: '# H1', desc: '标题1', example: '# 文章标题' },
+  { syntax: '## H2', desc: '标题2', example: '## 章节' },
+  { syntax: '### H3', desc: '标题3', example: '### 小节' },
+  { syntax: '**粗**', desc: '加粗', example: '**重要内容**' },
+  { syntax: '*斜*', desc: '斜体', example: '*斜体文字*' },
+  { syntax: '[文](url)', desc: '链接', example: '[点击](https://...)' },
+  { syntax: '![alt]()', desc: '图片', example: '![风景](/img.jpg)' },
+  { syntax: '- 项', desc: '无序列表', example: '- 第一项\n- 第二项' },
+  { syntax: '1. 项', desc: '有序列表', example: '1. 第一步\n2. 第二步' },
+  { syntax: '> 引', desc: '引用', example: '> 一段引用' },
+  { syntax: '`代码`', desc: '行内代码', example: '使用 `code()`' },
+  { syntax: '```', desc: '代码块', example: '```js\nconst x = 1\n```' },
   { syntax: '---', desc: '分隔线', example: '---' },
-  { syntax: '| 列1 | 列2 |', desc: '表格', example: '| 姓名 | 年龄 |\n| --- | --- |\n| 张三 | 25 |' },
+  { syntax: '\\|列\\|', desc: '表格', example: '|姓名|年龄|\n|--- |--- |\n|张三|25|' },
 ]
 
 export default function WritePage() {
@@ -28,7 +28,6 @@ export default function WritePage() {
   const [content, setContent] = useState('')
   const [publishing, setPublishing] = useState(false)
   const [message, setMessage] = useState(null)
-  const [showMdRef, setShowMdRef] = useState(false)
   const navigate = useNavigate()
   const textareaRef = useRef(null)
 
@@ -64,6 +63,19 @@ export default function WritePage() {
     } finally {
       setPublishing(false)
     }
+  }
+
+  const insertMd = (example) => {
+    const ta = textareaRef.current
+    if (!ta) return
+    const start = ta.selectionStart
+    const end = ta.selectionEnd
+    const newContent = content.slice(0, start) + example + content.slice(end)
+    setContent(newContent)
+    requestAnimationFrame(() => {
+      ta.focus()
+      ta.setSelectionRange(start + example.length, start + example.length)
+    })
   }
 
   // Auto-focus textarea when authenticated
@@ -109,7 +121,7 @@ export default function WritePage() {
           onChange={(e) => setTitle(e.target.value)}
           placeholder="文章标题"
         />
-        <div className="write-header-right">
+        <div className="write-header-row">
           <input
             className="write-tags-input"
             type="text"
@@ -127,27 +139,27 @@ export default function WritePage() {
         </div>
       </div>
 
+      <div className="write-md-bar">
+        <span className="write-md-bar-label">Markdown</span>
+        <div className="write-md-bar-items">
+          {MD_SYNTAX.map((item) => (
+            <span
+              key={item.syntax}
+              className="write-md-chip"
+              onClick={() => insertMd(item.example)}
+              title={item.desc}
+            >
+              {item.syntax}
+            </span>
+          ))}
+        </div>
+      </div>
+
       {message && (
         <div className={`write-message ${message.type}`}>
           {message.text}
         </div>
       )}
-
-      <div className={`write-md-ref ${showMdRef ? 'open' : ''}`}>
-        <div className="write-md-ref-grid">
-          {MD_SYNTAX.map((item) => (
-            <div
-              key={item.syntax}
-              className="write-md-ref-item"
-              onClick={() => setContent((prev) => prev + item.example + '\n')}
-              title="点击插入到编辑器"
-            >
-              <code className="write-md-ref-syntax">{item.syntax}</code>
-              <span className="write-md-ref-desc">{item.desc}</span>
-            </div>
-          ))}
-        </div>
-      </div>
 
       <div className="write-editor">
         <textarea
@@ -161,15 +173,6 @@ export default function WritePage() {
         <div className="write-preview">
           <MarkdownRenderer content={content} />
         </div>
-      </div>
-
-      <div className="write-footer">
-        <button
-          className={`write-md-toggle ${showMdRef ? 'active' : ''}`}
-          onClick={() => setShowMdRef((v) => !v)}
-        >
-          {showMdRef ? '收起语法' : 'Markdown 语法'}
-        </button>
       </div>
     </div>
   )
