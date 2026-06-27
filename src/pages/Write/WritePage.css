@@ -213,16 +213,88 @@
   max-width: 100%;
 }
 
+/* ---- Markdown reference ---- */
+.write-md-ref {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.35s ease;
+  border-bottom: 1px solid transparent;
+  background: var(--bg-primary);
+}
+
+.write-md-ref.open {
+  max-height: 260px;
+  border-bottom-color: var(--border-color);
+}
+
+.write-md-ref-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 6px;
+  padding: 16px 48px;
+  overflow-y: auto;
+}
+
+.write-md-ref-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: border-color var(--transition-fast),
+              background var(--transition-fast);
+}
+
+.write-md-ref-item:hover {
+  border-color: var(--accent);
+  background: var(--accent-subtle);
+}
+
+.write-md-ref-syntax {
+  font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', monospace;
+  font-size: var(--font-size-xs);
+  color: var(--accent);
+  line-height: 1.4;
+  white-space: pre-wrap;
+}
+
+.write-md-ref-desc {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+}
+
 /* ---- Footer ---- */
 .write-footer {
+  display: flex;
+  align-items: center;
   padding: 12px 48px;
   border-top: 1px solid var(--border-color);
   background: var(--bg-surface);
 }
 
-.write-hint {
-  color: var(--text-tertiary);
+.write-md-toggle {
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-secondary);
   font-size: var(--font-size-xs);
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: border-color var(--transition-fast),
+              color var(--transition-fast),
+              background var(--transition-fast);
+}
+
+.write-md-toggle:hover,
+.write-md-toggle.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-subtle);
 }
 
 /* ---- Responsive ---- */
@@ -259,6 +331,11 @@
 
   .write-message {
     padding: 12px 24px;
+  }
+
+  .write-md-ref-grid {
+    padding: 12px 24px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
 
   .write-footer {
