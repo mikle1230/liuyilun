@@ -10,24 +10,32 @@ const postModules = import.meta.glob('../../content/blog/*.md', {
   query: '?raw',
 })
 
+function findPostBySlug(slug) {
+  const path = Object.keys(postModules).find((k) => {
+    const parts = k.split('/')
+    const file = parts[parts.length - 1]
+    return file === `${slug}.md`
+  })
+  if (!path) return null
+  return postModules[path]
+}
+
 export default function BlogPost() {
   const { slug } = useParams()
   const [post, setPost] = useState(null)
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    const entry = Object.entries(postModules).find(([path]) =>
-      path.replace('.md', '').endsWith(slug)
-    )
+    const loader = findPostBySlug(slug)
 
-    if (!entry) {
+    if (!loader) {
       setError('文章不存在')
       return
     }
 
     ;(async () => {
       try {
-        const raw = await entry[1]()
+        const raw = await loader()
         const { data, content } = parseFrontmatter(raw)
         setPost({ slug, ...data, content })
       } catch {
