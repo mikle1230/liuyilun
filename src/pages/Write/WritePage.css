@@ -85,7 +85,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 20px 48px 12px;
+  padding: 20px 48px 16px;
   border-bottom: 1px solid var(--border-color);
   background: var(--bg-surface);
 }
@@ -107,14 +107,8 @@
   color: var(--text-tertiary);
 }
 
-.write-header-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
 .write-tags-input {
-  flex: 1;
+  width: 100%;
   padding: 8px 12px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-color);
@@ -124,6 +118,7 @@
   font-family: var(--font-sans);
   outline: none;
   transition: border-color var(--transition-fast);
+  box-sizing: border-box;
 }
 
 .write-tags-input:focus {
@@ -132,78 +127,6 @@
 
 .write-tags-input::placeholder {
   color: var(--text-tertiary);
-}
-
-.write-publish-btn {
-  padding: 8px 28px;
-  border-radius: var(--radius-sm);
-  border: none;
-  background: var(--accent);
-  color: var(--bg-primary);
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-  font-family: var(--font-sans);
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background var(--transition-fast), opacity var(--transition-fast);
-}
-
-.write-publish-btn:hover:not(:disabled) {
-  background: var(--accent-hover);
-}
-
-.write-publish-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-/* ---- Markdown syntax bar ---- */
-.write-md-bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 48px;
-  background: var(--bg-primary);
-  border-bottom: 1px solid var(--border-color);
-  overflow-x: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--border-color) transparent;
-}
-
-.write-md-bar-label {
-  flex-shrink: 0;
-  font-size: var(--font-size-xs);
-  color: var(--text-tertiary);
-  font-weight: 500;
-  letter-spacing: 0.05em;
-}
-
-.write-md-bar-items {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.write-md-chip {
-  flex-shrink: 0;
-  padding: 2px 8px;
-  border-radius: 4px;
-  border: 1px solid var(--border-color);
-  font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', monospace;
-  font-size: 11px;
-  color: var(--text-secondary);
-  cursor: pointer;
-  white-space: nowrap;
-  transition: border-color var(--transition-fast),
-              color var(--transition-fast),
-              background var(--transition-fast);
-  line-height: 1.6;
-}
-
-.write-md-chip:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent-subtle);
 }
 
 /* ---- Message ---- */
@@ -263,6 +186,87 @@
   max-width: 100%;
 }
 
+/* ---- Footer (MD bar + send button) ---- */
+.write-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 48px;
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-surface);
+}
+
+.write-md-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
+}
+
+.write-md-bar-label {
+  flex-shrink: 0;
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.write-md-bar-items {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.write-md-chip {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  line-height: 1.6;
+  transition: border-color var(--transition-fast),
+              color var(--transition-fast),
+              background var(--transition-fast);
+}
+
+.write-md-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-subtle);
+}
+
+/* ---- Send button ---- */
+.write-publish-btn {
+  flex-shrink: 0;
+  padding: 8px 28px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--accent);
+  color: var(--bg-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition-fast), opacity var(--transition-fast);
+}
+
+.write-publish-btn:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.write-publish-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 /* ---- Responsive ---- */
 @media (max-width: 900px) {
   .write-editor {
@@ -283,12 +287,12 @@
     font-size: var(--font-size-xl);
   }
 
-  .write-md-bar {
-    padding: 6px 24px;
-  }
-
   .write-message {
     padding: 12px 24px;
+  }
+
+  .write-footer {
+    padding: 8px 24px;
   }
 
   .write-textarea {

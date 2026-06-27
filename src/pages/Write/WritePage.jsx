@@ -37,7 +37,17 @@ export default function WritePage() {
     setPublishing(true)
     setMessage(null)
 
+    const isDev = import.meta.env.DEV
+
     try {
+      if (isDev) {
+        // Simulate in dev mode
+        await new Promise((r) => setTimeout(r, 800))
+        setMessage({ type: 'success', text: '✅ 本地模式：发布成功（模拟）' })
+        setTimeout(() => setMessage(null), 2000)
+        return
+      }
+
       const res = await fetch('/api/publish', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -121,38 +131,13 @@ export default function WritePage() {
           onChange={(e) => setTitle(e.target.value)}
           placeholder="文章标题"
         />
-        <div className="write-header-row">
-          <input
-            className="write-tags-input"
-            type="text"
-            value={tags}
-            onChange={(e) => setTags(e.target.value)}
-            placeholder="标签（逗号分隔）"
-          />
-          <button
-            className="write-publish-btn"
-            onClick={handlePublish}
-            disabled={publishing || !title.trim() || !content.trim()}
-          >
-            {publishing ? '发送中…' : '发送'}
-          </button>
-        </div>
-      </div>
-
-      <div className="write-md-bar">
-        <span className="write-md-bar-label">Markdown</span>
-        <div className="write-md-bar-items">
-          {MD_SYNTAX.map((item) => (
-            <span
-              key={item.syntax}
-              className="write-md-chip"
-              onClick={() => insertMd(item.example)}
-              title={item.desc}
-            >
-              {item.syntax}
-            </span>
-          ))}
-        </div>
+        <input
+          className="write-tags-input"
+          type="text"
+          value={tags}
+          onChange={(e) => setTags(e.target.value)}
+          placeholder="标签（逗号分隔）"
+        />
       </div>
 
       {message && (
@@ -173,6 +158,31 @@ export default function WritePage() {
         <div className="write-preview">
           <MarkdownRenderer content={content} />
         </div>
+      </div>
+
+      <div className="write-footer">
+        <div className="write-md-bar">
+          <span className="write-md-bar-label">Markdown</span>
+          <div className="write-md-bar-items">
+            {MD_SYNTAX.map((item) => (
+              <span
+                key={item.syntax}
+                className="write-md-chip"
+                onClick={() => insertMd(item.example)}
+                title={item.desc}
+              >
+                {item.syntax}
+              </span>
+            ))}
+          </div>
+        </div>
+        <button
+          className="write-publish-btn"
+          onClick={handlePublish}
+          disabled={publishing || !title.trim() || !content.trim()}
+        >
+          {publishing ? '发送中…' : '发送'}
+        </button>
       </div>
     </div>
   )
