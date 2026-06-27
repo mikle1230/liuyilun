@@ -1,0 +1,93 @@
+.strengths-section {
+  background: var(--bg-primary);
+  position: relative;
+}
+
+.strengths-section .container {
+  max-width: 700px;
+}
+
+.strengths-section .section-title,
+.strengths-section .section-subtitle {
+  text-align: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.strengths-section .section-label {
+  display: block;
+  text-align: center;
+}
+
+.strengths-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.strength-card {
+  padding: 28px 24px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.strength-card:hover {
+  border-color: rgba(201, 169, 110, 0.2);
+  transform: translateY(-4px);
+  background: var(--bg-elevated);
+}
+
+.strength-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: var(--accent-subtle);
+  color: var(--accent);
+  margin-bottom: 16px;
+  border: 1px solid rgba(201, 169, 110, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.strength-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.strength-card:hover .strength-icon {
+  transform: scale(1.05);
+}
+
+.strength-title {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  transition: color 0.3s ease;
+}
+
+.strength-card:hover .strength-title {
+  color: var(--accent);
+}
+
+.strength-description {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .strengths-grid { grid-template-columns: 1fr; }
+  .strength-card { padding: 28px 24px; }
+}
