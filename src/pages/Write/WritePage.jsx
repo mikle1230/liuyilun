@@ -185,7 +185,7 @@ export default function WritePage() {
           spellCheck={false}
         />
         <div className="write-preview">
-          <MarkdownRenderer content={content} />
+          <MarkdownRenderer content={title ? `# ${title}\n\n${content}` : content} />
         </div>
       </div>
 
