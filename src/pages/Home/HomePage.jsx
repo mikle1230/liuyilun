@@ -101,10 +101,17 @@ export default function HomePage() {
       })
     }
 
-    attemptPlay()
-    setTimeout(attemptPlay, 500)
-    setTimeout(attemptPlay, 1500)
-    window.addEventListener('load', attemptPlay, { once: true })
+    // Try immediately if already buffered
+    if (video.readyState >= 3) {
+      attemptPlay()
+    } else {
+      // Wait until enough data is loaded
+      video.addEventListener('canplay', attemptPlay, { once: true })
+      // Fallback: try on window load anyway
+      window.addEventListener('load', attemptPlay, { once: true })
+      // Last resort retry
+      setTimeout(attemptPlay, 3000)
+    }
   }, [])
 
   return (

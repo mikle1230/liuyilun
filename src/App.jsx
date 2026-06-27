@@ -6,6 +6,7 @@ import BlogList from './pages/Blog/BlogList'
 import BlogPost from './pages/Blog/BlogPost'
 import AIList from './pages/AI/AIList'
 import AIPost from './pages/AI/AIPost'
+import WritePage from './pages/Write/WritePage'
 import ExplorePage from './pages/Explore/ExplorePage'
 import AttractionDetail from './pages/Explore/AttractionDetail'
 import AboutPage from './pages/About/AboutPage'
@@ -32,6 +33,7 @@ export default function App() {
       <Route path="/explore" element={<AppLayout><ExplorePage /></AppLayout>} />
       <Route path="/explore/attraction/:slug" element={<AppLayout><AttractionDetail /></AppLayout>} />
       <Route path="/about" element={<AppLayout><AboutPage /></AppLayout>} />
+      <Route path="/write" element={<AppLayout><WritePage /></AppLayout>} />
     </Routes>
   )
 }
