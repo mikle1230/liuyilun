@@ -7,30 +7,34 @@ import '../Blog/BlogPost.css'
 const MarkdownRenderer = lazy(() => import('../../components/MarkdownRenderer'))
 import './AIPost.css'
 
+const postModules = import.meta.glob('../../content/ai/*.md', {
+  query: '?raw',
+})
+
 export default function AIPost() {
   const { slug } = useParams()
   const [post, setPost] = useState(null)
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    const loadPost = async () => {
+    const entry = Object.entries(postModules).find(([path]) =>
+      path.replace('.md', '').endsWith(slug)
+    )
+
+    if (!entry) {
+      setError('文章不存在')
+      return
+    }
+
+    ;(async () => {
       try {
-        const modules = import.meta.glob('../../content/ai/*.md', {
-          query: '?raw',
-        })
-        const key = `../../content/ai/${slug}.md`
-        if (!modules[key]) {
-          setError('文章不存在')
-          return
-        }
-        const raw = await modules[key]()
+        const raw = await entry[1]()
         const { data, content } = parseFrontmatter(raw)
-        setPost({ ...data, content })
+        setPost({ slug, ...data, content })
       } catch {
         setError('加载文章失败')
       }
-    }
-    loadPost()
+    })()
   }, [slug])
 
   if (error) {
