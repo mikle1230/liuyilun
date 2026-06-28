@@ -3,7 +3,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const { password, title, tags, content } = req.body
+  const { password, title, tags, content, type = 'blog', existingSlug } = req.body
 
   if (password !== process.env.WRITE_PASSWORD) {
     return res.status(401).json({ error: '密码错误' })
@@ -13,7 +13,6 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: '标题和内容不能为空' })
   }
 
-  const slug = generateSlug(title)
   const date = new Date().toISOString().slice(0, 10)
   const tagStr = JSON.stringify(Array.isArray(tags) ? tags : [])
   const excerpt = content.replace(/[#*[\]\n]/g, '').trim().slice(0, 120)
@@ -29,11 +28,34 @@ export default async function handler(req, res) {
     content,
   ].join('\n')
 
-  const filename = `${date}-${slug}.md`
-  const path = `src/content/blog/${filename}`
+  // If editing existing article, reuse its filename
+  const slug = generateSlug(title)
+  const filename = existingSlug
+    ? `${existingSlug}.md`
+    : `${date}-${slug}.md`
+  const directory = type === 'ai' ? 'ai' : 'blog'
+  const path = `src/content/${directory}/${filename}`
   const token = process.env.GITHUB_TOKEN
   const owner = 'mikle1230'
   const repo = 'liuyilun'
+
+  const body = {
+    message: existingSlug ? `更新文章: ${title}` : `发布新文章: ${title}`,
+    content: Buffer.from(frontmatter, 'utf-8').toString('base64'),
+  }
+
+  // For existing files, we need the SHA to update
+  // First fetch the current file to get its SHA
+  if (existingSlug) {
+    const getRes = await fetch(
+      `https://api.github.com/repos/${owner}/${repo}/contents/${path}`,
+      { headers: { Authorization: `Bearer ${token}` } },
+    )
+    if (getRes.ok) {
+      const existing = await getRes.json()
+      body.sha = existing.sha
+    }
+  }
 
   const githubRes = await fetch(
     `https://api.github.com/repos/${owner}/${repo}/contents/${path}`,
@@ -43,10 +65,7 @@ export default async function handler(req, res) {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        message: `发布新文章: ${title}`,
-        content: Buffer.from(frontmatter, 'utf-8').toString('base64'),
-      }),
+      body: JSON.stringify(body),
     },
   )
 
@@ -58,10 +77,11 @@ export default async function handler(req, res) {
     })
   }
 
+  const route = directory === 'ai' ? 'ai' : 'blog'
   return res.status(200).json({
     success: true,
     slug,
-    url: `/blog/${slug}`,
+    url: `/${route}/${slug}`,
     filename,
   })
 }

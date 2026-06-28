@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>写文章 · 温暖</title>
+<style>
+/* ════════════════════════════════════════
+   Variant 3 — 温暖 (Warm)
+   Warm neutral background, soft shadows,
+   rounded corners, cozy feel
+   ════════════════════════════════════════ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
+  background: #faf8f5;
+  color: #2c2c2c;
+  min-height: 100vh;
+}
+
+/* ── Top Bar ── */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 60px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 36px;
+}
+.topbar-left { display: flex; align-items: center; gap: 20px; }
+.topbar-title { font-size: 14px; font-weight: 600; color: #2c2c2c; }
+.topbar-back {
+  font-size: 13px; color: #8c8c8c; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 4px; transition: 0.2s;
+}
+.topbar-back:hover { color: #d4a373; }
+.topbar-right { display: flex; gap: 10px; }
+.topbar-btn {
+  padding: 7px 18px; border-radius: 8px; border: 1px solid #e8e0d8;
+  background: #fff; color: #5c5c5c; font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: 0.2s;
+}
+.topbar-btn:hover { border-color: #d4a373; color: #d4a373; }
+.topbar-btn.primary {
+  background: #d4a373; color: #fff; border-color: #d4a373;
+}
+.topbar-btn.primary:hover { background: #c49464; border-color: #c49464; }
+
+/* ── Layout ── */
+.app { display: flex; height: 100vh; padding-top: 60px; }
+
+/* ── Sidebar ── */
+.sidebar {
+  width: 280px;
+  background: #fff;
+  border-right: 1px solid #efeae4;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-header {
+  padding: 22px 24px 12px;
+  font-size: 11px; font-weight: 600; color: #b0a89e;
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+.sidebar-tabs { display: flex; padding: 4px 16px 0; gap: 6px; border-bottom: 1px solid #efeae4; }
+.sidebar-tab {
+  flex: 1; padding: 8px 0 8px; border: none; border-radius: 6px 6px 0 0;
+  background: none; font-size: 13px; color: #b0a89e; cursor: pointer;
+  transition: 0.15s; text-align: center;
+}
+.sidebar-tab.active { background: #faf8f5; color: #d4a373; font-weight: 500; }
+.sidebar-tab:hover:not(.active) { color: #8c8c8c; }
+.sidebar-list { flex: 1; overflow-y: auto; padding: 12px; }
+.sidebar-item {
+  display: block; width: 100%; padding: 12px 14px; border: none;
+  background: transparent; border-radius: 10px; text-align: left;
+  cursor: pointer; transition: 0.15s; font-size: 13px; color: #5c5c5c;
+  margin-bottom: 2px;
+}
+.sidebar-item:hover { background: #faf8f5; }
+.sidebar-item.active { background: #f5f0ea; color: #2c2c2c; font-weight: 500; }
+.sidebar-item-date { font-size: 11px; color: #b0a89e; display: block; margin-top: 3px; }
+
+/* ── Main Editor ── */
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: #faf8f5; }
+
+.editor-header {
+  padding: 28px 36px 0;
+  display: flex; flex-direction: column; gap: 14px;
+  background: #fff;
+  border-bottom: 1px solid #efeae4;
+}
+.editor-type-row { display: flex; align-items: center; gap: 8px; }
+.type-tab {
+  padding: 6px 18px; border-radius: 20px; border: 1px solid #e8e0d8;
+  background: #fff; color: #b0a89e; font-size: 12px; cursor: pointer; transition: 0.2s;
+}
+.type-tab.active { border-color: #d4a373; color: #d4a373; background: #faf6f0; }
+.type-tab:hover:not(.active) { border-color: #d4a373; color: #8c8c8c; }
+.title-input {
+  width: 100%; padding: 6px 0; border: none; background: transparent;
+  font-size: 28px; font-weight: 700; color: #2c2c2c; outline: none;
+  font-family: 'Georgia', 'Noto Serif SC', serif;
+}
+.title-input::placeholder { color: #d0c8be; }
+.tags-input {
+  width: 100%; padding: 10px 14px; border: 1px solid #e8e0d8;
+  border-radius: 10px; background: #faf8f5; color: #2c2c2c;
+  font-size: 13px; outline: none; margin-bottom: 18px;
+  transition: 0.2s;
+}
+.tags-input:focus { border-color: #d4a373; background: #fff; }
+.tags-input::placeholder { color: #b0a89e; }
+
+/* ── Split ── */
+.split {
+  flex: 1; display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; padding: 20px 36px; overflow: hidden;
+}
+.textarea {
+  padding: 24px; border: 1px solid #e8e0d8;
+  border-radius: 14px; background: #fff;
+  font-family: 'SF Mono', 'JetBrains Mono', monospace;
+  font-size: 13px; line-height: 1.9; color: #2c2c2c;
+  resize: none; outline: none; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+.textarea:focus { border-color: #d4a373; }
+.textarea::placeholder { color: #d0c8be; }
+.preview {
+  padding: 24px; border: 1px solid #e8e0d8;
+  border-radius: 14px; background: #fff;
+  overflow-y: auto; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+.preview h1 { font-family: 'Georgia', 'Noto Serif SC', serif; font-size: 24px; margin-bottom: 18px; color: #2c2c2c; font-weight: 700; }
+.preview p { font-size: 14px; line-height: 1.9; color: #5c5c5c; margin: 14px 0; }
+.preview strong { color: #2c2c2c; font-weight: 600; }
+.preview blockquote { margin: 20px 0; padding: 14px 20px; border-left: 3px solid #d4a373; background: #faf6f0; border-radius: 0 10px 10px 0; }
+.preview blockquote p { margin: 4px 0; color: #2c2c2c; font-style: italic; }
+.preview ul { margin: 14px 0; padding-left: 20px; }
+.preview li { font-size: 14px; line-height: 1.9; color: #5c5c5c; }
+.preview code { font-family: 'SF Mono', monospace; font-size: 0.88em; background: #faf8f5; padding: 2px 6px; border-radius: 6px; color: #c49464; }
+
+/* ── Footer ── */
+.footer {
+  padding: 14px 36px;
+  border-top: 1px solid #efeae4;
+  background: #fff;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.md-bar { display: flex; align-items: center; gap: 4px; overflow-x: auto; }
+.md-label { font-size: 11px; color: #b0a89e; font-weight: 500; margin-right: 6px; letter-spacing: 0.04em; }
+.md-chip {
+  padding: 3px 10px; border-radius: 6px; border: 1px solid #e8e0d8;
+  font-family: 'SF Mono', monospace; font-size: 11px; color: #b0a89e;
+  cursor: pointer; white-space: nowrap; transition: 0.15s;
+}
+.md-chip:hover { border-color: #d4a373; color: #d4a373; background: #faf6f0; }
+.publish-btn {
+  flex-shrink: 0; padding: 9px 30px; border-radius: 10px; border: none;
+  background: #d4a373; color: #fff; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: 0.2s;
+}
+.publish-btn:hover { background: #c49464; }
+.publish-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── Success ── */
+.success-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(250,248,245,0.95);
+  display: flex; align-items: center; justify-content: center;
+}
+.success-card {
+  text-align: center; background: #fff; padding: 48px 48px 36px;
+  border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+  max-width: 400px;
+}
+.success-card h2 { font-size: 24px; font-weight: 700; margin-bottom: 8px; color: #2c2c2c; }
+.success-card p { color: #8c8c8c; font-size: 14px; margin-bottom: 28px; line-height: 1.7; }
+.success-actions { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.success-actions .topbar-btn { width: 220px; padding: 10px; justify-content: center; display: flex; }
+.success-actions .topbar-btn.primary { width: 220px; padding: 10px; justify-content: center; display: flex; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <a class="topbar-back" href="#">← 返回首页</a>
+    <span class="topbar-title">写文章</span>
+  </div>
+  <div class="topbar-right">
+    <button class="topbar-btn">📋 管理文章</button>
+  </div>
+</div>
+
+<div class="app">
+  <div class="sidebar">
+    <div class="sidebar-header">全部文章</div>
+    <div class="sidebar-tabs">
+      <button class="sidebar-tab active">📝 博客</button>
+      <button class="sidebar-tab">🤖 AI</button>
+    </div>
+    <div class="sidebar-list">
+      <button class="sidebar-item active">
+        欢迎来到我的博客
+        <span class="sidebar-item-date">2026-06-27</span>
+      </button>
+      <button class="sidebar-item">
+        MICE 行业观察
+        <span class="sidebar-item-date">2026-06-27</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="editor-header">
+      <div class="editor-type-row">
+        <button class="type-tab active">📝 博客</button>
+        <button class="type-tab">🤖 AI 收集</button>
+      </div>
+      <input class="title-input" placeholder="文章标题" value="欢迎来到我的博客" />
+      <input class="tags-input" placeholder="标签（逗号分隔）" value="随笔, 个人" />
+    </div>
+
+    <div class="split">
+      <textarea class="textarea" placeholder="在此粘贴或撰写 Markdown 内容…">## 关于这个博客
+
+你好，我是刘逸伦。这里是我记录日常感悟、分享所见所闻的地方。
+
+在 19 年的行业经历中，我发现**记录与分享**是成长最快的方式。
+
+> "写作不是为了记录，而是为了思考。"</textarea>
+      <div class="preview">
+        <h1>欢迎来到我的博客</h1>
+        <p>你好，我是刘逸伦。这里是我记录日常感悟、分享所见所闻的地方。</p>
+        <p>在 19 年的行业经历中，我发现<strong>记录与分享</strong>是成长最快的方式。</p>
+        <blockquote><p>"写作不是为了记录，而是为了思考。"</p></blockquote>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="md-bar">
+        <span class="md-label">语法</span>
+        <span class="md-chip"># H1</span>
+        <span class="md-chip">**粗**</span>
+        <span class="md-chip">*斜*</span>
+        <span class="md-chip">[文](url)</span>
+        <span class="md-chip">- 项</span>
+        <span class="md-chip">&gt; 引</span>
+        <span class="md-chip">`代码`</span>
+        <span class="md-chip">---</span>
+      </div>
+      <button class="publish-btn">📤 发送</button>
+    </div>
+  </div>
+</div>
+
+<div class="success-overlay" style="display:none">
+  <div class="success-card">
+    <h2>✅ 发送成功</h2>
+    <p>文章已推送到 GitHub<br>Vercel 正在部署，约 30 秒后上线</p>
+    <div class="success-actions">
+      <button class="topbar-btn primary" style="padding:10px;width:220px">🌍 查看博客</button>
+      <button class="topbar-btn" style="padding:10px;width:220px">✏️ 写新博客</button>
+      <button class="topbar-btn" style="padding:10px;width:220px">🏠 返回首页</button>
+    </div>
+  </div>
+</div>
+
+<p style="position:fixed;bottom:12px;right:20px;font-size:11px;color:#b0a89e;background:#fff;padding:4px 14px;border-radius:8px;border:1px solid #efeae4;">温暖 · 暖色中性 · 柔和圆角 · 舒适感</p>
+</body>
+</html>
