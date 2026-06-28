@@ -55,6 +55,12 @@
   box-shadow: 0 0 0 2px var(--accent-subtle);
 }
 
+.write-gate-error {
+  color: #f87171;
+  font-size: var(--font-size-sm);
+  margin-top: -8px;
+}
+
 .write-gate-btn {
   width: 100%;
   padding: 12px;

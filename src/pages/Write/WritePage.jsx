@@ -237,7 +237,32 @@ export default function WritePage() {
           <div className="write-gate-card">
             <h2>✏️ 发布文章</h2>
             <p className="write-gate-desc">输入发布密码继续</p>
-            <form onSubmit={(e) => { e.preventDefault(); setAuthed(true) }}>
+            <form onSubmit={async (e) => {
+              e.preventDefault()
+              if (!password.trim()) return
+
+              if (import.meta.env.DEV) {
+                setPublishError(null)
+                setAuthed(true)
+                return
+              }
+
+              try {
+                const res = await fetch('/api/auth', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ password }),
+                })
+                if (res.ok) {
+                  setPublishError(null)
+                  setAuthed(true)
+                } else {
+                  setPublishError('密码错误')
+                }
+              } catch {
+                setPublishError('验证失败，请稍后重试')
+              }
+            }}>
               <input
                 className="write-gate-input"
                 type="password"
@@ -246,6 +271,7 @@ export default function WritePage() {
                 placeholder="发布密码"
                 autoFocus
               />
+              {publishError && <p className="write-gate-error">{publishError}</p>}
               <button className="write-gate-btn" type="submit">
                 进入
               </button>
