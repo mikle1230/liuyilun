@@ -1,4 +1,4 @@
-# 🅼 刘逸伦 · 个人知识枢纽
+# 🅼 · 个人知识枢纽
 
 > 记录思考 · 收集知识 · 探索世界
 
@@ -29,54 +29,6 @@
 - **搜索** — 搜索国家、城市、景点
 - **Wikipedia 图片回退** — 为无图片景点自动获取 Wikipedia 缩略图
 
-## 🚀 快速开始
-
-### 前置要求
-
-- Node.js >= 18
-- npm >= 9
-
-### 安装
-
-```bash
-git clone https://github.com/liuyilun/liuyilun-site.git
-cd liuyilun-site
-npm install
-```
-
-### 开发
-
-```bash
-npm run dev
-```
-
-启动 Vite 开发服务器（默认 http://localhost:5173），支持 HMR 热更新。
-
-### 构建
-
-```bash
-npm run build     # 生产构建到 dist/
-npm run preview   # 预览生产构建
-```
-
-### 代码检查
-
-```bash
-npm run lint      # ESLint 检查
-```
-
-## 🏗️ 技术栈
-
-| 类别 | 技术 |
-|------|------|
-| **框架** | React 19 (JSX, no TypeScript) |
-| **构建** | Vite 8 |
-| **路由** | react-router-dom v7 |
-| **地图** | Leaflet 1.9.4 + CartoDB dark_all 瓦片 |
-| **Markdown** | react-markdown + remark-gfm + rehype-highlight + rehype-raw |
-| **样式** | 纯 CSS + CSS 自定义属性（设计系统） |
-| **部署** | Vercel (SPA rewrites) |
-| **字体** | DM Sans, Noto Sans SC, Noto Serif SC (Google Fonts) |
 
 ## 📁 项目结构
 
