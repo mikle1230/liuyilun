@@ -94,7 +94,7 @@ const countryNames = {
   'netherlands': 'Netherlands', 'belgium': 'Belgium', 'switzerland': 'Switzerland',
   'austria': 'Austria', 'greece': 'Greece', 'sweden': 'Sweden', 'norway': 'Norway',
   'denmark': 'Denmark', 'ireland': 'Ireland', 'poland': 'Poland',
-  'czech-republic': 'Czech Republic', 'hungary': 'Hungary', 'croatia': 'Croatia',
+  'czech-republic': 'Czechia', 'hungary': 'Hungary', 'croatia': 'Croatia',
   'turkey': 'Turkey',
   'finland': 'Finland', 'estonia': 'Estonia', 'iceland': 'Iceland',
   'montenegro': 'Montenegro',
@@ -299,6 +299,10 @@ export default function ExplorePage() {
           if (activeCountry === 'france') bounds = L.latLngBounds([41.3, -4.8], [51.1, 9.6])
           else if (activeCountry === 'sweden') bounds = L.latLngBounds([55.3, 11.1], [69.1, 24.2])
           else if (activeCountry === 'norway') bounds = L.latLngBounds([57.9, 4.5], [71.2, 31.2])
+          else if (activeCountry === 'finland') bounds = L.latLngBounds([59.8, 20.6], [70.1, 31.6])
+          else if (activeCountry === 'iceland') bounds = L.latLngBounds([63.3, -24.5], [66.6, -13.5])
+          else if (activeCountry === 'estonia') bounds = L.latLngBounds([57.5, 23.5], [59.7, 28.2])
+          else if (activeCountry === 'montenegro') bounds = L.latLngBounds([41.9, 18.4], [43.6, 20.4])
           map.fitBounds(bounds, { padding: [40, 40], maxZoom: 8 })
         }
       }

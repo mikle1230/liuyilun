@@ -2054,9 +2054,9 @@
       ]
     },
     {
-      "id": "",
+      "id": "finland",
       "name": "芬兰",
-      "nameEn": "Cathedral",
+      "nameEn": "Finland",
       "description": "",
       "cities": [
         {
@@ -2100,9 +2100,9 @@
       ]
     },
     {
-      "id": "",
+      "id": "estonia",
       "name": "爱沙尼亚",
-      "nameEn": "Town",
+      "nameEn": "Estonia",
       "description": "",
       "cities": [
         {
@@ -2127,9 +2127,9 @@
       ]
     },
     {
-      "id": "",
+      "id": "montenegro",
       "name": "黑山",
-      "nameEn": "Town",
+      "nameEn": "Montenegro",
       "description": "",
       "cities": [
         {
@@ -2154,9 +2154,9 @@
       ]
     },
     {
-      "id": "",
+      "id": "iceland",
       "name": "冰岛",
-      "nameEn": "Reykjavik",
+      "nameEn": "Iceland",
       "description": "",
       "cities": [
         {
