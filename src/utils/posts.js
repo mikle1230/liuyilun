@@ -15,7 +15,7 @@ export function loadPostsFromModules(modules, transform) {
   return Object.entries(modules)
     .map(([path, raw]) => {
       const { data, content } = parseFrontmatter(raw)
-      const slug = path.split('/').pop().replace('.md', '')
+      const slug = path.split('/').pop().replace('.md', '').split('?')[0]
       const post = {
         slug,
         title: data.title || slug,

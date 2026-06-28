@@ -8,12 +8,13 @@ const MarkdownRenderer = lazy(() => import('../../components/MarkdownRenderer'))
 
 const postModules = import.meta.glob('../../content/blog/*.md', {
   query: '?raw',
+  import: 'default',
 })
 
 function findPostBySlug(slug) {
   const path = Object.keys(postModules).find((k) => {
     const parts = k.split('/')
-    const file = parts[parts.length - 1]
+    const file = parts[parts.length - 1].split('?')[0]
     return file === `${slug}.md`
   })
   if (!path) return null
@@ -74,24 +75,26 @@ export default function BlogPost() {
     <div className="blog-page">
       <article className="section blog-post-section">
         <div className="container">
-          <Link to="/blog" className="back-link">← 返回博客列表</Link>
+          <div className="blog-post-body">
+            <Link to="/blog" className="back-link">← 返回博客列表</Link>
 
-          <header className="blog-post-header">
-            <h1 className="blog-post-title">{post.title}</h1>
-            <div className="blog-post-meta">
-              <time>{post.date}</time>
-              <span className="meta-divider" />
-              <div className="blog-post-tags">
-                {post.tags?.map((tag) => (
-                  <TagPill key={tag} label={tag} />
-                ))}
+            <header className="blog-post-header">
+              <h1 className="blog-post-title">{post.title}</h1>
+              <div className="blog-post-meta">
+                <time>{post.date}</time>
+                <span className="meta-divider" />
+                <div className="blog-post-tags">
+                  {post.tags?.map((tag) => (
+                    <TagPill key={tag} label={tag} />
+                  ))}
+                </div>
               </div>
-            </div>
-          </header>
+            </header>
 
-          <Suspense fallback={<div className="loading-spinner" />}>
-            <MarkdownRenderer content={post.content} />
-          </Suspense>
+            <Suspense fallback={<div className="loading-spinner" />}>
+              <MarkdownRenderer content={post.content} />
+            </Suspense>
+          </div>
         </div>
       </article>
     </div>

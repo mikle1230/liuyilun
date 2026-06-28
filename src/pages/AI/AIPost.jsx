@@ -9,12 +9,13 @@ import './AIPost.css'
 
 const postModules = import.meta.glob('../../content/ai/*.md', {
   query: '?raw',
+  import: 'default',
 })
 
 function findPostBySlug(slug) {
   const path = Object.keys(postModules).find((k) => {
     const parts = k.split('/')
-    const file = parts[parts.length - 1]
+    const file = parts[parts.length - 1].split('?')[0]
     return file === `${slug}.md`
   })
   if (!path) return null
