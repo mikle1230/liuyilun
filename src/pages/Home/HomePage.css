@@ -131,8 +131,9 @@
 
 .featured-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 32px;
+  max-width: 780px;
 }
 
 /* ─── Column header ─── */

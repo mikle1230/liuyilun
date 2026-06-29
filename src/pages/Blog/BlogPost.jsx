@@ -6,19 +6,25 @@ import './BlogPost.css'
 
 const MarkdownRenderer = lazy(() => import('../../components/MarkdownRenderer'))
 
-const postModules = import.meta.glob('../../content/blog/*.md', {
+// Load from both content directories
+const blogModules = import.meta.glob('../../content/blog/*.md', {
+  query: '?raw',
+  import: 'default',
+})
+
+const aiModules = import.meta.glob('../../content/ai/*.md', {
   query: '?raw',
   import: 'default',
 })
 
 function findPostBySlug(slug) {
-  const path = Object.keys(postModules).find((k) => {
-    const parts = k.split('/')
-    const file = parts[parts.length - 1].split('?')[0]
+  const allModules = { ...blogModules, ...aiModules }
+  const path = Object.keys(allModules).find((k) => {
+    const file = k.split('/').pop().split('?')[0]
     return file === `${slug}.md`
   })
   if (!path) return null
-  return postModules[path]
+  return { loader: allModules[path], path }
 }
 
 export default function BlogPost() {
@@ -27,18 +33,20 @@ export default function BlogPost() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    const loader = findPostBySlug(slug)
+    const found = findPostBySlug(slug)
 
-    if (!loader) {
+    if (!found) {
       setError('文章不存在')
       return
     }
 
+    const section = found.path.includes('/blog/') ? 'tech' : 'ai'
+
     ;(async () => {
       try {
-        const raw = await loader()
+        const raw = await found.loader()
         const { data, content } = parseFrontmatter(raw)
-        setPost({ slug, ...data, content })
+        setPost({ slug, section, ...data, content })
       } catch {
         setError('加载文章失败')
       }
@@ -83,11 +91,27 @@ export default function BlogPost() {
               <div className="blog-post-meta">
                 <time>{post.date}</time>
                 <span className="meta-divider" />
+                {post.section && (
+                  <>
+                    <span className="post-section-badge">
+                      {post.section === 'ai' ? 'AI' : '技术'}
+                    </span>
+                    <span className="meta-divider" />
+                  </>
+                )}
                 <div className="blog-post-tags">
                   {post.tags?.map((tag) => (
                     <TagPill key={tag} label={tag} />
                   ))}
                 </div>
+                {post.sourceUrl && (
+                  <>
+                    <span className="meta-divider" />
+                    <a href={post.sourceUrl} target="_blank" rel="noopener noreferrer" className="source-link">
+                      原文链接 ↗
+                    </a>
+                  </>
+                )}
               </div>
             </header>
 

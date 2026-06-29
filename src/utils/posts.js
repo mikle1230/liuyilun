@@ -5,6 +5,16 @@
 import parseFrontmatter from './frontmatter'
 
 /**
+ * Determine post section from module path.
+ * /blog/ → 'tech', /ai/ → 'ai'
+ */
+function detectSection(path) {
+  if (path.includes('/blog/')) return 'tech'
+  if (path.includes('/ai/')) return 'ai'
+  return 'general'
+}
+
+/**
  * Load posts from Vite glob modules with frontmatter parsing.
  *
  * @param {Record<string, string>} modules - Result of import.meta.glob('...', { eager: true, query: '?raw', import: 'default' })
@@ -21,6 +31,7 @@ export function loadPostsFromModules(modules, transform) {
         title: data.title || slug,
         date: data.date || '',
         tags: data.tags || [],
+        section: detectSection(path), // NEW: auto-detect from path
         excerpt:
           data.excerpt ||
           content
@@ -44,5 +55,5 @@ export function loadPostsFromModules(modules, transform) {
 export function extractTags(posts) {
   const set = new Set()
   posts.forEach((p) => p.tags.forEach((t) => set.add(t)))
-  return [...set]
+  return [...set].sort()
 }

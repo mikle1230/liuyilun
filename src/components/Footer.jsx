@@ -26,7 +26,7 @@ export default function Footer() {
             <p className="footer-col-title">内容</p>
             <div className="footer-col-links">
               <Link to="/blog" className="footer-link">博客</Link>
-              <Link to="/ai" className="footer-link">AI 收集</Link>
+              <Link to="/blog?section=ai" className="footer-link">AI 收集</Link>
             </div>
           </div>
 

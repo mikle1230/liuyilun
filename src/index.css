@@ -1,65 +1,7 @@
 /* ============================================
-   Design System — taste-design compliant
-   Single gold accent · Zinc neutral · No glow
+   Design System — imported from themes.css
    ============================================ */
-
-:root {
-  /* ---- Backgrounds (Zinc scale, warm-leaning) ---- */
-  --bg-primary: #09090b;
-  --bg-secondary: #0d0d0f;
-  --bg-surface: #121214;
-  --bg-card: #161618;
-  --bg-elevated: #1c1c1f;
-
-  /* ---- Text ---- */
-  --text-primary: #f4f4f5;
-  --text-secondary: #a1a1aa;
-  --text-tertiary: #52525b;
-
-  /* ---- Accent: Gold — single accent, saturation < 80% ---- */
-  --accent: #c9a96e;
-  --accent-hover: #d4b87a;
-  --accent-dim: #a88b4f;
-  --accent-subtle: rgba(201, 169, 110, 0.08);
-
-  /* ---- Borders ---- */
-  --border-color: #1c1c22;
-  --border-light: #27272a;
-
-  --overlay: rgba(0, 0, 0, 0.7);
-
-  /* ---- Typography ---- */
-  --font-display: 'Noto Serif SC', 'Songti SC', Georgia, serif;
-  --font-sans: 'DM Sans', 'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-name: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 2rem;
-  --font-size-4xl: 2.5rem;
-  --font-size-5xl: 3.5rem;
-  --font-size-6xl: 5rem;
-
-  /* ---- Spacing ---- */
-  --section-padding: 140px 0;
-  --container-max: 1400px;
-  --container-padding: 0 48px;
-
-  /* ---- Transitions ---- */
-  --transition-fast: 0.2s cubic-bezier(0.22, 1, 0.36, 1);
-  --transition-base: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  --transition-slow: 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-
-  /* ---- Misc ---- */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
-}
+@import './styles/themes.css';
 
 /* ---- Reset ---- */
 *, *::before, *::after {
@@ -90,7 +32,7 @@ body::before {
   inset: 0;
   z-index: 9998;
   pointer-events: none;
-  opacity: 0.025;
+  opacity: var(--noise-opacity);
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 256px 256px;
@@ -261,23 +203,4 @@ button {
 .stagger-children > .scroll-reveal:nth-child(7) { transition-delay: 0.48s; }
 .stagger-children > .scroll-reveal:nth-child(8) { transition-delay: 0.56s; }
 
-/* ---- Responsive ---- */
-@media (max-width: 1024px) {
-  :root {
-    --container-padding: 0 24px;
-    --section-padding: 100px 0;
-    --font-size-5xl: 2.8rem;
-    --font-size-6xl: 3.2rem;
-    --font-size-4xl: 2rem;
-  }
-}
-
-@media (max-width: 640px) {
-  :root {
-    --container-padding: 0 16px;
-    --section-padding: 80px 0;
-    --font-size-5xl: 2.2rem;
-    --font-size-6xl: 2.4rem;
-    --font-size-4xl: 1.75rem;
-  }
-}
+/* Responsive breakpoints migrated to themes.css */

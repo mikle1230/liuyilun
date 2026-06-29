@@ -968,3 +968,34 @@
     padding: 12px;
   }
 }
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .explore-hero-title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .explore-map-container {
+    height: 45vh;
+    min-height: 280px;
+  }
+
+  .attraction-card-body {
+    padding: 16px;
+  }
+
+  .attraction-card-title {
+    font-size: var(--font-size-base);
+  }
+
+  .explore-popup {
+    padding: 20px;
+  }
+
+  .country-chip,
+  .city-chip {
+    padding: 10px 16px;
+    min-height: 44px;
+    font-size: var(--font-size-sm);
+  }
+}

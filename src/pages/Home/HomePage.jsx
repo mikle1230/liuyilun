@@ -20,8 +20,13 @@ const aiModules = import.meta.glob('../../content/ai/*.md', {
   import: 'default',
 })
 
-const featuredBlog = loadPostsFromModules(blogModules).filter((p) => p.pinned)
-const featuredAi = loadPostsFromModules(aiModules).filter((p) => p.pinned)
+const featuredPosts = (() => {
+  const blogs = loadPostsFromModules(blogModules)
+  const ais = loadPostsFromModules(aiModules)
+  return [...blogs, ...ais]
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 6)
+})()
 
 /* ════════════════════════════════════════════════════════
    Typewriter
@@ -160,7 +165,6 @@ export default function HomePage() {
           </ScrollReveal>
 
           <div className="featured-grid">
-            {/* Blog column */}
             <div className="featured-col">
               <ScrollReveal>
                 <div className="featured-col-header">
@@ -169,48 +173,14 @@ export default function HomePage() {
                     <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
                     <path d="M8 7h8M8 11h6" />
                   </svg>
-                  <span>博客</span>
+                  <span>最新文章</span>
                   <Link to="/blog" className="featured-col-more">查看全部 →</Link>
                 </div>
               </ScrollReveal>
               <div className="featured-post-list">
-                {featuredBlog.map((post) => (
+                {featuredPosts.map((post) => (
                   <ScrollReveal key={post.slug}>
                     <Link to={`/blog/${post.slug}`} className="featured-post-card">
-                      <div className="featured-post-meta">
-                        <time className="featured-post-date">{post.date}</time>
-                        <div className="featured-post-tags">
-                          {post.tags?.slice(0, 2).map((t) => (
-                            <span key={t} className="featured-post-tag">{t}</span>
-                          ))}
-                        </div>
-                      </div>
-                      <h3 className="featured-post-title">{post.title}</h3>
-                      <p className="featured-post-excerpt">{post.excerpt}</p>
-                      <span className="featured-post-arrow">阅读文章 →</span>
-                    </Link>
-                  </ScrollReveal>
-                ))}
-              </div>
-            </div>
-
-            {/* AI column */}
-            <div className="featured-col">
-              <ScrollReveal>
-                <div className="featured-col-header">
-                  <svg className="featured-col-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                    <circle cx="8.5" cy="8.5" r="1.5" />
-                    <path d="M21 15l-5-5L5 21" />
-                  </svg>
-                  <span>AI 收集</span>
-                  <Link to="/ai" className="featured-col-more">查看全部 →</Link>
-                </div>
-              </ScrollReveal>
-              <div className="featured-post-list">
-                {featuredAi.map((post) => (
-                  <ScrollReveal key={post.slug}>
-                    <Link to={`/ai/${post.slug}`} className="featured-post-card">
                       <div className="featured-post-meta">
                         <time className="featured-post-date">{post.date}</time>
                         <div className="featured-post-tags">

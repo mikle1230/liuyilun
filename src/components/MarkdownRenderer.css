@@ -219,3 +219,10 @@
   .markdown-renderer p, .markdown-renderer li { font-size: var(--font-size-base); }
   .markdown-renderer pre code { padding: 16px; font-size: var(--font-size-xs); }
 }
+
+@media (max-width: 480px) {
+  .markdown-renderer { padding: 0 4px; }
+  .markdown-renderer h1 { font-size: var(--font-size-2xl); }
+  .markdown-renderer h2 { font-size: var(--font-size-lg); }
+  .markdown-renderer p, .markdown-renderer li { font-size: var(--font-size-sm); line-height: 1.8; }
+}

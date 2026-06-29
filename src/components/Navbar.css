@@ -12,11 +12,12 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(9, 9, 11, 0.8);
+  background: var(--bg-primary);
   backdrop-filter: blur(24px) saturate(1.4);
   -webkit-backdrop-filter: blur(24px) saturate(1.4);
-  border-bottom: 1px solid rgba(201, 169, 110, 0.08);
+  border-bottom: 1px solid var(--border-color);
   pointer-events: none;
+  opacity: 0.85;
 }
 
 .navbar-inner {
@@ -98,7 +99,45 @@
   transform: scale(1);
 }
 
-/* Hamburger */
+/* ---- Navbar actions (theme toggle + hamburger) ---- */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  transition: var(--transition-fast);
+  position: relative;
+}
+
+.theme-toggle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--accent-subtle);
+  opacity: 0;
+  transition: var(--transition-fast);
+}
+
+.theme-toggle:hover::before {
+  opacity: 1;
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+}
+
+/* ---- Hamburger ---- */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -128,7 +167,7 @@
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Responsive */
+/* ---- Responsive ---- */
 @media (max-width: 768px) {
   .navbar-links {
     position: fixed;
@@ -136,7 +175,7 @@
     right: -100%;
     width: 280px;
     height: 100vh;
-    background: rgba(9, 9, 11, 0.95);
+    background: var(--bg-primary);
     backdrop-filter: blur(24px) saturate(1.4);
     -webkit-backdrop-filter: blur(24px) saturate(1.4);
     flex-direction: column;
@@ -144,7 +183,7 @@
     padding: 100px 32px 40px;
     gap: 4px;
     transition: var(--transition-base);
-    border-left: 1px solid rgba(201, 169, 110, 0.1);
+    border-left: 1px solid var(--border-color);
   }
 
   .navbar-links.open {
