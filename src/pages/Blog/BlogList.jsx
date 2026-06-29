@@ -2,7 +2,9 @@ import { useState, useMemo } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import ModuleHero from '../../components/ModuleHero'
 import ScrollReveal from '../../components/ScrollReveal'
+import BlogSidebar from '../../components/Sidebar'
 import { loadPostsFromModules, extractTags } from '../../utils/posts'
+import wallpapersData from '../../data/wallpapers.json'
 import './BlogList.css'
 
 const blogModules = import.meta.glob('../../content/blog/*.md', {
@@ -20,7 +22,6 @@ const aiModules = import.meta.glob('../../content/ai/*.md', {
 function loadAllPosts() {
   const blogs = loadPostsFromModules(blogModules)
   const ais = loadPostsFromModules(aiModules)
-  // Merge and re-sort
   return [...blogs, ...ais].sort((a, b) => {
     if (a.pinned && !b.pinned) return -1
     if (!a.pinned && b.pinned) return 1
@@ -57,7 +58,7 @@ export default function BlogList() {
 
       <section className="section blog-list-section">
         <div className="container">
-          {/* Section filter */}
+          {/* Section + Tag filters */}
           <ScrollReveal>
             <div className="blog-filters">
               <div className="blog-section-filter">
@@ -94,27 +95,39 @@ export default function BlogList() {
             </div>
           </ScrollReveal>
 
-          <div className="blog-grid stagger-children">
-            {filteredPosts.map((post) => (
-              <ScrollReveal key={post.slug}>
-                <Link to={`/blog/${post.slug}`} className="drama-card">
-                  <div className="drama-card-glow" />
-                  {post.section === 'ai' && (
-                    <span className="drama-card-badge">AI</span>
-                  )}
-                  <div className="drama-card-body">
-                    <time className="drama-card-date">{post.date}</time>
-                    <h3 className="drama-card-title">{post.title}</h3>
-                    <p className="drama-card-excerpt">{post.excerpt}</p>
-                    <div className="drama-card-tags">
-                      {post.tags?.map((tag) => (
-                        <span key={tag} className="drama-tag">{tag}</span>
-                      ))}
+          {/* Main layout: posts grid + sidebar */}
+          <div className="blog-layout-with-sidebar">
+            <div className="blog-grid stagger-children">
+              {filteredPosts.map((post) => (
+                <ScrollReveal key={post.slug}>
+                  <Link to={`/blog/${post.slug}`} className="drama-card">
+                    <div className="drama-card-glow" />
+                    {post.section === 'ai' && (
+                      <span className="drama-card-badge">AI</span>
+                    )}
+                    <div className="drama-card-body">
+                      <time className="drama-card-date">{post.date}</time>
+                      <h3 className="drama-card-title">{post.title}</h3>
+                      <p className="drama-card-excerpt">{post.excerpt}</p>
+                      <div className="drama-card-tags">
+                        {post.tags?.map((tag) => (
+                          <span key={tag} className="drama-tag">{tag}</span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              </ScrollReveal>
-            ))}
+                  </Link>
+                </ScrollReveal>
+              ))}
+            </div>
+
+            {/* Right sidebar (hidden on mobile) */}
+            <BlogSidebar
+              posts={posts}
+              wallpapers={wallpapersData}
+              tags={allTags}
+              activeTag={activeTag}
+              onTagClick={setActiveTag}
+            />
           </div>
 
           {filteredPosts.length === 0 && (

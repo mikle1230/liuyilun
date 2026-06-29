@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-刘逸伦的个人知识枢纽 — 博客、AI 学习收集、欧洲旅行知识库、个人履历。暗色主题、科技感视觉、多页设计。
+M 的个人知识枢纽 — 博客、AI 学习收集、欧洲旅行知识库、个人履历。明亮舒适、日式侘寂风视觉、多页设计。
 
 ## Commands
 

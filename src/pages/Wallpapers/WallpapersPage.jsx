@@ -54,7 +54,7 @@ function LazyImage({ item, onSelect }) {
           </div>
         ) : (
           <img
-            src={getThumbnailUrl(item.photoId)}
+            src={getThumbnailUrl(item)}
             alt={item.title}
             loading="lazy"
             className="wallpaper-img"

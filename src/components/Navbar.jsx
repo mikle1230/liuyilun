@@ -7,6 +7,7 @@ const navLinks = [
   { label: '首页', path: '/' },
   { label: '博客', path: '/blog' },
   { label: '探索', path: '/explore' },
+  { label: 'AI 导航', path: '/ai-nav' },
   { label: '壁纸', path: '/wallpapers' },
   { label: '关于', path: '/about' },
 ]

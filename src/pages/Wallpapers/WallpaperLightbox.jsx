@@ -83,7 +83,7 @@ export default function WallpaperLightbox({
       <div className="lightbox-content">
         <img
           ref={imgRef}
-          src={getPreviewUrl(item.photoId)}
+          src={getPreviewUrl(item)}
           alt={item.title}
           className="lightbox-image"
         />
@@ -105,7 +105,7 @@ export default function WallpaperLightbox({
 
         <div className="lightbox-actions">
           <a
-            href={getInnerDownloadUrl(item.photoId)}
+            href={getInnerDownloadUrl(item)}
             download
             className="lightbox-dl-btn"
             target="_blank"
@@ -119,7 +119,7 @@ export default function WallpaperLightbox({
             内屏 5120×4542
           </a>
           <a
-            href={getOuterDownloadUrl(item.photoId)}
+            href={getOuterDownloadUrl(item)}
             download
             className="lightbox-dl-btn lightbox-dl-btn-outline"
             target="_blank"

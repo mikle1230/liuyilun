@@ -1,108 +1,72 @@
 [
   {
     "id": "aurora-borealis",
-    "photoId": "t5YXx46qjH0",
-    "photographer": "Hannes Kunz",
-    "photographerUrl": "https://unsplash.com/@hkunz",
     "title": "北极光",
     "tags": ["极光", "自然", "天空"],
     "dateAdded": "2026-06-29"
   },
   {
     "id": "mountain-lake",
-    "photoId": "KMn4q0Q0s3M",
-    "photographer": "Johannes Plenio",
-    "photographerUrl": "https://unsplash.com/@johannesplenio",
     "title": "山间湖泊",
     "tags": ["山", "湖泊", "自然"],
     "dateAdded": "2026-06-29"
   },
   {
     "id": "cherry-blossom",
-    "photoId": "K5h0f4fEwZc",
-    "photographer": "Yoksel Zok",
-    "photographerUrl": "https://unsplash.com/@yoksel",
     "title": "樱花",
     "tags": ["花", "春天", "自然"],
     "dateAdded": "2026-06-29"
   },
   {
     "id": "city-night",
-    "photoId": "qjZ5X4nE6aE",
-    "photographer": "Alex Perez",
-    "photographerUrl": "https://unsplash.com/@a2eorigins",
     "title": "城市夜色",
     "tags": ["城市", "夜景", "建筑"],
     "dateAdded": "2026-06-29"
   },
   {
     "id": "ocean-sunset",
-    "photoId": "4R_WEmhx8eA",
-    "photographer": "Marek Okon",
-    "photographerUrl": "https://unsplash.com/@marekokon",
     "title": "海上日落",
     "tags": ["海洋", "日落", "自然"],
     "dateAdded": "2026-06-29"
   },
   {
     "id": "forest-trail",
-    "photoId": "FAXHw7vQnVU",
-    "photographer": "Lukasz Szmigiel",
-    "photographerUrl": "https://unsplash.com/@szmigiel",
     "title": "森林小径",
     "tags": ["森林", "小径", "自然"],
     "dateAdded": "2026-06-29"
   },
   {
     "id": "starry-sky",
-    "photoId": "Q9y3n4T1e_s",
-    "photographer": "Tommy Kwak",
-    "photographerUrl": "https://unsplash.com/@tkwakphoto",
     "title": "星空",
     "tags": ["星空", "夜晚", "自然"],
     "dateAdded": "2026-06-29"
   },
   {
     "id": "autumn-leaves",
-    "photoId": "gOG5fP3ZRqU",
-    "photographer": "Daniil Silantev",
-    "photographerUrl": "https://unsplash.com/@daniilsilantev",
     "title": "秋叶",
     "tags": ["秋天", "树叶", "自然"],
     "dateAdded": "2026-06-29"
   },
   {
     "id": "waterfall",
-    "photoId": "5rCRtJ_lpD0",
-    "photographer": "Lukasz Szmigiel",
-    "photographerUrl": "https://unsplash.com/@szmigiel",
     "title": "瀑布",
     "tags": ["瀑布", "水", "自然"],
     "dateAdded": "2026-06-29"
   },
   {
     "id": "desert-dunes",
-    "photoId": "l3IH0oJD7Hg",
-    "photographer": "Tobias Bjørkli",
-    "photographerUrl": "https://unsplash.com/@tobias_bjorkli",
     "title": "沙漠沙丘",
     "tags": ["沙漠", "沙丘", "自然"],
     "dateAdded": "2026-06-29"
   },
   {
     "id": "misty-mountains",
-    "photoId": "yOOTA6_4AXg",
-    "photographer": "Andreas Dress",
-    "photographerUrl": "https://unsplash.com/@andreastdress",
     "title": "雾中群山",
     "tags": ["山", "雾", "自然"],
     "dateAdded": "2026-06-29"
   },
   {
     "id": "tropical-beach",
-    "photoId": "AQl-J19ocn4",
-    "photographer": "Sean Oulashin",
-    "photographerUrl": "https://unsplash.com/@oulashin",
     "title": "热带海滩",
     "tags": ["海滩", "热带", "海洋"],
     "dateAdded": "2026-06-29"

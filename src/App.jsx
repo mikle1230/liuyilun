@@ -18,6 +18,7 @@ const AboutPage = lazy(() => import('./pages/About/AboutPage'))
 
 // Phase 3: Wallpapers
 const WallpapersPage = lazy(() => import('./pages/Wallpapers/WallpapersPage'))
+const AINavPage = lazy(() => import('./pages/AINav/AINavPage'))
 
 function AppLayout({ children }) {
   return (
@@ -58,6 +59,8 @@ export default function App() {
 
       {/* Wallpapers */}
       <Route path="/wallpapers" element={<Page seo={{ title: '壁纸', path: '/wallpapers' }}><WallpapersPage /></Page>} />
+      {/* AI Navigation */}
+      <Route path="/ai-nav" element={<Page seo={{ title: 'AI 导航', path: '/ai-nav' }}><AINavPage /></Page>} />
 
       <Route path="*" element={<Page><NotFound /></Page>} />
     </Routes>

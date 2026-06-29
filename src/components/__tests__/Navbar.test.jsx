@@ -19,6 +19,7 @@ describe('Navbar', () => {
     renderNavbar()
     expect(screen.getByText('首页')).toBeInTheDocument()
     expect(screen.getByText('博客')).toBeInTheDocument()
+    expect(screen.getByText('AI 导航')).toBeInTheDocument()
     expect(screen.getByText('壁纸')).toBeInTheDocument()
     expect(screen.getByText('探索')).toBeInTheDocument()
     expect(screen.getByText('关于')).toBeInTheDocument()

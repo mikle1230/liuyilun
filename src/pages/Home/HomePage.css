@@ -127,13 +127,20 @@
   );
 }
 
-/* ─── Two-column grid ─── */
+/* ─── Home layout: posts + sidebar ─── */
+
+.home-with-sidebar {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
 
 .featured-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 32px;
-  max-width: 780px;
+  flex: 1;
+  min-width: 0;
 }
 
 /* ─── Column header ─── */
@@ -403,6 +410,12 @@
 /* ════════════════════════════════════════════════════════════
    Responsive
    ════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  .home-with-sidebar {
+    flex-direction: column;
+  }
+}
 
 @media (max-width: 900px) {
   .featured-grid {

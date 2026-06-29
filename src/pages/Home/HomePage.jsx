@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import ScrollReveal from '../../components/ScrollReveal'
+import BlogSidebar from '../../components/Sidebar'
 import { loadPostsFromModules } from '../../utils/posts'
+import wallpapersData from '../../data/wallpapers.json'
 import './HomePage.css'
 
 /* ════════════════════════════════════════════════════════
@@ -164,39 +166,50 @@ export default function HomePage() {
             </div>
           </ScrollReveal>
 
-          <div className="featured-grid">
-            <div className="featured-col">
-              <ScrollReveal>
-                <div className="featured-col-header">
-                  <svg className="featured-col-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-                    <path d="M8 7h8M8 11h6" />
-                  </svg>
-                  <span>最新文章</span>
-                  <Link to="/blog" className="featured-col-more">查看全部 →</Link>
-                </div>
-              </ScrollReveal>
-              <div className="featured-post-list">
-                {featuredPosts.map((post) => (
-                  <ScrollReveal key={post.slug}>
-                    <Link to={`/blog/${post.slug}`} className="featured-post-card">
-                      <div className="featured-post-meta">
-                        <time className="featured-post-date">{post.date}</time>
-                        <div className="featured-post-tags">
-                          {post.tags?.slice(0, 2).map((t) => (
-                            <span key={t} className="featured-post-tag">{t}</span>
-                          ))}
+          <div className="home-with-sidebar">
+            <div className="featured-grid">
+              <div className="featured-col">
+                <ScrollReveal>
+                  <div className="featured-col-header">
+                    <svg className="featured-col-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                      <path d="M8 7h8M8 11h6" />
+                    </svg>
+                    <span>最新文章</span>
+                    <Link to="/blog" className="featured-col-more">查看全部 →</Link>
+                  </div>
+                </ScrollReveal>
+                <div className="featured-post-list">
+                  {featuredPosts.map((post) => (
+                    <ScrollReveal key={post.slug}>
+                      <Link to={`/blog/${post.slug}`} className="featured-post-card">
+                        <div className="featured-post-meta">
+                          <time className="featured-post-date">{post.date}</time>
+                          <div className="featured-post-tags">
+                            {post.tags?.slice(0, 2).map((t) => (
+                              <span key={t} className="featured-post-tag">{t}</span>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                      <h3 className="featured-post-title">{post.title}</h3>
-                      <p className="featured-post-excerpt">{post.excerpt}</p>
-                      <span className="featured-post-arrow">阅读文章 →</span>
-                    </Link>
-                  </ScrollReveal>
-                ))}
+                        <h3 className="featured-post-title">{post.title}</h3>
+                        <p className="featured-post-excerpt">{post.excerpt}</p>
+                        <span className="featured-post-arrow">阅读文章 →</span>
+                      </Link>
+                    </ScrollReveal>
+                  ))}
+                </div>
               </div>
             </div>
+
+            {/* Right sidebar */}
+            <BlogSidebar
+              posts={featuredPosts}
+              wallpapers={wallpapersData}
+              tags={[]}
+              activeTag={null}
+              onTagClick={() => {}}
+            />
           </div>
         </div>
       </section>
