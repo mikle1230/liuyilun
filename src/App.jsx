@@ -20,6 +20,9 @@ const AboutPage = lazy(() => import('./pages/About/AboutPage'))
 const WallpapersPage = lazy(() => import('./pages/Wallpapers/WallpapersPage'))
 const AINavPage = lazy(() => import('./pages/AINav/AINavPage'))
 
+// Hidden: HK Gate
+const HKGate = lazy(() => import('./pages/HK/HKGate'))
+
 function AppLayout({ children }) {
   return (
     <div className="app">
@@ -61,6 +64,9 @@ export default function App() {
       <Route path="/wallpapers" element={<Page seo={{ title: '壁纸', path: '/wallpapers' }}><WallpapersPage /></Page>} />
       {/* AI Navigation */}
       <Route path="/ai-nav" element={<Page seo={{ title: 'AI 导航', path: '/ai-nav' }}><AINavPage /></Page>} />
+
+      {/* Hidden: HK Gate */}
+      <Route path="/hk" element={<HKGate />} />
 
       <Route path="*" element={<Page><NotFound /></Page>} />
     </Routes>

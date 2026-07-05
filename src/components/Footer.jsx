@@ -64,6 +64,7 @@ export default function Footer() {
             <span className="footer-badge-dot" />
             记录思考 · 收集知识 · 探索世界
           </span>
+          <Link to="/hk" className="footer-hidden-entry" aria-hidden="true" tabIndex={-1}>·</Link>
         </div>
       </div>
     </footer>

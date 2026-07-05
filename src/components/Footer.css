@@ -274,6 +274,20 @@
   50% { opacity: 1; }
 }
 
+/* Hidden entry — barely visible, reveals on hover */
+.footer-hidden-entry {
+  font-size: 10px;
+  color: transparent;
+  text-decoration: none;
+  transition: color 0.5s ease;
+  user-select: none;
+  margin-left: 12px;
+}
+
+.footer-hidden-entry:hover {
+  color: var(--text-tertiary);
+}
+
 /* ══════════════════════════════════════════════════════
    Responsive
    ══════════════════════════════════════════════════════ */
