@@ -1,5 +1,5 @@
 import { useEffect, useRef, useCallback } from 'react'
-import { getPreviewUrl, getInnerDownloadUrl, getOuterDownloadUrl } from '../../utils/wallpapers'
+import { getPreviewUrl, getDownloadUrl } from '../../utils/wallpapers'
 import './WallpaperLightbox.css'
 
 export default function WallpaperLightbox({
@@ -34,7 +34,6 @@ export default function WallpaperLightbox({
   const handleTouchEnd = useCallback((e) => {
     const t = e.changedTouches[0]
     const dx = t.clientX - touchRef.current.startX
-    // Only trigger swipe if horizontal movement > vertical
     const dy = t.clientY - touchRef.current.startY
     if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 80) {
       if (dx > 0) onPrev()
@@ -93,19 +92,11 @@ export default function WallpaperLightbox({
       <div className="lightbox-bar">
         <div className="lightbox-info">
           <span className="lightbox-title">{item.title}</span>
-          {item.photographer && (
-            <span className="lightbox-photographer">
-              Photo by{' '}
-              <a href={item.photographerUrl} target="_blank" rel="noopener noreferrer">
-                {item.photographer}
-              </a>
-            </span>
-          )}
         </div>
 
         <div className="lightbox-actions">
           <a
-            href={getInnerDownloadUrl(item)}
+            href={getDownloadUrl(item, 2160, 4800)}
             download
             className="lightbox-dl-btn"
             target="_blank"
@@ -116,21 +107,7 @@ export default function WallpaperLightbox({
               <polyline points="7 10 12 15 17 10" />
               <line x1="12" y1="15" x2="12" y2="3" />
             </svg>
-            内屏 5120×4542
-          </a>
-          <a
-            href={getOuterDownloadUrl(item)}
-            download
-            className="lightbox-dl-btn lightbox-dl-btn-outline"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-            外屏 1080×2640
+            下载 2160×4800
           </a>
         </div>
       </div>

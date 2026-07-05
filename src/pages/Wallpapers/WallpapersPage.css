@@ -2,15 +2,6 @@
   padding-top: 0;
 }
 
-/* Tag filter */
-.wallpaper-tag-filter {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 40px;
-  justify-content: center;
-}
-
 /* Masonry grid (CSS columns) */
 .wallpaper-masonry {
   column-count: 4;
@@ -104,7 +95,3 @@
   margin-bottom: 4px;
 }
 
-.wallpaper-overlay-photographer {
-  font-size: var(--font-size-xs);
-  color: rgba(255, 255, 255, 0.7);
-}

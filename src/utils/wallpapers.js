@@ -1,13 +1,10 @@
 /**
  * Wallpaper URL utilities.
  *
- * Two-tier source system:
- *   1. Unsplash (photoId present) — premium source
- *   2. Picsum.photos (seed fallback) — always accessible, no API key, China-friendly
+ * Source: Picsum.photos (deterministic seed, no API key, China-friendly).
+ * Optional Unsplash support when photoId is present.
  *
- * Download dimensions:
- *   Inner screen (Vivo X Fold 5 unfolded): 5120 × 4542
- *   Outer screen (Vivo X Fold 5 folded):    1080 × 2640
+ * Download dimensions: Vivo X200 Pro — 2160 × 4800
  */
 
 const UNSPLASH_BASE = 'https://images.unsplash.com'
@@ -36,7 +33,6 @@ export function getDisplayUrl(item, w, h, quality = 80) {
   if (item.photoId) {
     return unsplashUrl(item.photoId, w, h, quality)
   }
-  // Fallback to Picsum with deterministic seed
   return picsumUrl(item.title || item.id, w, h)
 }
 
@@ -55,16 +51,5 @@ export function getDownloadUrl(item, width, height) {
   if (item.photoId) {
     return unsplashUrl(item.photoId, width, height, 90)
   }
-  // Picsum doesn't support arbitrary download sizes, use max reasonable
   return picsumUrl(item.title || item.id, width, height)
-}
-
-/** Inner screen (unfolded): 5120 × 4542 */
-export function getInnerDownloadUrl(item) {
-  return getDownloadUrl(item, 5120, 4542)
-}
-
-/** Outer screen (folded): 1080 × 2640 */
-export function getOuterDownloadUrl(item) {
-  return getDownloadUrl(item, 1080, 2640)
 }
