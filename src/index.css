@@ -203,4 +203,34 @@ button {
 .stagger-children > .scroll-reveal:nth-child(7) { transition-delay: 0.48s; }
 .stagger-children > .scroll-reveal:nth-child(8) { transition-delay: 0.56s; }
 
+/* ════════════════════════════════════════════════════════
+   Spotlight Card — border glows at cursor
+   ════════════════════════════════════════════════════════ */
+.spotlight-card {
+  --spot-x: 50%;
+  --spot-y: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(
+    600px circle at var(--spot-x) var(--spot-y),
+    var(--accent-subtle),
+    transparent 50%
+  );
+}
+
+.spotlight-card:hover::after {
+  opacity: 1;
+}
+
 /* Responsive breakpoints migrated to themes.css */

@@ -77,6 +77,12 @@ function useTypewriter(words, typingSpeed = 80, deletingSpeed = 40, pauseDuratio
    Component
    ════════════════════════════════════════════════════════ */
 
+function spotMove(e) {
+  const rect = e.currentTarget.getBoundingClientRect()
+  e.currentTarget.style.setProperty('--spot-x', `${((e.clientX - rect.left) / rect.width) * 100}%`)
+  e.currentTarget.style.setProperty('--spot-y', `${((e.clientY - rect.top) / rect.height) * 100}%`)
+}
+
 export default function HomePage() {
   const videoRef = useRef(null)
   const typewriterText = useTypewriter(typewriterWords)
@@ -156,7 +162,7 @@ export default function HomePage() {
             <div className="home-card-grid stagger-children">
               {featuredPosts.map((post) => (
                 <ScrollReveal key={post.slug}>
-                  <Link to={`/journal/${post.slug}`} className="journal-card">
+                  <Link to={`/journal/${post.slug}`} className="journal-card spotlight-card" onMouseMove={spotMove}>
                     <div
                       className="journal-card-img"
                       style={{
@@ -195,7 +201,7 @@ export default function HomePage() {
             <div className="home-card-grid stagger-children">
               {recentPosts.map((post) => (
                 <ScrollReveal key={post.slug}>
-                  <Link to={`/journal/${post.slug}`} className="journal-card">
+                  <Link to={`/journal/${post.slug}`} className="journal-card spotlight-card" onMouseMove={spotMove}>
                     <div
                       className="journal-card-img"
                       style={{

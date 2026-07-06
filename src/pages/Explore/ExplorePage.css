@@ -42,8 +42,17 @@
 
 .explore-country-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 24px;
+  grid-auto-rows: 260px;
+}
+
+.explore-country-grid > *:nth-child(3n+1) {
+  grid-row: span 2;
+}
+
+.explore-country-grid > *:nth-child(3n+1) .explore-country-card {
+  height: 100%;
 }
 
 /* ── Country Card ── */

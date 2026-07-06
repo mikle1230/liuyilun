@@ -13,6 +13,12 @@ const ALL_POSTS = import.meta.glob('../../content/{blog,ai}/*.md', {
   import: 'default',
 })
 
+function spotMove(e) {
+  const rect = e.currentTarget.getBoundingClientRect()
+  e.currentTarget.style.setProperty('--spot-x', `${((e.clientX - rect.left) / rect.width) * 100}%`)
+  e.currentTarget.style.setProperty('--spot-y', `${((e.clientY - rect.top) / rect.height) * 100}%`)
+}
+
 export default function JournalList() {
   const posts = useMemo(() => loadPostsFromModules(ALL_POSTS), [])
 
@@ -58,7 +64,7 @@ export default function JournalList() {
           <div className="journal-grid stagger-children">
             {filteredPosts.map((post) => (
               <ScrollReveal key={post.slug}>
-                <Link to={`/journal/${post.slug}`} className="journal-card">
+                <Link to={`/journal/${post.slug}`} className="journal-card spotlight-card" onMouseMove={spotMove}>
                   <div
                     className="journal-card-img"
                     style={{

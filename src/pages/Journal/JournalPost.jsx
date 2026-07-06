@@ -2,6 +2,7 @@ import { useState, useEffect, lazy, Suspense } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import parseFrontmatter from '../../utils/frontmatter'
 import TagPill from '../../components/TagPill'
+import SkeletonCard from '../../components/SkeletonCard'
 import './JournalPost.css'
 
 const MarkdownRenderer = lazy(() => import('../../components/MarkdownRenderer'))
@@ -61,9 +62,9 @@ export default function JournalPost() {
   if (!post) {
     return (
       <div className="journal-page">
-        <section className="section">
-          <div className="container" style={{ textAlign: 'center', padding: '120px 0' }}>
-            <div className="loading-spinner" />
+        <section className="section journal-post-section">
+          <div className="container">
+            <SkeletonCard />
           </div>
         </section>
       </div>

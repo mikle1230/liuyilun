@@ -147,8 +147,21 @@
 
 .home-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 32px;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 24px;
+}
+
+.home-card-grid > *:first-child {
+  grid-row: span 2;
+}
+
+.home-card-grid > *:first-child .journal-card {
+  height: 100%;
+}
+
+.home-card-grid > *:first-child .journal-card-img {
+  height: 320px;
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -230,6 +243,12 @@
   .home-card-grid {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+  .home-card-grid > *:first-child {
+    grid-row: auto;
+  }
+  .home-card-grid > *:first-child .journal-card-img {
+    height: 220px;
   }
   .home-explore-banner {
     flex-direction: column;

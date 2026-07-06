@@ -37,6 +37,12 @@ function getCountryCover(country) {
   }?w=800&q=80`
 }
 
+function spotMove(e) {
+  const rect = e.currentTarget.getBoundingClientRect()
+  e.currentTarget.style.setProperty('--spot-x', `${((e.clientX - rect.left) / rect.width) * 100}%`)
+  e.currentTarget.style.setProperty('--spot-y', `${((e.clientY - rect.top) / rect.height) * 100}%`)
+}
+
 export default function ExplorePage() {
   const [activeCountry, setActiveCountry] = useState(null)
 
@@ -71,8 +77,9 @@ export default function ExplorePage() {
                 return (
                   <ScrollReveal key={country.id}>
                     <button
-                      className="explore-country-card"
+                      className="explore-country-card spotlight-card"
                       onClick={() => setActiveCountry(country.id)}
+                      onMouseMove={spotMove}
                     >
                       <div
                         className="explore-country-card-img"
@@ -125,7 +132,12 @@ export default function ExplorePage() {
                       {city.attractions.map((a, i) => (
                         <ScrollReveal key={a.id} delay={i * 60}>
                           <Link to={`/explore/attraction/${a.id}`} className="attraction-card-link">
-                            <div className="attraction-card">
+                            <div className="attraction-card spotlight-card" onMouseMove={(e) => {
+                              const el = e.currentTarget
+                              const rect = el.getBoundingClientRect()
+                              el.style.setProperty('--spot-x', `${((e.clientX - rect.left) / rect.width) * 100}%`)
+                              el.style.setProperty('--spot-y', `${((e.clientY - rect.top) / rect.height) * 100}%`)
+                            }}>
                               <div className="attraction-card-img" style={imgStyle(a.image, 800, a.name)} />
                               <div className="attraction-card-body">
                                 <div className="attraction-card-meta">
