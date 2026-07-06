@@ -150,7 +150,7 @@
 .markdown-renderer pre code .hljs-attr,
 .markdown-renderer pre code .hljs-variable,
 .markdown-renderer pre code .hljs-template-variable {
-  color: #a88b4f;
+  color: var(--accent-dim);
 }
 
 .markdown-renderer pre code .hljs-comment,

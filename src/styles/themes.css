@@ -1,74 +1,73 @@
 /* ============================================
-   Dual-Theme Design System
-   Dark: warm Zinc · Gold accent · Noir
-   Light: wabi-sabi warm · Gold accent · Airy
+   Dual-Theme Design System v2
+   Light: clean white · Teal accent · Airy
+   Dark: deep noir · Teal accent · Cinematic
    ============================================ */
 
-/* ---- Dark theme (default) ---- */
-[data-theme="dark"] {
-  /* Backgrounds — warm-leaning Zinc */
-  --bg-primary: #0c0b0a;
-  --bg-secondary: #0f0e0d;
-  --bg-surface: #141312;
-  --bg-card: #181716;
-  --bg-elevated: #1e1d1b;
+/* ---- Light theme (default) ---- */
+[data-theme="light"], :root {
+  /* Backgrounds — crisp white stack */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafb;
+  --bg-surface: #f1f5f7;
+  --bg-card: #ffffff;
+  --bg-elevated: #eaf0f3;
 
   /* Text */
-  --text-primary: #f4f4f5;
-  --text-secondary: #a1a1aa;
-  --text-tertiary: #52525b;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-tertiary: #94a3b8;
 
-  /* Accent: Gold — single accent, saturation < 80% */
-  --accent: #c9a96e;
-  --accent-hover: #d4b87a;
-  --accent-dim: #a88b4f;
-  --accent-subtle: rgba(201, 169, 110, 0.08);
+  /* Accent: Teal #2dd4bf */
+  --accent: #14b8a6;
+  --accent-hover: #0d9488;
+  --accent-dim: #0f766e;
+  --accent-subtle: rgba(20, 184, 166, 0.08);
 
-  /* Borders */
-  --border-color: #1c1c22;
-  --border-light: #27272a;
+  /* Borders — airy */
+  --border-color: #e2e8f0;
+  --border-light: #cbd5e1;
+
+  --overlay: rgba(15, 23, 42, 0.4);
+
+  /* Noise — barely there */
+  --noise-opacity: 0.008;
+}
+
+/* ---- Dark theme ---- */
+[data-theme="dark"] {
+  /* Backgrounds — deep noir */
+  --bg-primary: #0a0f14;
+  --bg-secondary: #0d1318;
+  --bg-surface: #111820;
+  --bg-card: #161d26;
+  --bg-elevated: #1b2430;
+
+  /* Text */
+  --text-primary: #ecf1f5;
+  --text-secondary: #8899aa;
+  --text-tertiary: #4a5568;
+
+  /* Accent: Teal #2dd4bf */
+  --accent: #2dd4bf;
+  --accent-hover: #45e0cc;
+  --accent-dim: #14b8a6;
+  --accent-subtle: rgba(45, 212, 191, 0.08);
+
+  /* Borders — cool */
+  --border-color: #1e293b;
+  --border-light: #2a3646;
 
   --overlay: rgba(0, 0, 0, 0.7);
 
-  /* Noise opacity */
-  --noise-opacity: 0.025;
+  --noise-opacity: 0.02;
 }
 
-/* ---- Light theme — wabi-sabi warm ---- */
-[data-theme="light"] {
-  /* Backgrounds — warm cream / rice paper */
-  --bg-primary: #faf9f7;
-  --bg-secondary: #f5f2ed;
-  --bg-surface: #f0ece6;
-  --bg-card: #ebe7e1;
-  --bg-elevated: #e5e0d9;
-
-  /* Text — warm black */
-  --text-primary: #1a1a1a;
-  --text-secondary: #6b6b6b;
-  --text-tertiary: #9a9a9a;
-
-  /* Accent: Gold — same brand color, slightly more present */
-  --accent: #c9a96e;
-  --accent-hover: #d4b87a;
-  --accent-dim: #a88b4f;
-  --accent-subtle: rgba(201, 169, 110, 0.12);
-
-  /* Borders — ultra thin, warm neutral */
-  --border-color: #e5e1db;
-  --border-light: #ddd8d0;
-
-  --overlay: rgba(0, 0, 0, 0.3);
-
-  /* Noise opacity — subtler in light */
-  --noise-opacity: 0.012;
-}
-
-/* ---- Shared typography (identical across themes) ---- */
+/* ---- Typography — all sans-serif ---- */
 :root {
-  --font-display: 'Noto Serif SC', 'Songti SC', Georgia, serif;
-  --font-sans: 'DM Sans', 'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-name: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-display: 'Inter', 'Noto Sans SC', 'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'Inter', 'Noto Sans SC', 'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-name: 'Inter', 'Noto Sans SC', 'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif;
 
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;

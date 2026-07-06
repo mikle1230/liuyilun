@@ -1,33 +1,31 @@
 import { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import ScrollReveal from '../../components/ScrollReveal'
-import BlogSidebar from '../../components/Sidebar'
 import { loadPostsFromModules } from '../../utils/posts'
-import wallpapersData from '../../data/wallpapers.json'
+import { getCoverImage } from '../../utils/tagImages'
 import './HomePage.css'
 
 /* ════════════════════════════════════════════════════════
-   Content — markdown → featured posts
+   Content — merged journal (blog + ai)
    ════════════════════════════════════════════════════════ */
 
-const blogModules = import.meta.glob('../../content/blog/*.md', {
-  eager: true,
-  query: '?raw',
-  import: 'default',
-})
-
-const aiModules = import.meta.glob('../../content/ai/*.md', {
+const journalModules = import.meta.glob('../../content/{blog,ai}/*.md', {
   eager: true,
   query: '?raw',
   import: 'default',
 })
 
 const featuredPosts = (() => {
-  const blogs = loadPostsFromModules(blogModules)
-  const ais = loadPostsFromModules(aiModules)
-  return [...blogs, ...ais]
+  return loadPostsFromModules(journalModules)
+    .filter((p) => p.pinned)
+    .slice(0, 4)
+})()
+
+const recentPosts = (() => {
+  return loadPostsFromModules(journalModules)
+    .filter((p) => !p.pinned)
     .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .slice(0, 6)
+    .slice(0, 4)
 })()
 
 /* ════════════════════════════════════════════════════════
@@ -47,7 +45,6 @@ function useTypewriter(words, typingSpeed = 80, deletingSpeed = 40, pauseDuratio
   const [isDeleting, setIsDeleting] = useState(false)
 
   useEffect(() => {
-    // Typewriter animation loop — setState inside effect is intentional
     const currentWord = words[wordIndex]
 
     if (!isDeleting && text === currentWord) {
@@ -80,12 +77,6 @@ function useTypewriter(words, typingSpeed = 80, deletingSpeed = 40, pauseDuratio
    Component
    ════════════════════════════════════════════════════════ */
 
-const minifeatures = [
-  '实时全球互动地图',
-  '深度目的地人文百科',
-  '专属旅行笔记云同步',
-]
-
 export default function HomePage() {
   const videoRef = useRef(null)
   const typewriterText = useTypewriter(typewriterWords)
@@ -108,15 +99,11 @@ export default function HomePage() {
       })
     }
 
-    // Try immediately if already buffered
     if (video.readyState >= 3) {
       attemptPlay()
     } else {
-      // Wait until enough data is loaded
       video.addEventListener('canplay', attemptPlay, { once: true })
-      // Fallback: try on window load anyway
       window.addEventListener('load', attemptPlay, { once: true })
-      // Last resort retry
       setTimeout(attemptPlay, 3000)
     }
   }, [])
@@ -154,113 +141,103 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── Featured Content ─── */}
-      <section className="section home-featured-section">
-        <div className="container">
+      {/* ─── Featured Posts ─── */}
+      {featuredPosts.length > 0 && (
+        <section className="section home-featured-section">
+          <div className="container">
+            <ScrollReveal>
+              <div className="featured-header">
+                <span className="featured-label">精选</span>
+                <div className="featured-header-line" />
+                <Link to="/journal" className="featured-col-more">查看全部 →</Link>
+              </div>
+            </ScrollReveal>
 
-          {/* Section header */}
-          <ScrollReveal>
-            <div className="featured-header">
-              <span className="featured-label">精选内容</span>
-              <div className="featured-header-line" />
-            </div>
-          </ScrollReveal>
-
-          <div className="home-with-sidebar">
-            <div className="featured-grid">
-              <div className="featured-col">
-                <ScrollReveal>
-                  <div className="featured-col-header">
-                    <svg className="featured-col-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-                      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-                      <path d="M8 7h8M8 11h6" />
-                    </svg>
-                    <span>最新文章</span>
-                    <Link to="/blog" className="featured-col-more">查看全部 →</Link>
-                  </div>
+            <div className="home-card-grid stagger-children">
+              {featuredPosts.map((post) => (
+                <ScrollReveal key={post.slug}>
+                  <Link to={`/journal/${post.slug}`} className="journal-card">
+                    <div
+                      className="journal-card-img"
+                      style={{
+                        backgroundImage: `url(${getCoverImage(post.tags, post.image)})`,
+                      }}
+                    />
+                    <div className="journal-card-body">
+                      <time className="journal-card-date">{post.date}</time>
+                      <h3 className="journal-card-title">{post.title}</h3>
+                      <p className="journal-card-excerpt">{post.excerpt}</p>
+                      <div className="journal-card-tags">
+                        {post.tags?.slice(0, 3).map((tag) => (
+                          <span key={tag} className="journal-tag">{tag}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </Link>
                 </ScrollReveal>
-                <div className="featured-post-list">
-                  {featuredPosts.map((post) => (
-                    <ScrollReveal key={post.slug}>
-                      <Link to={`/blog/${post.slug}`} className="featured-post-card">
-                        <div className="featured-post-meta">
-                          <time className="featured-post-date">{post.date}</time>
-                          <div className="featured-post-tags">
-                            {post.tags?.slice(0, 2).map((t) => (
-                              <span key={t} className="featured-post-tag">{t}</span>
-                            ))}
-                          </div>
-                        </div>
-                        <h3 className="featured-post-title">{post.title}</h3>
-                        <p className="featured-post-excerpt">{post.excerpt}</p>
-                        <span className="featured-post-arrow">阅读文章 →</span>
-                      </Link>
-                    </ScrollReveal>
-                  ))}
-                </div>
-              </div>
+              ))}
             </div>
-
-            {/* Right sidebar */}
-            <BlogSidebar
-              posts={featuredPosts}
-              wallpapers={wallpapersData}
-              tags={[]}
-              activeTag={null}
-              onTagClick={() => {}}
-            />
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* ─── Mini Program ─── */}
-      <section className="section home-mini-section">
+      {/* ─── Recent Posts ─── */}
+      {recentPosts.length > 0 && (
+        <section className="section home-recent-section">
+          <div className="container">
+            <ScrollReveal>
+              <div className="featured-header">
+                <span className="featured-label">最新</span>
+                <div className="featured-header-line" />
+              </div>
+            </ScrollReveal>
+
+            <div className="home-card-grid stagger-children">
+              {recentPosts.map((post) => (
+                <ScrollReveal key={post.slug}>
+                  <Link to={`/journal/${post.slug}`} className="journal-card">
+                    <div
+                      className="journal-card-img"
+                      style={{
+                        backgroundImage: `url(${getCoverImage(post.tags, post.image)})`,
+                      }}
+                    />
+                    <div className="journal-card-body">
+                      <time className="journal-card-date">{post.date}</time>
+                      <h3 className="journal-card-title">{post.title}</h3>
+                      <p className="journal-card-excerpt">{post.excerpt}</p>
+                      <div className="journal-card-tags">
+                        {post.tags?.slice(0, 3).map((tag) => (
+                          <span key={tag} className="journal-tag">{tag}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </Link>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ─── Explore Teaser ─── */}
+      <section className="section home-explore-teaser">
         <div className="container">
           <ScrollReveal>
-            <div className="featured-header">
-              <span className="featured-label">探索世界</span>
-              <div className="featured-header-line" />
+            <div className="home-explore-banner">
+              <div className="home-explore-text">
+                <span className="featured-label">探索</span>
+                <h2 className="home-explore-heading">你向往的世界</h2>
+                <p className="home-explore-desc">
+                  从布拉格的查理大桥到冰岛的极光，一座一座城市地认识这个世界。
+                </p>
+                <Link to="/explore" className="home-explore-link">
+                  开始探索 →
+                </Link>
+              </div>
+              <div className="home-explore-visual" />
             </div>
           </ScrollReveal>
-
-          <div className="home-mini-card">
-            <div className="home-mini-left">
-              <div className="home-mini-qr-ring" />
-              <div className="home-mini-qr">
-                <div className="home-mini-qr-inner">
-                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-                    <rect x="3" y="3" width="7" height="7" rx="1" />
-                    <rect x="14" y="3" width="7" height="7" rx="1" />
-                    <rect x="3" y="14" width="7" height="7" rx="1" />
-                    <rect x="15" y="15" width="3" height="3" />
-                    <rect x="18" y="18" width="3" height="3" />
-                  </svg>
-                  <span>扫码体验</span>
-                </div>
-              </div>
-              <p className="home-mini-qr-hint">微信扫描 · 开启探索之旅</p>
-            </div>
-
-            <div className="home-mini-right">
-              <span className="home-mini-label">Connect Digitally</span>
-              <h2 className="home-mini-title">探索世界微信小程序</h2>
-              <p className="home-mini-desc">
-                将整个世界的灵感装进兜里。精选旅行指南、沉浸式航拍地图以及独家知识专栏。随时随地，开启您的全球视野。
-              </p>
-              <div className="home-mini-features">
-                {minifeatures.map((feat) => (
-                  <div key={feat} className="home-mini-feature">
-                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="10" cy="10" r="8" />
-                      <path d="M6 10l3 3 5-5" />
-                    </svg>
-                    <span>{feat}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
       </section>
     </div>

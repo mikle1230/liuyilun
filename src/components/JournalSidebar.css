@@ -1,0 +1,128 @@
+.journal-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  padding: 16px 0;
+  border-left: 1px solid var(--border-color);
+  position: sticky;
+  top: 80px;
+}
+
+.journal-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px 12px;
+}
+
+.journal-sidebar-title {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
+}
+
+.js-toggle-all {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.js-toggle-all:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.js-cat {
+  border-bottom: 1px solid transparent;
+}
+
+.js-cat.open {
+  border-bottom-color: var(--border-color);
+}
+
+.js-cat-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  margin: 1px 8px;
+  text-align: left;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.js-cat-btn:hover {
+  background: var(--accent-subtle);
+  color: var(--text-primary);
+}
+
+.js-cat.open .js-cat-btn {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.js-cat-icon {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.js-cat-name {
+  flex: 1;
+}
+
+.js-cat-arrow {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+}
+
+.js-items {
+  padding: 4px 16px 8px;
+}
+
+.js-item {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: var(--text-secondary);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.js-item:hover {
+  background: var(--accent-subtle);
+  color: var(--text-primary);
+}
+
+.js-item-name {
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+}
+
+.js-item-desc {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .journal-sidebar {
+    display: none;
+  }
+}

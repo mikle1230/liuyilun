@@ -5,9 +5,9 @@
 
 .footer {
   background:
-    radial-gradient(ellipse at 50% 0%, rgba(201, 169, 110, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 0%, rgba(20, 184, 166, 0.04) 0%, transparent 60%),
     var(--bg-primary);
-  border-top: 1px solid rgba(201, 169, 110, 0.08);
+  border-top: 1px solid rgba(20, 184, 166, 0.08);
   padding: 0 24px;
   position: relative;
   overflow: hidden;
@@ -19,8 +19,8 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(201, 169, 110, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201, 169, 110, 0.02) 1px, transparent 1px);
+    linear-gradient(rgba(20, 184, 166, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 184, 166, 0.02) 1px, transparent 1px);
   background-size: 48px 48px;
   pointer-events: none;
 }
@@ -36,9 +36,9 @@
   height: 1px;
   background: linear-gradient(90deg,
     transparent 0%,
-    rgba(201, 169, 110, 0.3) 20%,
-    rgba(201, 169, 110, 0.5) 50%,
-    rgba(201, 169, 110, 0.3) 80%,
+    rgba(20, 184, 166, 0.3) 20%,
+    rgba(20, 184, 166, 0.5) 50%,
+    rgba(20, 184, 166, 0.3) 80%,
     transparent 100%
   );
   margin-bottom: 56px;
@@ -119,7 +119,7 @@
   left: 0;
   width: 20px;
   height: 1px;
-  background: rgba(201, 169, 110, 0.4);
+  background: rgba(20, 184, 166, 0.4);
 }
 
 .footer-col-links {
@@ -144,7 +144,7 @@
 .footer-link::before {
   content: '\2014';
   font-size: 11px;
-  color: rgba(201, 169, 110, 0);
+  color: rgba(20, 184, 166, 0);
   transition: all 0.3s ease;
 }
 
@@ -160,8 +160,8 @@
 
 /* ─── Contact card ─── */
 .footer-contact-card {
-  background: rgba(201, 169, 110, 0.03);
-  border: 1px solid rgba(201, 169, 110, 0.08);
+  background: rgba(20, 184, 166, 0.03);
+  border: 1px solid rgba(20, 184, 166, 0.08);
   border-radius: 12px;
   padding: 20px 24px;
   backdrop-filter: blur(8px);
@@ -169,7 +169,7 @@
 }
 
 .footer-contact-card:hover {
-  border-color: rgba(201, 169, 110, 0.2);
+  border-color: rgba(20, 184, 166, 0.2);
 }
 
 .footer-contact-header {
@@ -227,9 +227,9 @@
 }
 
 .footer-social-btn:hover {
-  border-color: rgba(201, 169, 110, 0.25);
+  border-color: rgba(20, 184, 166, 0.25);
   color: var(--accent);
-  background: rgba(201, 169, 110, 0.06);
+  background: rgba(20, 184, 166, 0.06);
   transform: translateY(-2px);
 }
 
@@ -254,9 +254,9 @@
   gap: 6px;
   padding: 4px 14px;
   border-radius: 100px;
-  border: 1px solid rgba(201, 169, 110, 0.1);
+  border: 1px solid rgba(20, 184, 166, 0.1);
   font-size: 10px;
-  color: rgba(201, 169, 110, 0.5);
+  color: rgba(20, 184, 166, 0.5);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }

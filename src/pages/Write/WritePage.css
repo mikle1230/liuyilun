@@ -283,7 +283,7 @@
   --wp-text: #f4f4f5;
   --wp-text-secondary: #a1a1aa;
   --wp-text-tertiary: #52525b;
-  --wp-accent: #c9a96e;
+  --wp-accent: var(--accent);
   --wp-radius-sm: 8px;
   --wp-radius-md: 12px;
 }
@@ -590,7 +590,7 @@
 .write-message.draft {
   color: var(--accent);
   background: var(--accent-subtle);
-  border-bottom: 1px solid rgba(201, 169, 110, 0.15);
+  border-bottom: 1px solid rgba(20, 184, 166, 0.15);
 }
 
 /* ---- Editor area ---- */

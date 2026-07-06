@@ -1,24 +1,20 @@
 import { lazy, Suspense } from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate, useParams } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import PageLoader from './components/PageLoader'
-import RedirectToBlog from './components/RedirectToBlog'
 import Seo from './components/Seo'
 import './App.css'
 
 // Route-level code splitting — each page becomes its own Vite chunk
 const HomePage = lazy(() => import('./pages/Home/HomePage'))
-const BlogList = lazy(() => import('./pages/Blog/BlogList'))
-const BlogPost = lazy(() => import('./pages/Blog/BlogPost'))
+const JournalList = lazy(() => import('./pages/Journal/JournalList'))
+const JournalPost = lazy(() => import('./pages/Journal/JournalPost'))
 const WritePage = lazy(() => import('./pages/Write/WritePage'))
 const ExplorePage = lazy(() => import('./pages/Explore/ExplorePage'))
 const AttractionDetail = lazy(() => import('./pages/Explore/AttractionDetail'))
 const AboutPage = lazy(() => import('./pages/About/AboutPage'))
-
-// Phase 3: Wallpapers
 const WallpapersPage = lazy(() => import('./pages/Wallpapers/WallpapersPage'))
-const AINavPage = lazy(() => import('./pages/AINav/AINavPage'))
 
 // Hidden: HK Gate
 const HKGate = lazy(() => import('./pages/HK/HKGate'))
@@ -48,22 +44,26 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Page seo={{ title: '首页' }}><HomePage /></Page>} />
-      <Route path="/blog" element={<Page seo={{ title: '博客', path: '/blog' }}><BlogList /></Page>} />
-      <Route path="/blog/:slug" element={<Page><BlogPost /></Page>} />
 
-      {/* /ai routes → permanent redirect to /blog */}
-      <Route path="/ai" element={<Navigate to="/blog" replace />} />
-      <Route path="/ai/:slug" element={<RedirectToBlog />} />
+      {/* Journal — merged blog + AI */}
+      <Route path="/journal" element={<Page seo={{ title: 'Journal', path: '/journal' }}><JournalList /></Page>} />
+      <Route path="/journal/:slug" element={<Page><JournalPost /></Page>} />
+
+      {/* Legacy redirects */}
+      <Route path="/blog" element={<Navigate to="/journal" replace />} />
+      <Route path="/blog/:slug" element={<LegacyRedirect to="/journal" />} />
+      <Route path="/ai" element={<Navigate to="/journal" replace />} />
+      <Route path="/ai/:slug" element={<LegacyRedirect to="/journal" />} />
+      <Route path="/ai-nav" element={<Navigate to="/journal" replace />} />
 
       <Route path="/explore" element={<Page seo={{ title: '探索世界', path: '/explore' }}><ExplorePage /></Page>} />
       <Route path="/explore/attraction/:slug" element={<Page><AttractionDetail /></Page>} />
       <Route path="/about" element={<Page seo={{ title: '关于我', path: '/about' }}><AboutPage /></Page>} />
       <Route path="/write" element={<Page seo={{ title: '发布文章', path: '/write' }}><WritePage /></Page>} />
 
-      {/* Wallpapers */}
-      <Route path="/wallpapers" element={<Page seo={{ title: '壁纸', path: '/wallpapers' }}><WallpapersPage /></Page>} />
-      {/* AI Navigation */}
-      <Route path="/ai-nav" element={<Page seo={{ title: 'AI 导航', path: '/ai-nav' }}><AINavPage /></Page>} />
+      {/* Collection (was Wallpapers) */}
+      <Route path="/collection" element={<Page seo={{ title: 'Collection', path: '/collection' }}><WallpapersPage /></Page>} />
+      <Route path="/wallpapers" element={<Navigate to="/collection" replace />} />
 
       {/* Hidden: HK Gate */}
       <Route path="/hk" element={<HKGate />} />
@@ -71,6 +71,11 @@ export default function App() {
       <Route path="*" element={<Page><NotFound /></Page>} />
     </Routes>
   )
+}
+
+function LegacyRedirect({ to }) {
+  const { slug } = useParams()
+  return <Navigate to={`${to}/${slug}`} replace />
 }
 
 function NotFound() {
