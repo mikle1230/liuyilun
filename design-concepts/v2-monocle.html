@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>This Place — Monocle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Serif SC', 'DM Sans', serif;
+  font-size: 18px; line-height: 2;
+  color: #1c1816; background: #f8f6f1;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === Pacing === */
+.container { max-width: 800px; margin: 0 auto; padding: 0 28px; }
+.section { margin-bottom: 120px; }
+.spacer-80 { height: 80px; }
+.spacer-120 { height: 120px; }
+
+/* === Navigation — horizon line === */
+nav {
+  padding: 56px 0 24px;
+  margin-bottom: 100px;
+  border-bottom: 1px solid #ddd8d0;
+}
+nav .container {
+  display: flex; justify-content: space-between; align-items: flex-end;
+}
+.site-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  color: #1c1816; text-decoration: none;
+}
+.nav-links { display: flex; gap: 28px; }
+.nav-links a {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: #8a7e76; text-decoration: none;
+  transition: color .25s;
+}
+.nav-links a:hover { color: #1c1816; }
+
+/* === Hero — editorial statement === */
+.hero { margin-bottom: 100px; }
+.hero .kicker {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.2em;
+  color: #b8a89a; margin-bottom: 24px;
+}
+.hero h1 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 48px; font-weight: 900;
+  line-height: 1.2; letter-spacing: -0.02em;
+  color: #1c1816; margin-bottom: 28px;
+  max-width: 700px;
+}
+.hero p {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 16px; color: #6b5f56; line-height: 1.9;
+  max-width: 560px;
+}
+
+/* === Feature article — magazine cover story === */
+.feature {
+  margin-bottom: 100px;
+  position: relative;
+}
+.feature-image {
+  width: 100%; height: 420px;
+  background: #ddd8d0; margin-bottom: 32px;
+  display: flex; align-items: center; justify-content: center;
+  color: #8a7e76; font-size: 14px; font-family: 'DM Sans', sans-serif;
+}
+.feature-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.2em;
+  color: #b8a89a; margin-bottom: 12px;
+}
+.feature-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 24px; font-weight: 700;
+  color: #1c1816; margin-bottom: 8px;
+  line-height: 1.35;
+  max-width: 600px;
+}
+.feature-excerpt {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 15px; color: #6b5f56; line-height: 1.8;
+  max-width: 520px; margin-bottom: 16px;
+}
+.feature-cta {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: #1c1816; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+
+/* === Chapter divider === */
+.chapter {
+  text-align: center; margin-bottom: 80px;
+}
+.chapter span {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.3em;
+  color: #b8a89a;
+  display: inline-block; padding: 0 20px;
+  position: relative;
+}
+.chapter span::before, .chapter span::after {
+  content: ''; position: absolute; top: 50%;
+  width: 40px; height: 1px; background: #ddd8d0;
+}
+.chapter span::before { right: 100%; }
+.chapter span::after { left: 100%; }
+
+/* === Section headings === */
+.section-head {
+  margin-bottom: 40px;
+}
+.section-head h2 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 28px; font-weight: 700;
+  color: #1c1816; margin-bottom: 8px;
+}
+.section-head p {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 15px; color: #8a7e76; line-height: 1.7;
+}
+
+/* === Journal list (broken column) === */
+.journal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+.journal-card {
+  text-decoration: none; color: inherit;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #ddd8d0;
+}
+.journal-card:nth-child(1) { grid-column: 1 / -1; }
+.journal-card:nth-child(1) .jc-title {
+  font-size: 22px; max-width: 600px;
+}
+.jc-date {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; color: #b8a89a; margin-bottom: 8px;
+}
+.jc-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 17px; font-weight: 600;
+  margin-bottom: 6px; transition: color .25s;
+}
+.journal-card:hover .jc-title { color: #a08670; }
+.jc-excerpt {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 14px; color: #8a7e76; line-height: 1.7;
+}
+.view-all {
+  grid-column: 1 / -1;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: #1c1816; text-decoration: none;
+  padding: 16px 0;
+}
+
+/* === Collections — minimal list === */
+.coll-list { }
+.coll-item {
+  display: flex; align-items: baseline; gap: 20px;
+  padding: 14px 0;
+  border-bottom: 1px solid #e8e2da;
+  text-decoration: none; color: inherit;
+}
+.coll-item:first-child { border-top: 1px solid #e8e2da; }
+.coll-num {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; color: #b8a89a; width: 28px; flex-shrink: 0;
+}
+.coll-name { font-size: 16px; font-weight: 500; flex-shrink: 0; width: 120px; }
+.coll-item:hover .coll-name { color: #a08670; }
+.coll-desc { font-size: 14px; color: #8a7e76; }
+.coll-count {
+  margin-left: auto; font-family: 'DM Sans', sans-serif;
+  font-size: 12px; color: #b8a89a; flex-shrink: 0;
+}
+
+/* === Travels — narrative style === */
+.travel-essay {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+  margin-bottom: 40px;
+}
+.travel-image {
+  height: 320px; background: #ddd8d0;
+  display: flex; align-items: center; justify-content: center;
+  color: #8a7e76; font-size: 13px;
+}
+.travel-text h3 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 20px; font-weight: 700; margin-bottom: 12px;
+}
+.travel-text p {
+  font-size: 14px; color: #6b5f56; line-height: 1.8;
+}
+
+/* === Footer === */
+footer {
+  padding: 48px 0 64px;
+  border-top: 1px solid #ddd8d0;
+  margin-top: 60px;
+}
+footer .container {
+  display: flex; justify-content: space-between; align-items: center;
+}
+footer span { font-size: 12px; color: #b8a89a; font-family: 'DM Sans', sans-serif; }
+
+/* === Mobile === */
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  nav { padding: 32px 0 20px; margin-bottom: 60px; }
+  .nav-links { gap: 16px; }
+  .nav-links a { font-size: 10px; letter-spacing: 0.08em; }
+  .hero h1 { font-size: 32px; }
+  .journal-grid { grid-template-columns: 1fr; gap: 24px; }
+  .journal-card:nth-child(1) .jc-title { font-size: 18px; }
+  .feature-image { height: 240px; }
+  .coll-name { width: auto; }
+  .coll-desc { display: none; }
+  .travel-essay { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="#" class="site-title">This Place</a>
+    <div class="nav-links">
+      <a href="#">Journal</a>
+      <a href="#">Collections</a>
+      <a href="#">Travels</a>
+      <a href="#">About</a>
+      <a href="#">Now</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- Hero — editorial statement, magazine cover energy -->
+  <div class="hero">
+    <div class="kicker">One place, many seasons</div>
+    <h1>记录时间<br>沉淀自己</h1>
+    <p>一个随时间生长的个人空间。<br>
+    走过的路、读过的书、用过的好工具、沉淀下来的思考。</p>
+  </div>
+
+  <!-- Featured story — like a magazine cover story -->
+  <div class="feature">
+    <div class="feature-image">
+      <span>📰 Featured · 最新文章</span>
+    </div>
+    <div class="feature-label">Latest</div>
+    <div class="feature-title">数据库还是要学的 — 在 AI 时代重新理解基础</div>
+    <div class="feature-excerpt">当 AI 工具日新月异，为什么回过头来学习数据库仍然是值得的？一些随想与观察。</div>
+    <a href="#" class="feature-cta">
+      Read <span style="margin-left:4px;">→</span>
+    </a>
+  </div>
+
+  <!-- Chapter divider -->
+  <div class="chapter"><span>Journal</span></div>
+
+  <!-- Recent entries — broken column like Monocle -->
+  <div class="journal-grid">
+    <a href="#" class="journal-card">
+      <div class="jc-date">2026.06.28</div>
+      <div class="jc-title">AI 时代的伯克希尔</div>
+      <div class="jc-excerpt">当巴菲特被装进一个仓库，深夜关于 ai-berkshire 的一点絮语。</div>
+    </a>
+    <a href="#" class="journal-card">
+      <div class="jc-date">2026.06.27</div>
+      <div class="jc-title">欢迎来到这个空间</div>
+      <div class="jc-excerpt">一封简单的介绍信。关于这个空间存在的意义。</div>
+    </a>
+    <a href="#" class="journal-card">
+      <div class="jc-date">2026.06.20</div>
+      <div class="jc-title">MICE 行业的变与不变</div>
+      <div class="jc-excerpt">19 年从业随想，从入境旅游到会奖差旅。</div>
+    </a>
+    <a href="#" class="view-all">View all journal entries →</a>
+  </div>
+
+  <!-- Chapter divider -->
+  <div class="chapter"><span>Collections</span></div>
+
+  <div class="section-head">
+    <h2>收藏</h2>
+    <p>有用之物与无用之美，汇集于此。</p>
+  </div>
+
+  <div class="coll-list">
+    <a href="#" class="coll-item">
+      <span class="coll-num">01</span>
+      <span class="coll-name">AI 工具</span>
+      <span class="coll-desc">日常使用的 AI 助手与开发工具</span>
+      <span class="coll-count">14 项</span>
+    </a>
+    <a href="#" class="coll-item">
+      <span class="coll-num">02</span>
+      <span class="coll-name">Gallery</span>
+      <span class="coll-desc">收集的风景、建筑与光影瞬间</span>
+      <span class="coll-count">12 张</span>
+    </a>
+    <a href="#" class="coll-item">
+      <span class="coll-num">03</span>
+      <span class="coll-name">开源项目</span>
+      <span class="coll-desc">值得关注的开源框架与工具</span>
+      <span class="coll-count">10 项</span>
+    </a>
+    <a href="#" class="coll-item">
+      <span class="coll-num">04</span>
+      <span class="coll-name">书签</span>
+      <span class="coll-desc">散落在网络各处的宝藏</span>
+      <span class="coll-count">—</span>
+    </a>
+  </div>
+
+  <!-- Chapter divider -->
+  <div class="chapter"><span>Travels</span></div>
+
+  <div class="section-head">
+    <h2>旅行笔记</h2>
+    <p>印象、感受、观察、瞬间。</p>
+  </div>
+
+  <!-- Travel essay — asymmetric narrative -->
+  <div class="travel-essay">
+    <div class="travel-image"><span>🇬🇧 London</span></div>
+    <div class="travel-text">
+      <h3>伦敦的雾</h3>
+      <p>十一月的伦敦，下午四点天就暗了。泰晤士河边的路灯亮起来的时候，整座城市像一幅褪色的水彩画。<br><br>
+      在 Notting Hill 的一家旧书店里翻到一本 1962 年的旅行指南，封面写着："London is a place for walking."</p>
+    </div>
+  </div>
+
+  <div class="travel-essay" style="direction: rtl; text-align: left;">
+    <div class="travel-text" style="direction: ltr;">
+      <h3>瑞士的慢火车</h3>
+      <p>从 Interlaken 到 Zermatt 的火车在山谷里缓缓穿行。坐在窗边，看草地上的牛铃、远处的雪峰、从身边滑过的木屋——你突然理解了为什么瑞士人不着急。</p>
+    </div>
+    <div class="travel-image" style="direction: ltr;"><span>🇨🇭 Switzerland</span></div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="container">
+    <span>© 2026</span>
+    <span>This is a place, not a product.</span>
+  </div>
+</footer>
+
+</body>
+</html>

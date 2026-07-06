@@ -15,36 +15,34 @@ function renderNavbar() {
 }
 
 describe('Navbar', () => {
-  it('renders all navigation links', () => {
+  it('renders navigation links', () => {
     renderNavbar()
-    expect(screen.getByText('首页')).toBeInTheDocument()
-    expect(screen.getByText('博客')).toBeInTheDocument()
-    expect(screen.getByText('AI 导航')).toBeInTheDocument()
-    expect(screen.getByText('壁纸')).toBeInTheDocument()
-    expect(screen.getByText('探索')).toBeInTheDocument()
-    expect(screen.getByText('关于')).toBeInTheDocument()
+    expect(screen.getByText('Journal')).toBeInTheDocument()
+    expect(screen.getByText('Collections')).toBeInTheDocument()
+    expect(screen.getByText('Travels')).toBeInTheDocument()
+    expect(screen.getByText('About')).toBeInTheDocument()
   })
 
-  it('renders logo mark', () => {
+  it('renders site title', () => {
     renderNavbar()
-    expect(screen.getByText('M')).toBeInTheDocument()
+    expect(screen.getByText('This Place')).toBeInTheDocument()
   })
 
-  it('has theme toggle button with accessible label', () => {
+  it('has theme toggle buttons', () => {
     renderNavbar()
-    const toggle = screen.getByLabelText(/切换/)
-    expect(toggle).toBeInTheDocument()
+    const toggles = screen.getAllByRole('button')
+    const themeToggle = toggles.find(b => b.textContent === '🌙' || b.textContent === '☀️')
+    expect(themeToggle).toBeTruthy()
   })
 
-  it('toggles theme on button click', () => {
+  it('toggles theme on click', () => {
     renderNavbar()
-    const toggle = screen.getByLabelText(/切换/)
+    const toggles = screen.getAllByRole('button')
+    const themeToggle = toggles.find(b => b.textContent === '🌙' || b.textContent === '☀️')
     const html = document.documentElement
 
-    // Default theme from ThemeContext is 'light'
     expect(html.getAttribute('data-theme')).toBe('light')
-
-    fireEvent.click(toggle)
+    fireEvent.click(themeToggle)
     expect(html.getAttribute('data-theme')).toBe('dark')
   })
 })

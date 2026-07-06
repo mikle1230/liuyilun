@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>This Place — Warm</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', 'Noto Sans SC', sans-serif;
+    font-size: 17px; line-height: 1.9;
+    color: #2c2c2c; background: #fcf9f6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  /* Nav */
+  nav { padding: 48px 0 32px; border-bottom: 1px solid #ece8e2; margin-bottom: 80px; }
+  nav .container { display: flex; justify-content: space-between; align-items: center; }
+  .site-title {
+    font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 600;
+    color: #2c2c2c; text-decoration: none; letter-spacing: -0.01em;
+  }
+  .nav-links { display: flex; gap: 20px; }
+  .nav-links a {
+    font-size: 14px; color: #8a8580; text-decoration: none;
+    transition: color .2s; letter-spacing: 0.02em;
+  }
+  .nav-links a:hover { color: #2c2c2c; }
+
+  /* Home */
+  .hero { margin-bottom: 80px; }
+  .hero h1 {
+    font-family: 'Noto Serif SC', serif; font-size: 36px; font-weight: 700;
+    line-height: 1.35; margin-bottom: 24px; color: #2c2c2c;
+  }
+  .hero p { font-size: 17px; color: #6b6560; max-width: 560px; line-height: 1.9; }
+
+  .home-entries { margin-bottom: 80px; }
+  .home-entry {
+    display: flex; align-items: baseline; padding: 18px 0;
+    border-bottom: 1px solid #ece8e2; text-decoration: none; color: #2c2c2c;
+    transition: color .2s;
+  }
+  .home-entry:hover { color: #c66a3e; }
+  .home-entry:last-child { border-bottom: none; }
+  .home-entry-cat {
+    font-size: 13px; color: #c66a3e; width: 80px; flex-shrink: 0;
+    font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .home-entry-title { font-size: 16px; font-weight: 400; }
+  .home-entry-desc { font-size: 13px; color: #b0a9a2; margin-left: auto; }
+
+  /* Section */
+  .section-title {
+    font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 600;
+    margin-bottom: 32px; color: #2c2c2c; padding-bottom: 16px;
+    border-bottom: 1px solid #ece8e2;
+  }
+
+  /* Journal list */
+  .journal-list { margin-bottom: 80px; }
+  .journal-item {
+    display: block; padding: 20px 0; border-bottom: 1px solid #ece8e2;
+    text-decoration: none; color: #2c2c2c;
+  }
+  .journal-item:last-child { border-bottom: none; }
+  .journal-date { font-size: 13px; color: #b0a9a2; margin-bottom: 4px; }
+  .journal-title {
+    font-family: 'Noto Serif SC', serif; font-size: 18px; font-weight: 600;
+    margin-bottom: 4px; transition: color .2s;
+  }
+  .journal-item:hover .journal-title { color: #c66a3e; }
+  .journal-excerpt { font-size: 14px; color: #8a8580; line-height: 1.7; }
+
+  /* Collections */
+  .collections { margin-bottom: 80px; }
+  .coll-group { margin-bottom: 40px; }
+  .coll-header { font-size: 13px; font-weight: 600; color: #c66a3e; letter-spacing: 0.04em; margin-bottom: 12px; }
+  .coll-item {
+    display: flex; align-items: baseline; padding: 8px 0;
+    border-bottom: 1px solid #f0ece6; text-decoration: none; color: #2c2c2c; gap: 8px;
+  }
+  .coll-item:last-child { border-bottom: none; }
+  .coll-name { font-size: 15px; }
+  .coll-item:hover .coll-name { color: #c66a3e; }
+  .coll-desc { font-size: 13px; color: #8a8580; }
+  .coll-url { margin-left: auto; font-size: 12px; color: #b0a9a2; flex-shrink: 0; }
+
+  /* Travels */
+  .travels { margin-bottom: 80px; }
+  .travel-note { font-size: 14px; color: #6b6560; line-height: 1.8; margin-bottom: 32px; }
+  .travel-item {
+    display: block; padding: 14px 0; border-bottom: 1px solid #ece8e2;
+    text-decoration: none; color: #2c2c2c;
+  }
+  .travel-item:hover .travel-name { color: #c66a3e; }
+  .travel-name { font-size: 16px; font-weight: 500; margin-bottom: 2px; }
+  .travel-desc { font-size: 13px; color: #8a8580; }
+
+  /* Wallpaper gallery */
+  .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 80px; }
+  .gallery-item { aspect-ratio: 4/5; background: #ece8e2; border-radius: 4px; overflow: hidden; position: relative; }
+  .gallery-item .info {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 32px 14px 12px;
+    background: linear-gradient(to top, rgba(0,0,0,0.15), transparent);
+  }
+  .gallery-item .info span { display: block; font-size: 13px; color: #fff; font-weight: 400; }
+  .gallery-item .info .ctx { font-size: 11px; opacity: 0.7; margin-top: 1px; }
+
+  /* About */
+  .about { margin-bottom: 80px; }
+  .about-intro { font-size: 15px; color: #6b6560; line-height: 1.8; margin-bottom: 40px; }
+  .tl-item { padding: 18px 0; border-bottom: 1px solid #ece8e2; }
+  .tl-item:first-child { border-top: 1px solid #ece8e2; }
+  .tl-year { font-size: 13px; color: #c66a3e; font-weight: 500; margin-bottom: 2px; }
+  .tl-title { font-size: 15px; font-weight: 500; margin-bottom: 2px; }
+  .tl-desc { font-size: 14px; color: #6b6560; line-height: 1.7; }
+
+  /* Now */
+  .now { margin-bottom: 80px; }
+  .now-item { padding: 16px 0; border-bottom: 1px solid #ece8e2; }
+  .now-item:first-child { border-top: 1px solid #ece8e2; }
+  .now-label { font-size: 13px; color: #c66a3e; font-weight: 500; margin-bottom: 4px; }
+  .now-text { font-size: 15px; color: #3a3530; line-height: 1.7; }
+
+  /* Article */
+  .article { max-width: 680px; margin: 0 auto 80px; }
+  .article h1 {
+    font-family: 'Noto Serif SC', serif; font-size: 28px; font-weight: 700;
+    line-height: 1.3; margin-bottom: 10px; color: #2c2c2c;
+  }
+  .article .meta { font-size: 14px; color: #b0a9a2; margin-bottom: 48px; }
+  .article p { margin-bottom: 20px; color: #3a3530; }
+  .article h2 {
+    font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 600;
+    margin: 36px 0 12px; color: #2c2c2c;
+  }
+  .back-link { display: inline-block; font-size: 14px; color: #8a8580; margin-bottom: 24px; text-decoration: none; }
+
+  /* Footer */
+  footer { padding: 40px 0 56px; border-top: 1px solid #ece8e2; margin-top: 40px; }
+  footer .container { display: flex; justify-content: space-between; align-items: center; }
+  footer span { font-size: 13px; color: #b0a9a2; }
+
+  .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    nav { padding: 32px 0 24px; margin-bottom: 48px; }
+    .nav-links { gap: 14px; }
+    .nav-links a { font-size: 13px; }
+    .hero h1 { font-size: 26px; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .home-entry { flex-wrap: wrap; gap: 2px; }
+    .home-entry-cat { width: auto; }
+    .home-entry-desc { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="#" class="site-title">This Place</a>
+    <div class="nav-links">
+      <a href="#">Journal</a>
+      <a href="#">Collections</a>
+      <a href="#">Travels</a>
+      <a href="#">About</a>
+      <a href="#">Now</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>一处随时间生长的<br>个人空间。</h1>
+    <p>记录走过的路、读过的书、用过的好工具、<br>沉淀下来的思考。</p>
+  </div>
+
+  <!-- Entries -->
+  <div class="home-entries">
+    <a href="#" class="home-entry">
+      <span class="home-entry-cat">Journal</span>
+      <span class="home-entry-title">阅读随笔、日常思考</span>
+      <span class="home-entry-desc">10 篇</span>
+    </a>
+    <a href="#" class="home-entry">
+      <span class="home-entry-cat">Collections</span>
+      <span class="home-entry-title">好用的工具与宝藏链接</span>
+      <span class="home-entry-desc">80+ 个</span>
+    </a>
+    <a href="#" class="home-entry">
+      <span class="home-entry-cat">Travels</span>
+      <span class="home-entry-title">欧洲旅行笔记</span>
+      <span class="home-entry-desc">20 国</span>
+    </a>
+    <a href="#" class="home-entry">
+      <span class="home-entry-cat">Gallery</span>
+      <span class="home-entry-title">收集的风景与瞬间</span>
+      <span class="home-entry-desc">12 张</span>
+    </a>
+    <a href="#" class="home-entry">
+      <span class="home-entry-cat">About</span>
+      <span class="home-entry-title">关于这个地方</span>
+    </a>
+  </div>
+
+  <!-- Recent journal -->
+  <h2 class="section-title">最近</h2>
+  <div class="journal-list">
+    <a href="#" class="journal-item">
+      <div class="journal-date">2026.06.28</div>
+      <div class="journal-title">数据库还是要学的</div>
+      <div class="journal-excerpt">一些关于学习数据库的随想，为什么在这个 AI 时代基础仍然重要。</div>
+    </a>
+    <a href="#" class="journal-item">
+      <div class="journal-date">2026.06.28</div>
+      <div class="journal-title">AI 时代的伯克希尔</div>
+      <div class="journal-excerpt">当巴菲特被装进一个仓库，深夜关于 ai-berkshire 的一点絮语。</div>
+    </a>
+    <a href="#" class="journal-item">
+      <div class="journal-date">2026.06.27</div>
+      <div class="journal-title">欢迎</div>
+      <div class="journal-excerpt">一封简单的介绍信，关于这个空间存在的意义。</div>
+    </a>
+  </div>
+
+  <!-- Collections preview -->
+  <h2 class="section-title">收藏</h2>
+  <div class="collections">
+    <div class="coll-group">
+      <div class="coll-header">AI 工具</div>
+      <a href="#" class="coll-item">
+        <span class="coll-name">Claude</span>
+        <span class="coll-desc">日常使用的 AI 助手</span>
+        <span class="coll-url">↗</span>
+      </a>
+      <a href="#" class="coll-item">
+        <span class="coll-name">Cursor</span>
+        <span class="coll-desc">AI 原生代码编辑器</span>
+        <span class="coll-url">↗</span>
+      </a>
+    </div>
+    <div class="coll-group">
+      <div class="coll-header">壁纸 · 风景</div>
+      <a href="#" class="coll-item">
+        <span class="coll-name">北极光</span>
+        <span class="coll-desc">挪威旅行时拍到的极光</span>
+      </a>
+      <a href="#" class="coll-item">
+        <span class="coll-name">山间湖泊</span>
+        <span class="coll-desc">瑞士徒步时的宁静一刻</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Style label -->
+  <div style="margin: 80px 0 40px; padding: 32px; background: #f5f0ea; border-radius: 4px;">
+    <h3 style="font-family: 'Noto Serif SC', serif; font-size: 15px; margin-bottom: 16px; color: #2c2c2c;">🎨 方案 A：陶土暖色</h3>
+    <p style="font-size: 13px; color: #6b6560; line-height: 1.8;">
+      强调色 <span class="swatch" style="background: #c66a3e;"></span> #c66a3e 陶土橙 · 背景 #fcf9f6 暖白<br>
+      分隔线 #ece8e2 柔灰 · 正文色 #2c2c2c 暖黑 · 辅助色 #8a8580 / #b0a9a2<br>
+      字体方案：DM Sans + Noto Serif SC（标题衬线）<br>
+      感觉：手工感、温暖、真实、像一本私人印刷物
+    </p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="container">
+    <span>© 2026</span>
+    <span>This is a place, not a product.</span>
+  </div>
+</footer>
+
+</body>
+</html>

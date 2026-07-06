@@ -1,120 +1,98 @@
 /* ============================================
-   Dual-Theme Design System
-   Dark: warm Zinc · Gold accent · Noir
-   Light: wabi-sabi warm · Gold accent · Airy
+   Design System — White · Spacious · Image-led
    ============================================ */
 
-/* ---- Dark theme (default) ---- */
 [data-theme="dark"] {
-  /* Backgrounds — warm-leaning Zinc */
-  --bg-primary: #0c0b0a;
-  --bg-secondary: #0f0e0d;
-  --bg-surface: #141312;
-  --bg-card: #181716;
-  --bg-elevated: #1e1d1b;
+  --bg: #111;
+  --bg-secondary: #1a1a1a;
+  --text: #eee;
+  --text-secondary: #999;
+  --text-tertiary: #666;
+  --border: #222;
+  --accent: #6a8a6a;
+  --accent-subtle: rgba(106, 138, 106, 0.1);
+  --nav-bg: rgba(17, 17, 17, 0.75);
 
-  /* Text */
-  --text-primary: #f4f4f5;
-  --text-secondary: #a1a1aa;
-  --text-tertiary: #52525b;
-
-  /* Accent: Gold — single accent, saturation < 80% */
-  --accent: #c9a96e;
-  --accent-hover: #d4b87a;
-  --accent-dim: #a88b4f;
-  --accent-subtle: rgba(201, 169, 110, 0.08);
-
-  /* Borders */
-  --border-color: #1c1c22;
-  --border-light: #27272a;
-
-  --overlay: rgba(0, 0, 0, 0.7);
-
-  /* Noise opacity */
-  --noise-opacity: 0.025;
+  /* Backward-compatible aliases */
+  --bg-primary: var(--bg);
+  --bg-surface: var(--bg-secondary);
+  --bg-card: var(--bg-secondary);
+  --bg-elevated: var(--bg-secondary);
+  --text-primary: var(--text);
+  --border-color: var(--border);
+  --border-light: var(--border);
+  --accent-hover: var(--accent);
+  --accent-dim: var(--accent);
+  --font-display: var(--font-serif);
+  --font-name: var(--font-body);
+  --transition-fast: var(--transition);
+  --transition-base: var(--transition);
+  --transition-slow: var(--transition);
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 2px;
 }
 
-/* ---- Light theme — wabi-sabi warm ---- */
 [data-theme="light"] {
-  /* Backgrounds — warm cream / rice paper */
-  --bg-primary: #faf9f7;
-  --bg-secondary: #f5f2ed;
-  --bg-surface: #f0ece6;
-  --bg-card: #ebe7e1;
-  --bg-elevated: #e5e0d9;
+  --bg: #ffffff;
+  --bg-secondary: #f8f8f8;
+  --text: #1c1c1c;
+  --text-secondary: #8a8a8a;
+  --text-tertiary: #bbb;
+  --border: #eee;
+  --accent: #4a6a4f;
+  --accent-subtle: rgba(74, 106, 79, 0.08);
+  --nav-bg: rgba(255, 255, 255, 0.75);
 
-  /* Text — warm black */
-  --text-primary: #1a1a1a;
-  --text-secondary: #6b6b6b;
-  --text-tertiary: #9a9a9a;
-
-  /* Accent: Gold — same brand color, slightly more present */
-  --accent: #c9a96e;
-  --accent-hover: #d4b87a;
-  --accent-dim: #a88b4f;
-  --accent-subtle: rgba(201, 169, 110, 0.12);
-
-  /* Borders — ultra thin, warm neutral */
-  --border-color: #e5e1db;
-  --border-light: #ddd8d0;
-
-  --overlay: rgba(0, 0, 0, 0.3);
-
-  /* Noise opacity — subtler in light */
-  --noise-opacity: 0.012;
+  /* Backward-compatible aliases */
+  --bg-primary: var(--bg);
+  --bg-surface: var(--bg-secondary);
+  --bg-card: var(--bg-secondary);
+  --bg-elevated: var(--bg-secondary);
+  --text-primary: var(--text);
+  --border-color: var(--border);
+  --border-light: var(--border);
+  --accent-hover: var(--accent);
+  --accent-dim: var(--accent);
+  --font-display: var(--font-serif);
+  --font-name: var(--font-body);
+  --transition-fast: var(--transition);
+  --transition-base: var(--transition);
+  --transition-slow: var(--transition);
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 2px;
 }
 
-/* ---- Shared typography (identical across themes) ---- */
 :root {
-  --font-display: 'Noto Serif SC', 'Songti SC', Georgia, serif;
+  --font-serif: 'Noto Serif SC', 'Songti SC', Georgia, serif;
   --font-sans: 'DM Sans', 'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-name: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-body: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
 
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 2rem;
-  --font-size-4xl: 2.5rem;
-  --font-size-5xl: 3.5rem;
-  --font-size-6xl: 5rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: 3rem;
 
-  /* Spacing */
-  --section-padding: 140px 0;
-  --container-max: 1400px;
-  --container-padding: 0 48px;
+  --section-gap: 80px;
+  --container-max: 1200px;
+  --container-narrow: 680px;
+  --container-padding: 0 40px;
 
-  /* Transitions */
-  --transition-fast: 0.2s cubic-bezier(0.22, 1, 0.36, 1);
-  --transition-base: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  --transition-slow: 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-
-  /* Misc */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
+  --transition: 0.3s ease;
 }
 
-/* ---- Responsive overrides ---- */
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   :root {
     --container-padding: 0 24px;
-    --section-padding: 100px 0;
-    --font-size-5xl: 2.8rem;
-    --font-size-6xl: 3.2rem;
-    --font-size-4xl: 2rem;
-  }
-}
-
-@media (max-width: 640px) {
-  :root {
-    --container-padding: 0 16px;
-    --section-padding: 80px 0;
-    --font-size-5xl: 2.2rem;
-    --font-size-6xl: 2.4rem;
-    --font-size-4xl: 1.75rem;
+    --section-gap: 56px;
+    --text-3xl: 1.75rem;
+    --text-4xl: 2.25rem;
   }
 }

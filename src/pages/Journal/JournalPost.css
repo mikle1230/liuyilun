@@ -1,0 +1,29 @@
+.journal-post-page { padding-top: 100px; min-height: 100vh; }
+
+.journal-post-container { max-width: var(--container-narrow); margin: 0 auto; padding: var(--container-padding); }
+
+.post-header { margin-bottom: 48px; }
+.post-title {
+  font-family: var(--font-serif);
+  font-size: var(--text-3xl); font-weight: 700;
+  line-height: 1.25; color: var(--text);
+  margin-bottom: 16px;
+}
+.post-meta {
+  display: flex; align-items: center; gap: 8px;
+  flex-wrap: wrap; font-family: var(--font-sans);
+  font-size: 13px; color: var(--text-tertiary);
+}
+.post-meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-tertiary); }
+.post-section-badge { font-size: 11px; padding: 1px 8px; color: var(--accent); background: var(--accent-subtle); border-radius: 2px; }
+.post-tag { font-size: 12px; color: var(--text-tertiary); }
+.post-source { color: var(--accent); transition: color var(--transition); }
+.post-source:hover { color: var(--accent); text-decoration: underline; }
+
+.error-state { text-align: center; padding: 80px 0; }
+.error-state h1 { font-family: var(--font-serif); font-size: 3rem; color: var(--text-tertiary); margin-bottom: 8px; }
+.error-state p { color: var(--text-secondary); }
+
+@media (max-width: 640px) {
+  .post-title { font-size: var(--text-2xl); }
+}

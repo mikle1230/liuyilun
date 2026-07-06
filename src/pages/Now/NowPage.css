@@ -1,0 +1,29 @@
+.now-page { min-height: 100vh; }
+.page-desc { font-size: 14px; color: var(--text-secondary); margin-bottom: 32px; }
+
+.now-list { margin-bottom: 32px; }
+
+.now-item {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+.now-item:first-child { border-top: 1px solid var(--border); }
+
+.now-label {
+  font-family: var(--font-sans);
+  font-size: 11px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.now-text {
+  font-size: 15px; color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.now-updated {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--text-tertiary);
+}

@@ -3,8 +3,7 @@ import {
   getThumbnailUrl,
   getPreviewUrl,
   getDownloadUrl,
-  getInnerDownloadUrl,
-  getOuterDownloadUrl,
+  getFullDownloadUrl,
 } from '../wallpapers'
 
 const mockItem = {
@@ -35,22 +34,16 @@ describe('wallpaper URL helpers', () => {
   })
 
   it('getDownloadUrl uses specified dimensions', () => {
-    const url = getDownloadUrl(mockItem, 5120, 4542)
-    expect(url).toContain('w=5120')
-    expect(url).toContain('h=4542')
+    const url = getDownloadUrl(mockItem, 2160, 4800)
+    expect(url).toContain('w=2160')
+    expect(url).toContain('h=4800')
     expect(url).toContain('q=90')
   })
 
-  it('getInnerDownloadUrl returns 5120x4542', () => {
-    const url = getInnerDownloadUrl(mockItem)
-    expect(url).toContain('w=5120')
-    expect(url).toContain('h=4542')
-  })
-
-  it('getOuterDownloadUrl returns 1080x2640', () => {
-    const url = getOuterDownloadUrl(mockItem)
-    expect(url).toContain('w=1080')
-    expect(url).toContain('h=2640')
+  it('getFullDownloadUrl returns 2160x4800', () => {
+    const url = getFullDownloadUrl(mockItem)
+    expect(url).toContain('w=2160')
+    expect(url).toContain('h=4800')
   })
 
   it('falls back to Picsum when no Unsplash photoId', () => {

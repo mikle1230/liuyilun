@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>This Place — Aesop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400;9..40,500;9..40,600&family=Noto+Sans+SC:wght@200;300;400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans SC', 'DM Sans', sans-serif;
+  font-size: 16px; line-height: 1.9;
+  color: #2c2c2c; background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === Silence in UI === */
+.container { max-width: 720px; margin: 0 auto; padding: 0 28px; }
+.section { margin-bottom: 140px; }
+
+/* === Navigation — invisible === */
+nav {
+  padding: 48px 0 0;
+  margin-bottom: 120px;
+}
+nav .container {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.site-title {
+  font-size: 20px; font-weight: 200;
+  color: #2c2c2c; text-decoration: none;
+  letter-spacing: 0.08em;
+}
+.nav-links { display: flex; gap: 0; }
+.nav-links a {
+  font-size: 13px; font-weight: 300; color: #b0b0b0;
+  text-decoration: none; padding: 8px 16px;
+  transition: color .4s;
+}
+.nav-links a:hover { color: #2c2c2c; }
+
+/* === Hero — single statement === */
+.hero {
+  margin-bottom: 120px;
+}
+.hero h1 {
+  font-size: 32px; font-weight: 200;
+  line-height: 1.5; letter-spacing: 0.04em;
+  color: #2c2c2c; margin-bottom: 40px;
+  max-width: 600px;
+}
+.hero .divider {
+  width: 40px; height: 1px; background: #d0d0d0;
+  margin-bottom: 32px;
+}
+.hero p {
+  font-size: 15px; font-weight: 300;
+  color: #8a8a8a; line-height: 2;
+  max-width: 500px;
+}
+
+/* === Entry points — quiet list === */
+.entries { margin-bottom: 100px; }
+.entry {
+  display: flex; align-items: baseline;
+  padding: 18px 0;
+  text-decoration: none; color: #2c2c2c;
+  transition: opacity .4s;
+}
+.entry:hover { opacity: 0.6; }
+.entry-icon {
+  font-size: 16px; width: 32px; flex-shrink: 0;
+  opacity: 0.3;
+}
+.entry-title { font-size: 16px; font-weight: 400; }
+.entry-count {
+  margin-left: auto; font-size: 12px;
+  color: #c0c0c0; font-weight: 300;
+}
+.entry-line {
+  height: 1px; background: #f0f0f0; margin: 0;
+}
+
+/* === Section heading === */
+.section-head {
+  margin-bottom: 40px;
+}
+.section-head .label {
+  font-size: 11px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.2em;
+  color: #c0c0c0; margin-bottom: 8px;
+}
+.section-head h2 {
+  font-size: 24px; font-weight: 300;
+  letter-spacing: 0.02em; color: #2c2c2c;
+}
+
+/* === Journal === */
+.journal-entry {
+  display: block; padding: 24px 0;
+  text-decoration: none; color: inherit;
+}
+.journal-entry + .journal-entry {
+  border-top: 1px solid #f0f0f0;
+}
+.je-date {
+  font-size: 12px; color: #c0c0c0; margin-bottom: 6px;
+}
+.je-title {
+  font-size: 18px; font-weight: 400;
+  margin-bottom: 8px; transition: opacity .3s;
+}
+.journal-entry:hover .je-title { opacity: 0.6; }
+.je-excerpt {
+  font-size: 14px; color: #8a8a8a; line-height: 1.8;
+  font-weight: 300;
+}
+
+/* === Aesop-style product/image block === */
+.still-life {
+  margin-bottom: 60px;
+}
+.still-life-image {
+  width: 70%; height: 480px;
+  background: #f5f5f5; margin: 0 auto 32px;
+  display: flex; align-items: center; justify-content: center;
+  color: #d0d0d0; font-size: 12px; font-weight: 300;
+  letter-spacing: 0.1em;
+}
+.still-life-text {
+  text-align: center; max-width: 480px; margin: 0 auto;
+}
+.still-life-text h3 {
+  font-size: 14px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  color: #8a8a8a; margin-bottom: 12px;
+}
+.still-life-text p {
+  font-size: 14px; color: #b0b0b0; line-height: 1.9;
+  font-weight: 300;
+}
+
+/* === Collections === */
+.collection-set { margin-bottom: 60px; }
+.collection-set:last-child { margin-bottom: 0; }
+.cs-header {
+  margin-bottom: 16px;
+}
+.cs-header h3 {
+  font-size: 13px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: #2c2c2c; margin-bottom: 4px;
+}
+.cs-header p {
+  font-size: 13px; color: #b0b0b0; font-weight: 300;
+}
+.cs-item {
+  display: flex; align-items: baseline; gap: 12px;
+  padding: 8px 0; text-decoration: none; color: inherit;
+}
+.cs-dot {
+  width: 3px; height: 3px; border-radius: 50%;
+  background: #d0d0d0; flex-shrink: 0;
+}
+.cs-name {
+  font-size: 14px; font-weight: 400;
+  transition: opacity .3s;
+}
+.cs-item:hover .cs-name { opacity: 0.5; }
+.cs-desc { font-size: 13px; color: #b0b0b0; font-weight: 300; }
+
+/* === Gallery grid === */
+.gallery {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 8px;
+}
+.gallery-item {
+  aspect-ratio: 1;
+  background: #f5f5f5;
+  display: flex; align-items: center; justify-content: center;
+  color: #d0d0d0; font-size: 12px;
+}
+.gallery-item:first-child { grid-row: span 2; }
+
+/* === About === */
+.bio-text {
+  font-size: 15px; color: #6b6b6b;
+  line-height: 2; font-weight: 300;
+  max-width: 600px;
+}
+
+/* === Footer — barely there === */
+footer {
+  padding: 40px 0 80px;
+  margin-top: 40px;
+}
+footer .container {
+  display: flex; justify-content: space-between; align-items: center;
+}
+footer span { font-size: 12px; color: #d0d0d0; font-weight: 300; }
+
+/* === Mobile === */
+@media (max-width: 640px) {
+  nav { padding: 32px 0 0; margin-bottom: 80px; }
+  .nav-links a { font-size: 12px; padding: 8px 10px; }
+  .hero h1 { font-size: 24px; }
+  .still-life-image { width: 100%; height: 300px; }
+  .gallery { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="#" class="site-title">This Place</a>
+    <div class="nav-links">
+      <a href="#">Journal</a>
+      <a href="#">Collections</a>
+      <a href="#">Travels</a>
+      <a href="#">About</a>
+      <a href="#">Now</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- Hero — single statement, Aesop energy -->
+  <div class="hero">
+    <h1>这是个安静的地方。<br>
+    时间在这里慢慢走。<br>
+    记忆在这里留下来。</h1>
+    <div class="divider"></div>
+    <p>记录走过的路、读过的书、用过的好工具、<br>
+    沉淀下来的思考。在信息洪流中，<br>
+    留一处属于自己的脉络。</p>
+  </div>
+
+  <!-- Entry points — minimal, like Aesop product categories -->
+  <div class="entries">
+    <a href="#" class="entry">
+      <span class="entry-icon">✧</span>
+      <span class="entry-title">Journal — 随笔与思考</span>
+      <span class="entry-count">10</span>
+    </a>
+    <div class="entry-line"></div>
+    <a href="#" class="entry">
+      <span class="entry-icon">✧</span>
+      <span class="entry-title">Collections — 收藏与工具</span>
+      <span class="entry-count">36</span>
+    </a>
+    <div class="entry-line"></div>
+    <a href="#" class="entry">
+      <span class="entry-icon">✧</span>
+      <span class="entry-title">Travels — 旅行笔记</span>
+      <span class="entry-count">20</span>
+    </a>
+    <div class="entry-line"></div>
+    <a href="#" class="entry">
+      <span class="entry-icon">◯</span>
+      <span class="entry-title">Gallery — 收集的瞬间</span>
+      <span class="entry-count">12</span>
+    </a>
+    <div class="entry-line"></div>
+    <a href="#" class="entry">
+      <span class="entry-icon">◯</span>
+      <span class="entry-title">About — 关于这个地方</span>
+    </a>
+    <div class="entry-line"></div>
+    <a href="#" class="entry">
+      <span class="entry-icon">◯</span>
+      <span class="entry-title">Now — 最近在做什么</span>
+    </a>
+  </div>
+
+  <!-- Still life — Aesop signature spacious block -->
+  <div class="still-life">
+    <div class="still-life-image">
+      <span>Featured · 数据库还是要学的</span>
+    </div>
+    <div class="still-life-text">
+      <h3>Latest</h3>
+      <p>当 AI 工具日新月异，为什么回过头来学习数据库仍然是值得的？</p>
+    </div>
+  </div>
+
+  <!-- Journal -->
+  <div class="section-head">
+    <div class="label">Journal</div>
+    <h2>随笔</h2>
+  </div>
+  <div class="journal-entry">
+    <div class="je-date">2026.06.28</div>
+    <div class="je-title">AI 时代的伯克希尔</div>
+    <div class="je-excerpt">当巴菲特被装进一个仓库，关于 ai-berkshire 的一点深夜絮语。</div>
+  </div>
+  <div class="journal-entry">
+    <div class="je-date">2026.06.27</div>
+    <div class="je-title">欢迎来到这个空间</div>
+    <div class="je-excerpt">一封介绍信，关于这个空间存在的意义。</div>
+  </div>
+  <div class="journal-entry">
+    <div class="je-date">2026.06.20</div>
+    <div class="je-title">MICE 行业的变与不变</div>
+    <div class="je-excerpt">19 年从业随想。</div>
+  </div>
+
+  <!-- Collections -->
+  <div class="section-head" style="margin-top:100px;">
+    <div class="label">Collections</div>
+    <h2>收藏</h2>
+  </div>
+  <div class="collection-set">
+    <div class="cs-header">
+      <h3>AI 工具</h3>
+      <p>日常使用的 AI 助手，按需选取</p>
+    </div>
+    <a href="#" class="cs-item"><span class="cs-dot"></span><span class="cs-name">Claude</span><span class="cs-desc">日常 AI 助手</span></a>
+    <a href="#" class="cs-item"><span class="cs-dot"></span><span class="cs-name">Cursor</span><span class="cs-desc">AI 代码编辑器</span></a>
+    <a href="#" class="cs-item"><span class="cs-dot"></span><span class="cs-name">ChatGPT</span><span class="cs-desc">通用对话模型</span></a>
+  </div>
+  <div class="collection-set">
+    <div class="cs-header">
+      <h3>Gallery · 壁纸</h3>
+      <p>收集的风景与光影</p>
+    </div>
+    <div class="gallery">
+      <div class="gallery-item">极光</div>
+      <div class="gallery-item">山</div>
+      <div class="gallery-item">湖</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="container">
+    <span>© 2026</span>
+    <span>This is a place, not a product.</span>
+  </div>
+</footer>
+
+</body>
+</html>

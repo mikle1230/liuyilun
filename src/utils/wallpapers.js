@@ -53,3 +53,8 @@ export function getDownloadUrl(item, width, height) {
   }
   return picsumUrl(item.title || item.id, width, height)
 }
+
+/** Full resolution download: 2160 × 4800 (Vivo X Fold 5) */
+export function getFullDownloadUrl(item) {
+  return getDownloadUrl(item, 2160, 4800)
+}

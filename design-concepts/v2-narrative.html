@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>This Place — Narrative</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Serif SC', 'Noto Sans SC', serif;
+  font-size: 18px; line-height: 2;
+  color: #1a1a1a; background: #faf8f5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === Book-like container === */
+.container { max-width: 740px; margin: 0 auto; padding: 0 28px; }
+
+/* === Navigation (as footnotes) === */
+nav { padding: 40px 0 80px; }
+nav .container {
+  display: flex; justify-content: space-between;
+  align-items: center;
+}
+.site-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 400;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: #1a1a1a; text-decoration: none;
+}
+.nav-links { display: flex; gap: 24px; }
+.nav-links a {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 400;
+  color: #b0a8a0; text-decoration: none;
+  transition: color .3s;
+}
+.nav-links a:hover { color: #1a1a1a; }
+
+/* === Full-bleed hero image (moment) === */
+.hero-image {
+  width: 100vw; margin-left: calc(-50vw + 50%);
+  height: 70vh; min-height: 500px;
+  background: #e8e0d8; margin-bottom: 60px;
+  display: flex; align-items: flex-end; padding: 40px;
+}
+.hero-caption {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 400;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.8);
+}
+
+/* === Hero text (sits below image, like a book opening) === */
+.hero-text { margin-bottom: 80px; }
+.hero-text .kicker {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 400;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  color: #c0b0a0; margin-bottom: 20px;
+}
+.hero-text h1 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 44px; font-weight: 900;
+  line-height: 1.2; letter-spacing: -0.02em;
+  color: #1a1a1a; margin-bottom: 24px;
+}
+.hero-text p {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 16px; color: #7a7068; line-height: 2;
+  max-width: 520px;
+}
+
+/* === Page break (book chapter) === */
+.page-break {
+  text-align: center; margin: 100px 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; font-weight: 400;
+  text-transform: uppercase; letter-spacing: 0.3em;
+  color: #d0c8be;
+}
+
+/* === Section (book chapter) === */
+.chapter {
+  margin-bottom: 60px;
+}
+.chapter-number {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 400;
+  color: #c0b0a0; margin-bottom: 16px;
+  letter-spacing: 0.08em;
+}
+.chapter h2 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 28px; font-weight: 700;
+  color: #1a1a1a; margin-bottom: 24px;
+  line-height: 1.3;
+}
+
+/* === Journal (simple list, book-like) === */
+.journal-list { margin-bottom: 60px; }
+.jl-item {
+  display: block; padding: 24px 0;
+  text-decoration: none; color: inherit;
+  border-bottom: 1px solid #e8e0d8;
+}
+.jl-item:first-child { border-top: 1px solid #e8e0d8; }
+.jl-date {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; color: #b0a8a0; margin-bottom: 4px;
+}
+.jl-title {
+  font-size: 20px; font-weight: 600;
+  margin-bottom: 4px; transition: color .3s;
+}
+.jl-item:hover .jl-title { color: #9a8a78; }
+.jl-excerpt {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 14px; color: #7a7068; line-height: 1.8;
+}
+
+/* === Moment image (in-text, full-bleed) === */
+.moment {
+  width: 100vw; margin-left: calc(-50vw + 50%);
+  height: 400px; background: #e8e0d8;
+  margin: 80px 0;
+  display: flex; align-items: flex-end; padding: 32px;
+}
+.moment-caption {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; color: rgba(255,255,255,0.7);
+  font-weight: 300;
+}
+
+/* === Collections (book index style) === */
+.collection-index { margin-bottom: 60px; }
+.ci-group { margin-bottom: 36px; }
+.ci-group h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: #1a1a1a; margin-bottom: 12px;
+}
+.ci-item {
+  display: flex; align-items: baseline; gap: 8px;
+  padding: 6px 0; text-decoration: none; color: inherit;
+}
+.ci-name { font-size: 16px; transition: color .3s; }
+.ci-item:hover .ci-name { color: #9a8a78; }
+.ci-desc { font-size: 14px; color: #7a7068; }
+.ci-note {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; color: #b0a8a0; margin-left: auto;
+}
+
+/* === Gallery (like photo book) === */
+.photo-book {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 12px;
+}
+.photo-book-item {
+  aspect-ratio: auto;
+  height: 320px; background: #e8e0d8;
+  display: flex; align-items: center; justify-content: center;
+  color: #b0a8a0; font-size: 13px;
+}
+.photo-book-item:first-child { height: 480px; }
+.photo-book-item:last-child { grid-column: 1 / -1; height: 260px; }
+
+/* === Travel (narrative essay) === */
+.travel-scene { margin-bottom: 60px; }
+.travel-scene h3 {
+  font-size: 20px; font-weight: 700; margin-bottom: 12px;
+}
+.travel-scene p {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 15px; color: #5a524a; line-height: 2;
+}
+.travel-scene .place {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  color: #c0b0a0; margin-bottom: 8px;
+}
+
+/* === About (letter format) === */
+.letter {
+  font-size: 17px; color: #3a342e; line-height: 2.1;
+  max-width: 600px;
+}
+.letter p { margin-bottom: 24px; }
+.letter .salutation {
+  font-size: 14px; color: #b0a8a0;
+  font-family: 'DM Sans', sans-serif;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  margin-bottom: 32px;
+}
+
+/* === Footer === */
+footer {
+  padding: 80px 0 60px;
+  border-top: 1px solid #e8e0d8; margin-top: 80px;
+}
+footer .container {
+  display: flex; justify-content: space-between;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; color: #b0a8a0;
+}
+
+/* === Mobile === */
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  nav { padding: 24px 0 40px; }
+  .nav-links { gap: 16px; }
+  .nav-links a { font-size: 11px; }
+  .hero-image { height: 50vh; min-height: 300px; }
+  .hero-text h1 { font-size: 30px; }
+  .photo-book { grid-template-columns: 1fr; }
+  .photo-book-item:first-child { height: 320px; }
+  .photo-book-item:last-child { height: 240px; }
+  .moment { height: 280px; margin: 48px 0; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="#" class="site-title">This Place</a>
+    <div class="nav-links">
+      <a href="#">Journal</a>
+      <a href="#">Collections</a>
+      <a href="#">Travels</a>
+      <a href="#">About</a>
+      <a href="#">Now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Full-bleed hero image — a "moment" -->
+<div class="hero-image" style="background: linear-gradient(135deg, #5a4a3a, #8a7a6a);">
+  <span class="hero-caption">— somewhere between memory and time</span>
+</div>
+
+<div class="container">
+
+  <!-- Hero text — sits below the image, like a book's first spread -->
+  <div class="hero-text">
+    <div class="kicker">This Place</div>
+    <h1>时间在此处<br>变得可以触摸。</h1>
+    <p>记录走过的路、读过的书、用过的好工具、<br>
+    沉淀下来的思考。在信息洪流中，<br>
+    留一处属于自己的脉络。</p>
+  </div>
+
+  <!-- ====== FIRST CHAPTER: Journal ====== -->
+  <div class="page-break">✦ ✦ ✦</div>
+
+  <div class="chapter">
+    <div class="chapter-number">I</div>
+    <h2>Journal<br>随笔与记录</h2>
+  </div>
+
+  <div class="journal-list">
+    <a href="#" class="jl-item">
+      <div class="jl-date">2026.06.28</div>
+      <div class="jl-title">数据库还是要学的</div>
+      <div class="jl-excerpt">在 AI 时代重新理解基础——一些关于学习的随想。</div>
+    </a>
+    <a href="#" class="jl-item">
+      <div class="jl-date">2026.06.28</div>
+      <div class="jl-title">AI 时代的伯克希尔</div>
+      <div class="jl-excerpt">当巴菲特被装进一个仓库，深夜关于 ai-berkshire 的一点絮语。</div>
+    </a>
+    <a href="#" class="jl-item">
+      <div class="jl-date">2026.06.27</div>
+      <div class="jl-title">欢迎来到这个空间</div>
+      <div class="jl-excerpt">一封简单的介绍信。关于这个空间存在的意义。</div>
+    </a>
+    <a href="#" class="jl-item">
+      <div class="jl-date">2026.06.20</div>
+      <div class="jl-title">MICE 行业的变与不变</div>
+      <div class="jl-excerpt">19 年从业随想。</div>
+    </a>
+  </div>
+
+  <!-- ====== MOMENT: in-text full-bleed image ====== -->
+  <div class="moment" style="background: linear-gradient(to right, #6a5a4a, #9a8a7a);">
+    <span class="moment-caption">Berlin, November · 2024</span>
+  </div>
+
+  <!-- ====== SECOND CHAPTER: Collections ====== -->
+  <div class="page-break">✦ ✦ ✦</div>
+
+  <div class="chapter">
+    <div class="chapter-number">II</div>
+    <h2>Collections<br>收藏与索引</h2>
+  </div>
+
+  <div class="collection-index">
+    <div class="ci-group">
+      <h3>AI Tools</h3>
+      <a href="#" class="ci-item">
+        <span class="ci-name">Claude</span>
+        <span class="ci-desc">日常使用的 AI 助手</span>
+        <span class="ci-note">Anthropic</span>
+      </a>
+      <a href="#" class="ci-item">
+        <span class="ci-name">Cursor</span>
+        <span class="ci-desc">AI 原生代码编辑器</span>
+        <span class="ci-note">dev tool</span>
+      </a>
+      <a href="#" class="ci-item">
+        <span class="ci-name">ChatGPT</span>
+        <span class="ci-desc">通用对话模型</span>
+        <span class="ci-note">OpenAI</span>
+      </a>
+    </div>
+
+    <div class="ci-group">
+      <h3>Gallery</h3>
+      <div class="photo-book">
+        <div class="photo-book-item">北极光</div>
+        <div class="photo-book-item">山间湖泊</div>
+        <div class="photo-book-item">城市 · 森林 · 星空</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== THIRD CHAPTER: Travels ====== -->
+  <div class="page-break">✦ ✦ ✦</div>
+
+  <div class="chapter">
+    <div class="chapter-number">III</div>
+    <h2>Travels<br>旅行笔记</h2>
+  </div>
+
+  <div class="travel-scene">
+    <div class="place">London · 2024</div>
+    <h3>伦敦的雾</h3>
+    <p>十一月的伦敦，下午四点天就暗了。泰晤士河边的路灯亮起来的时候，整座城市像一幅褪色的水彩画。在 Notting Hill 的一家旧书店里翻到一本 1962 年的旅行指南，封面写着："London is a place for walking." 这句话到现在仍然是真的。</p>
+  </div>
+
+  <div class="travel-scene">
+    <div class="place">Switzerland · 2023</div>
+    <h3>瑞士的慢火车</h3>
+    <p>从 Interlaken 到 Zermatt 的火车在山谷里缓缓穿行。坐在窗边，看草地上的牛铃、远处的雪峰、从身边滑过的木屋——你突然理解了为什么瑞士人不着急。有些风景不是用来看的，是用来住的。</p>
+  </div>
+
+  <!-- ====== ABOUT: letter format ====== -->
+  <div class="page-break">✦ ✦ ✦</div>
+
+  <div class="chapter">
+    <div class="chapter-number">IV</div>
+    <h2>About<br>关于这个地方</h2>
+  </div>
+
+  <div class="letter">
+    <div class="salutation">Hi,</div>
+    <p>我是 M。这个空间是我在网络上的一个安静的角落。不为了展示什么，只是想把时间留下的痕迹整理一下——走过的路、读过的书、用过的工具、沉淀的思考。</p>
+    <p>这个网站的代码是开源的，部署在 Vercel 上。它不会是一个产品，也不会成为一个平台。它就是一个地方——一个属于我的地方。</p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="container">
+    <span>© 2026</span>
+    <span>This is a place, not a product.</span>
+  </div>
+</footer>
+
+</body>
+</html>

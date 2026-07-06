@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>This Place — 全新设计</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@200;300;400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans SC', 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.9;
+  color: #1c1c1c;
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === Typography scale === */
+.display-serif { font-family: 'Noto Serif SC', serif; }
+.display-sans { font-family: 'DM Sans', sans-serif; }
+.body-cn { font-family: 'Noto Sans SC', sans-serif; }
+.mono { font-family: 'DM Sans', sans-serif; }
+
+/* === Container — generous === */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+.container-narrow { max-width: 680px; margin: 0 auto; padding: 0 40px; }
+
+/* === Navigation — minimal, floating === */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 24px 0;
+  mix-blend-mode: difference;
+}
+nav .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.site-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 500;
+  color: #fff; text-decoration: none;
+  letter-spacing: 0.05em;
+}
+.nav-links { display: flex; gap: 32px; }
+.nav-links a {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 400;
+  color: rgba(255,255,255,0.6); text-decoration: none;
+  transition: color .3s;
+}
+.nav-links a:hover { color: #fff; }
+
+/* === Full-bleed Hero Image === */
+.hero-image {
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  background: linear-gradient(135deg, #2a3a2a, #5a7a5a);
+  display: flex;
+  align-items: flex-end;
+  padding: 80px 40px;
+  position: relative;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.3), transparent 40%);
+}
+.hero-text {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+}
+.hero-text .kicker {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 16px;
+}
+.hero-text h1 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 56px; font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-bottom: 20px;
+  max-width: 700px;
+}
+.hero-text p {
+  font-size: 16px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.9;
+  max-width: 520px;
+}
+
+/* === Section — spacious === */
+.section { margin: 100px 0; }
+
+/* === Section heading === */
+.section-heading {
+  margin-bottom: 48px;
+}
+.section-heading .label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  color: #b0b0b0;
+  margin-bottom: 8px;
+}
+.section-heading h2 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 28px; font-weight: 700;
+  color: #1c1c1c;
+  line-height: 1.25;
+}
+
+/* === Featured story — image-led === */
+.featured {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 100px;
+}
+.featured-image {
+  width: 100%;
+  height: 480px;
+  background: #e8e4de;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b0a8a0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+}
+.featured-content { }
+.featured-content .cat {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: #b0b0b0;
+  margin-bottom: 12px;
+}
+.featured-content h3 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 24px; font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+.featured-content p {
+  font-size: 14px;
+  color: #6b6b6b;
+  line-height: 1.9;
+  margin-bottom: 20px;
+}
+.featured-content .read {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 500;
+  color: #1c1c1c;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color .3s;
+}
+.featured-content .read:hover { color: #b0b0b0; }
+
+/* === Entry list === */
+.entry-list { }
+.entry-item {
+  display: flex;
+  align-items: center;
+  padding: 24px 0;
+  border-bottom: 1px solid #eee;
+  text-decoration: none;
+  color: #1c1c1c;
+  transition: opacity .3s;
+}
+.entry-item:first-child { border-top: 1px solid #eee; }
+.entry-item:hover { opacity: 0.5; }
+.entry-visual {
+  width: 80px; height: 80px;
+  background: #e8e4de; flex-shrink: 0;
+  margin-right: 28px;
+  display: flex; align-items: center; justify-content: center;
+  color: #b0a8a0; font-family: 'DM Sans', sans-serif; font-size: 10px;
+}
+.entry-info { flex: 1; }
+.entry-info .meta {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; color: #b0b0b0;
+  margin-bottom: 4px;
+}
+.entry-info h3 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 18px; font-weight: 600;
+  margin-bottom: 4px;
+}
+.entry-info p {
+  font-size: 13px; color: #8a8a8a;
+}
+.entry-arrow {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px; color: #d0d0d0;
+  margin-left: 20px;
+}
+
+/* === Image break === */
+.image-break {
+  width: 100%;
+  height: 60vh;
+  min-height: 400px;
+  background: linear-gradient(135deg, #4a5a4a, #7a9a7a);
+  display: flex;
+  align-items: flex-end;
+  padding: 48px;
+  margin: 100px 0;
+}
+.image-break span {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.5);
+}
+
+/* === Gallery grid === */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.gallery-item {
+  aspect-ratio: 4/5;
+  background: #e8e4de;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+  cursor: pointer;
+  transition: opacity .3s;
+}
+.gallery-item:hover { opacity: 0.8; }
+.gallery-item span {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; color: #fff;
+}
+.gallery-item:first-child { grid-row: span 2; }
+
+/* === Footer === */
+footer {
+  padding: 48px 0 64px;
+  border-top: 1px solid #eee;
+  margin-top: 80px;
+}
+footer .container {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; color: #b0b0b0;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .hero-text h1 { font-size: 36px; }
+  .featured { grid-template-columns: 1fr; }
+  .featured-image { height: 300px; }
+  .entry-visual { display: none; }
+  .container { padding: 0 24px; }
+  .container-narrow { padding: 0 24px; }
+  .hero-image { padding: 40px 24px; height: 80vh; min-height: 500px; }
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-item:first-child { grid-row: span 1; }
+  .nav-links { gap: 20px; }
+  .nav-links a { font-size: 11px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Nav — floating, white on dark hero, dark on white sections -->
+<nav>
+  <div class="container">
+    <a href="#" class="site-title">This Place</a>
+    <div class="nav-links">
+      <a href="#">Journal</a>
+      <a href="#">Collections</a>
+      <a href="#">Travels</a>
+      <a href="#">About</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Full-bleed hero — bright, striking image as the entrance -->
+<div class="hero-image" style="background: linear-gradient(135deg, #3a4a3a, #6a8a6a);">
+  <div class="hero-overlay"></div>
+  <div class="hero-text">
+    <div class="kicker">This Place</div>
+    <h1>一处随时间<br>生长的个人空间。</h1>
+    <p>记录走过的路、读过的书、用过的好工具、<br>沉淀下来的思考。</p>
+  </div>
+</div>
+
+<!-- Featured story — split screen: image + text -->
+<div class="container">
+  <div class="section">
+    <div class="featured">
+      <div class="featured-image">📰 精选文章</div>
+      <div class="featured-content">
+        <div class="cat">Latest</div>
+        <h3>数据库还是要学的</h3>
+        <p>当 AI 工具日新月异，为什么回过头来学习数据库仍然是值得的？一些随想与观察。</p>
+        <a href="#" class="read">Read →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Entry list — with small visual thumbnails -->
+<div class="container">
+  <div class="section-heading">
+    <div class="label">Journal</div>
+    <h2>随笔与记录</h2>
+  </div>
+
+  <div class="entry-list">
+    <a href="#" class="entry-item">
+      <div class="entry-visual">📷</div>
+      <div class="entry-info">
+        <div class="meta">2026.06.28</div>
+        <h3>数据库还是要学的</h3>
+        <p>在 AI 时代重新理解基础。</p>
+      </div>
+      <span class="entry-arrow">→</span>
+    </a>
+    <a href="#" class="entry-item">
+      <div class="entry-visual">📷</div>
+      <div class="entry-info">
+        <div class="meta">2026.06.28</div>
+        <h3>AI 时代的伯克希尔</h3>
+        <p>当巴菲特被装进一个仓库。</p>
+      </div>
+      <span class="entry-arrow">→</span>
+    </a>
+    <a href="#" class="entry-item">
+      <div class="entry-visual">📷</div>
+      <div class="entry-info">
+        <div class="meta">2026.06.27</div>
+        <h3>欢迎</h3>
+        <p>一封简单的介绍信。</p>
+      </div>
+      <span class="entry-arrow">→</span>
+    </a>
+    <a href="#" class="entry-item">
+      <div class="entry-visual">📷</div>
+      <div class="entry-info">
+        <div class="meta">2026.06.20</div>
+        <h3>MICE 行业的变与不变</h3>
+        <p>19 年从业随想。</p>
+      </div>
+      <span class="entry-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<!-- Full-bleed image break — a visual "moment" -->
+<div class="image-break" style="background: linear-gradient(135deg, #5a6a5a, #8aaa8a);">
+  <span>Somewhere, 2024</span>
+</div>
+
+<!-- Collections + Gallery -->
+<div class="container">
+  <div class="section-heading">
+    <div class="label">Collections</div>
+    <h2>收藏与索引</h2>
+  </div>
+
+  <div class="entry-list" style="margin-bottom: 48px;">
+    <div class="entry-item" style="cursor: default;">
+      <div class="entry-visual" style="background: #3a5a3a; color: #fff;">AI</div>
+      <div class="entry-info">
+        <h3>AI Tools</h3>
+        <p>80+ 工具，8 个分类</p>
+      </div>
+    </div>
+    <div class="entry-item" style="cursor: default;">
+      <div class="entry-visual" style="background: #5a6a5a; color: #fff;">📸</div>
+      <div class="entry-info">
+        <h3>Gallery</h3>
+        <p>12 张收集的风景</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="gallery-grid">
+    <div class="gallery-item" style="background: linear-gradient(135deg, #6a7a6a, #9aaa8a);"><span>极光</span></div>
+    <div class="gallery-item" style="background: linear-gradient(135deg, #7a8a7a, #aabaaa);"><span>山间湖泊</span></div>
+    <div class="gallery-item" style="background: linear-gradient(135deg, #5a6a5a, #8a9a8a);"><span>城市夜色</span></div>
+  </div>
+</div>
+
+<!-- Travels -->
+<div class="container">
+  <div class="section-heading">
+    <div class="label">Travels</div>
+    <h2>旅行笔记</h2>
+  </div>
+
+  <div class="entry-list">
+    <a href="#" class="entry-item">
+      <div class="entry-visual">🇬🇧</div>
+      <div class="entry-info">
+        <div class="meta">London · 2024</div>
+        <h3>伦敦的雾</h3>
+        <p>十一月的伦敦，下午四点天就暗了。</p>
+      </div>
+      <span class="entry-arrow">→</span>
+    </a>
+    <a href="#" class="entry-item">
+      <div class="entry-visual">🇨🇭</div>
+      <div class="entry-info">
+        <div class="meta">Switzerland · 2023</div>
+        <h3>瑞士的慢火车</h3>
+        <p>从 Interlaken 到 Zermatt。</p>
+      </div>
+      <span class="entry-arrow">→</span>
+    </a>
+    <a href="#" class="entry-item">
+      <div class="entry-visual">🇯🇵</div>
+      <div class="entry-info">
+        <div class="meta">Kyoto · 2023</div>
+        <h3>京都的雨</h3>
+        <p>六月雨季的岚山。</p>
+      </div>
+      <span class="entry-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<!-- About — short letter -->
+<div class="container-narrow" style="margin-top: 100px; margin-bottom: 60px;">
+  <div class="section-heading">
+    <div class="label">About</div>
+    <h2>关于这个地方</h2>
+  </div>
+  <p style="font-size: 15px; color: #6b6b6b; line-height: 2; max-width: 520px;">
+    这个空间是我在网络上的一个安静的角落。不为了展示什么，只是想把时间留下的痕迹整理一下。
+    这里不是一个产品，也不会成为一个平台。它就是一个地方。
+  </p>
+</div>
+
+<footer>
+  <div class="container">
+    <span>© 2026 This Place</span>
+    <span>This is a place, not a product.</span>
+  </div>
+</footer>
+
+</body>
+</html>

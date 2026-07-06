@@ -1,74 +1,417 @@
-[
-  {
-    "id": "aurora-borealis",
-    "title": "北极光",
-    "tags": ["极光", "自然", "天空"],
-    "dateAdded": "2026-06-29"
+{
+  "config": {
+    "displayCount": 6,
+    "displayPerPage": 12,
+    "thumbnailWidth": 400,
+    "fullWidth": 2160,
+    "fullHeight": 4800
   },
-  {
-    "id": "mountain-lake",
-    "title": "山间湖泊",
-    "tags": ["山", "湖泊", "自然"],
-    "dateAdded": "2026-06-29"
-  },
-  {
-    "id": "cherry-blossom",
-    "title": "樱花",
-    "tags": ["花", "春天", "自然"],
-    "dateAdded": "2026-06-29"
-  },
-  {
-    "id": "city-night",
-    "title": "城市夜色",
-    "tags": ["城市", "夜景", "建筑"],
-    "dateAdded": "2026-06-29"
-  },
-  {
-    "id": "ocean-sunset",
-    "title": "海上日落",
-    "tags": ["海洋", "日落", "自然"],
-    "dateAdded": "2026-06-29"
-  },
-  {
-    "id": "forest-trail",
-    "title": "森林小径",
-    "tags": ["森林", "小径", "自然"],
-    "dateAdded": "2026-06-29"
-  },
-  {
-    "id": "starry-sky",
-    "title": "星空",
-    "tags": ["星空", "夜晚", "自然"],
-    "dateAdded": "2026-06-29"
-  },
-  {
-    "id": "autumn-leaves",
-    "title": "秋叶",
-    "tags": ["秋天", "树叶", "自然"],
-    "dateAdded": "2026-06-29"
-  },
-  {
-    "id": "waterfall",
-    "title": "瀑布",
-    "tags": ["瀑布", "水", "自然"],
-    "dateAdded": "2026-06-29"
-  },
-  {
-    "id": "desert-dunes",
-    "title": "沙漠沙丘",
-    "tags": ["沙漠", "沙丘", "自然"],
-    "dateAdded": "2026-06-29"
-  },
-  {
-    "id": "misty-mountains",
-    "title": "雾中群山",
-    "tags": ["山", "雾", "自然"],
-    "dateAdded": "2026-06-29"
-  },
-  {
-    "id": "tropical-beach",
-    "title": "热带海滩",
-    "tags": ["海滩", "热带", "海洋"],
-    "dateAdded": "2026-06-29"
-  }
-]
+  "items": [
+    {
+      "id": "aurora-borealis",
+      "title": "北极光",
+      "enabled": true,
+      "tags": ["极光", "自然", "天空"],
+      "dateAdded": "2026-06-29"
+    },
+    {
+      "id": "mountain-lake",
+      "title": "山间湖泊",
+      "enabled": true,
+      "tags": ["山", "湖泊", "自然"],
+      "dateAdded": "2026-06-29"
+    },
+    {
+      "id": "cherry-blossom",
+      "title": "樱花",
+      "enabled": true,
+      "tags": ["花", "春天", "自然"],
+      "dateAdded": "2026-06-29"
+    },
+    {
+      "id": "city-night",
+      "title": "城市夜色",
+      "enabled": true,
+      "tags": ["城市", "夜景", "建筑"],
+      "dateAdded": "2026-06-29"
+    },
+    {
+      "id": "ocean-sunset",
+      "title": "海上日落",
+      "enabled": true,
+      "tags": ["海洋", "日落", "自然"],
+      "dateAdded": "2026-06-29"
+    },
+    {
+      "id": "forest-trail",
+      "title": "森林小径",
+      "enabled": true,
+      "tags": ["森林", "小径", "自然"],
+      "dateAdded": "2026-06-29"
+    },
+    {
+      "id": "starry-sky",
+      "title": "星空",
+      "enabled": true,
+      "tags": ["星空", "夜晚", "自然"],
+      "dateAdded": "2026-06-29"
+    },
+    {
+      "id": "autumn-leaves",
+      "title": "秋叶",
+      "enabled": true,
+      "tags": ["秋天", "树叶", "自然"],
+      "dateAdded": "2026-06-29"
+    },
+    {
+      "id": "waterfall",
+      "title": "瀑布",
+      "enabled": true,
+      "tags": ["瀑布", "水", "自然"],
+      "dateAdded": "2026-06-29"
+    },
+    {
+      "id": "desert-dunes",
+      "title": "沙漠沙丘",
+      "enabled": true,
+      "tags": ["沙漠", "沙丘", "自然"],
+      "dateAdded": "2026-06-29"
+    },
+    {
+      "id": "misty-mountains",
+      "title": "雾中群山",
+      "enabled": true,
+      "tags": ["山", "雾", "自然"],
+      "dateAdded": "2026-06-29"
+    },
+    {
+      "id": "tropical-beach",
+      "title": "热带海滩",
+      "enabled": true,
+      "tags": ["海滩", "热带", "海洋"],
+      "dateAdded": "2026-06-29"
+    },
+    {
+      "id": "snow-mountain",
+      "title": "雪峰",
+      "enabled": true,
+      "tags": ["雪山", "自然"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "luminous-lake",
+      "title": "镜面湖",
+      "enabled": true,
+      "tags": ["湖泊", "倒影", "自然"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "lavender-field",
+      "title": "薰衣草田",
+      "enabled": true,
+      "tags": ["花海", "紫色", "自然"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "canyon-view",
+      "title": "峡谷",
+      "enabled": true,
+      "tags": ["峡谷", "地质", "自然"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "bamboo-forest",
+      "title": "竹林",
+      "enabled": true,
+      "tags": ["竹林", "绿色", "自然"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "sunrise-ocean",
+      "title": "海上日出",
+      "enabled": true,
+      "tags": ["日出", "海洋", "天空"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "old-town",
+      "title": "古镇",
+      "enabled": true,
+      "tags": ["古镇", "建筑", "人文"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "autumn-road",
+      "title": "秋日大道",
+      "enabled": true,
+      "tags": ["秋天", "道路", "落叶"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "ice-cave",
+      "title": "冰洞",
+      "enabled": true,
+      "tags": ["冰", "洞穴", "自然"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "tea-plantation",
+      "title": "茶园",
+      "enabled": true,
+      "tags": ["茶", "绿色", "田园"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "neon-city",
+      "title": "霓虹都市",
+      "enabled": true,
+      "tags": ["城市", "霓虹", "夜景"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "water-ripple",
+      "title": "水波",
+      "enabled": true,
+      "tags": ["水", "抽象", "纹理"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "sandy-beach",
+      "title": "白沙海滩",
+      "enabled": true,
+      "tags": ["海滩", "白沙", "海洋"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "cliff-sea",
+      "title": "悬崖海岸",
+      "enabled": true,
+      "tags": ["悬崖", "海洋", "自然"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "moonlight",
+      "title": "月光",
+      "enabled": true,
+      "tags": ["月亮", "夜晚", "天空"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "rainy-street",
+      "title": "雨街",
+      "enabled": true,
+      "tags": ["雨", "街道", "城市"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "sakura-tunnel",
+      "title": "樱花隧道",
+      "enabled": true,
+      "tags": ["樱花", "花", "春天"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "meadow-hill",
+      "title": "草甸山丘",
+      "enabled": true,
+      "tags": ["草地", "山丘", "自然"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "temple-gate",
+      "title": "寺庙",
+      "enabled": true,
+      "tags": ["寺庙", "建筑", "人文"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "foggy-forest",
+      "title": "雾林",
+      "enabled": true,
+      "tags": ["森林", "雾", "神秘"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "stone-path",
+      "title": "石径",
+      "enabled": true,
+      "tags": ["小路", "石头", "自然"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "golden-hour",
+      "title": "黄金时刻",
+      "enabled": true,
+      "tags": ["日落", "金色", "天空"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "lighthouse",
+      "title": "灯塔",
+      "enabled": true,
+      "tags": ["灯塔", "海岸", "建筑"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "lotus-pond",
+      "title": "荷塘",
+      "enabled": true,
+      "tags": ["荷花", "池塘", "自然"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "snow-village",
+      "title": "雪村",
+      "enabled": true,
+      "tags": ["雪", "村庄", "冬天"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "coral-reef",
+      "title": "珊瑚礁",
+      "enabled": true,
+      "tags": ["海底", "珊瑚", "海洋"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "windmill",
+      "title": "风车",
+      "enabled": true,
+      "tags": ["风车", "田园", "欧洲"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "pavilion",
+      "title": "亭台",
+      "enabled": true,
+      "tags": ["中式", "建筑", "园林"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "glacier",
+      "title": "冰川",
+      "enabled": true,
+      "tags": ["冰川", "冰", "自然"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "flower-meadow",
+      "title": "花甸",
+      "enabled": true,
+      "tags": ["花", "草地", "自然"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "sunset-dock",
+      "title": "夕阳码头",
+      "enabled": true,
+      "tags": ["码头", "日落", "水"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "mossy-rocks",
+      "title": "青苔石",
+      "enabled": true,
+      "tags": ["石头", "青苔", "自然"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "red-village",
+      "title": "红屋顶",
+      "enabled": true,
+      "tags": ["村庄", "红色", "欧洲"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "starry-night",
+      "title": "繁星",
+      "enabled": true,
+      "tags": ["星空", "夜晚", "银河"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "water-town",
+      "title": "水乡",
+      "enabled": true,
+      "tags": ["水乡", "江南", "建筑"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "mountain-river",
+      "title": "山涧",
+      "enabled": true,
+      "tags": ["山", "溪流", "自然"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "city-skyline",
+      "title": "城市天际线",
+      "enabled": true,
+      "tags": ["城市", "天际线", "建筑"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "cherry-tree",
+      "title": "孤樱",
+      "enabled": true,
+      "tags": ["樱花", "树", "春天"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "misty-valley",
+      "title": "雾谷",
+      "enabled": true,
+      "tags": ["山谷", "雾", "自然"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "ancient-wall",
+      "title": "古城墙",
+      "enabled": true,
+      "tags": ["城墙", "历史", "建筑"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "fireworks",
+      "title": "烟花",
+      "enabled": true,
+      "tags": ["烟花", "夜晚", "城市"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "rice-terrace",
+      "title": "梯田",
+      "enabled": true,
+      "tags": ["梯田", "田园", "自然"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "polar-bear",
+      "title": "北极",
+      "enabled": true,
+      "tags": ["北极", "冰", "自然"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "botanical",
+      "title": "植物园",
+      "enabled": true,
+      "tags": ["植物", "温室", "绿色"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "seaside-town",
+      "title": "滨海小镇",
+      "enabled": true,
+      "tags": ["海岸", "小镇", "欧洲"],
+      "dateAdded": "2026-07-01"
+    },
+    {
+      "id": "maple-leaf",
+      "title": "红叶",
+      "enabled": true,
+      "tags": ["红叶", "秋天", "自然"],
+      "dateAdded": "2026-07-01"
+    }
+  ]
+}

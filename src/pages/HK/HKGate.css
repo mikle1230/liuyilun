@@ -131,11 +131,11 @@
 }
 
 .hk-link-itinerary:hover {
-  border-color: var(--accent-explore, #c3f400);
+  border-color: var(--accent);
 }
 
 .hk-link-food:hover {
-  border-color: var(--accent-blog, #34d399);
+  border-color: var(--accent);
 }
 
 .hk-link-icon {

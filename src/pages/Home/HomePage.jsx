@@ -1,267 +1,131 @@
-import { useState, useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import ScrollReveal from '../../components/ScrollReveal'
-import BlogSidebar from '../../components/Sidebar'
 import { loadPostsFromModules } from '../../utils/posts'
+import { getThumbnailUrl, getFullDownloadUrl } from '../../utils/wallpapers'
 import wallpapersData from '../../data/wallpapers.json'
 import './HomePage.css'
 
-/* ════════════════════════════════════════════════════════
-   Content — markdown → featured posts
-   ════════════════════════════════════════════════════════ */
+const blogModules = import.meta.glob('../../content/blog/*.md', { eager: true, query: '?raw', import: 'default' })
+const aiModules = import.meta.glob('../../content/ai/*.md', { eager: true, query: '?raw', import: 'default' })
 
-const blogModules = import.meta.glob('../../content/blog/*.md', {
-  eager: true,
-  query: '?raw',
-  import: 'default',
-})
-
-const aiModules = import.meta.glob('../../content/ai/*.md', {
-  eager: true,
-  query: '?raw',
-  import: 'default',
-})
-
-const featuredPosts = (() => {
+const allPosts = (() => {
   const blogs = loadPostsFromModules(blogModules)
   const ais = loadPostsFromModules(aiModules)
-  return [...blogs, ...ais]
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .slice(0, 6)
+  return [...blogs, ...ais].sort((a, b) => new Date(b.date) - new Date(a.date))
 })()
 
-/* ════════════════════════════════════════════════════════
-   Typewriter
-   ════════════════════════════════════════════════════════ */
-
-const typewriterWords = [
-  '在时间里留下痕迹',
-  '把经历变成知识',
-  '让思考持续生长',
-  '做一个有意思的人',
-]
-
-function useTypewriter(words, typingSpeed = 80, deletingSpeed = 40, pauseDuration = 2500) {
-  const [text, setText] = useState('')
-  const [wordIndex, setWordIndex] = useState(0)
-  const [isDeleting, setIsDeleting] = useState(false)
-
-  useEffect(() => {
-    // Typewriter animation loop — setState inside effect is intentional
-    const currentWord = words[wordIndex]
-
-    if (!isDeleting && text === currentWord) {
-      const timeout = setTimeout(() => setIsDeleting(true), pauseDuration)
-      return () => clearTimeout(timeout)
-    }
-
-    if (isDeleting && text === '') {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setIsDeleting(false)
-      setWordIndex((prev) => (prev + 1) % words.length)
-      return
-    }
-
-    const speed = isDeleting ? deletingSpeed : typingSpeed
-    const timeout = setTimeout(() => {
-      setText(isDeleting
-        ? currentWord.slice(0, text.length - 1)
-        : currentWord.slice(0, text.length + 1)
-      )
-    }, speed)
-
-    return () => clearTimeout(timeout)
-  }, [text, isDeleting, wordIndex, words, typingSpeed, deletingSpeed, pauseDuration])
-
-  return text
-}
-
-/* ════════════════════════════════════════════════════════
-   Component
-   ════════════════════════════════════════════════════════ */
-
-const minifeatures = [
-  '实时全球互动地图',
-  '深度目的地人文百科',
-  '专属旅行笔记云同步',
-]
+const latest = allPosts[0]
+const recentPosts = allPosts.slice(0, 4)
+const wallpaperItems = wallpapersData.items.filter(w => w.enabled !== false).slice(0, 4)
 
 export default function HomePage() {
   const videoRef = useRef(null)
-  const typewriterText = useTypewriter(typewriterWords)
 
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
     video.muted = true
     video.playsInline = true
-
-    const attemptPlay = () => {
-      video.play().catch(() => {
-        const playOnInteraction = () => {
-          video.play().catch(() => {})
-          document.removeEventListener('pointerdown', playOnInteraction)
-          document.removeEventListener('keydown', playOnInteraction)
-        }
-        document.addEventListener('pointerdown', playOnInteraction, { once: true })
-        document.addEventListener('keydown', playOnInteraction, { once: true })
-      })
-    }
-
-    // Try immediately if already buffered
-    if (video.readyState >= 3) {
-      attemptPlay()
-    } else {
-      // Wait until enough data is loaded
-      video.addEventListener('canplay', attemptPlay, { once: true })
-      // Fallback: try on window load anyway
-      window.addEventListener('load', attemptPlay, { once: true })
-      // Last resort retry
-      setTimeout(attemptPlay, 3000)
+    const play = () => video.play().catch(() => {})
+    if (video.readyState >= 3) { play() }
+    else {
+      video.addEventListener('canplay', play, { once: true })
+      setTimeout(play, 3000)
     }
   }, [])
 
   return (
     <div className="home-page">
-      {/* ─── Hero ─── */}
+      {/* === Hero Video === */}
       <section className="home-hero">
-        <div className="home-hero-video-wrapper">
-          <video
-            ref={videoRef}
-            className="home-hero-video"
-            autoPlay muted loop playsInline preload="auto" poster="/video/hero-poster.webp"
-          >
-            <source src="/video/hero-bg.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <div className="home-hero-overlay" />
-
-        <div className="home-hero-content container">
-          <ScrollReveal delay={100}>
-            <h1 className="home-hero-title">
-              <span className="typewriter-text">{typewriterText}</span>
-              <span className="typewriter-cursor">|</span>
-            </h1>
-          </ScrollReveal>
-
-          <ScrollReveal delay={300}>
-            <p className="home-hero-desc">
-              走过的路、读过的书、用过的工具、沉淀的思考——
-              <br />
-              在信息洪流中，留下属于自己的脉络。
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ─── Featured Content ─── */}
-      <section className="section home-featured-section">
-        <div className="container">
-
-          {/* Section header */}
-          <ScrollReveal>
-            <div className="featured-header">
-              <span className="featured-label">精选内容</span>
-              <div className="featured-header-line" />
-            </div>
-          </ScrollReveal>
-
-          <div className="home-with-sidebar">
-            <div className="featured-grid">
-              <div className="featured-col">
-                <ScrollReveal>
-                  <div className="featured-col-header">
-                    <svg className="featured-col-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-                      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-                      <path d="M8 7h8M8 11h6" />
-                    </svg>
-                    <span>最新文章</span>
-                    <Link to="/blog" className="featured-col-more">查看全部 →</Link>
-                  </div>
-                </ScrollReveal>
-                <div className="featured-post-list">
-                  {featuredPosts.map((post) => (
-                    <ScrollReveal key={post.slug}>
-                      <Link to={`/blog/${post.slug}`} className="featured-post-card">
-                        <div className="featured-post-meta">
-                          <time className="featured-post-date">{post.date}</time>
-                          <div className="featured-post-tags">
-                            {post.tags?.slice(0, 2).map((t) => (
-                              <span key={t} className="featured-post-tag">{t}</span>
-                            ))}
-                          </div>
-                        </div>
-                        <h3 className="featured-post-title">{post.title}</h3>
-                        <p className="featured-post-excerpt">{post.excerpt}</p>
-                        <span className="featured-post-arrow">阅读文章 →</span>
-                      </Link>
-                    </ScrollReveal>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Right sidebar */}
-            <BlogSidebar
-              posts={featuredPosts}
-              wallpapers={wallpapersData}
-              tags={[]}
-              activeTag={null}
-              onTagClick={() => {}}
-            />
+        <video ref={videoRef} className="hero-video" autoPlay muted loop playsInline preload="auto">
+          <source src="/video/hero-bg.mp4" type="video/mp4" />
+        </video>
+        <div className="hero-overlay" />
+        <div className="hero-content">
+          <div className="container">
+            <div className="hero-kicker">This Place</div>
+            <h1 className="hero-title">一处随时间<br />生长的个人空间。</h1>
+            <p className="hero-desc">记录走过的路、读过的书、用过的好工具、沉淀下来的思考。</p>
           </div>
         </div>
       </section>
 
-      {/* ─── Mini Program ─── */}
-      <section className="section home-mini-section">
-        <div className="container">
-          <ScrollReveal>
-            <div className="featured-header">
-              <span className="featured-label">探索世界</span>
-              <div className="featured-header-line" />
+      {/* === Featured Story === */}
+      {latest && (
+        <section className="section container">
+          <div className="featured">
+            <div className="featured-image">
+              <span>📰 Latest</span>
             </div>
-          </ScrollReveal>
-
-          <div className="home-mini-card">
-            <div className="home-mini-left">
-              <div className="home-mini-qr-ring" />
-              <div className="home-mini-qr">
-                <div className="home-mini-qr-inner">
-                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-                    <rect x="3" y="3" width="7" height="7" rx="1" />
-                    <rect x="14" y="3" width="7" height="7" rx="1" />
-                    <rect x="3" y="14" width="7" height="7" rx="1" />
-                    <rect x="15" y="15" width="3" height="3" />
-                    <rect x="18" y="18" width="3" height="3" />
-                  </svg>
-                  <span>扫码体验</span>
-                </div>
-              </div>
-              <p className="home-mini-qr-hint">微信扫描 · 开启探索之旅</p>
-            </div>
-
-            <div className="home-mini-right">
-              <span className="home-mini-label">Connect Digitally</span>
-              <h2 className="home-mini-title">探索世界微信小程序</h2>
-              <p className="home-mini-desc">
-                将整个世界的灵感装进兜里。精选旅行指南、沉浸式航拍地图以及独家知识专栏。随时随地，开启您的全球视野。
-              </p>
-              <div className="home-mini-features">
-                {minifeatures.map((feat) => (
-                  <div key={feat} className="home-mini-feature">
-                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="10" cy="10" r="8" />
-                      <path d="M6 10l3 3 5-5" />
-                    </svg>
-                    <span>{feat}</span>
-                  </div>
-                ))}
-              </div>
+            <div className="featured-content">
+              <div className="featured-cat">Featured</div>
+              <h2 className="featured-title">{latest.title}</h2>
+              <p className="featured-excerpt">{latest.excerpt}</p>
+              <Link to={`/journal/${latest.slug}`} className="featured-cta">Read →</Link>
             </div>
           </div>
+        </section>
+      )}
+
+      {/* === Journal Entries === */}
+      <section className="section container">
+        <div className="section-label">Journal</div>
+        <h2 className="section-title" style={{ marginBottom: 32 }}>随笔与记录</h2>
+        <div className="entry-list">
+          {recentPosts.map((post) => (
+            <Link key={post.slug} to={`/journal/${post.slug}`} className="entry-item">
+              <div className="entry-visual">{post.section === 'ai' ? '🤖' : '📝'}</div>
+              <div className="entry-info">
+                <div className="entry-meta">{post.date}</div>
+                <h3 className="entry-title">{post.title}</h3>
+                <p className="entry-excerpt">{post.excerpt}</p>
+              </div>
+              <span className="entry-arrow">→</span>
+            </Link>
+          ))}
         </div>
+      </section>
+
+      {/* === Wallpaper Gallery Section === */}
+      <section className="section container">
+        <div className="section-label">Gallery</div>
+        <h2 className="section-title" style={{ marginBottom: 32 }}>收集的风景</h2>
+        <div className="home-gallery">
+          {wallpaperItems.map(w => (
+            <a key={w.id} href={getFullDownloadUrl(w)} target="_blank" rel="noopener noreferrer" className="home-gallery-card" title="点击下载">
+              <img src={getThumbnailUrl(w)} alt={w.title} loading="lazy" />
+              <div className="home-gallery-info">
+                <span>{w.title}</span>
+              </div>
+            </a>
+          ))}
+        </div>
+        <Link to="/collections" className="section-cta">View all →</Link>
+      </section>
+
+      {/* === Travels Preview === */}
+      <section className="section container">
+        <div className="section-label">Travels</div>
+        <h2 className="section-title" style={{ marginBottom: 32 }}>旅行笔记</h2>
+        <div className="travel-preview">
+          <div className="travel-preview-card">
+            <div className="travel-preview-img">🇬🇧</div>
+            <h3>伦敦的雾</h3>
+            <p>十一月的伦敦，下午四点天就暗了。</p>
+          </div>
+          <div className="travel-preview-card">
+            <div className="travel-preview-img">🇨🇭</div>
+            <h3>瑞士的慢火车</h3>
+            <p>从 Interlaken 到 Zermatt 的山谷穿行。</p>
+          </div>
+          <div className="travel-preview-card">
+            <div className="travel-preview-img">🇯🇵</div>
+            <h3>京都的雨</h3>
+            <p>六月雨季的岚山，竹林的雨声。</p>
+          </div>
+        </div>
+        <Link to="/travels" className="section-cta">Explore map →</Link>
       </section>
     </div>
   )

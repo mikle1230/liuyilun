@@ -1,0 +1,12 @@
+.journal-page { min-height: 100vh; }
+.page-desc { font-size: 14px; color: var(--text-secondary); }
+
+.entry-tags { display: flex; gap: 6px; margin-top: 6px; }
+.entry-tag {
+  font-family: var(--font-sans);
+  font-size: 10px; padding: 2px 8px;
+  color: var(--text-tertiary);
+  background: var(--bg-secondary);
+  border-radius: 2px;
+}
+.entry-tag-ai { color: var(--accent); }

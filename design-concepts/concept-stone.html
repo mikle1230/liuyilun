@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>This Place — Stone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', 'Noto Sans SC', sans-serif;
+    font-size: 17px; line-height: 1.9;
+    color: #1a1a1a; background: #fff;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  /* Nav */
+  nav { padding: 48px 0 28px; border-bottom: 1px solid #e8e8e8; margin-bottom: 80px; }
+  nav .container { display: flex; justify-content: space-between; align-items: center; }
+  .site-title {
+    font-family: 'DM Sans', sans-serif; font-size: 18px; font-weight: 600;
+    color: #1a1a1a; text-decoration: none; letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a {
+    font-size: 14px; color: #9a9a9a; text-decoration: none;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: #1a1a1a; }
+
+  /* Home */
+  .hero { margin-bottom: 80px; }
+  .hero h1 {
+    font-family: 'DM Sans', sans-serif; font-size: 40px; font-weight: 300;
+    line-height: 1.25; margin-bottom: 24px; color: #1a1a1a;
+    letter-spacing: -0.02em;
+  }
+  .hero p { font-size: 16px; color: #6b6b6b; max-width: 560px; line-height: 1.8; }
+
+  .home-entries { margin-bottom: 80px; }
+  .home-entry {
+    display: flex; align-items: center; padding: 16px 0;
+    border-bottom: 1px solid #e8e8e8; text-decoration: none; color: #1a1a1a;
+    transition: color .2s;
+  }
+  .home-entry:hover { color: #3a3a3a; }
+  .home-entry:last-child { border-bottom: none; }
+  .home-entry-icon { font-size: 18px; margin-right: 16px; width: 28px; text-align: center; }
+  .home-entry-title { font-size: 16px; font-weight: 400; }
+  .home-entry-desc { font-size: 13px; color: #b0b0b0; margin-left: auto; }
+
+  /* Section */
+  .section-title {
+    font-size: 13px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.12em; color: #9a9a9a;
+    margin-bottom: 28px; padding-bottom: 12px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+
+  /* Journal */
+  .journal-list { margin-bottom: 80px; }
+  .journal-item {
+    display: block; padding: 18px 0; border-bottom: 1px solid #e8e8e8;
+    text-decoration: none; color: #1a1a1a;
+  }
+  .journal-item:last-child { border-bottom: none; }
+  .journal-date { font-size: 13px; color: #b0b0b0; margin-bottom: 4px; }
+  .journal-title {
+    font-size: 18px; font-weight: 500; margin-bottom: 4px; transition: color .2s;
+  }
+  .journal-item:hover .journal-title { color: #3a3a3a; }
+  .journal-excerpt { font-size: 14px; color: #7a7a7a; line-height: 1.7; }
+
+  /* Collections */
+  .collections { margin-bottom: 80px; }
+  .coll-group { margin-bottom: 36px; }
+  .coll-header { font-size: 13px; font-weight: 600; color: #3a3a3a; margin-bottom: 8px; }
+  .coll-item {
+    display: flex; align-items: baseline; padding: 6px 0;
+    text-decoration: none; color: #1a1a1a; gap: 8px;
+  }
+  .coll-name { font-size: 15px; }
+  .coll-item:hover .coll-name { color: #3a3a3a; }
+  .coll-desc { font-size: 13px; color: #7a7a7a; }
+  .coll-url { margin-left: auto; font-size: 12px; color: #b0b0b0; }
+
+  /* Travels */
+  .travels { margin-bottom: 80px; }
+  .travel-note { font-size: 14px; color: #6b6b6b; line-height: 1.8; margin-bottom: 32px; }
+  .travel-item {
+    display: block; padding: 12px 0;
+    text-decoration: none; color: #1a1a1a;
+  }
+  .travel-item:hover .travel-name { color: #3a3a3a; }
+  .travel-name { font-size: 15px; font-weight: 500; margin-bottom: 2px; }
+  .travel-desc { font-size: 13px; color: #7a7a7a; }
+
+  /* Gallery */
+  .gallery-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 80px; }
+  .gallery-item { aspect-ratio: 1; background: #f0f0f0; border-radius: 2px; overflow: hidden; position: relative; }
+  .gallery-item .info {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 28px 10px 10px;
+    background: linear-gradient(to top, rgba(0,0,0,0.1), transparent);
+  }
+  .gallery-item .info span { display: block; font-size: 12px; color: #fff; }
+
+  /* About */
+  .about { margin-bottom: 80px; }
+  .about-intro { font-size: 15px; color: #6b6b6b; line-height: 1.8; margin-bottom: 40px; }
+  .tl-item { padding: 14px 0; }
+  .tl-year { font-size: 12px; color: #3a3a3a; font-weight: 500; margin-bottom: 2px; }
+  .tl-title { font-size: 15px; font-weight: 500; margin-bottom: 2px; }
+  .tl-desc { font-size: 13px; color: #6b6b6b; line-height: 1.7; }
+
+  /* Now */
+  .now { margin-bottom: 80px; }
+  .now-item { padding: 14px 0; }
+  .now-label { font-size: 12px; color: #3a3a3a; font-weight: 500; margin-bottom: 4px; }
+  .now-text { font-size: 15px; color: #3a3a3a; line-height: 1.7; }
+
+  /* Article */
+  .article { max-width: 680px; margin: 0 auto 80px; }
+  .article h1 { font-size: 30px; font-weight: 500; line-height: 1.3; margin-bottom: 10px; color: #1a1a1a; letter-spacing: -0.02em; }
+  .article .meta { font-size: 14px; color: #b0b0b0; margin-bottom: 48px; }
+  .article p { margin-bottom: 20px; color: #3a3a3a; }
+  .article h2 { font-size: 22px; font-weight: 500; margin: 36px 0 12px; color: #1a1a1a; }
+  .back-link { display: inline-block; font-size: 14px; color: #9a9a9a; margin-bottom: 24px; text-decoration: none; }
+
+  /* Footer */
+  footer { padding: 40px 0 56px; border-top: 1px solid #e8e8e8; margin-top: 40px; }
+  footer .container { display: flex; justify-content: space-between; align-items: center; }
+  footer span { font-size: 13px; color: #b0b0b0; }
+
+  .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    nav { padding: 32px 0 24px; margin-bottom: 48px; }
+    .nav-links { gap: 16px; }
+    .nav-links a { font-size: 13px; }
+    .hero h1 { font-size: 28px; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .home-entry-desc { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="#" class="site-title">This Place</a>
+    <div class="nav-links">
+      <a href="#">Journal</a>
+      <a href="#">Collections</a>
+      <a href="#">Travels</a>
+      <a href="#">About</a>
+      <a href="#">Now</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>A quiet place<br>that grows with time.</h1>
+    <p>走过的路、读过的书、用过的好工具、沉淀下来的思考。<br>在信息洪流中留一处属于自己的脉络。</p>
+  </div>
+
+  <!-- Entries -->
+  <div class="home-entries">
+    <a href="#" class="home-entry">
+      <span class="home-entry-icon">📖</span>
+      <span class="home-entry-title">Journal · 随笔与思考</span>
+      <span class="home-entry-desc">10 篇</span>
+    </a>
+    <a href="#" class="home-entry">
+      <span class="home-entry-icon">📚</span>
+      <span class="home-entry-title">Collections · 收藏与工具</span>
+      <span class="home-entry-desc">80+ 项</span>
+    </a>
+    <a href="#" class="home-entry">
+      <span class="home-entry-icon">🗺️</span>
+      <span class="home-entry-title">Travels · 旅行笔记</span>
+      <span class="home-entry-desc">20 国</span>
+    </a>
+    <a href="#" class="home-entry">
+      <span class="home-entry-icon">🖼️</span>
+      <span class="home-entry-title">Gallery · 收集的瞬间</span>
+      <span class="home-entry-desc">12 张</span>
+    </a>
+    <a href="#" class="home-entry">
+      <span class="home-entry-icon">◻︎</span>
+      <span class="home-entry-title">About · 关于这个地方</span>
+    </a>
+  </div>
+
+  <!-- Journal preview -->
+  <h2 class="section-title">Recent</h2>
+  <div class="journal-list">
+    <a href="#" class="journal-item">
+      <div class="journal-date">2026.06.28</div>
+      <div class="journal-title">数据库还是要学的</div>
+      <div class="journal-excerpt">一些关于学习数据库的随想，为什么在这个 AI 时代基础仍然重要。</div>
+    </a>
+    <a href="#" class="journal-item">
+      <div class="journal-date">2026.06.28</div>
+      <div class="journal-title">AI 时代的伯克希尔</div>
+      <div class="journal-excerpt">当巴菲特被装进一个仓库，深夜关于 ai-berkshire 的一点絮语。</div>
+    </a>
+    <a href="#" class="journal-item">
+      <div class="journal-date">2026.06.27</div>
+      <div class="journal-title">欢迎</div>
+      <div class="journal-excerpt">一封简单的介绍信，关于这个空间存在的意义。</div>
+    </a>
+  </div>
+
+  <!-- Collections preview -->
+  <h2 class="section-title">Collections</h2>
+  <div class="collections">
+    <div class="coll-group">
+      <div class="coll-header">AI Tools</div>
+      <a href="#" class="coll-item">
+        <span class="coll-name">Claude</span>
+        <span class="coll-desc">日常使用的 AI 助手</span>
+        <span class="coll-url">↗</span>
+      </a>
+      <a href="#" class="coll-item">
+        <span class="coll-name">Cursor</span>
+        <span class="coll-desc">AI 原生代码编辑器</span>
+        <span class="coll-url">↗</span>
+      </a>
+    </div>
+    <div class="coll-group">
+      <div class="coll-header">Gallery</div>
+      <a href="#" class="coll-item">
+        <span class="coll-name">北极光</span>
+        <span class="coll-desc">挪威旅行时拍到的极光</span>
+      </a>
+      <a href="#" class="coll-item">
+        <span class="coll-name">山间湖泊</span>
+        <span class="coll-desc">瑞士徒步时的宁静一刻</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Style label -->
+  <div style="margin: 80px 0 40px; padding: 32px; background: #f5f5f5; border-radius: 2px;">
+    <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 16px; color: #1a1a1a; text-transform: uppercase; letter-spacing: 0.08em;">🎨 方案 B：石色冷静</h3>
+    <p style="font-size: 13px; color: #6b6b6b; line-height: 1.8;">
+      强调色 <span class="swatch" style="background: #3a3a3a;"></span> #3a3a3a 深灰 · 背景 #ffffff 纯白<br>
+      分隔线 #e8e8e8 冷灰 · 正文色 #1a1a1a 纯黑 · 辅助色 #9a9a9a / #b0b0b0<br>
+      字体方案：全部 DM Sans（无衬线统一），英文标题混排<br>
+      感觉：安静、图书馆、文字至上、知性冷静
+    </p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="container">
+    <span>© 2026</span>
+    <span>This is a place, not a product.</span>
+  </div>
+</footer>
+
+</body>
+</html>

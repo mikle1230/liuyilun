@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>方向一：档案室 Archive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 15px; line-height: 1.9;
+  color: #2a2a2a;
+  background: #f5f3f0;
+  -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 960px; margin: 0 auto; padding: 0 32px; }
+
+nav {
+  padding: 32px 0 24px;
+  margin-bottom: 48px;
+}
+nav .container {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.site-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  color: #2a2a2a;
+}
+.nav-links { display: flex; gap: 32px; }
+.nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px; color: #999490; text-decoration: none;
+  transition: color .2s;
+}
+.nav-links a:hover { color: #2a2a2a; }
+
+/* Archive grid - like a card catalog */
+.archive-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: #ddd8d0;
+  border: 1px solid #ddd8d0;
+  margin-bottom: 48px;
+}
+.archive-card {
+  background: #f5f3f0;
+  padding: 28px 24px;
+  text-decoration: none; color: #2a2a2a;
+  transition: background .25s;
+}
+.archive-card:hover { background: #edeae4; }
+.archive-ref {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; color: #b8b2a8; margin-bottom: 8px;
+}
+.archive-title {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 15px; font-weight: 500;
+  margin-bottom: 4px;
+}
+.archive-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; color: #b8b2a8;
+}
+
+/* Hero */
+.hero { margin-bottom: 64px; }
+.hero h1 {
+  font-family: 'DM Mono', monospace;
+  font-size: 28px; font-weight: 300;
+  line-height: 1.3; letter-spacing: -0.01em;
+  color: #2a2a2a; margin-bottom: 16px;
+}
+.hero p { color: #7a756e; max-width: 520px; }
+
+/* Content listing - filing system */
+.filing { margin-bottom: 48px; }
+.filing-header {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: #b8b2a8;
+  padding: 12px 0;
+  border-bottom: 2px solid #2a2a2a;
+  margin-bottom: 0;
+}
+.filing-item {
+  display: flex; align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 1px solid #ddd8d0;
+  text-decoration: none; color: #2a2a2a;
+}
+.filing-item:hover { background: #edeae4; margin: 0 -16px; padding: 12px 16px; }
+.filing-date {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px; color: #b8b2a8;
+  width: 100px; flex-shrink: 0;
+}
+.filing-title { font-size: 14px; }
+.filing-tag {
+  margin-left: auto;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; color: #b8b2a8;
+  text-transform: uppercase;
+}
+
+.collections-list { }
+.collection-cat {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; font-weight: 500;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd8d0;
+  color: #2a2a2a;
+  cursor: pointer;
+}
+.collection-cat:hover { color: #666; }
+
+footer {
+  padding: 40px 0;
+  border-top: 1px solid #ddd8d0;
+  margin-top: 48px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; color: #b8b2a8;
+}
+
+@media (max-width: 640px) {
+  .archive-grid { grid-template-columns: 1fr; }
+  .filing-date { width: auto; margin-right: 16px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="#" class="site-title">Index</a>
+    <div class="nav-links">
+      <a href="#">Journal</a>
+      <a href="#">Files</a>
+      <a href="#">Travels</a>
+      <a href="#">About</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="hero">
+    <h1>一个按时间编排<br>的个人档案室。</h1>
+    <p>走过的路、读过的书、用过的好工具、沉淀下来的思考。每一条记录都是档案架上的一个盒子。</p>
+  </div>
+
+  <!-- Archive / card catalog -->
+  <div class="archive-grid">
+    <a href="#" class="archive-card">
+      <div class="archive-ref">JRNL-2026-04</div>
+      <div class="archive-title">数据库还是要学的</div>
+      <div class="archive-meta">2026.06.28 · 3 min</div>
+    </a>
+    <a href="#" class="archive-card">
+      <div class="archive-ref">JRNL-2026-03</div>
+      <div class="archive-title">AI 时代的伯克希尔</div>
+      <div class="archive-meta">2026.06.28 · 12 min</div>
+    </a>
+    <a href="#" class="archive-card">
+      <div class="archive-ref">JRNL-2026-02</div>
+      <div class="archive-title">欢迎来到这个空间</div>
+      <div class="archive-meta">2026.06.27 · 2 min</div>
+    </a>
+    <a href="#" class="archive-card">
+      <div class="archive-ref">JRNL-2026-01</div>
+      <div class="archive-title">MICE 行业的变与不变</div>
+      <div class="archive-meta">2026.06.20 · 8 min</div>
+    </a>
+  </div>
+
+  <!-- Filing system -->
+  <div class="filing">
+    <div class="filing-header">Recent entries</div>
+    <a href="#" class="filing-item">
+      <span class="filing-date">2026.06.28</span>
+      <span class="filing-title">数据库还是要学的</span>
+      <span class="filing-tag">随笔</span>
+    </a>
+    <a href="#" class="filing-item">
+      <span class="filing-date">2026.06.28</span>
+      <span class="filing-title">AI 时代的伯克希尔</span>
+      <span class="filing-tag">AI</span>
+    </a>
+    <a href="#" class="filing-item">
+      <span class="filing-date">2026.06.27</span>
+      <span class="filing-title">欢迎</span>
+      <span class="filing-tag">随笔</span>
+    </a>
+    <a href="#" class="filing-item">
+      <span class="filing-date">2026.06.20</span>
+      <span class="filing-title">MICE 行业的变与不变</span>
+      <span class="filing-tag">行业</span>
+    </a>
+  </div>
+
+  <!-- Collections -->
+  <div class="filing">
+    <div class="filing-header">Collections</div>
+    <div class="collection-cat">📁 AI Tools (80 items)</div>
+    <div class="collection-cat">📁 Gallery (12 items)</div>
+    <div class="collection-cat">📁 Bookmarks</div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="container">
+    <span>Index v1.0 · Last updated 2026.07</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async'
 
-const SITE_NAME = 'M — 个人知识枢纽'
-const DEFAULT_DESC = '记录思考 · 收集知识 · 探索世界 — 一个人的知识枢纽'
+const SITE_NAME = 'This Place — M'
+const DEFAULT_DESC = '记录走过的路、读过的书、用过的好工具、沉淀下来的思考。'
 
 export default function Seo({ title, description, path }) {
   const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME

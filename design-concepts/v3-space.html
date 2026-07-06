@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>方向二：空间 SPACE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400;9..40,500&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans SC', 'DM Sans', sans-serif;
+  font-size: 15px; line-height: 2;
+  color: #3a3530;
+  background: #faf9f7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Everything is full-width, content is narrow */
+.content { max-width: 640px; margin: 0 auto; padding: 0 24px; }
+
+/* No nav bar — just a floating home link */
+.home-link {
+  position: fixed; top: 32px; left: 32px; z-index: 100;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 400;
+  color: #b0a8a0; text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color .3s;
+}
+.home-link:hover { color: #3a3530; }
+
+/* Full-bleed moment */
+.moment {
+  width: 100%;
+  height: 80vh; min-height: 500px;
+  background: #e8e2da;
+  display: flex; align-items: flex-end; justify-content: flex-start;
+  padding: 48px;
+  position: relative;
+}
+.moment-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 300;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.7);
+}
+
+/* Section — spacious, breathing */
+.section { margin-bottom: 100px; }
+
+.hero-text { margin-bottom: 80px; }
+.hero-text .kicker {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 400;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  color: #c5bdb3; margin-bottom: 24px;
+}
+.hero-text h1 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 36px; font-weight: 700;
+  line-height: 1.25; letter-spacing: -0.01em;
+  color: #3a3530; margin-bottom: 28px;
+  max-width: 540px;
+}
+.hero-text p {
+  font-size: 15px; color: #8a8178; line-height: 2;
+  max-width: 460px;
+}
+
+/* Entry links — minimal, floating right */
+.entries { max-width: 1200px; margin: 0 auto 100px; padding: 0 24px; }
+.entry-row {
+  display: flex; justify-content: flex-end;
+  padding: 8px 0;
+  border-bottom: 1px solid #edeae4;
+}
+.entry-row a {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 22px; font-weight: 400;
+  color: #3a3530; text-decoration: none;
+  transition: color .3s;
+  width: 300px;
+}
+.entry-row a:hover { color: #c5bdb3; }
+.entry-row span {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; color: #c5bdb3;
+  width: 80px;
+}
+
+/* Journal — spacious list */
+.journal-list { }
+.jl-entry { margin-bottom: 48px; }
+.jl-entry:last-child { margin-bottom: 0; }
+.jl-date {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; color: #c5bdb3;
+  margin-bottom: 4px;
+}
+.jl-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 22px; font-weight: 600;
+  margin-bottom: 8px;
+  transition: color .3s;
+}
+.jl-title:hover { color: #c5bdb3; }
+.jl-excerpt {
+  font-size: 14px; color: #8a8178; line-height: 1.9;
+  max-width: 480px;
+}
+
+/* Image break */
+.image-break {
+  width: 100%;
+  height: 50vh; min-height: 360px;
+  background: #e8e2da;
+  margin: 80px 0;
+  display: flex; align-items: flex-end; padding: 32px;
+}
+.image-break span {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.6);
+}
+
+/* Travel — spacious narrative */
+.travel-entry { margin-bottom: 60px; }
+.travel-place {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+  color: #c5bdb3; margin-bottom: 8px;
+}
+.travel-entry h3 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 20px; font-weight: 600; margin-bottom: 12px;
+}
+.travel-entry p {
+  font-size: 14px; color: #8a8178; line-height: 2;
+  max-width: 520px;
+}
+
+/* Footer */
+footer {
+  padding: 48px 0 64px;
+  border-top: 1px solid #edeae4;
+  margin-top: 40px;
+}
+footer .content {
+  display: flex; justify-content: space-between;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; color: #c5bdb3;
+}
+
+/* About letter */
+.letter { max-width: 520px; }
+.letter p { margin-bottom: 20px; color: #8a8178; line-height: 2; }
+.letter .salutation {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+  color: #c5bdb3; margin-bottom: 24px;
+}
+
+@media (max-width: 640px) {
+  .hero-text h1 { font-size: 28px; }
+  .moment { height: 60vh; min-height: 320px; padding: 24px; }
+  .entry-row a { font-size: 18px; width: auto; }
+  .entry-row { justify-content: flex-start; }
+  .entry-row span { display: none; }
+  .home-link { top: 20px; left: 20px; }
+}
+</style>
+</head>
+<body>
+
+<a href="#" class="home-link">This Place</a>
+
+<!-- Full-bleed moment — no nav, pure visual entry -->
+<div class="moment" style="background: linear-gradient(135deg, #5a6a5a, #8a9a7a);">
+  <span class="moment-label">— a quiet corner of the internet</span>
+</div>
+
+<div style="margin-top: -40px; position: relative; z-index: 1;">
+  <div class="content">
+
+    <!-- Hero text — sits below the image -->
+    <div class="hero-text">
+      <div class="kicker">This Place</div>
+      <h1>时间在此处<br>变得可以触摸。</h1>
+      <p>记录走过的路、读过的书、用过的好工具、沉淀下来的思考。在信息洪流中，留一处属于自己的脉络。</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- Entry links — arranged with spatial rhythm -->
+<div class="entries">
+  <div class="entry-row">
+    <span>01</span>
+    <a href="#">Journal — 随笔与记录</a>
+  </div>
+  <div class="entry-row">
+    <span>02</span>
+    <a href="#">Collections — 收藏与索引</a>
+  </div>
+  <div class="entry-row">
+    <span>03</span>
+    <a href="#">Travels — 旅行笔记</a>
+  </div>
+  <div class="entry-row">
+    <span>04</span>
+    <a href="#">About — 关于这个地方</a>
+  </div>
+  <div class="entry-row">
+    <span>05</span>
+    <a href="#">Now — 最近在做什么</a>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- Journal -->
+  <div class="section">
+    <div class="jl-entry">
+      <div class="jl-date">2026.06.28</div>
+      <div class="jl-title">数据库还是要学的</div>
+      <div class="jl-excerpt">当 AI 工具日新月异，为什么回过头来学习数据库仍然是值得的？</div>
+    </div>
+    <div class="jl-entry">
+      <div class="jl-date">2026.06.28</div>
+      <div class="jl-title">AI 时代的伯克希尔</div>
+      <div class="jl-excerpt">当巴菲特被装进一个仓库，深夜关于 ai-berkshire 的一点絮语。</div>
+    </div>
+    <div class="jl-entry">
+      <div class="jl-date">2026.06.27</div>
+      <div class="jl-title">欢迎来到这个空间</div>
+      <div class="jl-excerpt">一封简单的介绍信。</div>
+    </div>
+  </div>
+
+  <!-- Image break -->
+  <div class="image-break" style="background: linear-gradient(to right, #7a8a7a, #9aaa8a);">
+    <span>Somewhere, 2024</span>
+  </div>
+
+  <!-- Travels -->
+  <div class="section">
+    <div class="travel-entry">
+      <div class="travel-place">London · 2024</div>
+      <h3>伦敦的雾</h3>
+      <p>十一月的伦敦，下午四点天就暗了。泰晤士河边的路灯亮起来的时候，整座城市像一幅褪色的水彩画。</p>
+    </div>
+    <div class="travel-entry">
+      <div class="travel-place">Kyoto · 2023</div>
+      <h3>京都的雨</h3>
+      <p>六月雨季的京都，岚山的竹林里几乎没有人。雨滴打在竹叶上的声音，比任何冥想音乐都让人安静。</p>
+    </div>
+  </div>
+
+  <!-- About: letter format -->
+  <div class="section">
+    <div class="letter">
+      <div class="salutation">Hi,</div>
+      <p>这个空间是我在网络上的一个安静的角落。不为了展示什么，只是想把时间留下的痕迹整理一下。</p>
+      <p>这里不是一个产品，也不会成为一个平台。它就是一个地方——一个属于我的地方。</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="content">
+    <span>© 2026</span>
+    <span>This is a place, not a product.</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>方向三：手记 Field Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans SC', 'Noto Serif SC', sans-serif;
+  font-size: 15px;
+  line-height: 1.9;
+  color: #2c2c2c;
+  background: #f3efe8;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Notebook feel — subtle paper texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.3;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  pointer-events: none;
+}
+
+.container { max-width: 720px; margin: 0 auto; padding: 0 28px; }
+
+/* Navigation — like a table of contents */
+nav {
+  padding: 48px 0 32px;
+  border-bottom: 2px solid #2c2c2c;
+  margin-bottom: 64px;
+}
+.site-title {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 500;
+  color: #2c2c2c;
+  border: 1px solid #2c2c2c;
+  padding: 4px 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.nav-row { margin-top: 20px; display: flex; gap: 6px; flex-wrap: wrap; }
+.nav-row a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: #8a8a80; text-decoration: none;
+  padding: 4px 0;
+  transition: color .2s;
+}
+.nav-row a:hover { color: #2c2c2c; }
+.nav-row .sep { color: #c8c4ba; }
+
+/* Hero — like a field notebook cover */
+.hero {
+  margin-bottom: 64px;
+  padding: 32px 0;
+  border-bottom: 1px solid #ddd8ce;
+}
+.hero .note-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: #b8b2a6;
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 24px; font-weight: 300;
+  line-height: 1.4;
+  color: #2c2c2c; margin-bottom: 20px;
+}
+.hero p {
+  font-size: 14px; color: #7a746c;
+  line-height: 1.9;
+}
+
+/* Sections — like notebook dividers */
+.section-divider {
+  margin: 48px 0;
+  border: none;
+  border-top: 1px dashed #ddd8ce;
+}
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: #b8b2a6;
+  margin-bottom: 24px;
+}
+
+/* Entry cards — like sticky notes */
+.entry-note {
+  display: block;
+  padding: 20px 0;
+  border-bottom: 1px solid #ddd8ce;
+  text-decoration: none; color: #2c2c2c;
+  position: relative;
+}
+.entry-note:first-of-type { border-top: 1px solid #ddd8ce; }
+.entry-note::before {
+  content: '→';
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: #c8c4ba;
+  position: absolute; right: 0; top: 22px;
+  transition: right .2s;
+}
+.entry-note:hover::before { right: -4px; color: #2c2c2c; }
+
+.en-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: #b8b2a6; margin-bottom: 4px;
+}
+.en-title { font-size: 16px; font-weight: 500; margin-bottom: 4px; }
+.en-excerpt { font-size: 13px; color: #7a746c; }
+
+/* Collections — drawer style */
+.drawer {
+  margin-bottom: 24px;
+}
+.drawer-header {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-weight: 500;
+  padding: 14px 0;
+  border-bottom: 1px solid #ddd8ce;
+  cursor: pointer;
+  display: flex; justify-content: space-between;
+}
+.drawer-header:hover { color: #666; }
+.drawer-header::after { content: '▸'; font-size: 11px; }
+.drawer-item {
+  display: flex; align-items: baseline; gap: 8px;
+  padding: 8px 0 8px 16px;
+  text-decoration: none; color: #2c2c2c;
+  border-bottom: 1px solid #e8e4dc;
+}
+.drawer-item:last-child { border-bottom: none; }
+.di-name { font-size: 13px; }
+.di-desc { font-size: 12px; color: #8a8a80; }
+.di-url { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #c8c4ba; }
+
+/* Gallery — contact sheet style */
+.contact-sheet {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.cs-item {
+  aspect-ratio: 1;
+  background: #ddd8ce;
+  display: flex; align-items: center; justify-content: center;
+  color: #b8b2a6; font-family: 'JetBrains Mono', monospace; font-size: 10px;
+}
+
+/* Travel — log entry style */
+.log-entry { margin-bottom: 40px; }
+.log-place {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: #b8b2a6; margin-bottom: 4px;
+}
+.log-entry h3 { font-size: 17px; font-weight: 500; margin-bottom: 8px; }
+.log-entry p { font-size: 13px; color: #7a746c; line-height: 1.9; }
+
+/* About */
+.about-note {
+  font-size: 14px; color: #7a746c; line-height: 2;
+  margin-bottom: 24px;
+}
+
+footer {
+  padding: 48px 0;
+  border-top: 1px solid #ddd8ce;
+  margin-top: 40px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: #b8b2a6;
+  display: flex; justify-content: space-between;
+}
+
+@media (max-width: 640px) {
+  .contact-sheet { grid-template-columns: 1fr 1fr; }
+  .hero h1 { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<nav>
+  <a href="#" class="site-title">Field Notes</a>
+  <div class="nav-row">
+    <a href="#">Journal</a> <span class="sep">/</span>
+    <a href="#">Collections</a> <span class="sep">/</span>
+    <a href="#">Travels</a> <span class="sep">/</span>
+    <a href="#">About</a> <span class="sep">/</span>
+    <a href="#">Now</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="note-date">Last entry: 2026.06.28</div>
+  <h1>这是一本持续更新的<br>个人手记。</h1>
+  <p>记录走过的路、读过的书、用过的好工具、沉淀下来的思考。不编辑、不修饰、不发布——只是在记录。</p>
+</div>
+
+<!-- Journal entries -->
+<div class="section-label">Recent entries</div>
+
+<a href="#" class="entry-note">
+  <div class="en-date">2026.06.28</div>
+  <div class="en-title">数据库还是要学的</div>
+  <div class="en-excerpt">在 AI 时代重新理解基础——一些关于学习的随想。</div>
+</a>
+<a href="#" class="entry-note">
+  <div class="en-date">2026.06.28</div>
+  <div class="en-title">AI 时代的伯克希尔</div>
+  <div class="en-excerpt">当巴菲特被装进一个仓库，深夜关于 ai-berkshire 的絮语。</div>
+</a>
+<a href="#" class="entry-note">
+  <div class="en-date">2026.06.27</div>
+  <div class="en-title">欢迎来到这个空间</div>
+  <div class="en-excerpt">一封简单的介绍信。</div>
+</a>
+
+<hr class="section-divider">
+
+<!-- Collections as drawers -->
+<div class="section-label">Collections</div>
+
+<div class="drawer">
+  <div class="drawer-header">AI Tools · 80 items</div>
+  <div class="drawer-item">
+    <span class="di-name">Claude</span>
+    <span class="di-desc">日常 AI 助手</span>
+    <span class="di-url">↗</span>
+  </div>
+  <div class="drawer-item">
+    <span class="di-name">Cursor</span>
+    <span class="di-desc">AI 代码编辑器</span>
+    <span class="di-url">↗</span>
+  </div>
+</div>
+
+<div class="drawer">
+  <div class="drawer-header">Gallery · 12 items</div>
+</div>
+
+<hr class="section-divider">
+
+<!-- Travel as log -->
+<div class="section-label">Travel log</div>
+
+<div class="log-entry">
+  <div class="log-place">London · Nov 2024</div>
+  <h3>伦敦的雾</h3>
+  <p>十一月的伦敦，下午四点天就暗了。在 Notting Hill 的一家旧书店里翻到一本 1962 年的旅行指南，封面写着："London is a place for walking." 这句话到现在仍然是真的。</p>
+</div>
+
+<div class="log-entry">
+  <div class="log-place">Kyoto · Jun 2023</div>
+  <h3>京都的雨</h3>
+  <p>六月雨季的京都，龙安寺的枯山水前，十五块石头从任何角度都只能看到十四块——这个设计已经五百多年了。</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- About: short note -->
+<div class="section-label">About</div>
+
+<div class="about-note">
+  <p>这个空间是我在网络上的一个安静的角落。不为了展示什么，只是想把时间留下的痕迹整理一下。</p>
+  <p style="margin-top: 16px;">这个网站是开源的，部署在 Vercel 上。它不会成为一个产品。</p>
+</div>
+
+<footer>
+  <span>Field Notes · 2026</span>
+  <span>This is a place, not a product.</span>
+</footer>
+
+</div>
+
+</body>
+</html>
