@@ -1,5 +1,5 @@
 /* ============================================================
-   Home — Hero · Journal Cards · Explore Teaser
+   Home — Hero · Journal Strip · Explore Strip · Collection Strip
    ============================================================ */
 
 /* ════════════════════════════════════════════════════════════
@@ -12,227 +12,160 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding-top: 80px;
+  padding-top: 60px;
 }
 
-.home-hero-video-wrapper {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.home-hero-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  pointer-events: none;
-}
-
-.home-hero-video::-webkit-media-controls {
-  display: none !important;
-}
+.home-hero-video-wrapper { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.home-hero-video { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.home-hero-video::-webkit-media-controls { display: none !important; }
 
 .home-hero-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.05) 0%,
-    rgba(255, 255, 255, 0.15) 50%,
-    var(--bg-primary) 100%
-  );
+  position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.05) 0%,
+    rgba(255,255,255,0.15) 50%,
+    var(--bg-primary) 100%);
   pointer-events: none;
 }
 
 .home-hero-content {
-  position: relative;
-  z-index: 3;
-  width: 100%;
-  padding-top: 60px;
-  padding-bottom: 120px;
-  text-align: left;
+  position: relative; z-index: 3; width: 100%;
+  padding-top: 40px; padding-bottom: 100px;
 }
 
-.home-hero-title {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  min-height: 1.3em;
-  margin-bottom: 28px;
-}
+.home-hero-title { display: flex; align-items: center; gap: 4px; min-height: 1.3em; margin-bottom: 28px; }
 
 .typewriter-text {
-  font-family: var(--font-display);
-  font-size: var(--font-size-5xl);
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: var(--text-primary);
+  font-family: var(--font-display); font-size: var(--font-size-5xl);
+  font-weight: 700; letter-spacing: 0.02em; color: var(--text-primary);
 }
 
 .typewriter-cursor {
-  font-size: var(--font-size-5xl);
-  color: var(--accent);
-  font-weight: 300;
-  opacity: 0.6;
-  animation: cursorBlink 0.8s step-end infinite;
+  font-size: var(--font-size-5xl); color: var(--accent);
+  font-weight: 300; opacity: 0.6; animation: cursorBlink 0.8s step-end infinite;
 }
 
-@keyframes cursorBlink {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 0; }
-}
+@keyframes cursorBlink { 0%,100%{opacity:0.6} 50%{opacity:0} }
 
 .home-hero-desc {
-  font-size: var(--font-size-lg);
-  color: var(--text-secondary);
-  line-height: 1.7;
-  max-width: 560px;
+  font-size: var(--font-size-lg); color: var(--text-secondary);
+  line-height: 1.7; max-width: 560px;
 }
 
 /* ════════════════════════════════════════════════════════════
-   Featured / Recent Sections
+   Strip (shared for Journal / Explore / Collection)
    ════════════════════════════════════════════════════════════ */
 
-.home-featured-section {
-  padding: 100px 0 0;
+.home-strip { padding: 0 0 80px; }
+
+.home-strip-header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 36px;
 }
 
-.home-recent-section {
-  padding: 80px 0 100px;
+.home-strip-label {
+  font-size: 13px; font-weight: 600; color: var(--text-primary);
 }
 
-.featured-header {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 48px;
+.home-strip-more {
+  font-size: var(--font-size-sm); color: var(--text-tertiary);
+  text-decoration: none; transition: color 0.2s;
+}
+.home-strip-more:hover { color: var(--accent); }
+
+/* — Journal cards — */
+.home-strip-grid { display: grid; gap: 20px; }
+.home-strip-grid--3 { grid-template-columns: repeat(3, 1fr); margin-bottom: 20px; }
+.home-strip-grid--5 { grid-template-columns: repeat(5, 1fr); }
+
+.home-strip-card {
+  display: flex; flex-direction: column;
+  border-radius: var(--radius-lg); overflow: hidden;
+  border: 1px solid var(--border-color); background: var(--bg-card);
+  text-decoration: none; color: inherit;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s ease;
+}
+.home-strip-card:hover { transform: translateY(-3px); border-color: var(--accent-dim); }
+
+.home-strip-img {
+  width: 100%; height: 180px;
+  background-size: cover; background-position: center;
+  background-color: var(--bg-surface);
 }
 
-.featured-label {
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--accent);
-  flex-shrink: 0;
+.home-strip-body { padding: 20px 24px 24px; }
+
+.home-strip-date {
+  font-size: var(--font-size-xs); color: var(--text-tertiary);
+  letter-spacing: 0.05em; margin-bottom: 6px; display: block;
 }
 
-.featured-header-line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    var(--border-color) 0%,
-    transparent 100%
-  );
+.home-strip-title {
+  font-family: var(--font-display); font-size: var(--font-size-base);
+  font-weight: 600; line-height: 1.4; color: var(--text-primary);
+  transition: color 0.2s;
+}
+.home-strip-card:hover .home-strip-title { color: var(--accent); }
+
+/* — Explore country cards (horizontal scroll) — */
+.home-strip-scroll {
+  display: flex; gap: 16px; overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: thin; scrollbar-color: var(--border-color) transparent;
 }
 
-.featured-col-more {
-  margin-left: auto;
-  font-size: var(--font-size-sm);
-  color: var(--text-tertiary);
-  text-decoration: none;
-  transition: color 0.25s ease;
-  flex-shrink: 0;
-  font-weight: 500;
-}
-
-.featured-col-more:hover {
-  color: var(--accent);
-}
-
-/* ── Card Grid (reuses journal-card from JournalList.css) ── */
-
-.home-card-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  grid-template-rows: auto auto;
-  gap: 24px;
-}
-
-.home-card-grid > *:first-child {
-  grid-row: span 2;
-}
-
-.home-card-grid > *:first-child .journal-card {
-  height: 100%;
-}
-
-.home-card-grid > *:first-child .journal-card-img {
-  height: 320px;
-}
-
-/* ════════════════════════════════════════════════════════════
-   Explore Teaser
-   ════════════════════════════════════════════════════════════ */
-
-.home-explore-teaser {
-  padding: 0 0 100px;
-}
-
-.home-explore-banner {
-  display: flex;
-  align-items: center;
-  gap: 56px;
-  background: var(--bg-card);
+.home-strip-country {
+  position: relative; flex-shrink: 0; width: 260px; height: 180px;
+  border-radius: var(--radius-lg); overflow: hidden;
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 56px;
-  transition: border-color 0.3s ease;
-}
-
-.home-explore-banner:hover {
-  border-color: var(--accent-dim);
-}
-
-.home-explore-text {
-  flex: 1;
-  min-width: 0;
-}
-
-.home-explore-heading {
-  font-family: var(--font-display);
-  font-size: var(--font-size-3xl);
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.25;
-  margin-bottom: 16px;
-}
-
-.home-explore-desc {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  line-height: 1.7;
-  max-width: 440px;
-  margin-bottom: 24px;
-}
-
-.home-explore-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-  color: var(--accent);
   text-decoration: none;
-  transition: gap 0.3s ease;
+  transition: transform 0.4s ease;
+}
+.home-strip-country:hover { transform: translateY(-3px); }
+
+.home-strip-country-img {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  transition: transform 0.6s ease;
+}
+.home-strip-country:hover .home-strip-country-img { transform: scale(1.06); }
+
+.home-strip-country-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 20px 24px;
 }
 
-.home-explore-link:hover {
-  gap: 12px;
+.home-strip-country-name {
+  font-size: var(--font-size-lg); font-weight: 700; color: #fff;
 }
 
-.home-explore-visual {
-  flex-shrink: 0;
-  width: 240px;
-  height: 240px;
-  border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, var(--accent-subtle), transparent),
-              url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80');
-  background-size: cover;
-  background-position: center;
+.home-strip-country-en {
+  font-size: var(--font-size-xs); color: rgba(255,255,255,0.6);
+  margin-top: 2px;
+}
+
+/* — Wallpaper cards — */
+.home-strip-wall {
+  display: flex; flex-direction: column; text-decoration: none;
+  border-radius: var(--radius-md); overflow: hidden;
+  border: 1px solid var(--border-color); background: var(--bg-card);
+  transition: transform 0.4s ease;
+}
+.home-strip-wall:hover { transform: translateY(-3px); }
+
+.home-strip-wall-img {
+  width: 100%; aspect-ratio: 2/3;
+  background-size: cover; background-position: center;
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.home-strip-wall-title {
+  display: block; padding: 10px 12px;
+  font-size: var(--font-size-xs); color: var(--text-secondary);
+  text-align: center;
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -240,42 +173,20 @@
    ════════════════════════════════════════════════════════════ */
 
 @media (max-width: 900px) {
-  .home-card-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-  .home-card-grid > *:first-child {
-    grid-row: auto;
-  }
-  .home-card-grid > *:first-child .journal-card-img {
-    height: 220px;
-  }
-  .home-explore-banner {
-    flex-direction: column;
-    text-align: center;
-    padding: 40px 32px;
-    gap: 32px;
-  }
-  .home-explore-desc {
-    max-width: 100%;
-  }
-  .home-explore-visual {
-    width: 180px;
-    height: 180px;
-  }
+  .home-strip-grid--3 { grid-template-columns: repeat(2, 1fr); }
+  .home-strip-grid--5 { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 640px) {
-  .home-hero-content { padding-top: 40px; padding-bottom: 100px; }
+  .home-hero-content { padding-top: 20px; padding-bottom: 80px; }
   .typewriter-text { font-size: var(--font-size-4xl); }
   .typewriter-cursor { font-size: var(--font-size-4xl); }
   .home-hero-desc { font-size: var(--font-size-base); }
-
-  .home-featured-section { padding: 60px 0 0; }
-  .home-recent-section { padding: 40px 0 60px; }
-  .home-explore-teaser { padding: 0 0 60px; }
-
-  .featured-header { margin-bottom: 32px; }
+  .home-strip { padding: 0 0 60px; }
+  .home-strip-grid--3 { grid-template-columns: 1fr; gap: 14px; }
+  .home-strip-grid--5 { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .home-strip-country { width: 200px; height: 150px; }
+  .home-strip-header { margin-bottom: 24px; }
 }
 
 @media (max-width: 480px) {

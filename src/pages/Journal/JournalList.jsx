@@ -32,8 +32,9 @@ export default function JournalList() {
   return (
     <div className="journal-page">
       <ModuleHero
+        label="记录"
         title="Journal"
-        subtitle="阅读、思考、记录 — 让知识在时间里生长"
+        subtitle="观察，然后记录。诚实，比精彩更重要。"
       />
 
       <section className="section journal-list-section">
@@ -68,7 +69,7 @@ export default function JournalList() {
                   <div
                     className="journal-card-img"
                     style={{
-                      backgroundImage: `url(${getCoverImage(post.tags, post.image)})`,
+                      backgroundImage: `url(${getCoverImage(post.tags, post.image, post.slug)})`,
                     }}
                   />
                   <div className="journal-card-body">

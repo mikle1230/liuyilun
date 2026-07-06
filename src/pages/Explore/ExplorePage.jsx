@@ -57,10 +57,10 @@ export default function ExplorePage() {
       <section className="explore-hero">
         <div className="container">
           <ScrollReveal>
-            <span className="explore-hero-label">探索</span>
+            <span className="explore-hero-label">Explore</span>
             <h1 className="explore-hero-title">你向往的世界</h1>
             <p className="explore-hero-desc">
-              一座城市一座城市地认识这个世界。精选欧洲旅行目的地，每个城市都有值得探索的风景。
+               理解一个地方为什么成为今天的样子。不是为了打卡，而是为了看见。
             </p>
           </ScrollReveal>
         </div>
@@ -92,7 +92,7 @@ export default function ExplorePage() {
                         <h3 className="explore-country-name">{country.name}</h3>
                         <p className="explore-country-en">{country.nameEn}</p>
                         <p className="explore-country-stats">
-                          {cityCount} 个城市 · {attractionCount} 个景点
+                          {cityCount} cities · {attractionCount} spots
                         </p>
                       </div>
                     </button>
@@ -110,7 +110,7 @@ export default function ExplorePage() {
           <div className="container">
             <ScrollReveal>
               <button className="explore-back-btn" onClick={handleBack}>
-                ← 返回所有国家
+                ← All Countries
               </button>
               <div className="explore-country-header">
                 <h2 className="explore-country-heading">{selectedCountry.name}</h2>
@@ -125,7 +125,7 @@ export default function ExplorePage() {
                   <div className="explore-city-block">
                     <h3 className="explore-city-name">
                       {city.name}
-                      <span className="explore-city-count">{city.attractions.length} 个景点</span>
+                      <span className="explore-city-count">{city.attractions.length} spots</span>
                     </h3>
 
                     <div className="explore-attraction-grid stagger-children">
@@ -142,7 +142,7 @@ export default function ExplorePage() {
                               <div className="attraction-card-body">
                                 <div className="attraction-card-meta">
                                   <span className="attraction-type-badge">
-                                    {a.type === 'landmark' ? '地标' : a.type === 'museum' ? '博物馆' : '自然'}
+                                    {a.type === 'landmark' ? 'Landmark' : a.type === 'museum' ? 'Museum' : 'Nature'}
                                   </span>
                                   <span className="attraction-location">{city.name}, {selectedCountry.nameEn}</span>
                                 </div>

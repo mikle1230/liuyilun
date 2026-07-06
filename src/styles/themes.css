@@ -65,9 +65,9 @@
 
 /* ---- Typography — all sans-serif ---- */
 :root {
-  --font-display: 'Inter', 'Noto Sans SC', 'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-sans: 'Inter', 'Noto Sans SC', 'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-name: 'Inter', 'Noto Sans SC', 'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Geist', 'Noto Sans SC', 'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'Geist', 'Noto Sans SC', 'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-name: 'Geist', 'Noto Sans SC', 'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif;
 
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;

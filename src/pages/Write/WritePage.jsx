@@ -6,9 +6,9 @@ import './WritePage.css'
 
 const DRAFT_KEY = 'write_draft'
 const MD_SYNTAX = [
-  { syntax: '# H1', desc: '标题1', example: '# 文章标题' },
-  { syntax: '## H2', desc: '标题2', example: '## 章节' },
-  { syntax: '### H3', desc: '标题3', example: '### 小节' },
+  { syntax: '# H1', desc: 'Heading1', example: '# Title' },
+  { syntax: '## H2', desc: 'Heading2', example: '## Section' },
+  { syntax: '### H3', desc: 'Heading3', example: '### Sub' },
   { syntax: '**粗**', desc: '加粗', example: '**重要内容**' },
   { syntax: '*斜*', desc: '斜体', example: '*斜体文字*' },
   { syntax: '[文](url)', desc: '链接', example: '[点击](https://...)' },
@@ -211,17 +211,17 @@ export default function WritePage() {
       <div className={`write-page theme-${theme}`}>
         <div className="write-gate">
           <div className="write-gate-card">
-            <h2>✅ 发送成功</h2>
+            <h2>✅ Sent</h2>
             <p className="write-gate-desc">
-              文章已发送到 GitHub，Vercel 正在自动部署。<br />
-              大约 30 秒后上线。
+              Pushed to GitHub. Vercel is deploying.<br />
+              Live in about 30 seconds.
             </p>
             <div className="write-success-actions">
               <button className="write-gate-btn" onClick={() => navigate('/')}>
-                返回首页
+                Home
               </button>
               <button className="write-gate-btn write-gate-btn-secondary" onClick={resetForm}>
-                写新博客
+                New Post
               </button>
             </div>
           </div>
@@ -235,8 +235,8 @@ export default function WritePage() {
       <div className="write-page">
         <div className="write-gate">
           <div className="write-gate-card">
-            <h2>✏️ 发布文章</h2>
-            <p className="write-gate-desc">输入发布密码继续</p>
+            <h2>✏️ Write</h2>
+            <p className="write-gate-desc">Enter password to continue</p>
             <form onSubmit={async (e) => {
               e.preventDefault()
               if (!password.trim()) return
@@ -257,7 +257,7 @@ export default function WritePage() {
                   setPublishError(null)
                   setAuthed(true)
                 } else {
-                  setPublishError('密码错误')
+                  setPublishError('Wrong password')
                 }
               } catch {
                 setPublishError('验证失败，请稍后重试')
@@ -268,7 +268,7 @@ export default function WritePage() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="发布密码"
+                placeholder="Password"
                 autoFocus
               />
               {publishError && <p className="write-gate-error">{publishError}</p>}
@@ -290,7 +290,7 @@ export default function WritePage() {
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="文章标题"
+          placeholder="Title"
         />
         <div className="write-header-row">
           <div className="write-type-tabs">
@@ -298,13 +298,13 @@ export default function WritePage() {
               className={`write-type-tab ${articleType === 'blog' ? 'active' : ''}`}
               onClick={() => setArticleType('blog')}
             >
-              📝 博客
+              📝 Journal
             </button>
             <button
               className={`write-type-tab ${articleType === 'ai' ? 'active' : ''}`}
               onClick={() => setArticleType('ai')}
             >
-              🤖 AI 收集
+              🤖 AI
             </button>
           </div>
           <div className="write-theme-switcher">
@@ -339,13 +339,13 @@ export default function WritePage() {
             type="text"
             value={tags}
             onChange={(e) => setTags(e.target.value)}
-            placeholder="标签（逗号分隔）"
+            placeholder="Tags (comma separated)"
           />
           <button
             className={`write-edit-btn ${showEditList ? 'active' : ''}`}
             onClick={() => setShowEditList((v) => !v)}
           >
-            {editingSlug ? `编辑: ${editingArticle?.title || editingSlug}` : '📂 编辑已有文章'}
+            {editingSlug ? `Editing: ${editingArticle?.title || editingSlug}` : '📂 Edit Posts'}
           </button>
         </div>
       </div>
@@ -387,7 +387,7 @@ export default function WritePage() {
           className="write-textarea"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder="在此粘贴或撰写 Markdown 内容…"
+          placeholder="Write or paste Markdown here..."
           spellCheck={false}
         />
         <div className="write-preview">
@@ -416,7 +416,7 @@ export default function WritePage() {
           onClick={handlePublish}
           disabled={publishing || !title.trim() || !content.trim()}
         >
-          {publishing ? '发送中…' : editingSlug ? '更新' : '发送'}
+          {publishing ? 'Sending...' : editingSlug ? 'Update' : 'Send'}
         </button>
       </div>
     </div>

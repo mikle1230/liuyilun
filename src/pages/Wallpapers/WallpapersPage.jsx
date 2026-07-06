@@ -86,8 +86,9 @@ export default function WallpapersPage() {
   return (
     <div className="wallpapers-page">
       <ModuleHero
-        title="壁纸"
-        subtitle="精选壁纸 · 适配 Vivo X200 Pro"
+        label="收集"
+        title="Collection"
+        subtitle="值得保存的视觉碎片"
       />
 
       <section className="section wallpapers-section">

@@ -29,27 +29,16 @@
 }
 
 .navbar-logo {
-  display: flex;
-  align-items: center;
-}
-
-.logo-mark {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  background: var(--accent);
-  color: var(--bg-primary);
-  font-size: var(--font-size-xs);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.03em;
+  text-decoration: none;
   transition: var(--transition-fast);
 }
 
-.logo-mark:hover {
-  filter: brightness(1.15);
+.navbar-logo:hover {
+  color: var(--accent);
 }
 
 .navbar-links {
@@ -106,11 +95,7 @@
   gap: 8px;
 }
 
-/* Theme dropdown */
-.theme-dropdown {
-  position: relative;
-}
-
+/* Theme toggle */
 .theme-toggle {
   display: flex;
   align-items: center;
@@ -119,47 +104,26 @@
   height: 36px;
   border-radius: var(--radius-sm);
   color: var(--text-secondary);
-  font-size: 16px;
   transition: var(--transition-fast);
-  background: transparent;
+  position: relative;
+}
+
+.theme-toggle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--accent-subtle);
+  opacity: 0;
+  transition: var(--transition-fast);
+}
+
+.theme-toggle:hover::before {
+  opacity: 1;
 }
 
 .theme-toggle:hover {
-  background: var(--accent-subtle);
-}
-
-.theme-dropdown-menu {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  min-width: 120px;
-  padding: 4px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-color);
-  background: var(--bg-elevated);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
-  z-index: 100;
-}
-
-.theme-dropdown-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  padding: 8px 12px;
-  border: none;
-  border-radius: var(--radius-sm);
-  background: transparent;
-  color: var(--text-secondary);
-  font-size: var(--font-size-sm);
-  cursor: pointer;
-  transition: background var(--transition-fast), color var(--transition-fast);
-}
-
-.theme-dropdown-item:hover,
-.theme-dropdown-item.active {
-  background: var(--accent-subtle);
-  color: var(--text-primary);
+  color: var(--accent);
 }
 
 /* ---- Hamburger ---- */
@@ -199,7 +163,7 @@
     top: 0;
     right: -100%;
     width: 280px;
-    height: 100vh;
+    height: 100dvh;
     background: var(--bg-primary);
     backdrop-filter: blur(24px) saturate(1.4);
     -webkit-backdrop-filter: blur(24px) saturate(1.4);

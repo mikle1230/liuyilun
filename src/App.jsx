@@ -32,7 +32,7 @@ function AppLayout({ children }) {
 function Page({ children, seo }) {
   return (
     <AppLayout>
-      {seo && <Seo {...seo} />}
+      <Seo {...seo} />
       <Suspense fallback={<PageLoader />}>
         {children}
       </Suspense>
@@ -43,7 +43,7 @@ function Page({ children, seo }) {
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Page seo={{ title: '首页' }}><HomePage /></Page>} />
+      <Route path="/" element={<Page seo={{ title: 'Home' }}><HomePage /></Page>} />
 
       {/* Journal — merged blog + AI */}
       <Route path="/journal" element={<Page seo={{ title: 'Journal', path: '/journal' }}><JournalList /></Page>} />
@@ -56,10 +56,10 @@ export default function App() {
       <Route path="/ai/:slug" element={<LegacyRedirect to="/journal" />} />
       <Route path="/ai-nav" element={<Navigate to="/journal" replace />} />
 
-      <Route path="/explore" element={<Page seo={{ title: '探索世界', path: '/explore' }}><ExplorePage /></Page>} />
+      <Route path="/explore" element={<Page seo={{ title: 'Explore', path: '/explore' }}><ExplorePage /></Page>} />
       <Route path="/explore/attraction/:slug" element={<Page><AttractionDetail /></Page>} />
-      <Route path="/about" element={<Page seo={{ title: '关于我', path: '/about' }}><AboutPage /></Page>} />
-      <Route path="/write" element={<Page seo={{ title: '发布文章', path: '/write' }}><WritePage /></Page>} />
+      <Route path="/about" element={<Page seo={{ title: 'About', path: '/about' }}><AboutPage /></Page>} />
+      <Route path="/write" element={<Page seo={{ title: 'Write', path: '/write' }}><WritePage /></Page>} />
 
       {/* Collection (was Wallpapers) */}
       <Route path="/collection" element={<Page seo={{ title: 'Collection', path: '/collection' }}><WallpapersPage /></Page>} />

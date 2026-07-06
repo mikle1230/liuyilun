@@ -25,7 +25,8 @@ export default function AboutPage() {
   return (
     <div className="about-page">
       <ModuleHero
-        title="关于"
+        label="我是"
+        title="About"
         subtitle="19年旅游·会展·差旅行业深耕，全链条资源操盘手"
       />
 

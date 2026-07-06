@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom'
 import ScrollReveal from '../../components/ScrollReveal'
 import { loadPostsFromModules } from '../../utils/posts'
 import { getCoverImage } from '../../utils/tagImages'
+import travelData from '../../data/europe-travel.json'
+import wallpapersData from '../../data/wallpapers.json'
 import './HomePage.css'
 
 /* ════════════════════════════════════════════════════════
-   Content — merged journal (blog + ai)
+   Content
    ════════════════════════════════════════════════════════ */
 
 const journalModules = import.meta.glob('../../content/{blog,ai}/*.md', {
@@ -15,28 +17,22 @@ const journalModules = import.meta.glob('../../content/{blog,ai}/*.md', {
   import: 'default',
 })
 
-const featuredPosts = (() => {
-  return loadPostsFromModules(journalModules)
-    .filter((p) => p.pinned)
-    .slice(0, 4)
-})()
+const allPosts = loadPostsFromModules(journalModules)
+  .sort((a, b) => new Date(b.date) - new Date(a.date))
+  .slice(0, 6)
 
-const recentPosts = (() => {
-  return loadPostsFromModules(journalModules)
-    .filter((p) => !p.pinned)
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .slice(0, 4)
-})()
+const pickedCountries = travelData.countries.slice(0, 5)
+const pickedWallpapers = wallpapersData.slice(0, 5)
 
 /* ════════════════════════════════════════════════════════
    Typewriter
    ════════════════════════════════════════════════════════ */
 
 const typewriterWords = [
-  '在时间里留下痕迹',
-  '把经历变成知识',
-  '让思考持续生长',
-  '做一个有意思的人',
+  '不是一个网站，而是一个地方',
+  '人生值得被认真记录',
+  '一座不断成长的数字花园',
+  '时间是这里真正的主角',
 ]
 
 function useTypewriter(words, typingSpeed = 80, deletingSpeed = 40, pauseDuration = 2500) {
@@ -46,42 +42,81 @@ function useTypewriter(words, typingSpeed = 80, deletingSpeed = 40, pauseDuratio
 
   useEffect(() => {
     const currentWord = words[wordIndex]
-
     if (!isDeleting && text === currentWord) {
-      const timeout = setTimeout(() => setIsDeleting(true), pauseDuration)
-      return () => clearTimeout(timeout)
+      const t = setTimeout(() => setIsDeleting(true), pauseDuration)
+      return () => clearTimeout(t)
     }
-
     if (isDeleting && text === '') {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsDeleting(false)
       setWordIndex((prev) => (prev + 1) % words.length)
       return
     }
-
     const speed = isDeleting ? deletingSpeed : typingSpeed
-    const timeout = setTimeout(() => {
+    const t = setTimeout(() => {
       setText(isDeleting
         ? currentWord.slice(0, text.length - 1)
         : currentWord.slice(0, text.length + 1)
       )
     }, speed)
-
-    return () => clearTimeout(timeout)
+    return () => clearTimeout(t)
   }, [text, isDeleting, wordIndex, words, typingSpeed, deletingSpeed, pauseDuration])
-
   return text
 }
-
-/* ════════════════════════════════════════════════════════
-   Component
-   ════════════════════════════════════════════════════════ */
 
 function spotMove(e) {
   const rect = e.currentTarget.getBoundingClientRect()
   e.currentTarget.style.setProperty('--spot-x', `${((e.clientX - rect.left) / rect.width) * 100}%`)
   e.currentTarget.style.setProperty('--spot-y', `${((e.clientY - rect.top) / rect.height) * 100}%`)
 }
+
+const COUNTRY_COVERS = {
+  'united-kingdom': '1513635269975-59663e0ac1ad',
+  'france': '1502602898657-3e91760cbb34',
+  'germany': '1467269205-a7a3c3e9c5e8',
+  'italy': '1523906837458-0668d9c75b75',
+  'spain': '1543783206-7a5969ac5c71',
+  'portugal': '1555885614-5c8e3ab3e140',
+  'netherlands': '1512474932049-78ac69ede4a0',
+  'belgium': '1558618666-1c4e2e0a73f7',
+  'switzerland': '1530122037265-a5f1f91d3b99',
+  'austria': '1516552830192-1f78299c5d96',
+  'greece': '1533105079780-92b9be4833fa',
+  'sweden': '1508182315256-7b1e8c04c5c9',
+  'norway': '1520769669658-fc49e4441ca1',
+  'denmark': '1513622470522-16f11784df5d',
+  'ireland': '1549918864-5db3a6d4e5a3',
+  'poland': '1590080874088-eb9e21d5b7c3',
+  'czech-republic': '1519677100203-a0e668c92439',
+  'hungary': '1565967152-a98e25028a0a',
+  'croatia': '1555998017-765d9de3f6a0',
+  'turkey': '1524231757912-21f4f3e72c2f',
+  'finland': '1518531933037-1b45c2b7c0d7',
+  'estonia': '1558532923-2a6c6ca6c6b8',
+  'iceland': '1504893524553-56a33edc5b3e',
+  'montenegro': '1558618666-1c4e2e0a73f7',
+}
+
+function countryCover(c) {
+  const photo = COUNTRY_COVERS[c.id] || '1469854523086-cc02fe5d8800'
+  return `https://images.unsplash.com/photo-${photo}?w=600&q=80`
+}
+
+const WALLPAPER_COVERS = {
+  'aurora-borealis': '1483344560535-82e1f7182eae',
+  'mountain-lake': '1506905925348-21ebda60e2cd',
+  'cherry-blossom': '1523712999610-d11827ea0b1f',
+  'starry-night': '1419242902214-4d19d0b72df3',
+  'ocean-sunset': '1507525428034-b723cf961d3e',
+}
+
+function wallpaperCover(w) {
+  const photo = WALLPAPER_COVERS[w.id] || '1470071459604-3b5ec3a7fe05'
+  return `https://images.unsplash.com/photo-${photo}?w=400&q=80`
+}
+
+/* ════════════════════════════════════════════════════════
+   Component
+   ════════════════════════════════════════════════════════ */
 
 export default function HomePage() {
   const videoRef = useRef(null)
@@ -92,26 +127,11 @@ export default function HomePage() {
     if (!video) return
     video.muted = true
     video.playsInline = true
-
-    const attemptPlay = () => {
-      video.play().catch(() => {
-        const playOnInteraction = () => {
-          video.play().catch(() => {})
-          document.removeEventListener('pointerdown', playOnInteraction)
-          document.removeEventListener('keydown', playOnInteraction)
-        }
-        document.addEventListener('pointerdown', playOnInteraction, { once: true })
-        document.addEventListener('keydown', playOnInteraction, { once: true })
-      })
-    }
-
-    if (video.readyState >= 3) {
-      attemptPlay()
-    } else {
-      video.addEventListener('canplay', attemptPlay, { once: true })
-      window.addEventListener('load', attemptPlay, { once: true })
-      setTimeout(attemptPlay, 3000)
-    }
+    video.play().catch(() => {
+      const cb = () => { video.play().catch(() => {}) }
+      document.addEventListener('pointerdown', cb, { once: true })
+      document.addEventListener('keydown', cb, { once: true })
+    })
   }, [])
 
   return (
@@ -119,16 +139,11 @@ export default function HomePage() {
       {/* ─── Hero ─── */}
       <section className="home-hero">
         <div className="home-hero-video-wrapper">
-          <video
-            ref={videoRef}
-            className="home-hero-video"
-            autoPlay muted loop playsInline preload="auto" poster="/video/hero-poster.webp"
-          >
+          <video ref={videoRef} className="home-hero-video" autoPlay muted loop playsInline preload="auto">
             <source src="/video/hero-bg.mp4" type="video/mp4" />
           </video>
         </div>
         <div className="home-hero-overlay" />
-
         <div className="home-hero-content container">
           <ScrollReveal delay={100}>
             <h1 className="home-hero-title">
@@ -136,114 +151,90 @@ export default function HomePage() {
               <span className="typewriter-cursor">|</span>
             </h1>
           </ScrollReveal>
-
           <ScrollReveal delay={300}>
             <p className="home-hero-desc">
-              走过的路、读过的书、用过的工具、沉淀的思考——
-              <br />
-              在信息洪流中，留下属于自己的脉络。
+              观察 · 记录 · 反思 · 策展<br />安静的时光博物馆，为认真生活的人而建
             </p>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* ─── Featured Posts ─── */}
-      {featuredPosts.length > 0 && (
-        <section className="section home-featured-section">
-          <div className="container">
-            <ScrollReveal>
-              <div className="featured-header">
-                <span className="featured-label">精选</span>
-                <div className="featured-header-line" />
-                <Link to="/journal" className="featured-col-more">查看全部 →</Link>
-              </div>
-            </ScrollReveal>
-
-            <div className="home-card-grid stagger-children">
-              {featuredPosts.map((post) => (
-                <ScrollReveal key={post.slug}>
-                  <Link to={`/journal/${post.slug}`} className="journal-card spotlight-card" onMouseMove={spotMove}>
-                    <div
-                      className="journal-card-img"
-                      style={{
-                        backgroundImage: `url(${getCoverImage(post.tags, post.image)})`,
-                      }}
-                    />
-                    <div className="journal-card-body">
-                      <time className="journal-card-date">{post.date}</time>
-                      <h3 className="journal-card-title">{post.title}</h3>
-                      <p className="journal-card-excerpt">{post.excerpt}</p>
-                      <div className="journal-card-tags">
-                        {post.tags?.slice(0, 3).map((tag) => (
-                          <span key={tag} className="journal-tag">{tag}</span>
-                        ))}
-                      </div>
-                    </div>
-                  </Link>
-                </ScrollReveal>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ─── Recent Posts ─── */}
-      {recentPosts.length > 0 && (
-        <section className="section home-recent-section">
-          <div className="container">
-            <ScrollReveal>
-              <div className="featured-header">
-                <span className="featured-label">最新</span>
-                <div className="featured-header-line" />
-              </div>
-            </ScrollReveal>
-
-            <div className="home-card-grid stagger-children">
-              {recentPosts.map((post) => (
-                <ScrollReveal key={post.slug}>
-                  <Link to={`/journal/${post.slug}`} className="journal-card spotlight-card" onMouseMove={spotMove}>
-                    <div
-                      className="journal-card-img"
-                      style={{
-                        backgroundImage: `url(${getCoverImage(post.tags, post.image)})`,
-                      }}
-                    />
-                    <div className="journal-card-body">
-                      <time className="journal-card-date">{post.date}</time>
-                      <h3 className="journal-card-title">{post.title}</h3>
-                      <p className="journal-card-excerpt">{post.excerpt}</p>
-                      <div className="journal-card-tags">
-                        {post.tags?.slice(0, 3).map((tag) => (
-                          <span key={tag} className="journal-tag">{tag}</span>
-                        ))}
-                      </div>
-                    </div>
-                  </Link>
-                </ScrollReveal>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ─── Explore Teaser ─── */}
-      <section className="section home-explore-teaser">
+      {/* ─── Journal ─── */}
+      <section className="section home-strip">
         <div className="container">
-          <ScrollReveal>
-            <div className="home-explore-banner">
-              <div className="home-explore-text">
-                <span className="featured-label">探索</span>
-                <h2 className="home-explore-heading">你向往的世界</h2>
-                <p className="home-explore-desc">
-                  从布拉格的查理大桥到冰岛的极光，一座一座城市地认识这个世界。
-                </p>
-                <Link to="/explore" className="home-explore-link">
-                  开始探索 →
+          <div className="home-strip-header">
+            <span className="home-strip-label">Journal</span>
+            <Link to="/journal" className="home-strip-more">All Posts →</Link>
+          </div>
+          <div className="home-strip-grid home-strip-grid--3">
+            {allPosts.slice(0, 3).map((post) => (
+              <ScrollReveal key={post.slug}>
+                <Link to={`/journal/${post.slug}`} className="home-strip-card spotlight-card" onMouseMove={spotMove}>
+                  <div className="home-strip-img" style={{ backgroundImage: `url(${getCoverImage(post.tags, post.image, post.slug)})` }} />
+                  <div className="home-strip-body">
+                    <time className="home-strip-date">{post.date}</time>
+                    <h3 className="home-strip-title">{post.title}</h3>
+                  </div>
                 </Link>
-              </div>
-              <div className="home-explore-visual" />
-            </div>
-          </ScrollReveal>
+              </ScrollReveal>
+            ))}
+          </div>
+          <div className="home-strip-grid home-strip-grid--3">
+            {allPosts.slice(3, 6).map((post) => (
+              <ScrollReveal key={post.slug}>
+                <Link to={`/journal/${post.slug}`} className="home-strip-card spotlight-card" onMouseMove={spotMove}>
+                  <div className="home-strip-img" style={{ backgroundImage: `url(${getCoverImage(post.tags, post.image, post.slug)})` }} />
+                  <div className="home-strip-body">
+                    <time className="home-strip-date">{post.date}</time>
+                    <h3 className="home-strip-title">{post.title}</h3>
+                  </div>
+                </Link>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Explore ─── */}
+      <section className="section home-strip">
+        <div className="container">
+          <div className="home-strip-header">
+            <span className="home-strip-label">Explore</span>
+            <Link to="/explore" className="home-strip-more">All Countries →</Link>
+          </div>
+          <div className="home-strip-scroll">
+            {pickedCountries.map((c) => (
+              <ScrollReveal key={c.id}>
+                <Link to="/explore" className="home-strip-country spotlight-card" onMouseMove={spotMove}>
+                  <div className="home-strip-country-img" style={{ backgroundImage: `url(${countryCover(c)})` }} />
+                  <div className="home-strip-country-overlay">
+                    <span className="home-strip-country-name">{c.name}</span>
+                    <span className="home-strip-country-en">{c.nameEn}</span>
+                  </div>
+                </Link>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Collection ─── */}
+      <section className="section home-strip">
+        <div className="container">
+          <div className="home-strip-header">
+            <span className="home-strip-label">Collection</span>
+            <Link to="/collection" className="home-strip-more">All →</Link>
+          </div>
+          <div className="home-strip-grid home-strip-grid--5">
+            {pickedWallpapers.map((w) => (
+              <ScrollReveal key={w.id}>
+                <Link to="/collection" className="home-strip-wall spotlight-card" onMouseMove={spotMove}>
+                  <div className="home-strip-wall-img" style={{ backgroundImage: `url(${wallpaperCover(w)})` }} />
+                  <span className="home-strip-wall-title">{w.title}</span>
+                </Link>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </section>
     </div>
