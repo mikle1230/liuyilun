@@ -21,23 +21,47 @@ const allPosts = loadPostsFromModules(journalModules)
 
 const COLLECTION_CARDS = Array.from({ length: 10 }, (_, i) => i)
 
-const EXPLORE_ITEMS = [
+const ALL_COUNTRIES = [
   { id: 'italy', name: '意大利', en: 'Italy' },
   { id: 'france', name: '法国', en: 'France' },
   { id: 'spain', name: '西班牙', en: 'Spain' },
   { id: 'greece', name: '希腊', en: 'Greece' },
   { id: 'united-kingdom', name: '英国', en: 'United Kingdom' },
+  { id: 'germany', name: '德国', en: 'Germany' },
+  { id: 'portugal', name: '葡萄牙', en: 'Portugal' },
+  { id: 'netherlands', name: '荷兰', en: 'Netherlands' },
+  { id: 'belgium', name: '比利时', en: 'Belgium' },
+  { id: 'switzerland', name: '瑞士', en: 'Switzerland' },
+  { id: 'austria', name: '奥地利', en: 'Austria' },
+  { id: 'sweden', name: '瑞典', en: 'Sweden' },
+  { id: 'norway', name: '挪威', en: 'Norway' },
+  { id: 'denmark', name: '丹麦', en: 'Denmark' },
+  { id: 'ireland', name: '爱尔兰', en: 'Ireland' },
+  { id: 'poland', name: '波兰', en: 'Poland' },
+  { id: 'czech-republic', name: '捷克', en: 'Czech Republic' },
+  { id: 'hungary', name: '匈牙利', en: 'Hungary' },
+  { id: 'croatia', name: '克罗地亚', en: 'Croatia' },
+  { id: 'turkey', name: '土耳其', en: 'Turkey' },
+  { id: 'finland', name: '芬兰', en: 'Finland' },
+  { id: 'estonia', name: '爱沙尼亚', en: 'Estonia' },
+  { id: 'iceland', name: '冰岛', en: 'Iceland' },
+  { id: 'montenegro', name: '黑山', en: 'Montenegro' },
 ]
+
+function shuffleCountries() {
+  const shuffled = [...ALL_COUNTRIES].sort(() => Math.random() - 0.5)
+  return shuffled.slice(0, 5)
+}
 
 /* ════════════════════════════════════════════════════════
    Typewriter
    ════════════════════════════════════════════════════════ */
 
 const typewriterWords = [
-  '不是一个网站，而是一个地方',
-  '人生值得被认真记录',
-  '一座不断成长的数字花园',
-  '时间是这里真正的主角',
+  'The Place',
+  'where life being recorded',
+  'growth being admired',
+  'time being rewarded',
 ]
 
 function useTypewriter(words, typingSpeed = 80, deletingSpeed = 40, pauseDuration = 2500) {
@@ -81,6 +105,8 @@ function spotMove(e) {
 export default function HomePage() {
   const videoRef = useRef(null)
   const typewriterText = useTypewriter(typewriterWords)
+  const [exploreItems, setExploreItems] = useState(() => shuffleCountries())
+  const [wallpaperSeed, setWallpaperSeed] = useState(() => Date.now())
 
   useEffect(() => {
     const video = videoRef.current
@@ -113,7 +139,7 @@ export default function HomePage() {
           </ScrollReveal>
           <ScrollReveal delay={300}>
             <p className="home-hero-desc">
-              观察 · 记录 · 反思 · 策展<br />安静的时光博物馆，为认真生活的人而建
+              观察 · 记录 · 反思<br />数字后花园 · 时光博物馆
             </p>
           </ScrollReveal>
         </div>
@@ -163,7 +189,7 @@ export default function HomePage() {
             <Link to="/explore" className="home-strip-more">All Countries →</Link>
           </div>
           <div className="home-strip-grid home-strip-grid--5">
-            {EXPLORE_ITEMS.map((item) => (
+            {exploreItems.map((item) => (
               <ScrollReveal key={item.id}>
                 <Link to="/explore" state={{ focusCountry: item.id }} className="home-strip-card spotlight-card" onMouseMove={spotMove}>
                   <div className="home-strip-img" style={{ backgroundImage: `url(/images/countries/${item.id}.jpg)`, height: 200 }} />
@@ -174,6 +200,11 @@ export default function HomePage() {
                 </Link>
               </ScrollReveal>
             ))}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: 24 }}>
+            <button className="home-shuffle-btn" onClick={() => setExploreItems(shuffleCountries())}>
+              换一批
+            </button>
           </div>
         </div>
       </section>
@@ -186,13 +217,18 @@ export default function HomePage() {
             <Link to="/collection" className="home-strip-more">All →</Link>
           </div>
           <div className="home-strip-grid home-strip-grid--5">
-            {COLLECTION_CARDS.map((item, i) => (
-              <ScrollReveal key={i}>
+            {COLLECTION_CARDS.map((_, i) => (
+              <ScrollReveal key={`${wallpaperSeed}-${i}`}>
                 <Link to="/collection" className="home-strip-wall spotlight-card" onMouseMove={spotMove}>
-                  <div className="home-strip-wall-img" style={{ backgroundImage: `url(https://picsum.photos/seed/wall-${i}/400/600)` }} />
+                  <div className="home-strip-wall-img" style={{ backgroundImage: `url(https://picsum.photos/seed/${wallpaperSeed}-${i}/400/600)` }} />
                 </Link>
               </ScrollReveal>
             ))}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: 24 }}>
+            <button className="home-shuffle-btn" onClick={() => setWallpaperSeed(Date.now())}>
+              换一批
+            </button>
           </div>
         </div>
       </section>

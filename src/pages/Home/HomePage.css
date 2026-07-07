@@ -63,6 +63,22 @@
   margin-bottom: 36px;
 }
 
+.home-shuffle-btn {
+  padding: 6px 20px;
+  border-radius: 100px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+.home-shuffle-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 .home-strip-label {
   font-size: 13px; font-weight: 600; color: var(--text-primary);
 }

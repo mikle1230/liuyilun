@@ -1,5 +1,5 @@
-import { lazy, Suspense } from 'react'
-import { Routes, Route, Navigate, useParams } from 'react-router-dom'
+import { lazy, Suspense, useEffect } from 'react'
+import { Routes, Route, Navigate, useParams, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import PageLoader from './components/PageLoader'
@@ -40,9 +40,22 @@ function Page({ children, seo }) {
   )
 }
 
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    // Retry after lazy components mount
+    const t = setTimeout(() => window.scrollTo(0, 0), 100)
+    return () => clearTimeout(t)
+  }, [pathname])
+  return null
+}
+
 export default function App() {
   return (
-    <Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
       <Route path="/" element={<Page seo={{ title: 'Home' }}><HomePage /></Page>} />
 
       {/* Journal — merged blog + AI */}
@@ -70,6 +83,7 @@ export default function App() {
 
       <Route path="*" element={<Page><NotFound /></Page>} />
     </Routes>
+    </>
   )
 }
 
