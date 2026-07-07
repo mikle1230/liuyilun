@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom'
 import ScrollReveal from '../../components/ScrollReveal'
 import { loadPostsFromModules } from '../../utils/posts'
 import { getCoverImage } from '../../utils/tagImages'
-import travelData from '../../data/europe-travel.json'
-import wallpapersData from '../../data/wallpapers.json'
 import './HomePage.css'
 
 /* ════════════════════════════════════════════════════════
@@ -21,8 +19,15 @@ const allPosts = loadPostsFromModules(journalModules)
   .sort((a, b) => new Date(b.date) - new Date(a.date))
   .slice(0, 6)
 
-const pickedCountries = travelData.countries.slice(0, 5)
-const pickedWallpapers = wallpapersData.slice(0, 5)
+const COLLECTION_CARDS = Array.from({ length: 10 }, (_, i) => i)
+
+const EXPLORE_ITEMS = [
+  { id: 'italy', name: '意大利', en: 'Italy' },
+  { id: 'france', name: '法国', en: 'France' },
+  { id: 'spain', name: '西班牙', en: 'Spain' },
+  { id: 'greece', name: '希腊', en: 'Greece' },
+  { id: 'united-kingdom', name: '英国', en: 'United Kingdom' },
+]
 
 /* ════════════════════════════════════════════════════════
    Typewriter
@@ -67,51 +72,6 @@ function spotMove(e) {
   const rect = e.currentTarget.getBoundingClientRect()
   e.currentTarget.style.setProperty('--spot-x', `${((e.clientX - rect.left) / rect.width) * 100}%`)
   e.currentTarget.style.setProperty('--spot-y', `${((e.clientY - rect.top) / rect.height) * 100}%`)
-}
-
-const COUNTRY_COVERS = {
-  'united-kingdom': '1513635269975-59663e0ac1ad',
-  'france': '1502602898657-3e91760cbb34',
-  'germany': '1467269205-a7a3c3e9c5e8',
-  'italy': '1523906837458-0668d9c75b75',
-  'spain': '1543783206-7a5969ac5c71',
-  'portugal': '1555885614-5c8e3ab3e140',
-  'netherlands': '1512474932049-78ac69ede4a0',
-  'belgium': '1558618666-1c4e2e0a73f7',
-  'switzerland': '1530122037265-a5f1f91d3b99',
-  'austria': '1516552830192-1f78299c5d96',
-  'greece': '1533105079780-92b9be4833fa',
-  'sweden': '1508182315256-7b1e8c04c5c9',
-  'norway': '1520769669658-fc49e4441ca1',
-  'denmark': '1513622470522-16f11784df5d',
-  'ireland': '1549918864-5db3a6d4e5a3',
-  'poland': '1590080874088-eb9e21d5b7c3',
-  'czech-republic': '1519677100203-a0e668c92439',
-  'hungary': '1565967152-a98e25028a0a',
-  'croatia': '1555998017-765d9de3f6a0',
-  'turkey': '1524231757912-21f4f3e72c2f',
-  'finland': '1518531933037-1b45c2b7c0d7',
-  'estonia': '1558532923-2a6c6ca6c6b8',
-  'iceland': '1504893524553-56a33edc5b3e',
-  'montenegro': '1558618666-1c4e2e0a73f7',
-}
-
-function countryCover(c) {
-  const photo = COUNTRY_COVERS[c.id] || '1469854523086-cc02fe5d8800'
-  return `https://images.unsplash.com/photo-${photo}?w=600&q=80`
-}
-
-const WALLPAPER_COVERS = {
-  'aurora-borealis': '1483344560535-82e1f7182eae',
-  'mountain-lake': '1506905925348-21ebda60e2cd',
-  'cherry-blossom': '1523712999610-d11827ea0b1f',
-  'starry-night': '1419242902214-4d19d0b72df3',
-  'ocean-sunset': '1507525428034-b723cf961d3e',
-}
-
-function wallpaperCover(w) {
-  const photo = WALLPAPER_COVERS[w.id] || '1470071459604-3b5ec3a7fe05'
-  return `https://images.unsplash.com/photo-${photo}?w=400&q=80`
 }
 
 /* ════════════════════════════════════════════════════════
@@ -202,14 +162,14 @@ export default function HomePage() {
             <span className="home-strip-label">Explore</span>
             <Link to="/explore" className="home-strip-more">All Countries →</Link>
           </div>
-          <div className="home-strip-scroll">
-            {pickedCountries.map((c) => (
-              <ScrollReveal key={c.id}>
-                <Link to="/explore" className="home-strip-country spotlight-card" onMouseMove={spotMove}>
-                  <div className="home-strip-country-img" style={{ backgroundImage: `url(${countryCover(c)})` }} />
-                  <div className="home-strip-country-overlay">
-                    <span className="home-strip-country-name">{c.name}</span>
-                    <span className="home-strip-country-en">{c.nameEn}</span>
+          <div className="home-strip-grid home-strip-grid--5">
+            {EXPLORE_ITEMS.map((item) => (
+              <ScrollReveal key={item.id}>
+                <Link to="/explore" state={{ focusCountry: item.id }} className="home-strip-card spotlight-card" onMouseMove={spotMove}>
+                  <div className="home-strip-img" style={{ backgroundImage: `url(/images/countries/${item.id}.jpg)`, height: 200 }} />
+                  <div className="home-strip-body">
+                    <h3 className="home-strip-title">{item.name}</h3>
+                    <span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--text-tertiary)' }}>{item.en}</span>
                   </div>
                 </Link>
               </ScrollReveal>
@@ -226,11 +186,10 @@ export default function HomePage() {
             <Link to="/collection" className="home-strip-more">All →</Link>
           </div>
           <div className="home-strip-grid home-strip-grid--5">
-            {pickedWallpapers.map((w) => (
-              <ScrollReveal key={w.id}>
+            {COLLECTION_CARDS.map((item, i) => (
+              <ScrollReveal key={i}>
                 <Link to="/collection" className="home-strip-wall spotlight-card" onMouseMove={spotMove}>
-                  <div className="home-strip-wall-img" style={{ backgroundImage: `url(${wallpaperCover(w)})` }} />
-                  <span className="home-strip-wall-title">{w.title}</span>
+                  <div className="home-strip-wall-img" style={{ backgroundImage: `url(https://picsum.photos/seed/wall-${i}/400/600)` }} />
                 </Link>
               </ScrollReveal>
             ))}

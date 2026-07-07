@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import ScrollReveal from '../../components/ScrollReveal'
 import travelData from '../../data/europe-travel.json'
 import { imgStyle } from '../../utils/images'
@@ -8,33 +8,7 @@ import './ExplorePage.css'
 const countries = travelData.countries
 
 function getCountryCover(country) {
-  const names = country.nameEn.toLowerCase().replace(/\s+/g, '-')
-  return `https://images.unsplash.com/photo-${country.id === 'france' ? '1502602898657-3e91760cbb34'
-    : country.id === 'italy' ? '1523906837458-0668d9c9d75b'
-    : country.id === 'spain' ? '1543783206-7a5969ac5c71'
-    : country.id === 'germany' ? '1467269205-a7a3c3e9c5e8'
-    : country.id === 'united-kingdom' ? '1513635269975-59663e0ac1ad'
-    : country.id === 'switzerland' ? '1530122037265-a5f1f91d3b99'
-    : country.id === 'greece' ? '1533105079780-92b9be4833fa'
-    : country.id === 'portugal' ? '1555885614-5c8e3ab3e140'
-    : country.id === 'netherlands' ? '1512474932049-78ac69ede4a0'
-    : country.id === 'austria' ? '1516552830192-1f78299c5d96'
-    : country.id === 'sweden' ? '1508182315256-7b1e8c04c5c9'
-    : country.id === 'norway' ? '1520769669658-fc49e4441ca1'
-    : country.id === 'denmark' ? '1513622470522-16f11784df5d'
-    : country.id === 'ireland' ? '1549918864-5db3a6d4e5a3'
-    : country.id === 'hungary' ? '1565967152-a98e25028a0a'
-    : country.id === 'croatia' ? '1555998017-765d9de3f6a0'
-    : country.id === 'turkey' ? '1524231757912-21f4f3e72c2f'
-    : country.id === 'poland' ? '1590080874088-eb9e21d5b7c3'
-    : country.id === 'belgium' ? '1558618666-1c4e2e0a73f7'
-    : country.id === 'czech-republic' ? '1519677100203-a0e668c92439'
-    : country.id === 'finland' ? '1518531933037-1b45c2b7c0d7'
-    : country.id === 'estonia' ? '1558532923-2a6c6ca6c6b8'
-    : country.id === 'iceland' ? '1504893524553-56a33edc5b3e'
-    : country.id === 'montenegro' ? '1558618666-1c4e2e0a73f7'
-    : '1488646953014-85cb44e25828'
-  }?w=800&q=80`
+  return `/images/countries/${country.id}.jpg`
 }
 
 function spotMove(e) {
@@ -44,7 +18,14 @@ function spotMove(e) {
 }
 
 export default function ExplorePage() {
-  const [activeCountry, setActiveCountry] = useState(null)
+  const location = useLocation()
+  const [activeCountry, setActiveCountry] = useState(location.state?.focusCountry || null)
+
+  useEffect(() => {
+    if (location.state?.focusCountry) {
+      window.history.replaceState({}, '', '/explore')
+    }
+  }, [location.state?.focusCountry])
 
   const selectedCountry = activeCountry ? countries.find((c) => c.id === activeCountry) : null
   const countryCities = selectedCountry?.cities || []
