@@ -9,8 +9,7 @@ import parseFrontmatter from './frontmatter'
  * /blog/ → 'tech', /ai/ → 'ai'
  */
 function detectSection(path) {
-  if (path.includes('/blog/')) return 'tech'
-  if (path.includes('/ai/')) return 'ai'
+  if (path.includes('/journal/')) return 'journal'
   return 'general'
 }
 

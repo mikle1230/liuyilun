@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import siteConfig from '../data/site-config.json'
 import './Footer.css'
 
 export default function Footer() {
@@ -8,23 +9,21 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-inner container">
         <div className="footer-main">
-          <Link to="/" className="footer-logo">M</Link>
+          <Link to="/" className="footer-logo">{siteConfig.author.initial}</Link>
 
           <nav className="footer-nav">
-            <Link to="/journal">Journal</Link>
-            <Link to="/explore">Explore</Link>
-            <Link to="/collection">Collection</Link>
-            <Link to="/about">About</Link>
+            {siteConfig.footer.nav.map((link) => (
+              <Link key={link.path} to={link.path}>{link.label}</Link>
+            ))}
           </nav>
 
-          <a href="mailto:47847796@qq.com" className="footer-email">
-            47847796@qq.com
+          <a href={`mailto:${siteConfig.email}`} className="footer-email">
+            {siteConfig.email}
           </a>
         </div>
 
         <div className="footer-bottom">
           <span className="footer-copy">© {year}</span>
-          <Link to="/hk" className="footer-hidden-dot">·</Link>
         </div>
       </div>
     </footer>

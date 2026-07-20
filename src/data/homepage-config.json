@@ -1,0 +1,27 @@
+{
+  "hero": {
+    "typewriterWords": [
+      "The Place",
+      "where life being recorded",
+      "growth being admired",
+      "time being rewarded"
+    ],
+    "descriptionLine1": "观察 · 记录 · 反思",
+    "descriptionLine2": "数字后花园 · 时光博物馆"
+  },
+  "sections": {
+    "journal": {
+      "label": "Journal",
+      "moreText": "All Posts →"
+    },
+    "explore": {
+      "label": "Explore",
+      "moreText": "All Countries →"
+    },
+    "collection": {
+      "label": "Collection",
+      "moreText": "All →"
+    }
+  },
+  "shuffleButtonText": "换一批"
+}

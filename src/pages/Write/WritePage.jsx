@@ -22,7 +22,7 @@ const MD_SYNTAX = [
   { syntax: '\\|列\\|', desc: '表格', example: '|姓名|年龄|\n|--- |--- |\n|张三|25|' },
 ]
 
-const ARTICLES_GLOB = import.meta.glob('../../content/{blog,ai}/*.md', {
+const ARTICLES_GLOB = import.meta.glob('../../content/journal/*.md', {
   eager: true,
   query: '?raw',
   import: 'default',
@@ -32,7 +32,7 @@ function listArticles() {
   return Object.entries(ARTICLES_GLOB).map(([path, raw]) => {
     const { data } = parseFrontmatter(raw)
     const slug = path.split('/').pop().replace('.md', '').split('?')[0]
-    const type = path.includes('/blog/') ? 'blog' : 'ai'
+    const type = 'journal'
     return { slug, title: data.title || slug, type, path }
   }).sort((a, b) => a.title.localeCompare(b.title, 'zh'))
 }
@@ -46,7 +46,7 @@ export default function WritePage() {
   const [publishing, setPublishing] = useState(false)
   const [published, setPublished] = useState(false)
   const [publishError, setPublishError] = useState(null)
-  const [articleType, setArticleType] = useState('blog')
+  const [articleType, setArticleType] = useState('journal')
   const [editingSlug, setEditingSlug] = useState(null)
   const [showEditList, setShowEditList] = useState(false)
   const [theme, setTheme] = useState('tech')

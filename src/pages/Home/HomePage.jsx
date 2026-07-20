@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import ScrollReveal from '../../components/ScrollReveal'
 import { loadPostsFromModules } from '../../utils/posts'
 import { getCoverImage } from '../../utils/tagImages'
+import homepageConfig from '../../data/homepage-config.json'
 import './HomePage.css'
 
 /* ════════════════════════════════════════════════════════
@@ -57,12 +58,7 @@ function shuffleCountries() {
    Typewriter
    ════════════════════════════════════════════════════════ */
 
-const typewriterWords = [
-  'The Place',
-  'where life being recorded',
-  'growth being admired',
-  'time being rewarded',
-]
+const typewriterWords = homepageConfig.hero.typewriterWords
 
 function useTypewriter(words, typingSpeed = 80, deletingSpeed = 40, pauseDuration = 2500) {
   const [text, setText] = useState('')
@@ -139,7 +135,7 @@ export default function HomePage() {
           </ScrollReveal>
           <ScrollReveal delay={300}>
             <p className="home-hero-desc">
-              观察 · 记录 · 反思<br />数字后花园 · 时光博物馆
+              {homepageConfig.hero.descriptionLine1}<br />{homepageConfig.hero.descriptionLine2}
             </p>
           </ScrollReveal>
         </div>
@@ -149,8 +145,8 @@ export default function HomePage() {
       <section className="section home-strip">
         <div className="container">
           <div className="home-strip-header">
-            <span className="home-strip-label">Journal</span>
-            <Link to="/journal" className="home-strip-more">All Posts →</Link>
+            <span className="home-strip-label">{homepageConfig.sections.journal.label}</span>
+            <Link to="/journal" className="home-strip-more">{homepageConfig.sections.journal.moreText}</Link>
           </div>
           <div className="home-strip-grid home-strip-grid--3">
             {allPosts.slice(0, 3).map((post) => (
@@ -185,8 +181,8 @@ export default function HomePage() {
       <section className="section home-strip">
         <div className="container">
           <div className="home-strip-header">
-            <span className="home-strip-label">Explore</span>
-            <Link to="/explore" className="home-strip-more">All Countries →</Link>
+            <span className="home-strip-label">{homepageConfig.sections.explore.label}</span>
+            <Link to="/explore" className="home-strip-more">{homepageConfig.sections.explore.moreText}</Link>
           </div>
           <div className="home-strip-grid home-strip-grid--5">
             {exploreItems.map((item) => (
@@ -203,7 +199,7 @@ export default function HomePage() {
           </div>
           <div style={{ textAlign: 'center', marginTop: 24 }}>
             <button className="home-shuffle-btn" onClick={() => setExploreItems(shuffleCountries())}>
-              换一批
+              {homepageConfig.shuffleButtonText}
             </button>
           </div>
         </div>
@@ -213,8 +209,8 @@ export default function HomePage() {
       <section className="section home-strip">
         <div className="container">
           <div className="home-strip-header">
-            <span className="home-strip-label">Collection</span>
-            <Link to="/collection" className="home-strip-more">All →</Link>
+            <span className="home-strip-label">{homepageConfig.sections.collection.label}</span>
+            <Link to="/collection" className="home-strip-more">{homepageConfig.sections.collection.moreText}</Link>
           </div>
           <div className="home-strip-grid home-strip-grid--5">
             {COLLECTION_CARDS.map((_, i) => (
@@ -227,7 +223,7 @@ export default function HomePage() {
           </div>
           <div style={{ textAlign: 'center', marginTop: 24 }}>
             <button className="home-shuffle-btn" onClick={() => setWallpaperSeed(Date.now())}>
-              换一批
+              {homepageConfig.shuffleButtonText}
             </button>
           </div>
         </div>

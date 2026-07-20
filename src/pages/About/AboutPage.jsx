@@ -3,31 +3,23 @@ import ScrollReveal from '../../components/ScrollReveal'
 import CareerTimeline from './CareerTimeline'
 import Strengths from './Strengths'
 import ContactSection from './ContactSection'
+import aboutConfig from '../../data/about-config.json'
 import './AboutPage.css'
 import './ContactSection.css'
 
-const aboutStats = [
-  { value: '19+', label: '年行业经验' },
-  { value: '200+', label: '服务客户' },
-  { value: '150+', label: '中大型项目' },
-  { value: '50+', label: '跨境会奖项目' },
-]
+const { hero, bio, contact } = aboutConfig
 
 const contactItems = [
-  { label: '邮箱', value: '47847796@qq.com', href: 'mailto:47847796@qq.com' },
-]
-
-const industries = [
-  '入境旅游', '会奖旅游', '差旅管理', '场馆会展', '渠道拓展', '政企接待', '大型活动'
+  { label: '邮箱', value: contact.links[0].value, href: contact.links[0].href },
 ]
 
 export default function AboutPage() {
   return (
     <div className="about-page">
       <ModuleHero
-        label="我是"
-        title="About"
-        subtitle="19年旅游·会展·差旅行业深耕，全链条资源操盘手"
+        label={hero.label}
+        title={hero.title}
+        subtitle={hero.subtitle}
       />
 
       {/* Bio */}
@@ -58,27 +50,21 @@ export default function AboutPage() {
             <div className="about-right">
               <ScrollReveal>
                 <h2 className="section-title">
-                  全链条资源的<span className="text-accent">操盘手</span>
+                  {bio.sectionTitle1}<span className="text-accent">{bio.sectionTitleAccent}</span>
                 </h2>
               </ScrollReveal>
               <ScrollReveal delay={100}>
                 <div className="about-bio">
-                  <p className="bio-paragraph">
-                    深耕旅游、会展、差旅行业19年，从入境旅游到出境会奖，从差旅管理到场馆会展资源运营，
-                    具备境内外地接、渠道、供应商、政企、口岸全维度资源储备与整合能力。
-                  </p>
-                  <p className="bio-paragraph">
-                    曾任职中青旅、携程商旅、众信博睿、中关村会展、北辰会展等头部企业，
-                    服务世界500强、金融、科技、文旅政企客户200+，落地中大型项目150+。
-                    英语/俄语双语工作语言，具备高端政要团、国际代表团接待经验。
-                  </p>
+                  {bio.paragraphs.map((p, i) => (
+                    <p key={i} className="bio-paragraph">{p}</p>
+                  ))}
                 </div>
               </ScrollReveal>
               <ScrollReveal delay={200}>
                 <div className="about-industries">
-                  <span className="industries-label">涉猎领域</span>
+                  <span className="industries-label">{bio.industriesLabel}</span>
                   <div className="industries-tags">
-                    {industries.map((ind) => (
+                    {bio.industries.map((ind) => (
                       <span key={ind} className="industry-tag">{ind}</span>
                     ))}
                   </div>
@@ -86,7 +72,7 @@ export default function AboutPage() {
               </ScrollReveal>
               <ScrollReveal delay={300}>
                 <div className="about-stats">
-                  {aboutStats.map((stat) => (
+                  {bio.stats.map((stat) => (
                     <div key={stat.label} className="stat-item">
                       <span className="stat-value">{stat.value}</span>
                       <span className="stat-label">{stat.label}</span>
@@ -100,15 +86,12 @@ export default function AboutPage() {
         <div className="divider" />
       </section>
 
-      {/* Career + Projects merged timeline */}
       <CareerTimeline />
       <div className="divider" />
 
-      {/* Strengths */}
       <Strengths />
       <div className="divider" />
 
-      {/* Contact */}
       <ContactSection />
     </div>
   )

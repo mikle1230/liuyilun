@@ -1,14 +1,8 @@
 import { useState } from 'react'
 import { useNavigate, useLocation, Link } from 'react-router-dom'
 import { useTheme } from '../contexts/ThemeContext'
+import siteConfig from '../data/site-config.json'
 import './Navbar.css'
-
-const navLinks = [
-  { label: 'Journal', path: '/journal' },
-  { label: 'Explore', path: '/explore' },
-  { label: 'Collection', path: '/collection' },
-  { label: 'About', path: '/about' },
-]
 
 export default function Navbar() {
   const navigate = useNavigate()
@@ -30,11 +24,11 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="navbar-inner container">
         <Link className="navbar-logo" to="/" onClick={() => setMenuOpen(false)}>
-          The Place
+          {siteConfig.name}
         </Link>
 
         <div className={`navbar-links ${menuOpen ? 'open' : ''}`}>
-          {navLinks.map((link) => (
+          {siteConfig.nav.map((link) => (
             <button
               key={link.path}
               className={`nav-link ${isActive(link.path) ? 'active' : ''}`}
@@ -49,7 +43,7 @@ export default function Navbar() {
           <button
             className="theme-toggle"
             onClick={toggleTheme}
-            aria-label="切换主题"
+            aria-label="Toggle theme"
           >
             {theme === 'light' ? (
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -73,7 +67,7 @@ export default function Navbar() {
           <button
             className={`hamburger ${menuOpen ? 'open' : ''}`}
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="菜单"
+            aria-label="Menu"
           >
             <span />
             <span />

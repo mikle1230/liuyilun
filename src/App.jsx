@@ -16,8 +16,6 @@ const AttractionDetail = lazy(() => import('./pages/Explore/AttractionDetail'))
 const AboutPage = lazy(() => import('./pages/About/AboutPage'))
 const WallpapersPage = lazy(() => import('./pages/Wallpapers/WallpapersPage'))
 
-// Hidden: HK Gate
-const HKGate = lazy(() => import('./pages/HK/HKGate'))
 
 function AppLayout({ children }) {
   return (
@@ -78,8 +76,6 @@ export default function App() {
       <Route path="/collection" element={<Page seo={{ title: 'Collection', path: '/collection' }}><WallpapersPage /></Page>} />
       <Route path="/wallpapers" element={<Navigate to="/collection" replace />} />
 
-      {/* Hidden: HK Gate */}
-      <Route path="/hk" element={<HKGate />} />
 
       <Route path="*" element={<Page><NotFound /></Page>} />
     </Routes>

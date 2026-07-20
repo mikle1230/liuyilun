@@ -3,7 +3,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const { password, title, tags, content, type = 'blog', existingSlug } = req.body
+  const { password, title, tags, content, type = 'journal', existingSlug } = req.body
 
   if (password !== process.env.WRITE_PASSWORD) {
     return res.status(401).json({ error: '密码错误' })
@@ -33,7 +33,7 @@ export default async function handler(req, res) {
   const filename = existingSlug
     ? `${existingSlug}.md`
     : `${date}-${slug}.md`
-  const directory = type === 'ai' ? 'ai' : 'blog'
+  const directory = 'journal'
   const path = `src/content/${directory}/${filename}`
   const token = process.env.GITHUB_TOKEN
   const owner = 'mikle1230'
@@ -77,7 +77,7 @@ export default async function handler(req, res) {
     })
   }
 
-  const route = directory === 'ai' ? 'ai' : 'blog'
+  const route = 'journal'
   return res.status(200).json({
     success: true,
     slug,

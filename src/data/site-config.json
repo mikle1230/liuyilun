@@ -1,0 +1,26 @@
+{
+  "name": "The Place",
+  "description": "安静的时光博物馆，为认真生活的人而建",
+  "domain": "www.831225.xyz",
+  "email": "47847796@qq.com",
+  "phone": "18611488525",
+  "author": {
+    "name": "Michael",
+    "initial": "M"
+  },
+  "nav": [
+    { "label": "Journal", "path": "/journal" },
+    { "label": "Explore", "path": "/explore" },
+    { "label": "Collection", "path": "/collection" },
+    { "label": "About", "path": "/about" }
+  ],
+  "footer": {
+    "copyright": "© {year}",
+    "nav": [
+      { "label": "Journal", "path": "/journal" },
+      { "label": "Explore", "path": "/explore" },
+      { "label": "Collection", "path": "/collection" },
+      { "label": "About", "path": "/about" }
+    ]
+  }
+}
