@@ -7,7 +7,7 @@ import { loadPostsFromModules, extractTags } from '../../utils/posts'
 import { getCoverImage } from '../../utils/tagImages'
 import './JournalList.css'
 
-const ALL_POSTS = import.meta.glob('../../content/{blog,ai}/*.md', {
+const ALL_POSTS = import.meta.glob('../../content/journal/*.md', {
   eager: true,
   query: '?raw',
   import: 'default',

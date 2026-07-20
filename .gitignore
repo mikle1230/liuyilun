@@ -37,3 +37,6 @@ coverage/
 
 # Vercel
 .vercel
+
+# Obsidian (workspace state is personal)
+.obsidian/workspace.json

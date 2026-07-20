@@ -9,7 +9,7 @@ import './HomePage.css'
    Content
    ════════════════════════════════════════════════════════ */
 
-const journalModules = import.meta.glob('../../content/{blog,ai}/*.md', {
+const journalModules = import.meta.glob('../../content/journal/*.md', {
   eager: true,
   query: '?raw',
   import: 'default',

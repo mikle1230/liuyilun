@@ -1,0 +1,25 @@
+{
+  "showLineNumber": true,
+  "defaultViewMode": "source",
+  "livePreview": true,
+  "showUnsupportedFiles": true,
+  "readableLineLength": false,
+  "strictLineBreaks": false,
+  "showFrontmatter": true,
+  "foldHeading": true,
+  "foldIndent": true,
+  "showIndentGuide": true,
+  "userIgnoreFilters": [
+    "node_modules/",
+    "dist/",
+    ".claude/",
+    ".git/",
+    "public/images/",
+    "public/video/",
+    "package-lock.json",
+    "*.config.*"
+  ],
+  "attachmentFolderPath": "src/content/assets",
+  "newLinkFormat": "relative",
+  "useMarkdownLinks": true
+}

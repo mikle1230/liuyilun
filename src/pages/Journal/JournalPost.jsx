@@ -7,7 +7,7 @@ import './JournalPost.css'
 
 const MarkdownRenderer = lazy(() => import('../../components/MarkdownRenderer'))
 
-const ALL_POSTS = import.meta.glob('../../content/{blog,ai}/*.md', {
+const ALL_POSTS = import.meta.glob('../../content/journal/*.md', {
   query: '?raw',
   import: 'default',
 })

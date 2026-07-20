@@ -1,6 +1,6 @@
 # 内容编辑指南
 
-所有可手动编辑的内容文件都在 `src/data/` 目录下，纯 JSON 格式，用任何文本编辑器（VS Code、Obsidian、记事本）打开即可修改。修改后刷新浏览器即生效（开发模式下）。
+所有可手动编辑的内容文件都在 `src/data/`（JSON）和 `src/content/`（Markdown）目录下。用任何文本编辑器（VS Code、Obsidian、记事本）打开即可修改。
 
 ---
 
@@ -8,6 +8,7 @@
 
 | 想做的事 | 编辑哪个文件 |
 |----------|-------------|
+| 写/改一篇博客文章 | `src/content/journal/*.md` |
 | 增加/修改/删除一个国家下的景点 | `src/data/countries/<国家id>.json` |
 | 调整首页 Featured 精选 | `src/data/explore-config.json` → `featured` |
 | 调整首页热门城市 | `src/data/explore-config.json` → `popularCities` |
