@@ -10,7 +10,7 @@ import './App.css'
 const HomePage = lazy(() => import('./pages/Home/HomePage'))
 const JournalList = lazy(() => import('./pages/Journal/JournalList'))
 const JournalPost = lazy(() => import('./pages/Journal/JournalPost'))
-const WritePage = lazy(() => import('./pages/Write/WritePage'))
+const AdminPage = lazy(() => import('./pages/Admin/AdminPage'))
 const ExplorePage = lazy(() => import('./pages/Explore/ExplorePage'))
 const AttractionDetail = lazy(() => import('./pages/Explore/AttractionDetail'))
 const AboutPage = lazy(() => import('./pages/About/AboutPage'))
@@ -70,7 +70,8 @@ export default function App() {
       <Route path="/explore" element={<Page seo={{ title: 'Explore', path: '/explore' }}><ExplorePage /></Page>} />
       <Route path="/explore/attraction/:slug" element={<Page><AttractionDetail /></Page>} />
       <Route path="/about" element={<Page seo={{ title: 'About', path: '/about' }}><AboutPage /></Page>} />
-      <Route path="/write" element={<Page seo={{ title: 'Write', path: '/write' }}><WritePage /></Page>} />
+      <Route path="/admin" element={<AdminPage />} />
+      <Route path="/write" element={<Navigate to="/admin" replace />} />
 
       {/* Collection (was Wallpapers) */}
       <Route path="/collection" element={<Page seo={{ title: 'Collection', path: '/collection' }}><WallpapersPage /></Page>} />
