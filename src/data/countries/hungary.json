@@ -1,0 +1,53 @@
+{
+  "id": "hungary",
+  "name": "匈牙利",
+  "nameEn": "Hungary",
+  "description": "多瑙河畔的明珠，温泉文化与帝国遗产",
+  "cities": [
+    {
+      "id": "budapest",
+      "name": "布达佩斯",
+      "nameEn": "Budapest",
+      "lat": 47.5,
+      "lng": 19,
+      "attractions": [
+        {
+          "id": "parliament",
+          "name": "国会大厦",
+          "type": "landmark",
+          "image": "photo-1549877452-9c387954fbc2",
+          "description": "多瑙河畔最壮观的建筑",
+          "tips": "夜间亮灯后从对岸拍摄最佳"
+        },
+        {
+          "id": "szechenyi",
+          "name": "塞切尼温泉",
+          "type": "landmark",
+          "image": "photo-1569885853176-d1e871b01150",
+          "description": "欧洲最大的温泉浴场",
+          "tips": "自备拖鞋和浴巾，冬季室外池尤为惬意"
+        },
+        {
+          "id": "hungarian-parliament-building-thn4",
+          "name": "匈牙利国会大厦",
+          "nameEn": "Hungarian Parliament Building",
+          "type": "landmark",
+          "image": "place-efb55e29dd94",
+          "image_search_url": "https://www.bing.com/images/search?q=Hungarian+Parliament",
+          "description": "匈牙利国会大厦（Hungarian Parliament Building）是匈牙利布达佩斯的著名景点。",
+          "tips": ""
+        },
+        {
+          "id": "fishermans-bastion-fqoh",
+          "name": "渔人堡",
+          "nameEn": "Fishermans Bastion",
+          "type": "landmark",
+          "image": "place-67c287d46ece",
+          "image_search_url": "https://www.bing.com/images/search?q=Fishermans+Bastion",
+          "description": "渔人堡（Fishermans Bastion）是匈牙利布达佩斯的著名景点。",
+          "tips": ""
+        }
+      ]
+    }
+  ]
+}

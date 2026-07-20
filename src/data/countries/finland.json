@@ -1,0 +1,46 @@
+{
+  "id": "finland",
+  "name": "芬兰",
+  "nameEn": "Finland",
+  "description": "",
+  "cities": [
+    {
+      "id": "-bc49",
+      "name": "赫尔辛基",
+      "nameEn": "Cathedral",
+      "lat": 60.17,
+      "lng": 24.935,
+      "attractions": [
+        {
+          "id": "helsinki-cathedral-ffev",
+          "name": "赫尔辛基大教堂",
+          "nameEn": "Helsinki Cathedral",
+          "type": "landmark",
+          "image": "place-eebf74cf8ee9",
+          "image_search_url": "https://www.bing.com/images/search?q=Helsinki+Cathedral",
+          "description": "赫尔辛基大教堂（Helsinki Cathedral）是芬兰赫尔辛基的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-6d76",
+      "name": "罗瓦涅米",
+      "nameEn": "Rovaniemi",
+      "lat": 66.503,
+      "lng": 25.729,
+      "attractions": [
+        {
+          "id": "santa-claus-village-rovaniemi-4eem",
+          "name": "圣诞老人村",
+          "nameEn": "Santa Claus Village Rovaniemi",
+          "type": "landmark",
+          "image": "place-5325ba9cffdb",
+          "image_search_url": "https://www.bing.com/images/search?q=Santa+Claus+Village",
+          "description": "圣诞老人村（Santa Claus Village Rovaniemi）是芬兰罗瓦涅米的著名景点。",
+          "tips": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "czech-republic",
+  "name": "捷克",
+  "nameEn": "Czech Republic",
+  "description": "波希米亚的心脏，中世纪童话与水晶工艺",
+  "cities": [
+    {
+      "id": "prague",
+      "name": "布拉格",
+      "nameEn": "Prague",
+      "lat": 50.1,
+      "lng": 14.4,
+      "attractions": [
+        {
+          "id": "charles-bridge",
+          "name": "查理大桥",
+          "type": "landmark",
+          "image": "photo-1519677100203-a0e668c92439",
+          "description": "伏尔塔瓦河上的哥特式石桥",
+          "tips": "清晨是拍摄大桥的最佳时间",
+          "image_search_url": "https://www.bing.com/images/search?q=Charles+Bridge+Prague"
+        },
+        {
+          "id": "prague-castle",
+          "name": "布拉格城堡",
+          "type": "landmark",
+          "image": "photo-1541849546-216c3872b9df",
+          "description": "世界上最大的古堡群",
+          "tips": "从查理大桥步行上山约20分钟",
+          "image_search_url": "https://www.bing.com/images/search?q=Prague+Castle"
+        }
+      ]
+    }
+  ]
+}

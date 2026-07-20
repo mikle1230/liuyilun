@@ -1,0 +1,297 @@
+{
+  "id": "italy",
+  "name": "意大利",
+  "nameEn": "Italy",
+  "description": "古罗马文明的发源地，文艺复兴的摇篮，美食与时尚的天堂",
+  "cities": [
+    {
+      "id": "rome",
+      "name": "罗马",
+      "nameEn": "Rome",
+      "lat": 41.9,
+      "lng": 12.5,
+      "attractions": [
+        {
+          "id": "colosseum",
+          "name": "罗马斗兽场",
+          "type": "landmark",
+          "image": "photo-1552832230-c0197dd311b5",
+          "description": "古罗马时期最大的圆形竞技场，可容纳5万人",
+          "tips": "提前在线购票避免排队"
+        },
+        {
+          "id": "vatican",
+          "name": "梵蒂冈博物馆",
+          "type": "museum",
+          "image": "photo-1583417319070-4a69db38a482",
+          "description": "拥有西斯廷教堂米开朗基罗壁画",
+          "tips": "每月最后一个周日免费"
+        },
+        {
+          "id": "trevi",
+          "name": "特雷维喷泉",
+          "type": "landmark",
+          "image": "photo-1551002732-eda762e6124e",
+          "description": "罗马最大的巴洛克喷泉",
+          "tips": "清晨6-7点前往可避开人潮"
+        },
+        {
+          "id": "colosseum-rome-sou2",
+          "name": "斗兽场",
+          "nameEn": "Colosseum Rome",
+          "type": "landmark",
+          "image": "place-0dd48af65407",
+          "image_search_url": "https://www.bing.com/images/search?q=Colosseum+Rome",
+          "description": "斗兽场（Colosseum Rome）是意大利罗马的著名景点。",
+          "tips": ""
+        },
+        {
+          "id": "roman-forum-75t5",
+          "name": "古罗马广场",
+          "nameEn": "Roman Forum",
+          "type": "landmark",
+          "image": "place-56111de3bb2f",
+          "image_search_url": "https://www.bing.com/images/search?q=Roman+Forum",
+          "description": "古罗马广场（Roman Forum）是意大利罗马的著名景点。",
+          "tips": ""
+        },
+        {
+          "id": "pantheon-rome-yz6m",
+          "name": "万神殿",
+          "nameEn": "Pantheon Rome",
+          "type": "landmark",
+          "image": "place-45f37dc6c0bd",
+          "image_search_url": "https://www.bing.com/images/search?q=Pantheon+Rome",
+          "description": "万神殿（Pantheon Rome）是意大利罗马的著名景点。",
+          "tips": ""
+        },
+        {
+          "id": "trevi-fountain-apcb",
+          "name": "特莱维喷泉",
+          "nameEn": "Trevi Fountain",
+          "type": "landmark",
+          "image": "place-5cd85fee65e0",
+          "image_search_url": "https://www.bing.com/images/search?q=Trevi+Fountain",
+          "description": "特莱维喷泉（Trevi Fountain）是意大利罗马的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "venice",
+      "name": "威尼斯",
+      "nameEn": "Venice",
+      "lat": 45.4,
+      "lng": 12.3,
+      "attractions": [
+        {
+          "id": "stmarks",
+          "name": "圣马可广场",
+          "type": "landmark",
+          "image": "photo-1514890547357-a9ee288728e0",
+          "description": "被拿破仑称为欧洲最美的客厅",
+          "tips": "清晨或深夜前往可避开人潮",
+          "image_search_url": "https://www.bing.com/images/search?q=St+Marks+Square+Venice"
+        }
+      ]
+    },
+    {
+      "id": "florence",
+      "name": "佛罗伦萨",
+      "nameEn": "Florence",
+      "lat": 43.8,
+      "lng": 11.3,
+      "attractions": [
+        {
+          "id": "duomo",
+          "name": "圣母百花大教堂",
+          "type": "landmark",
+          "image": "photo-1534081333815-ae5019106622",
+          "description": "布鲁内莱斯基的穹顶是建筑史上的奇迹",
+          "tips": "登顶需爬463级台阶",
+          "image_search_url": "https://www.bing.com/images/search?q=Florence+Cathedral"
+        },
+        {
+          "id": "uffizi",
+          "name": "乌菲兹美术馆",
+          "type": "museum",
+          "image": "photo-1543852786-1cf6624b9987",
+          "description": "收藏波提切利、达芬奇等大师作品",
+          "tips": "旺季需提前数周预约"
+        },
+        {
+          "id": "uffizi-gallery-am3y",
+          "name": "乌菲齐美术馆",
+          "nameEn": "Uffizi Gallery",
+          "type": "landmark",
+          "image": "place-fe660cdac860",
+          "image_search_url": "https://www.bing.com/images/search?q=Uffizi+Gallery",
+          "description": "乌菲齐美术馆（Uffizi Gallery）是意大利佛罗伦萨的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-a253",
+      "name": "梵蒂冈",
+      "nameEn": "Basilica",
+      "lat": 41.902,
+      "lng": 12.453,
+      "attractions": [
+        {
+          "id": "st-peter-s-basilica-d4v2",
+          "name": "圣彼得大教堂",
+          "nameEn": "St. Peter's Basilica",
+          "type": "landmark",
+          "image": "place-cdebd5494f8f",
+          "image_search_url": "https://www.bing.com/images/search?q=St+Peters+Basilica",
+          "description": "圣彼得大教堂（St. Peter's Basilica）是意大利梵蒂冈的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-598d",
+      "name": "比萨",
+      "nameEn": "Pisa",
+      "lat": 43.723,
+      "lng": 10.397,
+      "attractions": [
+        {
+          "id": "leaning-tower-of-pisa-ba8n",
+          "name": "比萨斜塔",
+          "nameEn": "Leaning Tower of Pisa",
+          "type": "landmark",
+          "image": "place-d04e1b497a42",
+          "image_search_url": "https://www.bing.com/images/search?q=Leaning+Tower+of+Pisa",
+          "description": "比萨斜塔（Leaning Tower of Pisa）是意大利比萨的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-c207",
+      "name": "托斯卡纳乡村",
+      "nameEn": "Tuscany",
+      "lat": 43.5,
+      "lng": 11.5,
+      "attractions": [
+        {
+          "id": "siena-tuscany-e98v",
+          "name": "锡耶纳老城",
+          "nameEn": "Siena Tuscany",
+          "type": "landmark",
+          "image": "place-99ac0aa9687c",
+          "image_search_url": "https://www.bing.com/images/search?q=Siena+Tuscany",
+          "description": "锡耶纳老城（Siena Tuscany）是意大利托斯卡纳乡村的著名景点。",
+          "tips": ""
+        },
+        {
+          "id": "san-gimignano-j32s",
+          "name": "圣吉米尼亚诺",
+          "nameEn": "San Gimignano",
+          "type": "landmark",
+          "image": "place-0271864dc33b",
+          "image_search_url": "https://www.bing.com/images/search?q=San+Gimignano",
+          "description": "圣吉米尼亚诺（San Gimignano）是意大利托斯卡纳乡村的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-5a41",
+      "name": "阿玛尔菲海岸",
+      "nameEn": "Coast",
+      "lat": 40.633,
+      "lng": 14.6,
+      "attractions": [
+        {
+          "id": "amalfi-coast-miwn",
+          "name": "阿玛尔菲小镇",
+          "nameEn": "Amalfi Coast",
+          "type": "landmark",
+          "image": "place-eaefb69b4067",
+          "image_search_url": "https://www.bing.com/images/search?q=Amalfi+Coast",
+          "description": "阿玛尔菲小镇（Amalfi Coast）是意大利阿玛尔菲海岸的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-e528",
+      "name": "五渔村",
+      "nameEn": "Terre",
+      "lat": 44.127,
+      "lng": 9.709,
+      "attractions": [
+        {
+          "id": "cinque-terre-azev",
+          "name": "五渔村国家公园",
+          "nameEn": "Cinque Terre",
+          "type": "landmark",
+          "image": "place-81559929d531",
+          "image_search_url": "https://www.bing.com/images/search?q=Cinque+Terre",
+          "description": "五渔村国家公园（Cinque Terre）是意大利五渔村的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-19ca",
+      "name": "米兰",
+      "nameEn": "Cathedral",
+      "lat": 45.464,
+      "lng": 9.19,
+      "attractions": [
+        {
+          "id": "milan-cathedral-ak53",
+          "name": "米兰大教堂",
+          "nameEn": "Milan Cathedral",
+          "type": "landmark",
+          "image": "place-28267c83a261",
+          "image_search_url": "https://www.bing.com/images/search?q=Milan+Cathedral",
+          "description": "米兰大教堂（Milan Cathedral）是意大利米兰的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-e0bd",
+      "name": "多洛米蒂山",
+      "nameEn": "Lavaredo",
+      "lat": 46.5,
+      "lng": 12,
+      "attractions": [
+        {
+          "id": "tre-cime-di-lavaredo-3obt",
+          "name": "三峰山",
+          "nameEn": "Tre Cime di Lavaredo",
+          "type": "landmark",
+          "image": "place-3665f05732f4",
+          "image_search_url": "https://www.bing.com/images/search?q=Tre+Cime+di+Lavaredo",
+          "description": "三峰山（Tre Cime di Lavaredo）是意大利多洛米蒂山的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-9bf9",
+      "name": "西西里岛",
+      "nameEn": "Sicily",
+      "lat": 37.5,
+      "lng": 14,
+      "attractions": [
+        {
+          "id": "taormina-sicily-tn44",
+          "name": "陶尔米纳",
+          "nameEn": "Taormina Sicily",
+          "type": "landmark",
+          "image": "place-881d8f134010",
+          "image_search_url": "https://www.bing.com/images/search?q=Taormina+Sicily",
+          "description": "陶尔米纳（Taormina Sicily）是意大利西西里岛的著名景点。",
+          "tips": ""
+        }
+      ]
+    }
+  ]
+}

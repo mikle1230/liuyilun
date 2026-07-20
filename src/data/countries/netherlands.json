@@ -1,0 +1,90 @@
+{
+  "id": "netherlands",
+  "name": "荷兰",
+  "nameEn": "Netherlands",
+  "description": "风车与郁金香的国度，运河与博物馆群",
+  "cities": [
+    {
+      "id": "amsterdam",
+      "name": "阿姆斯特丹",
+      "nameEn": "Amsterdam",
+      "lat": 52.4,
+      "lng": 4.9,
+      "attractions": [
+        {
+          "id": "rijksmuseum",
+          "name": "荷兰国立博物馆",
+          "type": "museum",
+          "image": "photo-1584003564911-5e3a8b54c4e8",
+          "description": "伦勃朗《夜巡》的收藏地",
+          "tips": "下载官方App获取中文语音导览"
+        },
+        {
+          "id": "anne-frank",
+          "name": "安妮·弗兰克之家",
+          "type": "museum",
+          "image": "photo-1605101104528-7fc5a82a4b03",
+          "description": "二战历史的深刻见证",
+          "tips": "门票仅限网上预订"
+        },
+        {
+          "id": "canals",
+          "name": "运河带",
+          "type": "nature",
+          "image": "photo-1534351590666-13e5a00d84ed",
+          "description": "17世纪运河被评为世界遗产",
+          "tips": "黄昏灯光巡游最为浪漫",
+          "image_search_url": "https://www.bing.com/images/search?q=Amsterdam+Canals"
+        },
+        {
+          "id": "van-gogh-museum-0cn8",
+          "name": "梵高博物馆",
+          "nameEn": "Van Gogh Museum",
+          "type": "landmark",
+          "image": "place-cebd763d84cb",
+          "image_search_url": "https://www.bing.com/images/search?q=Van+Gogh+Museum",
+          "description": "梵高博物馆（Van Gogh Museum）是荷兰阿姆斯特丹的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-f03d",
+      "name": "库肯霍夫",
+      "nameEn": "Keukenhof",
+      "lat": 52.27,
+      "lng": 4.547,
+      "attractions": [
+        {
+          "id": "keukenhof-brr3",
+          "name": "库肯霍夫公园",
+          "nameEn": "Keukenhof",
+          "type": "landmark",
+          "image": "place-3d4c4d8832eb",
+          "image_search_url": "https://www.bing.com/images/search?q=Keukenhof",
+          "description": "库肯霍夫公园（Keukenhof）是荷兰库肯霍夫的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-3026",
+      "name": "羊角村",
+      "nameEn": "Giethoorn",
+      "lat": 52.739,
+      "lng": 6.077,
+      "attractions": [
+        {
+          "id": "giethoorn-gu98",
+          "name": "羊角村",
+          "nameEn": "Giethoorn",
+          "type": "landmark",
+          "image": "place-c7c046900e02",
+          "image_search_url": "https://www.bing.com/images/search?q=Giethoorn",
+          "description": "羊角村（Giethoorn）是荷兰羊角村的著名景点。",
+          "tips": ""
+        }
+      ]
+    }
+  ]
+}

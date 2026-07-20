@@ -1,0 +1,89 @@
+{
+  "id": "portugal",
+  "name": "葡萄牙",
+  "nameEn": "Portugal",
+  "description": "大航海时代的起点，彩色瓷砖与陈年美酒",
+  "cities": [
+    {
+      "id": "lisbon",
+      "name": "里斯本",
+      "nameEn": "Lisbon",
+      "lat": 38.7,
+      "lng": -9.1,
+      "attractions": [
+        {
+          "id": "belem-tower",
+          "name": "贝伦塔",
+          "type": "landmark",
+          "image": "photo-1555881400-74d7acaacd8b",
+          "description": "大航海时代的象征",
+          "tips": "与热罗尼莫斯修道院步行可达",
+          "image_search_url": "https://www.bing.com/images/search?q=Belem+Tower"
+        },
+        {
+          "id": "alfama",
+          "name": "阿尔法玛老城",
+          "type": "landmark",
+          "image": "photo-1513735534726-565e2f1be233",
+          "description": "里斯本最古老的街区",
+          "tips": "乘坐28路电车穿行最经典"
+        }
+      ]
+    },
+    {
+      "id": "porto",
+      "name": "波尔图",
+      "nameEn": "Porto",
+      "lat": 41.2,
+      "lng": -8.6,
+      "attractions": [
+        {
+          "id": "douro",
+          "name": "杜罗河谷",
+          "type": "nature",
+          "image": "photo-1558014144-35a2c4b8b4cb",
+          "description": "世界最古老的葡萄酒产区之一",
+          "tips": "建议参加品酒巡游"
+        }
+      ]
+    },
+    {
+      "id": "-491a",
+      "name": "辛特拉",
+      "nameEn": "Sintra",
+      "lat": 38.793,
+      "lng": -9.382,
+      "attractions": [
+        {
+          "id": "pena-palace-sintra-398p",
+          "name": "佩纳宫",
+          "nameEn": "Pena Palace Sintra",
+          "type": "landmark",
+          "image": "place-416b560ff818",
+          "image_search_url": "https://www.bing.com/images/search?q=Pena+Palace",
+          "description": "佩纳宫（Pena Palace Sintra）是葡萄牙辛特拉的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-0c92",
+      "name": "阿尔加维",
+      "nameEn": "Cave",
+      "lat": 37,
+      "lng": -8,
+      "attractions": [
+        {
+          "id": "benagil-cave-7lwr",
+          "name": "贝纳吉尔海洞",
+          "nameEn": "Benagil Cave",
+          "type": "landmark",
+          "image": "place-4f1b0639ba00",
+          "image_search_url": "https://www.bing.com/images/search?q=Benagil+Cave",
+          "description": "贝纳吉尔海洞（Benagil Cave）是葡萄牙阿尔加维的著名景点。",
+          "tips": ""
+        }
+      ]
+    }
+  ]
+}

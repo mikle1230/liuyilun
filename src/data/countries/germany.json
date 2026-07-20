@@ -1,0 +1,182 @@
+{
+  "id": "germany",
+  "name": "德国",
+  "nameEn": "Germany",
+  "description": "欧洲的经济引擎，从柏林的历史厚重到巴伐利亚的童话城堡",
+  "cities": [
+    {
+      "id": "berlin",
+      "name": "柏林",
+      "nameEn": "Berlin",
+      "lat": 52.5,
+      "lng": 13.4,
+      "attractions": [
+        {
+          "id": "brandenburg-gate",
+          "name": "勃兰登堡门",
+          "type": "landmark",
+          "image": "photo-1560969184-10fe8719e047",
+          "description": "德国统一的象征，新古典主义风格城门",
+          "tips": "巴黎广场周围集中了多个景点",
+          "image_search_url": "https://www.bing.com/images/search?q=Brandenburg+Gate"
+        },
+        {
+          "id": "museum-island",
+          "name": "博物馆岛",
+          "type": "museum",
+          "image": "photo-1516315720917-631e3f52039c",
+          "description": "施普雷河上的五座世界级博物馆群",
+          "tips": "通票可参观全部五馆"
+        },
+        {
+          "id": "berlin-wall",
+          "name": "柏林墙遗址",
+          "type": "landmark",
+          "image": "photo-1528728329032-2972f65dfb3f",
+          "description": "冷战历史的凝固记忆，东边画廊有最长的露天壁画群",
+          "tips": "全天免费开放"
+        },
+        {
+          "id": "berlin-wall-east-side-gallery-c0hg",
+          "name": "柏林墙遗迹",
+          "nameEn": "Berlin Wall East Side Gallery",
+          "type": "landmark",
+          "image": "place-b5bf29d97021",
+          "image_search_url": "https://www.bing.com/images/search?q=Berlin+Wall",
+          "description": "柏林墙遗迹（Berlin Wall East Side Gallery）是德国柏林的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "munich",
+      "name": "慕尼黑",
+      "nameEn": "Munich",
+      "lat": 48.1,
+      "lng": 11.6,
+      "attractions": [
+        {
+          "id": "neuschwanstein",
+          "name": "新天鹅堡",
+          "type": "landmark",
+          "image": "photo-1439066290691-510176234120",
+          "description": "迪士尼城堡的原型，路德维希二世的童话城堡",
+          "tips": "距慕尼黑约2小时车程，务必提前预约门票"
+        },
+        {
+          "id": "marienplatz",
+          "name": "玛利亚广场",
+          "type": "landmark",
+          "image": "photo-1467269204594-9661b134dd2b",
+          "description": "慕尼黑的心脏，新市政厅木偶钟每天定时表演",
+          "tips": "上午11点和中午12点有木偶表演"
+        },
+        {
+          "id": "nymphenburg-palace-bfyr",
+          "name": "宁芬堡宫",
+          "nameEn": "Nymphenburg Palace",
+          "type": "landmark",
+          "image": "place-ef33692c1f70",
+          "image_search_url": "https://www.bing.com/images/search?q=Nymphenburg+Palace",
+          "description": "宁芬堡宫（Nymphenburg Palace）是德国慕尼黑的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-c61a",
+      "name": "菲森",
+      "nameEn": "Castle",
+      "lat": 47.571,
+      "lng": 10.701,
+      "attractions": [
+        {
+          "id": "neuschwanstein-castle-1ang",
+          "name": "新天鹅堡",
+          "nameEn": "Neuschwanstein Castle",
+          "type": "landmark",
+          "image": "place-f481a0dec865",
+          "image_search_url": "https://www.bing.com/images/search?q=Neuschwanstein+Castle",
+          "description": "新天鹅堡（Neuschwanstein Castle）是德国菲森的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-ebe9",
+      "name": "科隆",
+      "nameEn": "Cathedral",
+      "lat": 50.938,
+      "lng": 6.96,
+      "attractions": [
+        {
+          "id": "cologne-cathedral-b1wh",
+          "name": "科隆大教堂",
+          "nameEn": "Cologne Cathedral",
+          "type": "landmark",
+          "image": "place-66f25054822f",
+          "image_search_url": "https://www.bing.com/images/search?q=Cologne+Cathedral",
+          "description": "科隆大教堂（Cologne Cathedral）是德国科隆的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-4a8b",
+      "name": "罗滕堡",
+      "nameEn": "Tauber",
+      "lat": 49.38,
+      "lng": 10.188,
+      "attractions": [
+        {
+          "id": "rothenburg-ob-der-tauber-jfdz",
+          "name": "罗滕堡",
+          "nameEn": "Rothenburg ob der Tauber",
+          "type": "landmark",
+          "image": "place-bfa1a12bf1f0",
+          "image_search_url": "https://www.bing.com/images/search?q=Rothenburg+ob+der+Tauber",
+          "description": "罗滕堡（Rothenburg ob der Tauber）是德国罗滕堡的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-d54d",
+      "name": "汉堡",
+      "nameEn": "Hamburg",
+      "lat": 53.551,
+      "lng": 9.994,
+      "attractions": [
+        {
+          "id": "speicherstadt-hamburg-lebh",
+          "name": "汉堡仓库城",
+          "nameEn": "Speicherstadt Hamburg",
+          "type": "landmark",
+          "image": "place-9448500cbc41",
+          "image_search_url": "https://www.bing.com/images/search?q=Speicherstadt+Hamburg",
+          "description": "汉堡仓库城（Speicherstadt Hamburg）是德国汉堡的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-66d4",
+      "name": "海德堡",
+      "nameEn": "Castle",
+      "lat": 49.398,
+      "lng": 8.672,
+      "attractions": [
+        {
+          "id": "heidelberg-castle-jrp1",
+          "name": "海德堡城堡",
+          "nameEn": "Heidelberg Castle",
+          "type": "landmark",
+          "image": "place-f6550578eddb",
+          "image_search_url": "https://www.bing.com/images/search?q=Heidelberg+Castle",
+          "description": "海德堡城堡（Heidelberg Castle）是德国海德堡的著名景点。",
+          "tips": ""
+        }
+      ]
+    }
+  ]
+}

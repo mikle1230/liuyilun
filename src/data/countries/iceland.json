@@ -1,0 +1,65 @@
+{
+  "id": "iceland",
+  "name": "冰岛",
+  "nameEn": "Iceland",
+  "description": "",
+  "cities": [
+    {
+      "id": "-aaeb",
+      "name": "雷克雅未克",
+      "nameEn": "Reykjavik",
+      "lat": 64.147,
+      "lng": -21.942,
+      "attractions": [
+        {
+          "id": "hallgrimskirkja-reykjavik-dzqg",
+          "name": "哈尔格林姆教堂",
+          "nameEn": "Hallgrimskirkja Reykjavik",
+          "type": "landmark",
+          "image": "place-7d7f08563141",
+          "image_search_url": "https://www.bing.com/images/search?q=Hallgrimskirkja",
+          "description": "哈尔格林姆教堂（Hallgrimskirkja Reykjavik）是冰岛雷克雅未克的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-fff1",
+      "name": "黄金圈",
+      "nameEn": "Iceland",
+      "lat": 64.3,
+      "lng": -20.3,
+      "attractions": [
+        {
+          "id": "geysir-iceland-t9qs",
+          "name": "间歇泉",
+          "nameEn": "Geysir Iceland",
+          "type": "landmark",
+          "image": "place-2a8ff9d8e523",
+          "image_search_url": "https://www.bing.com/images/search?q=Geysir+Iceland",
+          "description": "间歇泉（Geysir Iceland）是冰岛黄金圈的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-70ba",
+      "name": "维克",
+      "nameEn": "Beach",
+      "lat": 63.419,
+      "lng": -19.008,
+      "attractions": [
+        {
+          "id": "reynisfjara-black-sand-beach-0xjr",
+          "name": "黑沙滩",
+          "nameEn": "Reynisfjara Black Sand Beach",
+          "type": "landmark",
+          "image": "place-3f963d9f3b54",
+          "image_search_url": "https://www.bing.com/images/search?q=Reynisfjara+Beach",
+          "description": "黑沙滩（Reynisfjara Black Sand Beach）是冰岛维克的著名景点。",
+          "tips": ""
+        }
+      ]
+    }
+  ]
+}

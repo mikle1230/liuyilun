@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-M 的个人知识枢纽 — 博客、AI 学习收集、欧洲旅行知识库、个人履历。明亮舒适、日式侘寂风视觉、多页设计。
+The Place — 博客和AI学习收集、欧洲旅行知识库、壁纸、个人履历。明亮舒适、多页设计。
 
 ## Commands
 

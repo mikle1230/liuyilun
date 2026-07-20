@@ -1,0 +1,202 @@
+{
+  "id": "france",
+  "name": "法国",
+  "nameEn": "France",
+  "description": "浪漫与艺术之都，拥有世界顶级的博物馆、美食与葡萄酒文化",
+  "cities": [
+    {
+      "id": "paris",
+      "name": "巴黎",
+      "nameEn": "Paris",
+      "lat": 48.9,
+      "lng": 2.3,
+      "attractions": [
+        {
+          "id": "eiffel",
+          "name": "埃菲尔铁塔",
+          "type": "landmark",
+          "image": "photo-1543349689-3a4d29968ca8",
+          "description": "巴黎的标志性建筑，高324米，夜晚灯光秀尤为壮观",
+          "tips": "建议黄昏时分登塔，可同时欣赏日景与夜景",
+          "image_search_url": "https://www.bing.com/images/search?q=Eiffel+Tower+Paris"
+        },
+        {
+          "id": "louvre",
+          "name": "卢浮宫",
+          "type": "museum",
+          "image": "photo-1499856871958-5b9627545d1a",
+          "description": "世界最大的艺术博物馆，收藏蒙娜丽莎等35,000件艺术品",
+          "tips": "周三/周五晚间开放至21:45",
+          "image_search_url": "https://www.bing.com/images/search?q=Louvre+Museum+Paris"
+        },
+        {
+          "id": "notre-dame",
+          "name": "巴黎圣母院",
+          "type": "landmark",
+          "image": "photo-1503264116251-35a269479413",
+          "description": "哥特式建筑巅峰之作",
+          "tips": "可在广场外围拍摄全景"
+        },
+        {
+          "id": "versailles",
+          "name": "凡尔赛宫",
+          "type": "landmark",
+          "image": "photo-1548013146-72479768bada",
+          "description": "法国王权的极致象征，镜厅举世闻名",
+          "tips": "建议预留一整天，周二闭馆"
+        },
+        {
+          "id": "arc-de-triomphe-af6t",
+          "name": "凯旋门",
+          "nameEn": "Arc de Triomphe",
+          "type": "landmark",
+          "image": "place-bdb61c78ce2d",
+          "image_search_url": "https://www.bing.com/images/search?q=Arc+de+Triomphe+Paris",
+          "description": "凯旋门（Arc de Triomphe）是法国巴黎的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "nice",
+      "name": "尼斯",
+      "nameEn": "Nice",
+      "lat": 43.7,
+      "lng": 7.3,
+      "attractions": [
+        {
+          "id": "promenade",
+          "name": "英国人漫步大道",
+          "type": "nature",
+          "image": "photo-1533104816931-20fa691ff6ca",
+          "description": "沿地中海延伸7公里的海滨大道",
+          "tips": "适合清晨慢跑或傍晚散步"
+        },
+        {
+          "id": "promenade-des-anglais-nice-s1wa",
+          "name": "尼斯旧城与天使湾",
+          "nameEn": "Promenade des Anglais Nice",
+          "type": "landmark",
+          "image": "place-09772a4dec37",
+          "image_search_url": "https://www.bing.com/images/search?q=Promenade+des+Anglais+Nice",
+          "description": "尼斯旧城与天使湾（Promenade des Anglais Nice）是法国尼斯的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-105b",
+      "name": "凡尔赛",
+      "nameEn": "Versailles",
+      "lat": 48.804,
+      "lng": 2.12,
+      "attractions": [
+        {
+          "id": "palace-of-versailles-8gw6",
+          "name": "凡尔赛宫",
+          "nameEn": "Palace of Versailles",
+          "type": "landmark",
+          "image": "place-184ec830a77c",
+          "image_search_url": "https://www.bing.com/images/search?q=Palace+of+Versailles",
+          "description": "凡尔赛宫（Palace of Versailles）是法国凡尔赛的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-b670",
+      "name": "圣米歇尔山",
+      "nameEn": "Saint-Michel",
+      "lat": 48.636,
+      "lng": -1.511,
+      "attractions": [
+        {
+          "id": "mont-saint-michel-45to",
+          "name": "圣米歇尔山及其海湾",
+          "nameEn": "Mont Saint-Michel",
+          "type": "landmark",
+          "image": "place-700d9d4463f7",
+          "image_search_url": "https://www.bing.com/images/search?q=Mont+Saint-Michel",
+          "description": "圣米歇尔山及其海湾（Mont Saint-Michel）是法国圣米歇尔山的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-b6e5",
+      "name": "阿维尼翁",
+      "nameEn": "Avignon",
+      "lat": 43.949,
+      "lng": 4.806,
+      "attractions": [
+        {
+          "id": "palais-des-papes-avignon-rmor",
+          "name": "阿维尼翁教皇宫",
+          "nameEn": "Palais des Papes Avignon",
+          "type": "landmark",
+          "image": "place-35ddc6e7aa25",
+          "image_search_url": "https://www.bing.com/images/search?q=Palais+des+Papes+Avignon",
+          "description": "阿维尼翁教皇宫（Palais des Papes Avignon）是法国阿维尼翁的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-48d5",
+      "name": "卢瓦尔河谷",
+      "nameEn": "Chenonceau",
+      "lat": 47.4,
+      "lng": 0.7,
+      "attractions": [
+        {
+          "id": "chateau-de-chenonceau-iwe9",
+          "name": "舍农索城堡",
+          "nameEn": "Chateau de Chenonceau",
+          "type": "landmark",
+          "image": "place-394eb88da3c5",
+          "image_search_url": "https://www.bing.com/images/search?q=Chateau+de+Chenonceau",
+          "description": "舍农索城堡（Chateau de Chenonceau）是法国卢瓦尔河谷的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-e674",
+      "name": "科尔马",
+      "nameEn": "Town",
+      "lat": 48.081,
+      "lng": 7.355,
+      "attractions": [
+        {
+          "id": "colmar-old-town-xy3n",
+          "name": "科尔马老城与木筋屋",
+          "nameEn": "Colmar Old Town",
+          "type": "landmark",
+          "image": "place-392051a939c9",
+          "image_search_url": "https://www.bing.com/images/search?q=Colmar+Old+Town",
+          "description": "科尔马老城与木筋屋（Colmar Old Town）是法国科尔马的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-b950",
+      "name": "里昂",
+      "nameEn": "Lyon",
+      "lat": 45.764,
+      "lng": 4.836,
+      "attractions": [
+        {
+          "id": "vieux-lyon-21uw",
+          "name": "里昂老城",
+          "nameEn": "Vieux Lyon",
+          "type": "landmark",
+          "image": "place-c8ed6560a47c",
+          "image_search_url": "https://www.bing.com/images/search?q=Vieux+Lyon",
+          "description": "里昂老城（Vieux Lyon）是法国里昂的著名景点。",
+          "tips": ""
+        }
+      ]
+    }
+  ]
+}

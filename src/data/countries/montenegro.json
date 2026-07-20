@@ -1,0 +1,27 @@
+{
+  "id": "montenegro",
+  "name": "黑山",
+  "nameEn": "Montenegro",
+  "description": "",
+  "cities": [
+    {
+      "id": "-6933",
+      "name": "科托尔",
+      "nameEn": "Town",
+      "lat": 42.424,
+      "lng": 18.771,
+      "attractions": [
+        {
+          "id": "kotor-old-town-kth5",
+          "name": "科托尔老城",
+          "nameEn": "Kotor Old Town",
+          "type": "landmark",
+          "image": "place-d00e7932ee6b",
+          "image_search_url": "https://www.bing.com/images/search?q=Kotor+Old+Town",
+          "description": "科托尔老城（Kotor Old Town）是黑山科托尔的著名景点。",
+          "tips": ""
+        }
+      ]
+    }
+  ]
+}

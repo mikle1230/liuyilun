@@ -1,0 +1,164 @@
+{
+  "id": "spain",
+  "name": "西班牙",
+  "nameEn": "Spain",
+  "description": "热情奔放的弗拉门戈、高迪建筑、地中海美食的完美结合",
+  "cities": [
+    {
+      "id": "barcelona",
+      "name": "巴塞罗那",
+      "nameEn": "Barcelona",
+      "lat": 41.4,
+      "lng": 2.2,
+      "attractions": [
+        {
+          "id": "sagrada",
+          "name": "圣家堂",
+          "type": "landmark",
+          "image": "photo-1583779457094-ab6cdaf2c5d0",
+          "description": "高迪未完成的旷世巨作",
+          "tips": "需提前数周预订门票",
+          "image_search_url": "https://www.bing.com/images/search?q=Sagrada+Familia"
+        },
+        {
+          "id": "park-guell",
+          "name": "桂尔公园",
+          "type": "landmark",
+          "image": "photo-1523531294919-4bcd7c65e216",
+          "description": "高迪的童话花园，马赛克蜥蜴喷泉是标志",
+          "tips": "核心区需购票，外围区域免费"
+        },
+        {
+          "id": "park-guell-fd9m",
+          "name": "帕克 Güell",
+          "nameEn": "Park Guell",
+          "type": "landmark",
+          "image": "place-18a65fc304e5",
+          "image_search_url": "https://www.bing.com/images/search?q=Park+Guell",
+          "description": "帕克 Güell（Park Guell）是西班牙巴塞罗那的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "madrid",
+      "name": "马德里",
+      "nameEn": "Madrid",
+      "lat": 40.4,
+      "lng": -3.7,
+      "attractions": [
+        {
+          "id": "prado",
+          "name": "普拉多博物馆",
+          "type": "museum",
+          "image": "photo-1517420697766-ab15a96f9108",
+          "description": "西班牙最重要的艺术殿堂",
+          "tips": "周一至周六18:00-20:00免费",
+          "image_search_url": "https://www.bing.com/images/search?q=Prado+Museum"
+        },
+        {
+          "id": "royal-palace",
+          "name": "马德里王宫",
+          "type": "landmark",
+          "image": "photo-1559563458-527698bbf6b0",
+          "description": "欧洲最大的仍在使用的王宫",
+          "tips": "官方活动日不对外开放"
+        }
+      ]
+    },
+    {
+      "id": "granada",
+      "name": "格拉纳达",
+      "nameEn": "Granada",
+      "lat": 37.2,
+      "lng": -3.6,
+      "attractions": [
+        {
+          "id": "alhambra",
+          "name": "阿尔罕布拉宫",
+          "type": "landmark",
+          "image": "photo-1517142526733-541e95b61ceb",
+          "description": "摩尔人在欧洲最后的宫殿",
+          "tips": "门票极为抢手，至少提前一月预订",
+          "image_search_url": "https://www.bing.com/images/search?q=Alhambra+Granada"
+        }
+      ]
+    },
+    {
+      "id": "-7aff",
+      "name": "圣地亚哥-德孔波斯特拉",
+      "nameEn": "Compostela",
+      "lat": 42.878,
+      "lng": -8.544,
+      "attractions": [
+        {
+          "id": "santiago-de-compostela-ybux",
+          "name": "圣地亚哥-德孔波斯特拉老城",
+          "nameEn": "Santiago de Compostela",
+          "type": "landmark",
+          "image": "place-0a2cc9fa440e",
+          "image_search_url": "https://www.bing.com/images/search?q=Santiago+de+Compostela",
+          "description": "圣地亚哥-德孔波斯特拉老城（Santiago de Compostela）是西班牙圣地亚哥-德孔波斯特拉的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-2f32",
+      "name": "托莱多",
+      "nameEn": "Spain",
+      "lat": 39.857,
+      "lng": -4.024,
+      "attractions": [
+        {
+          "id": "toledo-spain-2jcl",
+          "name": "托莱多古城",
+          "nameEn": "Toledo Spain",
+          "type": "landmark",
+          "image": "place-a04724105b9d",
+          "image_search_url": "https://www.bing.com/images/search?q=Toledo+Spain",
+          "description": "托莱多古城（Toledo Spain）是西班牙托莱多的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-1b06",
+      "name": "科尔多瓦",
+      "nameEn": "Cordoba",
+      "lat": 37.888,
+      "lng": -4.779,
+      "attractions": [
+        {
+          "id": "mezquita-cordoba-rjgy",
+          "name": "科尔多瓦大清真寺-主教座堂",
+          "nameEn": "Mezquita Cordoba",
+          "type": "landmark",
+          "image": "place-58a35290f27e",
+          "image_search_url": "https://www.bing.com/images/search?q=Mezquita+Cordoba",
+          "description": "科尔多瓦大清真寺-主教座堂（Mezquita Cordoba）是西班牙科尔多瓦的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-11cc",
+      "name": "毕尔巴鄂",
+      "nameEn": "Bilbao",
+      "lat": 43.263,
+      "lng": -2.935,
+      "attractions": [
+        {
+          "id": "guggenheim-museum-bilbao-7yvg",
+          "name": "毕尔巴鄂古根海姆博物馆",
+          "nameEn": "Guggenheim Museum Bilbao",
+          "type": "landmark",
+          "image": "place-c79b79c8f742",
+          "image_search_url": "https://www.bing.com/images/search?q=Guggenheim+Bilbao",
+          "description": "毕尔巴鄂古根海姆博物馆（Guggenheim Museum Bilbao）是西班牙毕尔巴鄂的著名景点。",
+          "tips": ""
+        }
+      ]
+    }
+  ]
+}

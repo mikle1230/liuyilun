@@ -1,0 +1,27 @@
+{
+  "id": "estonia",
+  "name": "爱沙尼亚",
+  "nameEn": "Estonia",
+  "description": "",
+  "cities": [
+    {
+      "id": "-848c",
+      "name": "塔林",
+      "nameEn": "Town",
+      "lat": 59.437,
+      "lng": 24.754,
+      "attractions": [
+        {
+          "id": "tallinn-old-town-diei",
+          "name": "塔林老城",
+          "nameEn": "Tallinn Old Town",
+          "type": "landmark",
+          "image": "place-09d6d84ce7ce",
+          "image_search_url": "https://www.bing.com/images/search?q=Tallinn+Old+Town",
+          "description": "塔林老城（Tallinn Old Town）是爱沙尼亚塔林的著名景点。",
+          "tips": ""
+        }
+      ]
+    }
+  ]
+}

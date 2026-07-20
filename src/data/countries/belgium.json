@@ -1,0 +1,91 @@
+{
+  "id": "belgium",
+  "name": "比利时",
+  "nameEn": "Belgium",
+  "description": "欧洲的心脏，中世纪广场与精酿啤酒",
+  "cities": [
+    {
+      "id": "brussels",
+      "name": "布鲁塞尔",
+      "nameEn": "Brussels",
+      "lat": 50.8,
+      "lng": 4.4,
+      "attractions": [
+        {
+          "id": "grand-place",
+          "name": "布鲁塞尔大广场",
+          "type": "landmark",
+          "image": "photo-1491557345352-5929e343eb89",
+          "description": "被雨果誉为欧洲最美广场",
+          "tips": "每两年八月有鲜花地毯节"
+        },
+        {
+          "id": "grand-place-brussels-k2p3",
+          "name": "大广场",
+          "nameEn": "Grand Place Brussels",
+          "type": "landmark",
+          "image": "place-d4c15bcb652b",
+          "image_search_url": "https://www.bing.com/images/search?q=Grand+Place+Brussels",
+          "description": "大广场（Grand Place Brussels）是比利时布鲁塞尔的著名景点。",
+          "tips": ""
+        },
+        {
+          "id": "atomium-v9wc",
+          "name": "原子球塔",
+          "nameEn": "Atomium",
+          "type": "landmark",
+          "image": "place-37de3d815053",
+          "image_search_url": "https://www.bing.com/images/search?q=Atomium",
+          "description": "原子球塔（Atomium）是比利时布鲁塞尔的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "bruges",
+      "name": "布鲁日",
+      "nameEn": "Bruges",
+      "lat": 51.2,
+      "lng": 3.2,
+      "attractions": [
+        {
+          "id": "bruges-canals",
+          "name": "布鲁日运河",
+          "type": "nature",
+          "image": "photo-1491557345352-5929e343eb89",
+          "description": "保存最完整的中世纪古城",
+          "tips": "从火车站步行15分钟到老城"
+        },
+        {
+          "id": "bruges-historic-centre-j2od",
+          "name": "布鲁日历史中心",
+          "nameEn": "Bruges Historic Centre",
+          "type": "landmark",
+          "image": "place-9fb295f12d14",
+          "image_search_url": "https://www.bing.com/images/search?q=Bruges+Belgium",
+          "description": "布鲁日历史中心（Bruges Historic Centre）是比利时布鲁日的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-657e",
+      "name": "根特",
+      "nameEn": "Center",
+      "lat": 51.054,
+      "lng": 3.725,
+      "attractions": [
+        {
+          "id": "ghent-city-center-8whm",
+          "name": "根特老城",
+          "nameEn": "Ghent City Center",
+          "type": "landmark",
+          "image": "place-1eed96708af0",
+          "image_search_url": "https://www.bing.com/images/search?q=Ghent+Belgium",
+          "description": "根特老城（Ghent City Center）是比利时根特的著名景点。",
+          "tips": ""
+        }
+      ]
+    }
+  ]
+}

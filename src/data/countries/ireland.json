@@ -1,0 +1,33 @@
+{
+  "id": "ireland",
+  "name": "爱尔兰",
+  "nameEn": "Ireland",
+  "description": "翡翠岛国，凯尔特文化与威士忌的故乡",
+  "cities": [
+    {
+      "id": "dublin",
+      "name": "都柏林",
+      "nameEn": "Dublin",
+      "lat": 53.3,
+      "lng": -6.3,
+      "attractions": [
+        {
+          "id": "trinity-library",
+          "name": "圣三一学院图书馆",
+          "type": "museum",
+          "image": "photo-1548199973-03cce0bbc87b",
+          "description": "《凯尔经》的收藏地",
+          "tips": "上午早到避开旅行团"
+        },
+        {
+          "id": "cliffs-moher",
+          "name": "莫赫悬崖",
+          "type": "nature",
+          "image": "photo-1564065384079-0cd2ade5ee3d",
+          "description": "高出大西洋214米的海崖",
+          "tips": "从都柏林出发约3小时车程"
+        }
+      ]
+    }
+  ]
+}

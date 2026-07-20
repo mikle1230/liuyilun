@@ -1,0 +1,60 @@
+{
+  "id": "norway",
+  "name": "挪威",
+  "nameEn": "Norway",
+  "description": "峡湾之国，壮丽的自然风光与北极光",
+  "cities": [
+    {
+      "id": "oslo",
+      "name": "奥斯陆",
+      "nameEn": "Oslo",
+      "lat": 59.9,
+      "lng": 10.8,
+      "attractions": [
+        {
+          "id": "opera-house",
+          "name": "奥斯陆歌剧院",
+          "type": "landmark",
+          "image": "photo-1513519245088-0e12902e35ca",
+          "description": "白色大理石建筑从峡湾中升起",
+          "tips": "屋顶24小时开放"
+        }
+      ]
+    },
+    {
+      "id": "bergen",
+      "name": "卑尔根",
+      "nameEn": "Bergen",
+      "lat": 60.4,
+      "lng": 5.3,
+      "attractions": [
+        {
+          "id": "bryggen",
+          "name": "布吕根码头",
+          "type": "landmark",
+          "image": "photo-1554110397-9ce02c7e5877",
+          "description": "汉萨同盟时期的彩色木屋群",
+          "tips": "从佛罗伊恩山缆车下来步行5分钟"
+        },
+        {
+          "id": "fjord",
+          "name": "挪威峡湾",
+          "type": "nature",
+          "image": "photo-1506034864569-0bbd46e4c9cc",
+          "description": "松恩峡湾是挪威最长最深的峡湾",
+          "tips": "从卑尔根出发可参加一日游轮"
+        },
+        {
+          "id": "bryggen-bergen-8zmp",
+          "name": "布吕根",
+          "nameEn": "Bryggen Bergen",
+          "type": "landmark",
+          "image": "place-808f9d9d88bd",
+          "image_search_url": "https://www.bing.com/images/search?q=Bryggen+Bergen",
+          "description": "布吕根（Bryggen Bergen）是挪威卑尔根的著名景点。",
+          "tips": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "id": "poland",
+  "name": "波兰",
+  "nameEn": "Poland",
+  "description": "欧洲心脏地带，中世纪广场与深刻历史",
+  "cities": [
+    {
+      "id": "krakow",
+      "name": "克拉科夫",
+      "nameEn": "Krakow",
+      "lat": 50.1,
+      "lng": 19.9,
+      "attractions": [
+        {
+          "id": "wawel",
+          "name": "瓦维尔城堡",
+          "type": "landmark",
+          "image": "photo-1519199429512-965503b04ae7",
+          "description": "波兰历代国王的宫殿",
+          "tips": "免费区域有限"
+        },
+        {
+          "id": "auschwitz",
+          "name": "奥斯维辛纪念馆",
+          "type": "museum",
+          "image": "photo-1559650656-5d1d361ad10e",
+          "description": "二战纳粹集中营遗址",
+          "tips": "参观需3-4小时，提前网上预约"
+        }
+      ]
+    },
+    {
+      "id": "warsaw",
+      "name": "华沙",
+      "nameEn": "Warsaw",
+      "lat": 52.2,
+      "lng": 21,
+      "attractions": [
+        {
+          "id": "old-town",
+          "name": "华沙老城",
+          "type": "landmark",
+          "image": "photo-1515586838455-8f8f940d6853",
+          "description": "战后按原貌重建的奇迹",
+          "tips": "夏季有露天音乐会和艺术市集"
+        }
+      ]
+    }
+  ]
+}

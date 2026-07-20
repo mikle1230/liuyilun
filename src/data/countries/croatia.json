@@ -1,0 +1,73 @@
+{
+  "id": "croatia",
+  "name": "克罗地亚",
+  "nameEn": "Croatia",
+  "description": "亚得里亚海的珍珠，中世纪城墙与碧蓝海岸",
+  "cities": [
+    {
+      "id": "dubrovnik",
+      "name": "杜布罗夫尼克",
+      "nameEn": "Dubrovnik",
+      "lat": 42.6,
+      "lng": 18.1,
+      "attractions": [
+        {
+          "id": "city-walls",
+          "name": "古城墙",
+          "type": "landmark",
+          "image": "photo-1555992336-03a23e7b2e96",
+          "description": "权力的游戏君临城取景地",
+          "tips": "建议上午或傍晚走城墙"
+        },
+        {
+          "id": "dubrovnik-old-town-fyht",
+          "name": "杜布罗夫尼克古城",
+          "nameEn": "Dubrovnik Old Town",
+          "type": "landmark",
+          "image": "place-05514d7bb9df",
+          "image_search_url": "https://www.bing.com/images/search?q=Dubrovnik+Old+Town",
+          "description": "杜布罗夫尼克古城（Dubrovnik Old Town）是克罗地亚杜布罗夫尼克的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-b81c",
+      "name": "斯普利特",
+      "nameEn": "Split",
+      "lat": 43.509,
+      "lng": 16.44,
+      "attractions": [
+        {
+          "id": "diocletians-palace-split-kffk",
+          "name": "戴克里先宫",
+          "nameEn": "Diocletians Palace Split",
+          "type": "landmark",
+          "image": "place-4647c60dbdf2",
+          "image_search_url": "https://www.bing.com/images/search?q=Diocletians+Palace",
+          "description": "戴克里先宫（Diocletians Palace Split）是克罗地亚斯普利特的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-7632",
+      "name": "普利特维采湖",
+      "nameEn": "Lakes",
+      "lat": 44.88,
+      "lng": 15.612,
+      "attractions": [
+        {
+          "id": "plitvice-lakes-8zvb",
+          "name": "十六湖国家公园",
+          "nameEn": "Plitvice Lakes",
+          "type": "landmark",
+          "image": "place-e8f7941f832c",
+          "image_search_url": "https://www.bing.com/images/search?q=Plitvice+Lakes",
+          "description": "十六湖国家公园（Plitvice Lakes）是克罗地亚普利特维采湖的著名景点。",
+          "tips": ""
+        }
+      ]
+    }
+  ]
+}

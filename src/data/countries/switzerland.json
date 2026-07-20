@@ -1,0 +1,82 @@
+{
+  "id": "switzerland",
+  "name": "瑞士",
+  "nameEn": "Switzerland",
+  "description": "阿尔卑斯山间的纯净国度，湖光山色与精密钟表",
+  "cities": [
+    {
+      "id": "interlaken",
+      "name": "因特拉肯",
+      "nameEn": "Interlaken",
+      "lat": 46.7,
+      "lng": 7.9,
+      "attractions": [
+        {
+          "id": "jungfrau",
+          "name": "少女峰",
+          "type": "nature",
+          "image": "photo-1530122037265-a5f1f91d3b99",
+          "description": "海拔3454米的欧洲之巅",
+          "tips": "山顶终年积雪需保暖",
+          "image_search_url": "https://www.bing.com/images/search?q=Jungfraujoch"
+        }
+      ]
+    },
+    {
+      "id": "lucerne",
+      "name": "卢塞恩",
+      "nameEn": "Lucerne",
+      "lat": 47.1,
+      "lng": 8.3,
+      "attractions": [
+        {
+          "id": "chapel-bridge",
+          "name": "卡佩尔廊桥",
+          "type": "landmark",
+          "image": "photo-1527668752968-14dc70a27c95",
+          "description": "欧洲最古老的木桥",
+          "tips": "与水塔构成最经典的明信片画面",
+          "image_search_url": "https://www.bing.com/images/search?q=Chapel+Bridge+Lucerne"
+        }
+      ]
+    },
+    {
+      "id": "-3f87",
+      "name": "采尔马特",
+      "nameEn": "Zermatt",
+      "lat": 46.021,
+      "lng": 7.749,
+      "attractions": [
+        {
+          "id": "matterhorn-zermatt-dk28",
+          "name": "马特洪峰",
+          "nameEn": "Matterhorn Zermatt",
+          "type": "landmark",
+          "image": "place-49bdc41d4e5a",
+          "image_search_url": "https://www.bing.com/images/search?q=Matterhorn",
+          "description": "马特洪峰（Matterhorn Zermatt）是瑞士采尔马特的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-419e",
+      "name": "伯尔尼",
+      "nameEn": "Bern",
+      "lat": 46.948,
+      "lng": 7.447,
+      "attractions": [
+        {
+          "id": "old-city-of-bern-40jd",
+          "name": "伯尔尼老城",
+          "nameEn": "Old City of Bern",
+          "type": "landmark",
+          "image": "place-9d65f9610a26",
+          "image_search_url": "https://www.bing.com/images/search?q=Old+City+of+Bern",
+          "description": "伯尔尼老城（Old City of Bern）是瑞士伯尔尼的著名景点。",
+          "tips": ""
+        }
+      ]
+    }
+  ]
+}

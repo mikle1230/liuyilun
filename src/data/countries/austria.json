@@ -1,0 +1,100 @@
+{
+  "id": "austria",
+  "name": "奥地利",
+  "nameEn": "Austria",
+  "description": "音乐与艺术的圣地，阿尔卑斯山脚下的优雅",
+  "cities": [
+    {
+      "id": "vienna",
+      "name": "维也纳",
+      "nameEn": "Vienna",
+      "lat": 48.2,
+      "lng": 16.4,
+      "attractions": [
+        {
+          "id": "schonbrunn",
+          "name": "美泉宫",
+          "type": "landmark",
+          "image": "photo-1516550893923-9f8775b9db19",
+          "description": "哈布斯堡王朝的夏宫",
+          "tips": "花园免费参观",
+          "image_search_url": "https://www.bing.com/images/search?q=Schonbrunn+Palace"
+        },
+        {
+          "id": "belvedere",
+          "name": "美景宫",
+          "type": "museum",
+          "image": "photo-1572947650440-e8a97ef053b2",
+          "description": "收藏克里姆特《吻》的美术馆",
+          "tips": "露台可俯瞰维也纳老城"
+        },
+        {
+          "id": "st-stephen-s-cathedral-vienna-r2zz",
+          "name": "斯蒂芬大教堂",
+          "nameEn": "St. Stephen's Cathedral Vienna",
+          "type": "landmark",
+          "image": "place-1424b57c5be6",
+          "image_search_url": "https://www.bing.com/images/search?q=St+Stephens+Cathedral+Vienna",
+          "description": "斯蒂芬大教堂（St. Stephen's Cathedral Vienna）是奥地利维也纳的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "salzburg",
+      "name": "萨尔茨堡",
+      "nameEn": "Salzburg",
+      "lat": 47.8,
+      "lng": 13,
+      "attractions": [
+        {
+          "id": "hohensalzburg",
+          "name": "萨尔茨堡要塞",
+          "type": "landmark",
+          "image": "photo-1552465011-b4e21bf6e79a",
+          "description": "中欧保存最完整的中世纪城堡",
+          "tips": "可乘缆车或步行登山",
+          "image_search_url": "https://www.bing.com/images/search?q=Hohensalzburg+Fortress"
+        }
+      ]
+    },
+    {
+      "id": "-8291",
+      "name": "哈尔施塔特",
+      "nameEn": "Hallstatt",
+      "lat": 47.56,
+      "lng": 13.649,
+      "attractions": [
+        {
+          "id": "hallstatt-xzvh",
+          "name": "哈尔施塔特",
+          "nameEn": "Hallstatt",
+          "type": "landmark",
+          "image": "place-6c77351074b8",
+          "image_search_url": "https://www.bing.com/images/search?q=Hallstatt+Austria",
+          "description": "哈尔施塔特（Hallstatt）是奥地利哈尔施塔特的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-fa41",
+      "name": "因斯布鲁克",
+      "nameEn": "Innsbruck",
+      "lat": 47.268,
+      "lng": 11.395,
+      "attractions": [
+        {
+          "id": "goldenes-dachl-innsbruck-jsgc",
+          "name": "黄金屋顶",
+          "nameEn": "Goldenes Dachl Innsbruck",
+          "type": "landmark",
+          "image": "place-1008cfc5bbb8",
+          "image_search_url": "https://www.bing.com/images/search?q=Golden Roof+Innsbruck",
+          "description": "黄金屋顶（Goldenes Dachl Innsbruck）是奥地利因斯布鲁克的著名景点。",
+          "tips": ""
+        }
+      ]
+    }
+  ]
+}

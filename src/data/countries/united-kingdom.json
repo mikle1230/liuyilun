@@ -1,0 +1,195 @@
+{
+  "id": "united-kingdom",
+  "name": "英国",
+  "nameEn": "United Kingdom",
+  "description": "大英帝国的遗产，从伦敦的摩登到苏格兰高地的苍茫，文化与自然交织",
+  "cities": [
+    {
+      "id": "london",
+      "name": "伦敦",
+      "nameEn": "London",
+      "lat": 51.5,
+      "lng": -0.1,
+      "attractions": [
+        {
+          "id": "big-ben",
+          "name": "大本钟",
+          "type": "landmark",
+          "image": "photo-1500380804539-4e1e8c1e7140",
+          "description": "伦敦乃至整个英国的象征，哥特式钟楼伫立于泰晤士河畔",
+          "tips": "国会大厦内部仅在特定时间开放",
+          "image_search_url": "https://www.bing.com/images/search?q=Big+Ben+London"
+        },
+        {
+          "id": "british-museum",
+          "name": "大英博物馆",
+          "type": "museum",
+          "image": "photo-1533319418398-7c6c2e8ccc5c",
+          "description": "收藏超过800万件文物，罗塞塔石碑为镇馆之宝",
+          "tips": "免费入场，建议预留至少3小时",
+          "image_search_url": "https://www.bing.com/images/search?q=British+Museum"
+        },
+        {
+          "id": "tower-bridge",
+          "name": "塔桥",
+          "type": "landmark",
+          "image": "photo-1513635269979-59663e0ac1ad",
+          "description": "横跨泰晤士河的标志性开合桥",
+          "tips": "傍晚时分拍摄最佳"
+        },
+        {
+          "id": "tower-bridge-zlcm",
+          "name": "伦敦塔桥",
+          "nameEn": "Tower Bridge",
+          "type": "landmark",
+          "image": "place-e79f4042b5e3",
+          "image_search_url": "https://www.bing.com/images/search?q=Tower+Bridge+London",
+          "description": "伦敦塔桥（Tower Bridge）是英国伦敦的著名景点。",
+          "tips": ""
+        },
+        {
+          "id": "tower-of-london-qs0j",
+          "name": "伦敦塔",
+          "nameEn": "Tower of London",
+          "type": "landmark",
+          "image": "place-9baddb28c0cb",
+          "image_search_url": "https://www.bing.com/images/search?q=Tower+of+London",
+          "description": "伦敦塔（Tower of London）是英国伦敦的著名景点。",
+          "tips": ""
+        },
+        {
+          "id": "westminster-abbey-2qot",
+          "name": "威斯敏斯特教堂",
+          "nameEn": "Westminster Abbey",
+          "type": "landmark",
+          "image": "place-651e54ae23a5",
+          "image_search_url": "https://www.bing.com/images/search?q=Westminster+Abbey",
+          "description": "威斯敏斯特教堂（Westminster Abbey）是英国伦敦的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "edinburgh",
+      "name": "爱丁堡",
+      "nameEn": "Edinburgh",
+      "lat": 55.9,
+      "lng": -3.2,
+      "attractions": [
+        {
+          "id": "edinburgh-castle",
+          "name": "爱丁堡城堡",
+          "type": "landmark",
+          "image": "photo-1549925240-8b46e0a3d4b2",
+          "description": "建在死火山岩顶的古堡，苏格兰的精神象征",
+          "tips": "八月军乐节期间人流量极大",
+          "image_search_url": "https://www.bing.com/images/search?q=Edinburgh+Castle"
+        },
+        {
+          "id": "royal-mile",
+          "name": "皇家一英里",
+          "type": "landmark",
+          "image": "photo-1551727974-8ee5c0b76a04",
+          "description": "连接城堡和荷里路德宫的老城街道",
+          "tips": "沿途有许多免费参观的庭院和博物馆",
+          "image_search_url": "https://www.bing.com/images/search?q=Royal+Mile+Edinburgh"
+        }
+      ]
+    },
+    {
+      "id": "-24ea",
+      "name": "索尔兹伯里",
+      "nameEn": "Stonehenge",
+      "lat": 51.069,
+      "lng": -1.794,
+      "attractions": [
+        {
+          "id": "stonehenge-1s74",
+          "name": "巨石阵",
+          "nameEn": "Stonehenge",
+          "type": "landmark",
+          "image": "place-55f660030042",
+          "image_search_url": "https://www.bing.com/images/search?q=Stonehenge",
+          "description": "巨石阵（Stonehenge）是英国索尔兹伯里的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-a3a6",
+      "name": "湖区",
+      "nameEn": "Windermere",
+      "lat": 54.5,
+      "lng": -3,
+      "attractions": [
+        {
+          "id": "lake-district-windermere-n7cv",
+          "name": "温德米尔",
+          "nameEn": "Lake District Windermere",
+          "type": "landmark",
+          "image": "place-c8e214b6b8d9",
+          "image_search_url": "https://www.bing.com/images/search?q=Lake+District+Windermere",
+          "description": "温德米尔（Lake District Windermere）是英国湖区的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-7f29",
+      "name": "约克",
+      "nameEn": "Minster",
+      "lat": 53.959,
+      "lng": -1.082,
+      "attractions": [
+        {
+          "id": "york-minster-1cmb",
+          "name": "约克大教堂",
+          "nameEn": "York Minster",
+          "type": "landmark",
+          "image": "place-fe584a8d9a2c",
+          "image_search_url": "https://www.bing.com/images/search?q=York+Minster",
+          "description": "约克大教堂（York Minster）是英国约克的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-3eaf",
+      "name": "科茨沃尔德",
+      "nameEn": "Bourton-on-the-Water",
+      "lat": 51.833,
+      "lng": -1.833,
+      "attractions": [
+        {
+          "id": "bourton-on-the-water-0e0y",
+          "name": "水上伯顿",
+          "nameEn": "Bourton-on-the-Water",
+          "type": "landmark",
+          "image": "place-c20c42759308",
+          "image_search_url": "https://www.bing.com/images/search?q=Bourton-on-the-Water",
+          "description": "水上伯顿（Bourton-on-the-Water）是英国科茨沃尔德的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-c7da",
+      "name": "巴斯",
+      "nameEn": "Baths",
+      "lat": 51.382,
+      "lng": -2.359,
+      "attractions": [
+        {
+          "id": "roman-baths-dqc2",
+          "name": "罗马浴场",
+          "nameEn": "Roman Baths",
+          "type": "landmark",
+          "image": "place-9d7f32ab8051",
+          "image_search_url": "https://www.bing.com/images/search?q=Roman+Baths+Bath",
+          "description": "罗马浴场（Roman Baths）是英国巴斯的著名景点。",
+          "tips": ""
+        }
+      ]
+    }
+  ]
+}

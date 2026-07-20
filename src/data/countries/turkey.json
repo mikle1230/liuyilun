@@ -1,0 +1,72 @@
+{
+  "id": "turkey",
+  "name": "土耳其",
+  "nameEn": "Turkey",
+  "description": "横跨欧亚的文明走廊，清真寺与香料市场",
+  "cities": [
+    {
+      "id": "istanbul",
+      "name": "伊斯坦布尔",
+      "nameEn": "Istanbul",
+      "lat": 41,
+      "lng": 29,
+      "attractions": [
+        {
+          "id": "hagia-sophia",
+          "name": "圣索菲亚大教堂",
+          "type": "landmark",
+          "image": "photo-1541432901042-2d4bd12b1a79",
+          "description": "拜占庭建筑的最高成就",
+          "tips": "排队时间较长，建议开门前到达"
+        },
+        {
+          "id": "blue-mosque",
+          "name": "蓝色清真寺",
+          "type": "landmark",
+          "image": "photo-1604678933893-f68a9febad20",
+          "description": "六座宣礼塔的奥斯曼杰作",
+          "tips": "祈祷时间不对外开放",
+          "image_search_url": "https://www.bing.com/images/search?q=Blue+Mosque+Istanbul"
+        }
+      ]
+    },
+    {
+      "id": "-1ef2",
+      "name": "卡帕多奇亚",
+      "nameEn": "Museum",
+      "lat": 38.643,
+      "lng": 34.828,
+      "attractions": [
+        {
+          "id": "goreme-open-air-museum-puwm",
+          "name": "格雷梅露天博物馆",
+          "nameEn": "Goreme Open Air Museum",
+          "type": "landmark",
+          "image": "place-c346c3d30080",
+          "image_search_url": "https://www.bing.com/images/search?q=Goreme+Open+Air+Museum",
+          "description": "格雷梅露天博物馆（Goreme Open Air Museum）是土耳其卡帕多奇亚的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-9791",
+      "name": "以弗所",
+      "nameEn": "City",
+      "lat": 37.939,
+      "lng": 27.341,
+      "attractions": [
+        {
+          "id": "ephesus-ancient-city-bits",
+          "name": "以弗所古城",
+          "nameEn": "Ephesus Ancient City",
+          "type": "landmark",
+          "image": "place-fb4e0b8b4186",
+          "image_search_url": "https://www.bing.com/images/search?q=Ephesus+Ruins",
+          "description": "以弗所古城（Ephesus Ancient City）是土耳其以弗所的著名景点。",
+          "tips": ""
+        }
+      ]
+    }
+  ]
+}

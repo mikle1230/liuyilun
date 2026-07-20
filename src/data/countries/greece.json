@@ -1,0 +1,99 @@
+{
+  "id": "greece",
+  "name": "希腊",
+  "nameEn": "Greece",
+  "description": "西方文明的摇篮，爱琴海上的蓝白岛屿",
+  "cities": [
+    {
+      "id": "athens",
+      "name": "雅典",
+      "nameEn": "Athens",
+      "lat": 38,
+      "lng": 23.7,
+      "attractions": [
+        {
+          "id": "acropolis",
+          "name": "雅典卫城",
+          "type": "landmark",
+          "image": "photo-1555992336-03a23e7b2e96",
+          "description": "帕特农神庙矗立于城市之巅",
+          "tips": "夏季中午极热，建议清晨或傍晚前往",
+          "image_search_url": "https://www.bing.com/images/search?q=Acropolis+Athens"
+        },
+        {
+          "id": "acropolis-museum",
+          "name": "卫城博物馆",
+          "type": "museum",
+          "image": "photo-1563530948855-8b4d1ae961f9",
+          "description": "现代建筑中陈列着卫城的珍贵文物",
+          "tips": "顶层咖啡厅可直视帕特农神庙"
+        }
+      ]
+    },
+    {
+      "id": "santorini",
+      "name": "圣托里尼",
+      "nameEn": "Santorini",
+      "lat": 36.4,
+      "lng": 25.4,
+      "attractions": [
+        {
+          "id": "oia-sunset",
+          "name": "伊亚日落",
+          "type": "nature",
+          "image": "photo-1570077188670-e3a8d69ac5ff",
+          "description": "全球最著名的日落景观之一",
+          "tips": "提前一小时到达占据位置"
+        },
+        {
+          "id": "oia-santorini-duym",
+          "name": "伊亚",
+          "nameEn": "Oia Santorini",
+          "type": "landmark",
+          "image": "place-34cc65aa0775",
+          "image_search_url": "https://www.bing.com/images/search?q=Oia+Santorini",
+          "description": "伊亚（Oia Santorini）是希腊圣托里尼的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-c307",
+      "name": "米克诺斯岛",
+      "nameEn": "Windmills",
+      "lat": 37.447,
+      "lng": 25.328,
+      "attractions": [
+        {
+          "id": "mykonos-windmills-kx9o",
+          "name": "米克诺斯风车",
+          "nameEn": "Mykonos Windmills",
+          "type": "landmark",
+          "image": "place-f4025c091227",
+          "image_search_url": "https://www.bing.com/images/search?q=Mykonos+Windmills",
+          "description": "米克诺斯风车（Mykonos Windmills）是希腊米克诺斯岛的著名景点。",
+          "tips": ""
+        }
+      ]
+    },
+    {
+      "id": "-0d71",
+      "name": "迈泰奥拉",
+      "nameEn": "Monasteries",
+      "lat": 39.714,
+      "lng": 21.631,
+      "attractions": [
+        {
+          "id": "meteora-monasteries-hka7",
+          "name": "迈泰奥拉修道院群",
+          "nameEn": "Meteora Monasteries",
+          "type": "landmark",
+          "image": "place-d475f34a56bf",
+          "image_search_url": "https://www.bing.com/images/search?q=Meteora+Monasteries",
+          "description": "迈泰奥拉修道院群（Meteora Monasteries）是希腊迈泰奥拉的著名景点。",
+          "tips": ""
+        }
+      ]
+    }
+  ]
+}

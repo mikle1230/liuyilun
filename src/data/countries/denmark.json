@@ -1,0 +1,43 @@
+{
+  "id": "denmark",
+  "name": "丹麦",
+  "nameEn": "Denmark",
+  "description": "童话王国，设计之都，幸福指数最高的北欧明珠",
+  "cities": [
+    {
+      "id": "copenhagen",
+      "name": "哥本哈根",
+      "nameEn": "Copenhagen",
+      "lat": 55.7,
+      "lng": 12.6,
+      "attractions": [
+        {
+          "id": "nyhavn",
+          "name": "新港",
+          "type": "landmark",
+          "image": "photo-1513622470528-e862e8b9f14e",
+          "description": "安徒生曾在此居住创作的彩色运河",
+          "tips": "夏季傍晚时分最佳"
+        },
+        {
+          "id": "tivoli",
+          "name": "蒂沃利花园",
+          "type": "landmark",
+          "image": "photo-1559703248-dcaaec9fab50",
+          "description": "迪士尼的灵感来源之一",
+          "tips": "夜间灯光秀尤为梦幻"
+        },
+        {
+          "id": "the-little-mermaid-copenhagen-vrw1",
+          "name": "小美人鱼雕像",
+          "nameEn": "The Little Mermaid Copenhagen",
+          "type": "landmark",
+          "image": "place-3cf15dada706",
+          "image_search_url": "https://www.bing.com/images/search?q=Little+Mermaid+statue",
+          "description": "小美人鱼雕像（The Little Mermaid Copenhagen）是丹麦哥本哈根的著名景点。",
+          "tips": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": "sweden",
+  "name": "瑞典",
+  "nameEn": "Sweden",
+  "description": "北欧设计的王国，斯德哥尔摩群岛与极光",
+  "cities": [
+    {
+      "id": "stockholm",
+      "name": "斯德哥尔摩",
+      "nameEn": "Stockholm",
+      "lat": 59.3,
+      "lng": 18.1,
+      "attractions": [
+        {
+          "id": "gamla-stan",
+          "name": "老城",
+          "type": "landmark",
+          "image": "photo-1506905925346-21bda4d32df4",
+          "description": "色彩斑斓的中世纪老城",
+          "tips": "最窄的巷子仅90厘米宽"
+        },
+        {
+          "id": "vasa",
+          "name": "瓦萨沉船博物馆",
+          "type": "museum",
+          "image": "photo-1590105838541-c0d5e7e0f43b",
+          "description": "1628年首航即沉没的完整战船",
+          "tips": "博物馆光线较暗"
+        },
+        {
+          "id": "gamla-stan-stockholm-uil7",
+          "name": "斯德哥尔摩老城",
+          "nameEn": "Gamla Stan Stockholm",
+          "type": "landmark",
+          "image": "place-fa62bd186c80",
+          "image_search_url": "https://www.bing.com/images/search?q=Gamla+Stan",
+          "description": "斯德哥尔摩老城（Gamla Stan Stockholm）是瑞典斯德哥尔摩的著名景点。",
+          "tips": ""
+        }
+      ]
+    }
+  ]
+}
