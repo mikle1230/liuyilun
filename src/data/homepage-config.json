@@ -1,13 +1,8 @@
 {
   "hero": {
-    "typewriterWords": [
-      "The Place",
-      "where life being recorded",
-      "growth being admired",
-      "time being rewarded"
-    ],
+    "title": ["Where Time Settles", "What Memory Keeps", "How Light Remembers"],
     "descriptionLine1": "观察 · 记录 · 反思",
-    "descriptionLine2": "数字后花园 · 时光博物馆"
+    "descriptionLine2": "数字后花园"
   },
   "sections": {
     "journal": {

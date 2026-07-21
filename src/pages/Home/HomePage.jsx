@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import ScrollReveal from '../../components/ScrollReveal'
 import { loadPostsFromModules } from '../../utils/posts'
@@ -6,9 +6,9 @@ import { getCoverImage } from '../../utils/tagImages'
 import homepageConfig from '../../data/homepage-config.json'
 import './HomePage.css'
 
-/* ════════════════════════════════════════════════════════
+/* ════════════════════════════════════════════════════════════
    Content
-   ════════════════════════════════════════════════════════ */
+   ════════════════════════════════════════════════════════════ */
 
 const journalModules = import.meta.glob('../../content/journal/*.md', {
   eager: true,
@@ -54,38 +54,9 @@ function shuffleCountries() {
   return shuffled.slice(0, 5)
 }
 
-/* ════════════════════════════════════════════════════════
-   Typewriter
-   ════════════════════════════════════════════════════════ */
-
-const typewriterWords = homepageConfig.hero.typewriterWords
-
-function useTypewriter(words, typingSpeed = 80, deletingSpeed = 40, pauseDuration = 2500) {
-  const [text, setText] = useState('')
-  const [wordIndex, setWordIndex] = useState(0)
-  const [isDeleting, setIsDeleting] = useState(false)
-
-  useEffect(() => {
-    const currentWord = words[wordIndex]
-    if (!isDeleting && text === currentWord) {
-      const t = setTimeout(() => setIsDeleting(true), pauseDuration)
-      return () => clearTimeout(t)
-    }
-    if (isDeleting && text === '') {
-      setIsDeleting(false)
-      setWordIndex((prev) => (prev + 1) % words.length)
-      return
-    }
-    const speed = isDeleting ? deletingSpeed : typingSpeed
-    const t = setTimeout(() => {
-      setText(isDeleting
-        ? currentWord.slice(0, text.length - 1)
-        : currentWord.slice(0, text.length + 1)
-      )
-    }, speed)
-    return () => clearTimeout(t)
-  }, [text, isDeleting, wordIndex, words, typingSpeed, deletingSpeed, pauseDuration])
-  return text
+function pickBannerImages() {
+  const shuffled = [...ALL_COUNTRIES].sort(() => Math.random() - 0.5)
+  return shuffled.slice(0, 3).map((c) => `/images/countries/${c.id}.jpg`)
 }
 
 function spotMove(e) {
@@ -94,43 +65,47 @@ function spotMove(e) {
   e.currentTarget.style.setProperty('--spot-y', `${((e.clientY - rect.top) / rect.height) * 100}%`)
 }
 
-/* ════════════════════════════════════════════════════════
+/* ════════════════════════════════════════════════════════════
    Component
-   ════════════════════════════════════════════════════════ */
+   ════════════════════════════════════════════════════════════ */
 
 export default function HomePage() {
-  const videoRef = useRef(null)
-  const typewriterText = useTypewriter(typewriterWords)
   const [exploreItems, setExploreItems] = useState(() => shuffleCountries())
   const [wallpaperSeed, setWallpaperSeed] = useState(() => Date.now())
+  const [bannerImages] = useState(() => pickBannerImages())
+  const [bannerIndex, setBannerIndex] = useState(0)
+
+  const nextBanner = useCallback(() => {
+    setBannerIndex((i) => (i + 1) % bannerImages.length)
+  }, [bannerImages.length])
 
   useEffect(() => {
-    const video = videoRef.current
-    if (!video) return
-    video.muted = true
-    video.playsInline = true
-    video.play().catch(() => {
-      const cb = () => { video.play().catch(() => {}) }
-      document.addEventListener('pointerdown', cb, { once: true })
-      document.addEventListener('keydown', cb, { once: true })
-    })
-  }, [])
+    const timer = setInterval(nextBanner, 5000)
+    return () => clearInterval(timer)
+  }, [nextBanner])
 
   return (
     <div className="home-page">
-      {/* ─── Hero ─── */}
+      {/* ─── Hero Banner ─── */}
       <section className="home-hero">
-        <div className="home-hero-video-wrapper">
-          <video ref={videoRef} className="home-hero-video" autoPlay muted loop playsInline preload="auto">
-            <source src="/video/hero-bg.mp4" type="video/mp4" />
-          </video>
+        <div className="home-hero-banner">
+          {bannerImages.map((img, i) => (
+            <div
+              key={img}
+              className={`home-hero-slide ${i === bannerIndex ? 'active' : ''}`}
+              style={{ backgroundImage: `url(${img})` }}
+            />
+          ))}
         </div>
         <div className="home-hero-overlay" />
         <div className="home-hero-content container">
           <ScrollReveal delay={100}>
             <h1 className="home-hero-title">
-              <span className="typewriter-text">{typewriterText}</span>
-              <span className="typewriter-cursor">|</span>
+              {homepageConfig.hero.title.map((line, i) => (
+                <span key={i} className={`home-hero-title-line ${i === bannerIndex ? 'active' : ''}`}>
+                  {line}
+                </span>
+              ))}
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={300}>
@@ -138,6 +113,16 @@ export default function HomePage() {
               {homepageConfig.hero.descriptionLine1}<br />{homepageConfig.hero.descriptionLine2}
             </p>
           </ScrollReveal>
+          <div className="home-hero-dots">
+            {bannerImages.map((_, i) => (
+              <button
+                key={i}
+                className={`home-hero-dot ${i === bannerIndex ? 'active' : ''}`}
+                onClick={() => setBannerIndex(i)}
+                aria-label={`Slide ${i + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
