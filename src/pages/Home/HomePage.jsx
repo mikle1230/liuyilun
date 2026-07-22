@@ -11,16 +11,14 @@ import './HomePage.css'
    ════════════════════════════════════════════════════════════ */
 
 const journalModules = import.meta.glob('../../content/journal/*.md', {
-  eager: true,
-  query: '?raw',
-  import: 'default',
+  eager: true, query: '?raw', import: 'default',
 })
 
 const allPosts = loadPostsFromModules(journalModules)
   .sort((a, b) => new Date(b.date) - new Date(a.date))
-  .slice(0, 6)
+  .slice(0, 5)
 
-const COLLECTION_CARDS = Array.from({ length: 10 }, (_, i) => i)
+const COLLECTION_CARDS = Array.from({ length: 6 }, (_, i) => i)
 
 const ALL_COUNTRIES = [
   { id: 'italy', name: '意大利', en: 'Italy' },
@@ -80,13 +78,16 @@ export default function HomePage() {
   }, [bannerImages.length])
 
   useEffect(() => {
-    const timer = setInterval(nextBanner, 5000)
+    const timer = setInterval(nextBanner, 86400000)
     return () => clearInterval(timer)
   }, [nextBanner])
 
+  const featuredPost = allPosts[0]
+  const gridPosts = allPosts.slice(1, 5)
+
   return (
     <div className="home-page">
-      {/* ─── Hero Banner ─── */}
+      {/* ─── Hero ─── */}
       <section className="home-hero">
         <div className="home-hero-banner">
           {bannerImages.map((img, i) => (
@@ -127,47 +128,53 @@ export default function HomePage() {
       </section>
 
       {/* ─── Journal ─── */}
-      <section className="section home-strip">
+      <section className="home-section">
         <div className="container">
-          <div className="home-strip-header">
-            <span className="home-strip-label">{homepageConfig.sections.journal.label}</span>
-            <Link to="/journal" className="home-strip-more">{homepageConfig.sections.journal.moreText}</Link>
+          <div className="home-section-header">
+            <span className="home-section-label">{homepageConfig.sections.journal.label}</span>
+            <Link to="/journal" className="home-section-more">{homepageConfig.sections.journal.moreText}</Link>
           </div>
-          <div className="home-strip-grid home-strip-grid--3">
-            {allPosts.slice(0, 3).map((post) => (
-              <ScrollReveal key={post.slug}>
-                <Link to={`/journal/${post.slug}`} className="home-strip-card spotlight-card" onMouseMove={spotMove}>
-                  <div className="home-strip-img" style={{ backgroundImage: `url(${getCoverImage(post.tags, post.image, post.slug)})` }} />
-                  <div className="home-strip-body">
-                    <time className="home-strip-date">{post.date}</time>
-                    <h3 className="home-strip-title">{post.title}</h3>
-                  </div>
-                </Link>
-              </ScrollReveal>
-            ))}
-          </div>
-          <div className="home-strip-grid home-strip-grid--3">
-            {allPosts.slice(3, 6).map((post) => (
-              <ScrollReveal key={post.slug}>
-                <Link to={`/journal/${post.slug}`} className="home-strip-card spotlight-card" onMouseMove={spotMove}>
-                  <div className="home-strip-img" style={{ backgroundImage: `url(${getCoverImage(post.tags, post.image, post.slug)})` }} />
-                  <div className="home-strip-body">
-                    <time className="home-strip-date">{post.date}</time>
-                    <h3 className="home-strip-title">{post.title}</h3>
-                  </div>
-                </Link>
-              </ScrollReveal>
-            ))}
-          </div>
+
+          {featuredPost && (
+            <ScrollReveal>
+              <Link to={`/journal/${featuredPost.slug}`} className="home-featured spotlight-card" onMouseMove={spotMove}>
+                <div
+                  className="home-featured-img"
+                  style={{ backgroundImage: `url(${getCoverImage(featuredPost.tags, featuredPost.image, featuredPost.slug)})` }}
+                />
+                <div className="home-featured-body">
+                  <time className="home-featured-date">{featuredPost.date}</time>
+                  <h2 className="home-featured-title">{featuredPost.title}</h2>
+                  <p className="home-featured-excerpt">{featuredPost.excerpt}</p>
+                </div>
+              </Link>
+            </ScrollReveal>
+          )}
+
+          {gridPosts.length > 0 && (
+            <div className="home-strip-grid home-strip-grid--4 stagger-children">
+              {gridPosts.map((post) => (
+                <ScrollReveal key={post.slug}>
+                  <Link to={`/journal/${post.slug}`} className="home-strip-card spotlight-card" onMouseMove={spotMove}>
+                    <div className="home-strip-img" style={{ backgroundImage: `url(${getCoverImage(post.tags, post.image, post.slug)})` }} />
+                    <div className="home-strip-body">
+                      <time className="home-strip-date">{post.date}</time>
+                      <h3 className="home-strip-title">{post.title}</h3>
+                    </div>
+                  </Link>
+                </ScrollReveal>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
       {/* ─── Explore ─── */}
-      <section className="section home-strip">
+      <section className="home-section home-section--alt">
         <div className="container">
-          <div className="home-strip-header">
-            <span className="home-strip-label">{homepageConfig.sections.explore.label}</span>
-            <Link to="/explore" className="home-strip-more">{homepageConfig.sections.explore.moreText}</Link>
+          <div className="home-section-header">
+            <span className="home-section-label">{homepageConfig.sections.explore.label}</span>
+            <Link to="/explore" className="home-section-more">{homepageConfig.sections.explore.moreText}</Link>
           </div>
           <div className="home-strip-grid home-strip-grid--5">
             {exploreItems.map((item) => (
@@ -182,7 +189,7 @@ export default function HomePage() {
               </ScrollReveal>
             ))}
           </div>
-          <div style={{ textAlign: 'center', marginTop: 24 }}>
+          <div className="home-shuffle-wrap">
             <button className="home-shuffle-btn" onClick={() => setExploreItems(shuffleCountries())}>
               {homepageConfig.shuffleButtonText}
             </button>
@@ -191,13 +198,13 @@ export default function HomePage() {
       </section>
 
       {/* ─── Collection ─── */}
-      <section className="section home-strip">
+      <section className="home-section">
         <div className="container">
-          <div className="home-strip-header">
-            <span className="home-strip-label">{homepageConfig.sections.collection.label}</span>
-            <Link to="/collection" className="home-strip-more">{homepageConfig.sections.collection.moreText}</Link>
+          <div className="home-section-header">
+            <span className="home-section-label">{homepageConfig.sections.collection.label}</span>
+            <Link to="/collection" className="home-section-more">{homepageConfig.sections.collection.moreText}</Link>
           </div>
-          <div className="home-strip-grid home-strip-grid--5">
+          <div className="home-strip-grid home-strip-grid--3">
             {COLLECTION_CARDS.map((_, i) => (
               <ScrollReveal key={`${wallpaperSeed}-${i}`}>
                 <Link to="/collection" className="home-strip-wall spotlight-card" onMouseMove={spotMove}>
@@ -206,7 +213,7 @@ export default function HomePage() {
               </ScrollReveal>
             ))}
           </div>
-          <div style={{ textAlign: 'center', marginTop: 24 }}>
+          <div className="home-shuffle-wrap">
             <button className="home-shuffle-btn" onClick={() => setWallpaperSeed(Date.now())}>
               {homepageConfig.shuffleButtonText}
             </button>
