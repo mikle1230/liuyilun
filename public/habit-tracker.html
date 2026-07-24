@@ -1,0 +1,2364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🌟 好习惯积分表</title>
+<style>
+:root {
+  --bg: #f5f5f0;
+  --card: #fff;
+  --text: #222;
+  --text2: #888;
+  --border: #e8e8e0;
+  --accent: #e67e22;
+  --green: #27ae60;
+  --red: #e74c3c;
+  --gray: #ccc;
+  --tab-bg: #fff;
+  --shadow: 0 2px 12px rgba(0,0,0,.08);
+  --radius: 12px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg); color: var(--text);
+  display: flex; justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+.app {
+  width: 100%; max-width: 480px; height: 100%;
+  display: flex; flex-direction: column;
+  background: var(--bg); position: relative;
+}
+
+/* ========== 顶栏 ========== */
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px 8px; background: var(--bg);
+  flex-shrink: 0;
+}
+.header .nav { display: flex; align-items: center; gap: 4px; }
+.header .nav button {
+  background: none; border: none; font-size: 22px; padding: 6px 8px;
+  cursor: pointer; border-radius: 8px; color: var(--text);
+}
+.header .nav button:active { background: #ddd; }
+.header .nav .title { font-size: 17px; font-weight: 700; min-width: 120px; text-align: center; }
+.header .nav .title-sub { font-size: 13px; color: var(--text2); font-weight: 400; }
+.header .actions { display: flex; gap: 4px; }
+.header .actions button {
+  background: none; border: none; font-size: 20px; padding: 6px;
+  cursor: pointer; border-radius: 8px;
+}
+.header .actions button:active { background: #ddd; }
+
+/* 模式徽标 */
+.mode-badge {
+  display: inline-block; font-size: 11px; padding: 2px 10px;
+  border-radius: 10px; font-weight: 600;
+}
+.mode-workday { background: #d5f5e3; color: #1e8449; }
+.mode-holiday { background: #fdebd0; color: #b9770e; }
+.mode-vacation { background: #d6eaf8; color: #2471a3; }
+
+/* ========== 内容区 ========== */
+.content {
+  flex: 1; overflow-y: auto; overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 16px 8px;
+}
+
+/* ========== 月视图 ========== */
+.month-view { display: none; }
+.month-view.active { display: block; }
+
+.month-summary {
+  display: flex; gap: 8px; margin-bottom: 12px;
+  background: var(--card); border-radius: var(--radius); padding: 12px 16px;
+  box-shadow: var(--shadow);
+}
+.month-summary .stat { flex: 1; text-align: center; }
+.month-summary .stat .label { font-size: 11px; color: var(--text2); }
+.month-summary .stat .val { font-size: 20px; font-weight: 800; margin-top: 2px; }
+.month-summary .stat .val.green { color: var(--green); }
+.month-summary .stat .val.orange { color: var(--accent); }
+.month-summary .stat .val.red { color: var(--red); }
+
+.calendar { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+.calendar table { width: 100%; border-collapse: collapse; }
+.calendar th {
+  font-size: 12px; color: var(--text2); font-weight: 600;
+  padding: 10px 0 6px; text-align: center;
+}
+.calendar td {
+  text-align: center; padding: 4px 0; cursor: pointer;
+  width: 14.28%; position: relative;
+}
+.calendar td:active { background: #f0f0e8; }
+.calendar td .day-num {
+  font-size: 14px; font-weight: 600; display: block;
+  margin-bottom: 2px;
+}
+.calendar td .day-dot { font-size: 14px; line-height: 1; }
+.calendar td.other-month .day-num { color: #ccc; }
+.calendar td.other-month .day-dot { opacity: 0.3; }
+.calendar td.today .day-num {
+  background: var(--accent); color: #fff; border-radius: 50%;
+  width: 28px; height: 28px; line-height: 28px;
+  display: inline-block;
+}
+.calendar td .dot-all { color: var(--green); }
+.calendar td .dot-partial { color: var(--accent); }
+.calendar td .dot-none { color: var(--red); }
+.calendar td .dot-na { color: var(--gray); }
+.calendar td .dot-future { color: #ddd; }
+
+/* 本周进度条 */
+.week-progress {
+  margin-top: 10px; background: var(--card); border-radius: var(--radius);
+  padding: 10px 16px; box-shadow: var(--shadow);
+  display: flex; align-items: center; gap: 10px;
+  cursor: pointer;
+}
+.week-progress:active { background: #f0f0e8; }
+.week-progress .wp-label { font-size: 13px; font-weight: 600; white-space: nowrap; }
+.week-progress .wp-bar {
+  flex: 1; height: 8px; background: #eee; border-radius: 4px; overflow: hidden;
+}
+.week-progress .wp-bar .wp-fill {
+  height: 100%; background: var(--green); border-radius: 4px;
+  transition: width .3s;
+}
+.week-progress .wp-text { font-size: 12px; color: var(--text2); white-space: nowrap; }
+
+/* ========== 周视图 ========== */
+.week-view { display: none; padding-bottom: 8px; }
+.week-view.active { display: block; }
+
+.habit-card {
+  background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+  margin-bottom: 10px; overflow: hidden; cursor: pointer;
+}
+.habit-card:active { background: #fafaf5; }
+.habit-card .card-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px 6px;
+}
+.habit-card .card-head .ch-left { display: flex; align-items: center; gap: 8px; }
+.habit-card .card-head .ch-left .ch-emoji { font-size: 20px; }
+.habit-card .card-head .ch-left .ch-name { font-size: 15px; font-weight: 600; }
+.habit-card .card-head .ch-pts {
+  font-size: 14px; font-weight: 700; color: var(--accent);
+}
+.habit-card .card-dots {
+  display: flex; justify-content: space-around; padding: 4px 10px 6px;
+}
+.habit-card .card-dots .dot-item {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 2px; min-width: 32px; padding: 4px 0;
+  border-radius: 8px; cursor: pointer;
+}
+.habit-card .card-dots .dot-item:active { background: #f0f0e8; }
+.habit-card .card-dots .dot-item .dow-label { font-size: 10px; color: var(--text2); }
+.habit-card .card-dots .dot-item .dow-icon {
+  font-size: 20px; line-height: 1; min-height: 24px;
+}
+.habit-card .card-dots .dot-item .dow-icon.checked { color: var(--green); }
+.habit-card .card-dots .dot-item .dow-icon.void { color: var(--red); }
+.habit-card .card-dots .dot-item .dow-icon.pending { color: var(--gray); }
+.habit-card .card-dots .dot-item .dow-icon.na { color: #ddd; }
+
+.habit-card .card-footer {
+  padding: 0 14px 10px; display: flex; align-items: center; gap: 10px;
+  flex-wrap: wrap;
+}
+.habit-card .card-footer .streak {
+  font-size: 12px; font-weight: 600; color: var(--green);
+  display: flex; align-items: center; gap: 4px;
+}
+.habit-card .card-footer .streak-bar {
+  flex: 1; max-width: 100px; height: 6px; background: #eee;
+  border-radius: 3px; overflow: hidden;
+}
+.habit-card .card-footer .streak-bar .sb-fill {
+  height: 100%; background: var(--green); border-radius: 3px;
+  transition: width .3s;
+}
+.habit-card .card-footer .eff-pts {
+  font-size: 11px; color: var(--text2); margin-left: auto;
+}
+.habit-card .card-rule {
+  padding: 0 14px 8px; font-size: 11px; color: var(--text2); line-height: 1.4;
+}
+
+/* ========== 日视图 ========== */
+.day-view { display: none; }
+.day-view.active { display: block; }
+
+.day-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.day-header .dh-back { font-size: 15px; color: var(--accent); font-weight: 600; cursor: pointer; padding: 4px 0; }
+.day-header .dh-date { font-size: 16px; font-weight: 700; text-align: center; }
+.day-header .dh-mode { font-size: 11px; }
+.day-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px;
+}
+.day-nav button {
+  background: var(--card); border: none; padding: 8px 16px;
+  border-radius: 20px; font-size: 14px; font-weight: 600;
+  cursor: pointer; box-shadow: var(--shadow); color: var(--text);
+}
+.day-nav button:active { background: #f0f0e8; }
+.day-nav .dn-today { font-size: 12px; color: var(--accent); font-weight: 600; cursor: pointer; }
+
+.habit-row {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 12px 14px; margin-bottom: 8px; cursor: pointer;
+  min-height: 56px;
+}
+.habit-row:active { background: #fafaf5; }
+.habit-row .hr-emoji { font-size: 22px; }
+.habit-row .hr-info { flex: 1; min-width: 0; }
+.habit-row .hr-info .hr-name { font-size: 15px; font-weight: 600; }
+.habit-row .hr-info .hr-rule { font-size: 11px; color: var(--text2); margin-top: 1px; }
+.habit-row .hr-info .hr-rule.na { color: var(--gray); font-style: italic; }
+.habit-row .hr-pts {
+  font-size: 15px; font-weight: 700; color: var(--accent);
+  white-space: nowrap;
+}
+.habit-row .hr-status {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; font-weight: 900; flex-shrink: 0;
+  transition: all .15s;
+}
+.habit-row .hr-status.status-checked { background: #e8f8f5; color: var(--green); }
+.habit-row .hr-status.status-void { background: #fde8e8; color: var(--red); }
+.habit-row .hr-status.status-pending { background: #f5f5f0; color: var(--gray); }
+
+/* 日视图今日小结 */
+.day-summary {
+  background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 12px 16px; margin-bottom: 8px;
+  display: flex; align-items: center; justify-content: space-around;
+}
+.day-summary .ds-item { text-align: center; }
+.day-summary .ds-item .ds-val { font-size: 18px; font-weight: 800; }
+.day-summary .ds-item .ds-val.green { color: var(--green); }
+.day-summary .ds-item .ds-val.orange { color: var(--accent); }
+.day-summary .ds-item .ds-label { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+/* ========== 积分面板（底部弹出） ========== */
+.overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,.4); z-index: 100;
+  display: none;
+}
+.overlay.show { display: block; }
+
+.points-sheet {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  max-width: 480px; margin: 0 auto;
+  background: var(--card); border-radius: 16px 16px 0 0;
+  z-index: 101; padding: 20px 20px calc(20px + var(--safe-bottom));
+  transform: translateY(100%); transition: transform .3s ease;
+  max-height: 80vh; overflow-y: auto;
+}
+.points-sheet.show { transform: translateY(0); }
+.points-sheet .ps-handle {
+  width: 36px; height: 4px; background: #ddd; border-radius: 2px;
+  margin: 0 auto 16px;
+}
+.points-sheet .ps-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; text-align: center; }
+.points-sheet .ps-balance { display: flex; gap: 8px; margin-bottom: 16px; }
+.points-sheet .ps-balance .psb-item { flex: 1; text-align: center; padding: 8px; background: #f9f9f5; border-radius: 8px; }
+.points-sheet .ps-balance .psb-item .psb-val { font-size: 18px; font-weight: 800; }
+.points-sheet .ps-balance .psb-item .psb-val.green { color: var(--green); }
+.points-sheet .ps-balance .psb-item .psb-val.orange { color: var(--accent); }
+.points-sheet .ps-balance .psb-item .psb-val.red { color: var(--red); }
+.points-sheet .ps-balance .psb-item .psb-label { font-size: 11px; color: var(--text2); }
+
+.points-sheet .ps-tabs { display: flex; gap: 8px; margin-bottom: 12px; }
+.points-sheet .ps-tabs button {
+  flex: 1; padding: 10px; border: 2px solid var(--border); border-radius: 8px;
+  background: var(--card); font-size: 14px; font-weight: 600; cursor: pointer;
+}
+.points-sheet .ps-tabs button.active { border-color: var(--accent); background: #fef9e7; color: var(--accent); }
+.points-sheet .ps-form { margin-bottom: 16px; }
+.points-sheet .ps-form .psf-row { margin-bottom: 10px; }
+.points-sheet .ps-form .psf-row label { display: block; font-size: 12px; color: var(--text2); margin-bottom: 4px; }
+.points-sheet .ps-form .psf-row input, .points-sheet .ps-form .psf-row select {
+  width: 100%; padding: 10px 12px; border: 2px solid var(--border);
+  border-radius: 8px; font-size: 15px; font-family: inherit;
+}
+.points-sheet .ps-form .psf-row input:focus { outline: none; border-color: var(--accent); }
+
+/* 兑换项目列表 */
+.ps-item { display: flex; align-items: center; gap: 6px; padding: 8px 10px; margin-bottom: 6px; background: #f9f9f5; border-radius: 8px; flex-wrap: wrap; }
+.psi-name { font-weight: 600; font-size: 14px; min-width: 80px; }
+.psi-cost { font-size: 12px; color: #666; display: flex; align-items: center; gap: 3px; }
+.psi-qty { font-size: 12px; color: #666; display: flex; align-items: center; gap: 3px; }
+.psi-total { font-size: 13px; font-weight: 600; color: var(--accent); }
+.psi-cost-input, .psi-qty-input { width: 50px !important; padding: 3px 4px !important; font-size: 13px !important; }
+.ps-add-item { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 8px; padding: 10px; border: 2px dashed #ddd; border-radius: 8px; }
+.ps-add-item input { flex: 1; min-width: 80px; padding: 6px 8px; border: 2px solid #ddd; border-radius: 6px; font-size: 13px; }
+.ps-add-item button { padding: 6px 14px; background: var(--accent); color: #fff; border: none; border-radius: 6px; font-size: 13px; cursor: pointer; }
+.ps-add-item button:active { background: #d35400; }
+.points-sheet .ps-form button.primary {
+  width: 100%; padding: 12px; background: var(--accent); color: #fff;
+  border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer;
+}
+.points-sheet .ps-form button.primary:active { background: #d35400; }
+
+.points-sheet .ps-log { margin-top: 12px; }
+.points-sheet .ps-log .psl-title { font-size: 13px; font-weight: 600; color: var(--text2); margin-bottom: 6px; }
+.points-sheet .ps-log .psl-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 6px 0; font-size: 13px; border-bottom: 1px solid var(--border);
+}
+.points-sheet .ps-log .psl-item .psl-amount { font-weight: 700; }
+.points-sheet .ps-log .psl-item .psl-amount.negative { color: var(--red); }
+.points-sheet .ps-log .psl-item .psl-amount.positive { color: var(--green); }
+.points-sheet .ps-log .psl-item .psl-note { color: var(--text2); }
+.points-sheet .ps-log .psl-item .psl-date { color: var(--text2); font-size: 11px; }
+
+/* ========== 设置面板 ========== */
+.settings-sheet {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  max-width: 480px; margin: 0 auto;
+  background: var(--card); border-radius: 16px 16px 0 0;
+  z-index: 101; padding: 20px 20px calc(20px + var(--safe-bottom));
+  transform: translateY(100%); transition: transform .3s ease;
+  max-height: 80vh; overflow-y: auto;
+}
+.settings-sheet.show { transform: translateY(0); }
+.settings-sheet .ss-handle {
+  width: 36px; height: 4px; background: #ddd; border-radius: 2px;
+  margin: 0 auto 16px;
+}
+.settings-sheet .ss-title { font-size: 18px; font-weight: 700; margin-bottom: 16px; text-align: center; }
+.settings-sheet .ss-section { margin-bottom: 16px; }
+.settings-sheet .ss-section .sss-title { font-size: 13px; font-weight: 600; color: var(--text2); margin-bottom: 8px; }
+.settings-sheet .ss-section .vacation-row {
+  display: flex; gap: 8px; align-items: center; margin-bottom: 8px;
+}
+.settings-sheet .ss-section .vacation-row input[type="date"] {
+  flex: 1; padding: 8px; border: 2px solid var(--border); border-radius: 8px; font-size: 13px;
+}
+.settings-sheet .ss-section .vacation-row .v-name { font-size: 13px; min-width: 60px; }
+.settings-sheet .ss-section .vacation-row button {
+  background: none; border: none; font-size: 18px; cursor: pointer; padding: 4px;
+}
+.settings-sheet .ss-section .add-btn {
+  display: flex; align-items: center; gap: 4px; color: var(--accent);
+  font-size: 13px; font-weight: 600; cursor: pointer; border: none; background: none; padding: 6px 0;
+}
+.settings-sheet button.primary {
+  width: 100%; padding: 12px; background: var(--accent); color: #fff;
+  border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer;
+}
+
+/* ========== 底部Tab ========== */
+.tabbar {
+  display: flex; background: var(--tab-bg); border-top: 1px solid var(--border);
+  flex-shrink: 0; padding-bottom: var(--safe-bottom);
+}
+.tabbar .tab {
+  flex: 1; text-align: center; padding: 8px 0 4px; cursor: pointer;
+  font-size: 11px; color: var(--text2); transition: all .15s;
+}
+.tabbar .tab .tab-icon { font-size: 22px; display: block; margin-bottom: 2px; }
+.tabbar .tab.active { color: var(--accent); }
+.tabbar .tab:active { background: #f5f5f0; }
+
+/* ========== Toast ========== */
+.toast {
+  position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(.8);
+  background: rgba(0,0,0,.75); color: #fff; padding: 10px 20px;
+  border-radius: 20px; font-size: 14px; font-weight: 600;
+  z-index: 999; opacity: 0; transition: all .25s; pointer-events: none;
+  white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+
+/* ========== 打印 ========== */
+@media print {
+  body { background: #fff; }
+  .app { max-width: none; }
+  .tabbar, .header .actions { display: none !important; }
+  .content { overflow: visible; }
+  .calendar td .day-dot { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4 portrait; margin: 10mm; }
+}
+
+/* ========== 桌面端 — 可打印周表格 (>= 768px) ========== */
+@media (min-width: 768px) {
+  .app { max-width: none; height: auto; min-height: 100vh; background: #e8e8e0; padding: 16px; }
+
+  /* 隐藏移动端内容 */
+  .content { display: none; }
+  .tabbar { display: none; }
+
+  /* 桌面端顶栏（类似旧版工具栏） */
+  .header {
+    position: sticky; top: 0; z-index: 10;
+    max-width: 1100px; margin: 0 auto 16px;
+    background: #fff; padding: 10px 16px;
+    border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,.1);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .header .nav .title { font-size: 15px; min-width: auto; }
+  .header .actions button { font-size: 15px; padding: 4px 8px; }
+
+  /* ===== 可打印页面 ===== */
+  .printable-view {
+    display: block !important;
+    max-width: 1100px; margin: 0 auto;
+    background: #fff; padding: 10mm 12mm 8mm;
+    box-shadow: 0 4px 24px rgba(0,0,0,.15);
+    border-radius: 4px;
+  }
+
+  .p-header { text-align: center; margin-bottom: 4mm; display: flex; align-items: center; justify-content: center; gap: 12px; }
+  .p-header h1 { font-size: 20px; font-weight: 900; letter-spacing: 2px; }
+  .p-header .p-week-badge { font-size: 12px; background: #eee; padding: 3px 10px; border-radius: 10px; }
+
+  .p-subtitle { font-size: 11px; color: #666; text-align: center; margin-bottom: 3mm; }
+  .p-subtitle span { border-bottom: 1px dashed #999; padding: 0 6px; margin: 0 4px; min-width: 50px; display: inline-block; }
+
+  .p-summary { display: flex; gap: 3mm; margin-bottom: 4mm; font-size: 12px; font-weight: 700; }
+  .p-summary .box { flex: 1; border: 2px solid #333; padding: 2mm 3mm; text-align: center; border-radius: 4px; }
+  .p-summary .box .val { font-size: 18px; margin-top: 1px; }
+  .p-summary .box.effective .val { color: #27ae60; }
+  .p-summary .box.pending .val { color: #e67e22; }
+  .p-summary .box.total .val { color: #2c3e50; }
+
+  .p-table { width: 100%; border-collapse: collapse; font-size: 11px; table-layout: fixed; }
+  .p-table th, .p-table td { border: 1.5px solid #555; padding: 1.5mm 1mm; text-align: center; vertical-align: middle; }
+  .p-table thead th { background: #333; color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .5px; }
+
+  .p-table td.p-item-name { text-align: left; font-weight: 600; padding-left: 2mm; }
+  .p-table td.p-rule-text { text-align: left; font-size: 10px; line-height: 1.4; padding-left: 2mm; color: #444; }
+  .p-table td.p-pts-val { font-weight: 700; color: #e67e22; font-size: 12px; }
+  .p-table td.p-streak-cell { background: #fef9e7; }
+  .p-table td.p-streak-cell .p-streak-num { font-size: 16px; font-weight: 900; }
+  .p-table td.p-streak-cell .p-streak-num.active { color: #27ae60; }
+  .p-table td.p-streak-cell .p-streak-num.broken { color: #e74c3c; }
+  .p-table td.p-streak-cell .p-streak-target { font-size: 9px; color: #888; }
+
+  .p-table .p-person-header td {
+    font-weight: 800; font-size: 12px; padding: 2mm 4mm;
+    text-align: left; letter-spacing: 1px;
+  }
+  .p-table .p-person-mom td { background: #fff3cd; }
+  .p-table .p-person-xiaomei td { background: #e8f8f5; }
+
+  /* 日格子 - 可点击 */
+  .p-table td.p-day-cell {
+    cursor: pointer; user-select: none; position: relative; min-height: 22px;
+    transition: background .1s;
+  }
+  .p-table td.p-day-cell:hover { background: #fef9e7; }
+  .p-table td.p-day-cell::after {
+    content: "○"; position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%); color: #ccc; font-size: 14px;
+  }
+  .p-table td.p-day-cell.checked::after { content: "✔"; color: #27ae60; font-weight: 900; font-size: 15px; }
+  .p-table td.p-day-cell.void::after { content: "✗"; color: #e74c3c; font-weight: 900; font-size: 14px; }
+  .p-table td.p-day-cell.na { background: #f5f5f5; cursor: default; }
+  .p-table td.p-day-cell.na::after { content: "—"; color: #ccc; font-size: 12px; }
+
+  .p-table td.p-eff-cell { font-weight: 700; font-size: 13px; }
+  .p-table td.p-eff-cell.has-points { color: #27ae60; }
+  .p-table td.p-eff-cell.no-points { color: #ccc; }
+  .p-table tr.p-subtotal td { font-weight: 700; font-size: 11px; background: #f9f9f9; border-top: 2px solid #333; }
+
+  .p-vote {
+    margin-top: 4mm; border: 2px dashed #e74c3c; padding: 3mm 5mm;
+    border-radius: 6px; font-size: 11px;
+  }
+  .p-vote h3 { font-size: 12px; color: #e74c3c; margin-bottom: 2mm; }
+  .p-vote-grid { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .p-vote-grid span { display: flex; align-items: center; gap: 2px; }
+  .p-vote-grid input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; }
+
+  .p-legend {
+    margin-top: 3mm; font-size: 10px; color: #666;
+    display: flex; gap: 12px; flex-wrap: wrap;
+    border-top: 1px solid #ddd; padding-top: 2mm;
+  }
+  .p-legend .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .p-legend .dot.green { background: #27ae60; }
+  .p-legend .dot.red { background: #e74c3c; }
+
+  .p-sign { margin-top: 3mm; display: flex; gap: 8mm; justify-content: flex-end; font-size: 11px; }
+  .p-sign span { border-bottom: 1px solid #333; min-width: 50px; padding: 0 5px; }
+
+  /* 投票弹窗样式 */
+  .vote-sheet { position: fixed; bottom: 0; left: 0; right: 0; max-width: 480px; margin: 0 auto; background: #fff; border-radius: 16px 16px 0 0; z-index: 101; padding: 20px 20px calc(20px + env(safe-area-inset-bottom,0px)); transform: translateY(100%); transition: transform .3s ease; max-height: 85vh; overflow-y: auto; }
+  .vote-sheet.show { transform: translateY(0); }
+  .vs-handle { width: 36px; height: 4px; background: #ddd; border-radius: 2px; margin: 0 auto 12px; }
+  .vs-title { font-size: 17px; font-weight: 700; text-align: center; margin-bottom: 4px; }
+  .vs-habit { text-align: center; font-size: 15px; color: #555; margin-bottom: 4px; }
+  .vs-streak { text-align: center; font-size: 13px; color: #27ae60; margin-bottom: 12px; }
+  .vs-field { margin-bottom: 12px; }
+  .vs-field label { display: block; font-size: 12px; color: #888; margin-bottom: 4px; }
+  .vs-field textarea { width: 100%; padding: 8px 10px; border: 2px solid #ddd; border-radius: 8px; font-size: 14px; font-family: inherit; resize: none; }
+  .vs-voters { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+  .vs-voter { display: flex; align-items: center; gap: 6px; padding: 8px 10px; border: 2px solid #eee; border-radius: 8px; cursor: pointer; font-size: 13px; transition: all .15s; }
+  .vs-voter:active { background: #f5f5f0; }
+  .vs-voter.approved { border-color: #27ae60; background: #e8f8f5; }
+  .vs-voter.rejected { border-color: #e74c3c; background: #fde8e8; }
+  .vs-voter .vv-check { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #ccc; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+  .vs-voter.approved .vv-check { border-color: #27ae60; background: #27ae60; color: #fff; }
+  .vs-voter.rejected .vv-check { border-color: #e74c3c; background: #e74c3c; color: #fff; }
+  .vs-voter .vv-name { flex: 1; }
+  .vs-status { text-align: center; font-size: 13px; font-weight: 600; margin-bottom: 10px; }
+  .vs-save { width: 100%; padding: 12px; background: #e67e22; color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; margin-bottom: 16px; }
+  .vs-save:active { background: #d35400; }
+  .vs-records { border-top: 1px solid #eee; padding-top: 12px; }
+  .vsr-title { font-size: 13px; font-weight: 600; color: #888; margin-bottom: 8px; }
+  .vsr-item { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; padding: 8px 0; border-bottom: 1px solid #f0f0e8; font-size: 12px; }
+  .vsr-item .vsr-habit { font-weight: 600; }
+  .vsr-item .vsr-result { font-weight: 700; }
+  .vsr-item .vsr-result.pass { color: #27ae60; }
+  .vsr-item .vsr-result.fail { color: #e74c3c; }
+  .vsr-item .vsr-votes { color: #666; font-size: 11px; }
+
+  /* 打印 */
+  @media print {
+    body { background: #fff; padding: 0; }
+    .app { padding: 0; background: #fff; }
+    .header, .toast { display: none !important; }
+    .printable-view { box-shadow: none; padding: 6mm 8mm 4mm; max-width: none; border-radius: 0; }
+    .p-table td.p-day-cell { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .p-table td.p-day-cell::after { content: "○"; color: #bbb; font-size: 13px; }
+    .p-table td.p-day-cell.checked::after { content: "✔"; color: #27ae60; font-size: 14px; }
+    .p-table td.p-day-cell.void::after { content: "✗"; color: #e74c3c; font-size: 13px; }
+    .p-table td.p-day-cell.na::after { content: "—"; color: #ccc; font-size: 11px; }
+    @page { size: A4 landscape; margin: 0; }
+  }
+}
+
+/* ========== 桌面端可打印视图（默认隐藏，仅桌面显示） ========== */
+.printable-view { display: none; }
+
+/* 移动端投票弹窗样式 */
+@media (max-width: 767px) {
+  .vote-sheet { position: fixed; bottom: 0; left: 0; right: 0; max-width: 480px; margin: 0 auto; background: #fff; border-radius: 16px 16px 0 0; z-index: 101; padding: 20px 20px calc(20px + env(safe-area-inset-bottom,0px)); transform: translateY(100%); transition: transform .3s ease; max-height: 85vh; overflow-y: auto; }
+  .vote-sheet.show { transform: translateY(0); }
+  .vs-handle { width: 36px; height: 4px; background: #ddd; border-radius: 2px; margin: 0 auto 12px; }
+  .vs-title { font-size: 17px; font-weight: 700; text-align: center; margin-bottom: 4px; }
+  .vs-habit { text-align: center; font-size: 15px; color: #555; margin-bottom: 4px; }
+  .vs-streak { text-align: center; font-size: 13px; color: #27ae60; margin-bottom: 12px; }
+  .vs-field { margin-bottom: 12px; }
+  .vs-field label { display: block; font-size: 12px; color: #888; margin-bottom: 4px; }
+  .vs-field textarea { width: 100%; padding: 8px 10px; border: 2px solid #ddd; border-radius: 8px; font-size: 14px; font-family: inherit; resize: none; }
+  .vs-voters { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+  .vs-voter { display: flex; align-items: center; gap: 6px; padding: 8px 10px; border: 2px solid #eee; border-radius: 8px; cursor: pointer; font-size: 13px; transition: all .15s; }
+  .vs-voter:active { background: #f5f5f0; }
+  .vs-voter.approved { border-color: #27ae60; background: #e8f8f5; }
+  .vs-voter.rejected { border-color: #e74c3c; background: #fde8e8; }
+  .vs-voter .vv-check { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #ccc; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+  .vs-voter.approved .vv-check { border-color: #27ae60; background: #27ae60; color: #fff; }
+  .vs-voter.rejected .vv-check { border-color: #e74c3c; background: #e74c3c; color: #fff; }
+  .vs-voter .vv-name { flex: 1; }
+  .vs-status { text-align: center; font-size: 13px; font-weight: 600; margin-bottom: 10px; }
+  .vs-save { width: 100%; padding: 12px; background: #e67e22; color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; margin-bottom: 16px; }
+  .vs-save:active { background: #d35400; }
+  .vs-records { border-top: 1px solid #eee; padding-top: 12px; }
+  .vsr-title { font-size: 13px; font-weight: 600; color: #888; margin-bottom: 8px; }
+  .vsr-item { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; padding: 8px 0; border-bottom: 1px solid #f0f0e8; font-size: 12px; }
+  .vsr-item .vsr-habit { font-weight: 600; }
+  .vsr-item .vsr-result { font-weight: 700; }
+  .vsr-item .vsr-result.pass { color: #27ae60; }
+  .vsr-item .vsr-result.fail { color: #e74c3c; }
+  .vsr-item .vsr-votes { color: #666; font-size: 11px; }
+}
+</style>
+</head>
+<body>
+
+<div class="app" id="app">
+  <!-- 顶栏 -->
+  <div class="header" id="header">
+    <div class="nav">
+      <button id="btnNavPrev">◀</button>
+      <span class="title" id="headerTitle">加载中</span>
+      <button id="btnNavNext">▶</button>
+    </div>
+    <div class="actions">
+      <span class="mode-badge mode-workday" id="modeBadge">工作日</span>
+      <span id="syncStatus" style="font-size:14px;display:none;cursor:help;margin-right:4px;"></span>
+      <button id="btnPoints" title="积分管理">💰</button>
+      <button id="btnSettings">⚙️</button>
+    </div>
+  </div>
+
+  <!-- 内容区 -->
+  <div class="content" id="content">
+    <!-- 月视图 -->
+    <div class="month-view" id="monthView">
+      <div class="month-summary">
+        <div class="stat"><div class="label">获得积分</div><div class="val green" id="msEarned">0</div></div>
+        <div class="stat"><div class="label">已兑换</div><div class="val orange" id="msSpent">0</div></div>
+        <div class="stat"><div class="label">剩余可用</div><div class="val" id="msRemain">0</div></div>
+      </div>
+      <div class="calendar" id="monthCalendar"></div>
+      <div class="week-progress" id="weekProgress">
+        <span class="wp-label" id="wpLabel">本周</span>
+        <div class="wp-bar"><div class="wp-fill" id="wpFill" style="width:0%"></div></div>
+        <span class="wp-text" id="wpText">0/0</span>
+      </div>
+    </div>
+
+    <!-- 周视图 -->
+    <div class="week-view" id="weekView">
+      <div id="weekCards"></div>
+    </div>
+
+    <!-- 日视图 -->
+    <div class="day-view" id="dayView">
+      <div class="day-header">
+        <span class="dh-back" id="dayBack">← 返回</span>
+        <span class="dh-date" id="dayDate"></span>
+        <span class="dh-mode" id="dayMode"></span>
+      </div>
+      <div class="day-nav">
+        <button id="dayPrev">← 前一天</button>
+        <span class="dn-today" id="dayGoToday">今天</span>
+        <button id="dayNext">后一天 →</button>
+      </div>
+      <div id="dayHabits"></div>
+      <div class="day-summary" id="daySummary">
+        <div class="ds-item"><div class="ds-val green" id="dsDone">0</div><div class="ds-label">已完成</div></div>
+        <div class="ds-item"><div class="ds-val orange" id="dsTotal">0</div><div class="ds-label">待完成</div></div>
+        <div class="ds-item"><div class="ds-val" id="dsPts">0</div><div class="ds-label">今日得分</div></div>
+        <div class="ds-item"><div class="ds-val green" id="dsStreak">0</div><div class="ds-label">连续天数</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 桌面端可打印周视图 -->
+  <div class="printable-view" id="printableView">
+    <div class="p-header">
+      <h1>🌟 好习惯积分表</h1>
+      <span class="p-week-badge" id="pWeekBadge"></span>
+    </div>
+    <div class="p-subtitle">
+      宝贝：<span contenteditable="true" id="pChildName">小美</span>
+      日期：<span id="pWeekRange"></span>
+      模式：<span class="mode-badge" id="pModeLabel">工作日</span>
+    </div>
+    <div class="p-summary" id="pSummary"></div>
+    <table class="p-table">
+      <thead>
+        <tr>
+          <th style="width:5.5%">人物</th><th style="width:13%">好习惯项目</th>
+          <th style="width:20%">细则要求</th><th style="width:6%">连续</th>
+          <th style="width:5%">分值</th>
+          <th style="width:7%">周一</th><th style="width:7%">周二</th>
+          <th style="width:7%">周三</th><th style="width:7%">周四</th>
+          <th style="width:7%">周五</th><th style="width:7%">周六</th>
+          <th style="width:7%">周日</th><th style="width:6%">生效积分</th>
+        </tr>
+      </thead>
+      <tbody id="pTableBody"></tbody>
+    </table>
+    <div class="p-vote">
+      <h3>🗳 特殊情况七票豁免（如无法连续，获全家七票同意方可保留连续计分机会）</h3>
+      <div class="p-vote-grid" id="pVoteGrid">
+        <span>👨 <input type="checkbox"> 爸爸</span>
+        <span>👩 <input type="checkbox"> 妈妈</span>
+        <span>👧 <input type="checkbox"> 小美</span>
+        <span>👴 <input type="checkbox"> 爷爷</span>
+        <span>👵 <input type="checkbox"> 奶奶</span>
+        <span>👴 <input type="checkbox"> 外公</span>
+        <span>👵 <input type="checkbox"> 外婆</span>
+        <span style="font-weight:700;margin-left:8px;color:#e74c3c;" id="pVoteStatus">需7票全部同意</span>
+      </div>
+    </div>
+    <div class="p-legend">
+      <span><span class="dot green"></span> ✔ 已完成</span>
+      <span><span class="dot red"></span> ✗ 未完成（断连）</span>
+      <span>○ 待完成</span>
+      <span>— 不适用日</span>
+      <span style="margin-left:12px;"><b>连续</b>：当前连续次数 / 需要连续次数</span>
+      <span style="color:#27ae60;"><b>生效积分</b>：连续达标后实际获得</span>
+    </div>
+    <div class="p-sign">
+      宝贝签字：<span contenteditable="true"></span>
+      家长签字：<span contenteditable="true"></span>
+      日期：<span contenteditable="true"></span>
+    </div>
+  </div>
+
+  <!-- 底部Tab -->
+  <div class="tabbar" id="tabbar">
+    <div class="tab active" data-tab="month"><span class="tab-icon">📅</span>月</div>
+    <div class="tab" data-tab="week"><span class="tab-icon">📋</span>周</div>
+    <div class="tab" data-tab="vote"><span class="tab-icon">🗳</span>投票</div>
+    <div class="tab" data-tab="points"><span class="tab-icon">💰</span>积分</div>
+  </div>
+</div>
+
+<!-- 积分面板 -->
+<div class="overlay" id="pointsOverlay"></div>
+<div class="points-sheet" id="pointsSheet">
+  <div class="ps-handle"></div>
+  <div class="ps-title">💰 积分管理</div>
+  <div class="ps-balance">
+    <div class="psb-item"><div class="psb-val green" id="psEarned">0</div><div class="psb-label">获得积分</div></div>
+    <div class="psb-item"><div class="psb-val orange" id="psSpent">0</div><div class="psb-label">已兑换</div></div>
+    <div class="psb-item"><div class="psb-val" id="psRemain">0</div><div class="psb-label">剩余可用</div></div>
+  </div>
+  <div class="ps-tabs">
+    <button class="active" data-ps-tab="spend">🎁 兑换项目</button>
+    <button data-ps-tab="deduct">⚠️ 扣分惩罚</button>
+    <button data-ps-tab="items">📋 流水</button>
+  </div>
+  <!-- 兑换项目 -->
+  <div class="ps-form" id="psFormSpend">
+    <div class="psf-title" style="font-size:14px;font-weight:600;margin-bottom:8px;">选择要兑换的项目：</div>
+    <div id="psItems"></div>
+  </div>
+  <!-- 扣分表单 -->
+  <div class="ps-form" id="psFormDeduct" style="display:none">
+    <div class="psf-row"><label>扣分原因</label>
+      <select id="psDeductReason">
+        <option value="晚睡">😴 晚睡</option>
+        <option value="不按时吃饭">🍚 不按时吃饭</option>
+        <option value="没刷牙">🪥 没刷牙</option>
+        <option value="没洗脸">🧼 没洗脸</option>
+        <option value="其他">其他</option>
+      </select>
+    </div>
+    <div class="psf-row"><label>扣分分值</label><input type="number" id="psDeductPts" placeholder="输入分值" min="1"></div>
+    <button class="primary" id="btnDeduct" style="background:var(--red)">确认扣分</button>
+  </div>
+  <div class="ps-log" id="psLog"><div class="psl-title">📋 本月流水</div></div>
+</div>
+
+<!-- 设置面板 -->
+<div class="overlay" id="settingsOverlay"></div>
+<div class="settings-sheet" id="settingsSheet">
+  <div class="ss-handle"></div>
+  <div class="ss-title">⚙️ 设置</div>
+  <div class="ss-section">
+    <div class="sss-title">🏖 寒暑假日期配置</div>
+    <div id="vacationList"></div>
+    <button class="add-btn" id="addVacation">＋ 添加假期区间</button>
+  </div>
+  <div class="ss-section">
+    <div class="sss-title">👧 宝贝名字</div>
+    <input type="text" id="childNameInput" style="width:100%;padding:10px 12px;border:2px solid var(--border);border-radius:8px;font-size:15px;">
+  </div>
+  <div class="ss-section">
+    <div class="sss-title">🔄 跨设备同步（GitHub Gist）</div>
+    <div style="font-size:11px;color:#888;margin-bottom:6px;">填入 GitHub Personal Access Token（需 gist 权限），数据自动同步到所有设备</div>
+    <input type="password" id="gistTokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" style="width:100%;padding:10px 12px;border:2px solid var(--border);border-radius:8px;font-size:13px;margin-bottom:6px;">
+    <div id="gistSyncInfo" style="font-size:12px;color:#888;margin-bottom:6px;"></div>
+    <div style="display:flex;gap:6px;">
+      <button id="btnTestSync" style="flex:1;padding:8px;background:#27ae60;color:#fff;border:none;border-radius:6px;font-size:13px;cursor:pointer;">🔄 测试连接</button>
+      <button id="btnClearToken" style="padding:8px;background:#e74c3c;color:#fff;border:none;border-radius:6px;font-size:13px;cursor:pointer;">✕ 清除</button>
+    </div>
+  </div>
+  <button class="primary" id="btnSettingsSave">保存设置</button>
+</div>
+
+<!-- 投票弹窗 -->
+<div class="overlay" id="voteOverlay"></div>
+<div class="vote-sheet" id="voteSheet">
+  <div class="vs-handle"></div>
+  <div class="vs-title">🗳 断连豁免投票</div>
+  <div class="vs-habit" id="vsHabit"></div>
+  <div class="vs-streak" id="vsStreak"></div>
+  <div class="vs-field">
+    <label>申请理由</label>
+    <textarea id="vsReason" placeholder="说明这次断连的原因……" rows="2"></textarea>
+  </div>
+  <div class="vs-voters" id="vsVoters"></div>
+  <div class="vs-status" id="vsStatus">需7票全部同意</div>
+  <button class="vs-save" id="btnSaveVote">💾 保存投票结果</button>
+  <div class="vs-records" id="vsRecords">
+    <div class="vsr-title">📋 历史投票记录</div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===================================================================
+// 1. 习惯配置
+// ===================================================================
+const HABITS = [
+  { id:'mom_bf', personKey:'mom', emoji:'🥣', name:'吃早饭', pts:10, streakNeed:3,
+    rule:'8:30前吃完早饭', ruleVacation:'9:00前吃完早饭', applicable:'all' },
+  { id:'mom_sleep', personKey:'mom', emoji:'😴', name:'早睡觉', pts:10, streakNeed:3,
+    rule:'10:30前睡觉', ruleVacation:'11:00前睡觉', applicable:'all' },
+  { id:'xm_brush', personKey:'xiaomei', emoji:'🪥', name:'刷牙', pts:1, streakNeed:5,
+    rule:'7:30前刷牙（>2分钟，水池旁）', ruleVacation:'8:00前刷牙', applicable:'all' },
+  { id:'xm_wash', personKey:'xiaomei', emoji:'🧼', name:'洗脸', pts:1, streakNeed:5,
+    rule:'7:30前洗脸（毛巾温水）', ruleVacation:'8:00前洗脸', applicable:'all' },
+  { id:'xm_bf', personKey:'xiaomei', emoji:'🥣', name:'吃早饭(小美)', pts:1, streakNeed:5,
+    rule:'7:40前吃完早饭', ruleVacation:'8:30前吃完早饭', applicable:'all' },
+  { id:'xm_lunch', personKey:'xiaomei', emoji:'🍚', name:'吃午饭', pts:5, streakNeed:5,
+    rule:'11:30-13:30 ≤30分钟', ruleVacation:'11:30-13:30 ≤30分钟', applicable:'noschool' },
+  { id:'xm_sleep1', personKey:'xiaomei', emoji:'😴', name:'睡觉(目标一9:30)', pts:10, streakNeed:5,
+    rule:'21:30前睡觉', ruleVacation:'22:00前睡觉', applicable:'all' },
+  { id:'xm_sleep2', personKey:'xiaomei', emoji:'🌙', name:'睡觉(目标二10:00)', pts:5, streakNeed:5,
+    rule:'22:00前睡觉', ruleVacation:'22:30前睡觉', applicable:'all' },
+];
+
+// ===================================================================
+// 2. 2026年法定节假日 + 调休工作日
+// ===================================================================
+const HOLIDAYS_2026 = {
+  // 元旦 1/1-1/3
+  '2026-01-01':1,'2026-01-02':1,'2026-01-03':1,
+  // 春节 2/15-2/23
+  '2026-02-15':1,'2026-02-16':1,'2026-02-17':1,'2026-02-18':1,
+  '2026-02-19':1,'2026-02-20':1,'2026-02-21':1,'2026-02-22':1,'2026-02-23':1,
+  // 清明 4/4-4/6
+  '2026-04-04':1,'2026-04-05':1,'2026-04-06':1,
+  // 劳动节 5/1-5/5
+  '2026-05-01':1,'2026-05-02':1,'2026-05-03':1,'2026-05-04':1,'2026-05-05':1,
+  // 端午 6/19-6/21
+  '2026-06-19':1,'2026-06-20':1,'2026-06-21':1,
+  // 中秋 9/25-9/27
+  '2026-09-25':1,'2026-09-26':1,'2026-09-27':1,
+  // 国庆 10/1-10/7
+  '2026-10-01':1,'2026-10-02':1,'2026-10-03':1,'2026-10-04':1,
+  '2026-10-05':1,'2026-10-06':1,'2026-10-07':1,
+};
+
+const MAKEUP_2026 = {
+  '2026-01-04':1,  // 元旦调休
+  '2026-02-14':1,'2026-02-28':1, // 春节调休
+  '2026-05-09':1,  // 劳动节调休
+  '2026-09-20':1,'2026-10-10':1, // 国庆调休
+};
+
+// ===================================================================
+// 3. 状态
+// ===================================================================
+let checks = {};       // { weekKey: { habitId: ['○','✓','✗',...] } }
+let streakState = {};  // { habitId: { count, lastDate } }
+let effectiveLog = {}; // { habitId: [{ date, pts }] }
+let transactions = []; // [{ id, date, type, amount, note }]
+let dateConfig = { vacationRanges: [] };
+let voteRecords = []; // [{ id, date, habitId, votes:{person:bool}, allApproved, reason, createdAt }]
+let exchangeItems = []; // [{ id, name, cost, unit }]
+let gistConfig = { token: '', gistId: '' };
+let gistSyncStatus = 'idle'; // 'idle' | 'syncing' | 'ok' | 'error'
+let currentView = 'month'; // 'month' | 'week' | 'day'
+let currentMonth = new Date(); currentMonth.setDate(1);
+let currentWeek = null;    // Date (Monday)
+let currentDay = null;     // Date
+
+// ===================================================================
+// 4. 日期工具
+// ===================================================================
+function fmtDateFull(d) {
+  const y = d.getFullYear(), m = d.getMonth()+1, dd = d.getDate();
+  return y+'-'+String(m).padStart(2,'0')+'-'+String(dd).padStart(2,'0');
+}
+function fmtDate(d) { return (d.getMonth()+1)+'/'+d.getDate(); }
+function fmtDateCN(d) { return d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日'; }
+
+function getMonday(date) {
+  const d = new Date(date); d.setHours(0,0,0,0);
+  const day = d.getDay(); const diff = day === 0 ? -6 : 1 - day;
+  d.setDate(d.getDate() + diff); return d;
+}
+
+function getWeekKey(d) {
+  const date = new Date(d); date.setHours(0,0,0,0);
+  const thu = new Date(date); thu.setDate(date.getDate() + 3);
+  const yr = thu.getFullYear();
+  const jan1 = new Date(yr,0,1);
+  const doy = Math.floor((thu - jan1) / 86400000);
+  const wk = Math.ceil((doy + jan1.getDay() + 1) / 7);
+  return yr+'-W'+String(wk).padStart(2,'0');
+}
+
+function getDayOfWeek(d) { // Mon=0..Sun=6
+  const day = d.getDay();
+  return day === 0 ? 6 : day - 1;
+}
+
+function getMonthDays(year, month) {
+  return new Date(year, month + 1, 0).getDate();
+}
+
+function getCalendarGrid(year, month) {
+  const first = new Date(year, month, 1);
+  const last = new Date(year, month + 1, 0);
+  const start = getMonday(first);
+  const totalDays = Math.ceil((last - start + 86400000) / 86400000);
+  const weeks = Math.ceil(totalDays / 7);
+  const grid = [];
+  for (let w = 0; w < weeks; w++) {
+    const row = [];
+    for (let d = 0; d < 7; d++) {
+      const date = new Date(start);
+      date.setDate(start.getDate() + w * 7 + d);
+      row.push(date);
+    }
+    grid.push(row);
+  }
+  return grid;
+}
+
+function datesConsecutive(d1, d2) {
+  const a = new Date(d1), b = new Date(d2);
+  a.setHours(0,0,0,0); b.setHours(0,0,0,0);
+  return (b - a) === 86400000;
+}
+
+// ===================================================================
+// 5. 日历模式判定
+// ===================================================================
+function getModeForDate(date) {
+  const ds = fmtDateFull(date);
+  // 寒暑假
+  for (const r of dateConfig.vacationRanges) {
+    if (ds >= r.start && ds <= r.end) return 'vacation';
+  }
+  // 法定节假日
+  if (HOLIDAYS_2026[ds]) return 'holiday';
+  // 周末但非调休
+  const dow = date.getDay();
+  if ((dow === 0 || dow === 6) && !MAKEUP_2026[ds]) return 'holiday';
+  return 'workday';
+}
+
+function getModeLabel(m) {
+  return { workday:'工作日', holiday:'节假日', vacation:'寒暑假' }[m] || '';
+}
+
+function getModeClass(m) {
+  return { workday:'mode-workday', holiday:'mode-holiday', vacation:'mode-vacation' }[m] || '';
+}
+
+// ===================================================================
+// 6. 习惯适用性 & 状态存取
+// ===================================================================
+function isDayApplicable(habit, date) {
+  const mode = getModeForDate(date);
+  if (habit.applicable === 'all') return true;
+  if (habit.applicable === 'noschool') return mode === 'vacation';
+  return true;
+}
+
+function getRuleText(habit, date) {
+  const mode = getModeForDate(date);
+  if (mode === 'vacation' && habit.ruleVacation) return habit.ruleVacation;
+  return habit.rule;
+}
+
+function getDayStatus(habit, date) {
+  const wk = getWeekKey(date);
+  const di = getDayOfWeek(date);
+  if (!isDayApplicable(habit, date)) return 'na';
+  if (checks[wk] && checks[wk][habit.id] && checks[wk][habit.id][di]) {
+    return checks[wk][habit.id][di];
+  }
+  return '○';
+}
+
+function setDayStatus(habit, date, status) {
+  const wk = getWeekKey(date);
+  const di = getDayOfWeek(date);
+  if (!checks[wk]) checks[wk] = {};
+  if (!checks[wk][habit.id]) checks[wk][habit.id] = ['○','○','○','○','○','○','○'];
+  checks[wk][habit.id][di] = status;
+  saveData();
+}
+
+function cycleStatus(habit, date) {
+  const cur = getDayStatus(habit, date);
+  if (cur === 'na') return;
+  if (cur === '○' || cur === '') { setDayStatus(habit, date, '✓'); return '✓'; }
+  if (cur === '✓') { setDayStatus(habit, date, '✗'); return '✗'; }
+  if (cur === '✗') { setDayStatus(habit, date, '○'); return '○'; }
+}
+
+// ===================================================================
+// 7. 连续计分计算
+// ===================================================================
+function recomputeStreaks() {
+  streakState = {}; effectiveLog = {};
+  const weeks = Object.keys(checks).sort();
+  const today = fmtDateFull(new Date());
+
+  HABITS.forEach(h => {
+    streakState[h.id] = { count: 0, lastDate: null };
+    effectiveLog[h.id] = [];
+
+    weeks.forEach(wk => {
+      const parts = wk.split('-W');
+      if (parts.length !== 2) return;
+      const yr = parseInt(parts[0]), wn = parseInt(parts[1]);
+      const jan4 = new Date(yr,0,4);
+      const jdow = jan4.getDay() || 7;
+      const fm = new Date(jan4); fm.setDate(jan4.getDate() - (jdow - 1) + (wn - 1) * 7);
+
+      if (!checks[wk] || !checks[wk][h.id]) return;
+      for (let d = 0; d < 7; d++) {
+        const date = new Date(fm); date.setDate(fm.getDate() + d);
+        const ds = fmtDateFull(date);
+        if (ds > today) continue;
+        const status = checks[wk][h.id][d] || '○';
+        if (!isDayApplicable(h, date)) continue;
+
+        if (status === '✓') {
+          const prev = streakState[h.id].lastDate;
+          if (prev && datesConsecutive(new Date(prev), date)) {
+            streakState[h.id].count++;
+          } else if (prev && prev === ds) {
+          } else {
+            streakState[h.id].count = 1;
+          }
+          streakState[h.id].lastDate = ds;
+
+          if (streakState[h.id].count >= h.streakNeed) {
+            effectiveLog[h.id].push({ date: ds, pts: h.pts * h.streakNeed });
+            streakState[h.id].count = 0;
+            streakState[h.id].lastDate = null;
+          }
+        } else if (status === '✗' || (status === '○' && ds < today)) {
+          // 检查是否有已通过的豁免投票，有则不断连
+          const exempt = voteRecords.some(v => v.habitId === h.id && v.date === ds && v.allApproved === true);
+          if (!exempt) {
+            streakState[h.id].count = 0;
+            streakState[h.id].lastDate = null;
+          }
+        }
+      }
+    });
+  });
+}
+
+function getEffPts(habitId) {
+  return (effectiveLog[habitId]||[]).reduce((s,e) => s + e.pts, 0);
+}
+
+function getStreakCount(habitId) { return (streakState[habitId]||{}).count || 0; }
+
+// ===================================================================
+// 8. 投票系统
+// ===================================================================
+const FAMILY = ['爸爸','妈妈','小美','爷爷','奶奶','外公','外婆'];
+const FAMILY_EMOJI = {'爸爸':'👨','妈妈':'👩','小美':'👧','爷爷':'👴','奶奶':'👵','外公':'👴','外婆':'👵'};
+
+function hasApprovedVote(habitId, date) {
+  return voteRecords.some(v => v.habitId === habitId && v.date === date && v.allApproved === true);
+}
+function getVoteFor(habitId, date) { return voteRecords.find(v => v.habitId === habitId && v.date === date); }
+
+function showVoteModal(habitId, date) {
+  if (!habitId || !date) {
+    document.getElementById('vsHabit').textContent = '📋 所有投票记录';
+    document.getElementById('vsStreak').textContent = '';
+    document.getElementById('vsVoters').innerHTML = '';
+    document.getElementById('vsReason').value = '';
+    document.getElementById('vsStatus').textContent = '';
+    document.getElementById('voteSheet').dataset.editingHabit = '';
+    document.getElementById('voteSheet').dataset.editingDate = '';
+    renderVoteRecords();
+    document.getElementById('voteOverlay').classList.add('show');
+    document.getElementById('voteSheet').classList.add('show');
+    return;
+  }
+  const habit = HABITS.find(h => h.id === habitId);
+  if (!habit) return;
+  const existing = getVoteFor(habitId, date);
+  document.getElementById('vsHabit').textContent = habit.emoji + ' ' + habit.name + ' · ' + date;
+  const sc = getStreakCount(habitId);
+  document.getElementById('vsStreak').textContent = sc > 0 ? '🔥 当前连续 ' + sc + '/' + habit.streakNeed : '当前无连续';
+  const votes = existing ? {...existing.votes} : {};
+  let vhtml = '';
+  FAMILY.forEach(n => {
+    const val = votes[n]; const cls = val===true?'approved':val===false?'rejected':'';
+    vhtml += '<div class="vs-voter '+cls+'" data-voter="'+n+'"><span class="vv-check">'+(val===true?'✓':val===false?'✗':'○')+'</span><span class="vv-name">'+FAMILY_EMOJI[n]+' '+n+'</span></div>';
+  });
+  document.getElementById('vsVoters').innerHTML = vhtml;
+  document.getElementById('vsReason').value = existing ? (existing.reason||'') : '';
+  window._currentVotes = votes;
+
+  document.querySelectorAll('.vs-voter').forEach(el => {
+    el.addEventListener('click', function() {
+      const name = this.dataset.voter; const v = window._currentVotes;
+      const cur = v[name];
+      if (cur === undefined) v[name] = true;
+      else if (cur === true) v[name] = false;
+      else delete v[name];
+      const nv = v[name];
+      this.className = 'vs-voter' + (nv===true?' approved':nv===false?' rejected':'');
+      this.querySelector('.vv-check').textContent = nv===true?'✓':nv===false?'✗':'○';
+      updateVoteStatus();
+    });
+  });
+
+  document.getElementById('voteSheet').dataset.editingHabit = habitId;
+  document.getElementById('voteSheet').dataset.editingDate = date;
+  updateVoteStatus();
+  renderVoteRecords();
+  document.getElementById('voteOverlay').classList.add('show');
+  document.getElementById('voteSheet').classList.add('show');
+}
+
+function updateVoteStatus() {
+  const v = window._currentVotes || {}; const t = FAMILY.length;
+  const a = FAMILY.filter(n => v[n]===true).length, r = FAMILY.filter(n => v[n]===false).length;
+  const st = document.getElementById('vsStatus');
+  if (a === t) { st.textContent='✅ 全票通过！可豁免断连'; st.style.color='#27ae60'; }
+  else if (r > 0) { st.textContent='❌ '+r+'人反对，未通过（'+a+'/'+t+'）'; st.style.color='#e74c3c'; }
+  else { st.textContent='⏳ 待投票（'+a+'/'+t+'）'; st.style.color='#e67e22'; }
+}
+
+function saveVoteResult() {
+  const habitId = document.getElementById('voteSheet').dataset.editingHabit;
+  const date = document.getElementById('voteSheet').dataset.editingDate;
+  const votes = window._currentVotes || {}; const reason = document.getElementById('vsReason').value.trim();
+  const allApproved = FAMILY.every(n => votes[n] === true);
+  const existing = getVoteFor(habitId, date);
+  const record = {
+    id: existing ? existing.id : 'v_'+Date.now().toString(36)+Math.random().toString(36).slice(2,5),
+    date, habitId, votes: {}, allApproved, reason,
+    createdAt: existing ? existing.createdAt : new Date().toISOString()
+  };
+  FAMILY.forEach(n => { if (votes[n] !== undefined) record.votes[n] = votes[n]; });
+  if (existing) { const i = voteRecords.indexOf(existing); if(i>-1) voteRecords[i]=record; }
+  else voteRecords.push(record);
+  saveData(); recomputeStreaks();
+  document.getElementById('voteOverlay').classList.remove('show');
+  document.getElementById('voteSheet').classList.remove('show');
+  showToast(allApproved ? '✅ 已豁免！连续保留' : '❌ 未全票通过，连续已重置');
+  if (isDesktop()) renderPrintableWeek();
+  else if (currentView==='month') renderMonthView();
+  else if (currentView==='week') renderWeekView();
+  else renderDayView();
+}
+
+function renderVoteRecords() {
+  const c = document.getElementById('vsRecords');
+  let html = '<div class="vsr-title">📋 历史投票记录</div>';
+  if (voteRecords.length===0) { html+='<div style="font-size:13px;color:#888;padding:8px 0;">暂无记录</div>'; }
+  else {
+    [...voteRecords].sort((a,b)=>b.createdAt.localeCompare(a.createdAt)).forEach(r => {
+      const h = HABITS.find(x => x.id === r.habitId);
+      const hn = h ? h.emoji+' '+h.name : r.habitId;
+      const vs = Object.keys(r.votes).map(n => (r.votes[n]?'✓':'✗')+n).join(' ');
+      html += '<div class="vsr-item"><span class="vsr-habit">'+hn+'</span><span class="vsr-date">'+r.date+'</span>';
+      html += '<span class="vsr-result '+(r.allApproved?'pass':'fail')+'">'+(r.allApproved?'✅ 已豁免':'❌ 未通过')+'</span>';
+      html += '<span class="vsr-votes">'+vs+'</span>';
+      if (r.reason) html += '<span style="color:#999;font-size:11px;">「'+r.reason+'」</span>';
+      html += '</div>';
+    });
+  }
+  c.innerHTML = html;
+}
+
+function hideVoteModal() {
+  document.getElementById('voteOverlay').classList.remove('show');
+  document.getElementById('voteSheet').classList.remove('show');
+}
+
+// ===================================================================
+// 9. 数据持久化
+// ===================================================================
+function loadData() {
+  try {
+    const raw = localStorage.getItem('habitTableV3');
+    if (raw) {
+      const d = JSON.parse(raw);
+      checks = d.checks || {};
+      streakState = d.streakState || {};
+      effectiveLog = d.effectiveLog || {};
+      transactions = d.transactions || [];
+      dateConfig = d.dateConfig || { vacationRanges: [] };
+      voteRecords = d.voteRecords || [];
+      exchangeItems = d.exchangeItems || getDefaultExchangeItems();
+      gistConfig = d.gistConfig || { token: '', gistId: '' };
+      // 清理旧na
+      Object.keys(checks).forEach(wk => {
+        Object.keys(checks[wk]).forEach(hid => {
+          if (Array.isArray(checks[wk][hid])) {
+            checks[wk][hid] = checks[wk][hid].map(s => s === 'na' ? '○' : s);
+          }
+        });
+      });
+    } else {
+      // 尝试从 V2 迁移
+      try {
+        const v2 = localStorage.getItem('habitTableV2');
+        if (v2) {
+          const d = JSON.parse(v2);
+          checks = d.checks || {};
+          dateConfig = { vacationRanges: [] };
+          saveData();
+        }
+      } catch(e) {}
+    }
+  } catch(e) { checks = {}; }
+}
+
+function saveData() {
+  localStorage.setItem('habitTableV3', JSON.stringify({
+    checks, streakState, effectiveLog, transactions, dateConfig, voteRecords, exchangeItems, gistConfig
+  }));
+  debounceSyncToGist();
+}
+
+// ===================================================================
+// 9. 积分/交易
+// ===================================================================
+function getTotalEarned() {
+  return Object.values(effectiveLog).reduce((s, log) => s + log.reduce((ss, e) => ss + e.pts, 0), 0);
+}
+function getTotalSpent() {
+  return transactions.filter(t => t.type === 'spend' || t.type === 'deduct')
+    .reduce((s, t) => s + t.amount, 0);
+}
+function getRemain() { return getTotalEarned() - getTotalSpent(); }
+
+function getMonthEarned(monthKey) {
+  let s = 0;
+  Object.values(effectiveLog).forEach(log => {
+    log.forEach(e => { if (e.date.startsWith(monthKey)) s += e.pts; });
+  });
+  return s;
+}
+function getMonthSpent(monthKey) {
+  return transactions.filter(t => t.date.startsWith(monthKey))
+    .reduce((s, t) => s + t.amount, 0);
+}
+
+// ===================================================================
+// 10. 渲染 - 月视图
+// ===================================================================
+function renderMonthView() {
+  // 今日完成度统计（按日）
+  const grid = getCalendarGrid(currentMonth.getFullYear(), currentMonth.getMonth());
+  const today = fmtDateFull(new Date());
+  const monthKey = currentMonth.getFullYear()+'-'+String(currentMonth.getMonth()+1).padStart(2,'0');
+
+  // 生成日历HTML
+  let html = '<table><thead><tr><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>日</th></tr></thead><tbody>';
+
+  grid.forEach(row => {
+    html += '<tr>';
+    row.forEach(date => {
+      const ds = fmtDateFull(date);
+      const isOther = date.getMonth() !== currentMonth.getMonth();
+      const isToday = ds === today;
+      const cls = isOther ? 'other-month' : '';
+      const dayNum = date.getDate();
+
+      // 完成状态
+      let dotHtml = '', dotCls = 'dot-future';
+      if (ds <= today && !isOther) {
+        let total = 0, done = 0;
+        HABITS.forEach(h => {
+          if (!isDayApplicable(h, date)) return;
+          total++;
+          if (getDayStatus(h, date) === '✓') done++;
+        });
+        if (total === 0) { dotHtml = '—'; dotCls = 'dot-na'; }
+        else if (done === total) { dotHtml = '●'; dotCls = 'dot-all'; }
+        else if (done > 0) { dotHtml = '◎'; dotCls = 'dot-partial'; }
+        else { dotHtml = '◌'; dotCls = 'dot-none'; }
+      } else if (isOther) {
+        dotHtml = '';
+      } else {
+        dotHtml = ''; dotCls = 'dot-future';
+      }
+
+      html += `<td class="${cls}" data-date="${ds}">`;
+      html += `<div class="day-num ${isToday?'today':''}">${dayNum}</div>`;
+      if (dotHtml) html += `<div class="day-dot ${dotCls}">${dotHtml}</div>`;
+      html += '</td>';
+    });
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  document.getElementById('monthCalendar').innerHTML = html;
+
+  // 月度汇总
+  document.getElementById('msEarned').textContent = getMonthEarned(monthKey);
+  document.getElementById('msSpent').textContent = getMonthSpent(monthKey);
+  document.getElementById('msRemain').textContent = getMonthEarned(monthKey) - getMonthSpent(monthKey);
+
+  // 本周进度条
+  renderWeekProgress();
+
+  // 绑定日历点击
+  document.querySelectorAll('#monthCalendar td[data-date]').forEach(td => {
+    td.addEventListener('click', function() {
+      const ds = this.dataset.date;
+      const d = new Date(ds + 'T00:00:00');
+      if (isDesktop()) {
+        currentWeek = getMonday(d);
+        currentDay = d;
+        renderWeekView();
+        renderDayView();
+        updateHeader(true);
+      } else {
+        goToWeek(d);
+      }
+    });
+  });
+
+  // 绑定周进度条点击
+  document.getElementById('weekProgress').onclick = function() {
+    goToWeek(new Date());
+  };
+}
+
+function renderWeekProgress() {
+  const today = new Date();
+  const monday = getMonday(today);
+  let total = 0, done = 0;
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(monday); d.setDate(monday.getDate() + i);
+    const ds = fmtDateFull(d);
+    if (ds > fmtDateFull(today)) break;
+    HABITS.forEach(h => {
+      if (!isDayApplicable(h, d)) return;
+      total++;
+      if (getDayStatus(h, d) === '✓') done++;
+    });
+  }
+  const pct = total > 0 ? Math.round(done/total*100) : 0;
+  document.getElementById('wpFill').style.width = pct + '%';
+  document.getElementById('wpText').textContent = done + '/' + total;
+}
+
+// ===================================================================
+// 11. 渲染 - 周视图
+// ===================================================================
+function renderWeekView() {
+  if (!currentWeek) currentWeek = getMonday(new Date());
+  const weekStart = currentWeek;
+  const dates = [];
+  for (let i = 0; i < 7; i++) { const d = new Date(weekStart); d.setDate(weekStart.getDate()+i); dates.push(d); }
+
+  const today = fmtDateFull(new Date());
+  const DOW = ['一','二','三','四','五','六','日'];
+  let cards = '';
+
+  HABITS.forEach(h => {
+    // 检查本周是否有适用日
+    let hasAny = false;
+    for (let i = 0; i < 7; i++) {
+      if (isDayApplicable(h, dates[i])) { hasAny = true; break; }
+    }
+    if (!hasAny) return;
+
+    const streak = getStreakCount(h.id);
+    const effPts = getEffPts(h.id);
+
+    // 每日状态
+    let dotsHtml = '';
+    for (let i = 0; i < 7; i++) {
+      const ds = fmtDateFull(dates[i]);
+      const status = getDayStatus(h, dates[i]);
+      let icon, cls;
+      if (status === '✓') { icon = '●'; cls = 'checked'; }
+      else if (status === '✗') { icon = '✗'; cls = 'void'; }
+      else if (status === 'na') { icon = '—'; cls = 'na'; }
+      else { icon = '○'; cls = ds <= today ? 'void' : 'pending'; }
+      dotsHtml += `<div class="dot-item" data-habit="${h.id}" data-day="${i}" data-date="${ds}">`;
+      dotsHtml += `<span class="dow-label">${DOW[i]}</span>`;
+      dotsHtml += `<span class="dow-icon ${cls}">${icon}</span></div>`;
+    }
+
+    // 周视图规则：如果本周有假期就用假期规则
+    let ruleText = getRuleText(h, dates[0]);
+    for (let i = 0; i < 7; i++) {
+      if (getModeForDate(dates[i]) === 'vacation' && h.ruleVacation) {
+        ruleText = h.ruleVacation; break;
+      }
+    }
+    const barPct = h.streakNeed > 0 ? Math.min(100, streak/h.streakNeed*100) : 0;
+
+    cards += `<div class="habit-card" data-habit="${h.id}" data-week-start="${fmtDateFull(weekStart)}">`;
+    cards += `<div class="card-head"><div class="ch-left"><span class="ch-emoji">${h.emoji}</span><span class="ch-name">${h.name}</span></div><span class="ch-pts">+${h.pts}</span></div>`;
+    cards += `<div class="card-dots">${dotsHtml}</div>`;
+    if (streak > 0) {
+      cards += `<div class="card-footer"><span class="streak">🔥 ${streak}/${h.streakNeed}</span><div class="streak-bar"><div class="sb-fill" style="width:${barPct}%"></div></div>`;
+    } else {
+      cards += `<div class="card-footer"><span class="streak">0/${h.streakNeed}</span><div class="streak-bar"><div class="sb-fill" style="width:0%"></div></div>`;
+    }
+    if (effPts > 0) cards += `<span class="eff-pts">✅ 得分 ${effPts}</span>`;
+    // 投票入口
+    let hasX = false, xDate = '';
+    for (let i = 0; i < 7; i++) {
+      if (fmtDateFull(dates[i]) > today) continue;
+      if (getDayStatus(h, dates[i]) === '✗' && isDayApplicable(h, dates[i])) { hasX=true; xDate=fmtDateFull(dates[i]); break; }
+    }
+    if (hasX) {
+      const hasVote = getVoteFor(h.id, xDate);
+      cards += `<span class="eff-pts" style="margin-left:4px;cursor:pointer;" data-vote-h="${h.id}" data-vote-d="${xDate}" title="豁免投票">${hasVote ? (hasVote.allApproved ? '✅已豁免' : '❌未通过') : '🗳豁免'}</span>`;
+    }
+    cards += `</div><div class="card-rule">${ruleText}</div></div>`;
+  });
+
+  document.getElementById('weekCards').innerHTML = cards;
+
+  // 绑定日点点击
+  document.querySelectorAll('.habit-card .dot-item').forEach(el => {
+    el.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const habitId = this.dataset.habit;
+      const dayIdx = parseInt(this.dataset.day);
+      const dateStr = this.dataset.date;
+      const habit = HABITS.find(h => h.id === habitId);
+      if (!habit) return;
+      const d = new Date(dateStr + 'T00:00:00');
+      const todayStr = fmtDateFull(new Date());
+      if (dateStr > todayStr) { showToast('⏳ 不能记录未来'); return; }
+      if (getDayStatus(habit, d) === 'na') return;
+      cycleStatus(habit, d);
+      // 重新计算并刷新
+      recomputeStreaks();
+      const wkStart = this.closest('.habit-card').dataset.weekStart;
+      currentWeek = new Date(wkStart + 'T00:00:00');
+      renderWeekView();
+      updateHeader();
+      saveData();
+      showToast('✅');
+    });
+  });
+
+  // 绑定卡片点击 → 进入日视图（优先跳到今天）
+  document.querySelectorAll('.habit-card').forEach(card => {
+    card.addEventListener('click', function(e) {
+      if (e.target.closest('.dot-item')) return;
+      if (e.target.closest('[data-vote-h]')) return;
+      const ds = this.dataset.weekStart;
+      const monday = new Date(ds + 'T00:00:00');
+      currentWeek = monday;
+      const today = new Date(); today.setHours(0,0,0,0);
+      const weekEnd = new Date(monday); weekEnd.setDate(monday.getDate() + 6);
+      const target = today >= monday && today <= weekEnd ? today : monday;
+      if (isDesktop()) {
+        currentDay = target;
+        renderDayView();
+        updateHeader(true);
+      } else {
+        goToDay(target);
+      }
+    });
+  });
+
+  // 绑定投票按钮（周视图）
+  document.querySelectorAll('[data-vote-h]').forEach(el => {
+    el.addEventListener('click', function(e) {
+      e.stopPropagation();
+      showVoteModal(this.dataset.voteH, this.dataset.voteD);
+    });
+  });
+}
+
+// ===================================================================
+// 12. 渲染 - 日视图
+// ===================================================================
+function renderDayView() {
+  if (!currentDay) currentDay = new Date();
+  const d = currentDay;
+  const ds = fmtDateFull(d);
+  const today = fmtDateFull(new Date());
+  const mode = getModeForDate(d);
+  const modeLabel = getModeLabel(mode);
+  const modeClass = getModeClass(mode);
+
+  const DOW = ['一','二','三','四','五','六','日'];
+  document.getElementById('dayDate').textContent = fmtDateCN(d) + ' 星期' + DOW[getDayOfWeek(d)];
+  const dayModeEl = document.getElementById('dayMode');
+  dayModeEl.textContent = modeLabel;
+  dayModeEl.className = 'dh-mode mode-badge ' + modeClass;
+
+  // 是否可编辑
+  const canEdit = ds <= today;
+
+  // 渲染习惯列表
+  let html = '';
+  let doneCount = 0, totalCount = 0, ptsToday = 0;
+
+  HABITS.forEach(h => {
+    const status = getDayStatus(h, d);
+    const applicable = isDayApplicable(h, d);
+    const ruleText = applicable ? getRuleText(h, d) : '今天不计分';
+
+    if (applicable) totalCount++;
+    if (status === '✓') { doneCount++; ptsToday += h.pts; }
+
+    let statusBtn, statusCls;
+    if (status === '✓') { statusBtn = '✔'; statusCls = 'status-checked'; }
+    else if (status === '✗') { statusBtn = '✗'; statusCls = 'status-void'; }
+    else { statusBtn = '○'; statusCls = 'status-pending'; }
+
+    html += `<div class="habit-row" data-habit="${h.id}" data-date="${ds}">`;
+    html += `<span class="hr-emoji">${h.emoji}</span>`;
+    html += `<div class="hr-info"><div class="hr-name">${h.name}</div><div class="hr-rule${applicable?'':' na'}">${ruleText}</div></div>`;
+    html += `<span class="hr-pts">+${h.pts}</span>`;
+    html += `<span class="hr-status ${statusCls}">${statusBtn}</span>`;
+    if (status === '✗' && applicable) {
+      const hasV = getVoteFor(h.id, ds);
+      html += `<span style="font-size:16px;margin-left:4px;cursor:pointer;" data-vote-h="${h.id}" data-vote-d="${ds}" title="豁免投票">${hasV ? (hasV.allApproved ? '✅' : '❌') : '🗳'}</span>`;
+    }
+    html += '</div>';
+  });
+
+  document.getElementById('dayHabits').innerHTML = html;
+
+  // 今日摘要
+  const streakDays = calcDayStreak(d);
+  document.getElementById('dsDone').textContent = doneCount;
+  document.getElementById('dsTotal').textContent = totalCount - doneCount;
+  document.getElementById('dsPts').textContent = '+' + ptsToday;
+  document.getElementById('dsStreak').textContent = streakDays;
+
+  // 绑定点击（日视图）
+  if (canEdit) {
+    document.querySelectorAll('.habit-row').forEach(row => {
+      row.addEventListener('click', function(e) {
+        if (e.target.closest('[data-vote-h]')) return;
+        const habitId = this.dataset.habit;
+        const dateStr = this.dataset.date;
+        const habit = HABITS.find(h => h.id === habitId);
+        if (!habit) return;
+        const date = new Date(dateStr + 'T00:00:00');
+        if (getDayStatus(habit, date) === 'na') { showToast('今天不计分'); return; }
+        cycleStatus(habit, date);
+        recomputeStreaks();
+        renderDayView();
+        saveData();
+        showToast('✅');
+      });
+    });
+    // 日视图投票按钮
+    document.querySelectorAll('[data-vote-h]').forEach(el => {
+      el.addEventListener('click', function(e) {
+        e.stopPropagation();
+        showVoteModal(this.dataset.voteH, this.dataset.voteD);
+      });
+    });
+  }
+}
+
+// 计算连续打卡天数（到某天为止）
+function calcDayStreak(date) {
+  let count = 0;
+  const cursor = new Date(date); cursor.setHours(0,0,0,0);
+  const today = new Date(); today.setHours(0,0,0,0);
+  const limit = fmtDateFull(cursor);
+
+  // 从给定日期往回数
+  for (let i = 0; i < 365; i++) {
+    const d = new Date(cursor);
+    d.setDate(cursor.getDate() - i);
+    const ds = fmtDateFull(d);
+    if (ds > limit) continue;
+    if (ds > fmtDateFull(today)) continue; // 跳过未来
+
+    // 检查这天是否有适用习惯
+    let anyApplicable = false, allDone = true;
+    HABITS.forEach(h => {
+      if (!isDayApplicable(h, d)) return;
+      anyApplicable = true;
+      if (getDayStatus(h, d) !== '✓') allDone = false;
+    });
+    if (!anyApplicable) continue;
+    if (allDone) count++;
+    else break;
+  }
+  return count;
+}
+
+// ===================================================================
+// 13. 响应式工具 & 视图切换
+// ===================================================================
+function isDesktop() { return window.innerWidth >= 768; }
+
+// ===================================================================
+// 13. 桌面端可打印周视图渲染
+// ===================================================================
+function isDesktop() { return window.innerWidth >= 768; }
+
+function renderPrintableWeek() {
+  if (!currentWeek) currentWeek = getMonday(new Date());
+  const dates = [];
+  for (let i = 0; i < 7; i++) { const d = new Date(currentWeek); d.setDate(currentWeek.getDate()+i); dates.push(d); }
+  const weekKey = getWeekKey(currentWeek);
+  const today = fmtDateFull(new Date());
+
+  document.getElementById('pWeekBadge').textContent = '第'+(weekKey.split('-W')[1])+'周';
+  document.getElementById('pWeekRange').textContent = fmtDate(dates[0])+' - '+fmtDate(dates[6]);
+  const refMode = getModeForDate(currentWeek);
+  document.getElementById('pModeLabel').textContent = getModeLabel(refMode);
+  document.getElementById('pModeLabel').className = 'mode-badge '+getModeClass(refMode);
+  const savedName = localStorage.getItem('habitTable_childName') || '小美';
+  document.getElementById('pChildName').textContent = savedName;
+
+  let weekEff = 0, weekPend = 0;
+  const allTotal = Object.values(effectiveLog).reduce((s, log) => s + log.reduce((ss, e) => ss + e.pts, 0), 0);
+  const allSpent = transactions.filter(t => t.type==='spend'||t.type==='deduct').reduce((s,t) => s+t.amount, 0);
+  HABITS.forEach(h => {
+    for (let d = 0; d < 7; d++) {
+      const date = dates[d]; const ds = fmtDateFull(date);
+      if (ds > today) continue;
+      if (!isDayApplicable(h, date)) continue;
+      if (getDayStatus(h, date) === '✓') weekPend += h.pts;
+    }
+    (effectiveLog[h.id]||[]).forEach(e => {
+      const eDate = new Date(e.date+'T00:00:00');
+      if (eDate >= dates[0] && eDate <= dates[6]) weekEff += e.pts;
+    });
+  });
+
+  document.getElementById('pSummary').innerHTML =
+    '<div class="box effective">已生效积分<div class="val">'+weekEff+'</div></div>'+
+    '<div class="box pending">待生效积分<div class="val">'+weekPend+'</div></div>'+
+    '<div class="box total">累计总收入<div class="val">'+allTotal+'</div></div>'+
+    '<div class="box" style="border-color:#e74c3c;">已兑换<div class="val" style="color:#e74c3c;">'+allSpent+'</div></div>'+
+    '<div class="box" style="border-color:#27ae60;">剩余可用<div class="val" style="color:#27ae60;">'+(allTotal-allSpent)+'</div></div>';
+
+  const groups = [
+    { cls:'p-person-mom', label:'👩 妈妈', habits:HABITS.filter(h => h.personKey==='mom') },
+    { cls:'p-person-xiaomei', label:'👧 小美', habits:HABITS.filter(h => h.personKey==='xiaomei') },
+  ];
+  let html = '';
+  groups.forEach(pg => {
+    if (!pg.habits.length) return;
+    html += '<tr class="p-person-header '+pg.cls+'"><td colspan="13">'+pg.label+'</td></tr>';
+    let pEff = 0;
+    pg.habits.forEach(h => {
+      const sc = getStreakCount(h.id);
+      let wEff = 0;
+      for (let d = 0; d < 7; d++) {
+        if (fmtDateFull(dates[d]) > today) continue;
+        if (!isDayApplicable(h, dates[d])) continue;
+        if (getDayStatus(h, dates[d]) === '✓') wEff += h.pts;
+      }
+      (effectiveLog[h.id]||[]).forEach(e => {
+        const eD = new Date(e.date+'T00:00:00');
+        if (eD >= dates[0] && eD <= dates[6]) wEff += e.pts;
+      });
+      pEff += wEff;
+      const ruleText = (refMode==='vacation' && h.ruleVacation) ? h.ruleVacation : h.rule;
+
+      html += '<tr class="p-data-row" data-habit="'+h.id+'">';
+      html += '<td style="font-size:16px;">'+h.emoji+'</td>';
+      html += '<td class="p-item-name">'+h.name+'</td>';
+      html += '<td class="p-rule-text">'+ruleText.replace(/\n/g,'<br>')+'</td>';
+      html += '<td class="p-streak-cell"><span class="p-streak-num '+(sc>0?'active':'')+'">'+sc+'</span><span class="p-streak-target">/'+h.streakNeed+'</span></td>';
+      html += '<td class="p-pts-val">+'+h.pts+'</td>';
+      for (let d = 0; d < 7; d++) {
+        const ds = fmtDateFull(dates[d]);
+        const st = getDayStatus(h, dates[d]);
+        let cls = 'p-day-cell';
+        if (st === '✓') cls += ' checked';
+        else if (st === '✗') cls += ' void';
+        else if (st === 'na') cls += ' na';
+        else if (st === '○' && ds <= today && isDayApplicable(h, dates[d])) cls += ' void';
+        html += '<td class="'+cls+'" data-habit="'+h.id+'" data-day="'+d+'" data-date="'+ds+'"></td>';
+      }
+      // 检查本周是否有 ✗ 需要投票
+      let hasX = false, xDate = '';
+      for (let d = 0; d < 7; d++) {
+        const ds = fmtDateFull(dates[d]);
+        if (ds > today) continue;
+        if (getDayStatus(h, dates[d]) === '✗' && isDayApplicable(h, dates[d])) { hasX=true; xDate=ds; break; }
+      }
+      const voteBtn = hasX ? ' <span class="p-vote-btn" data-vote-habit="'+h.id+'" data-vote-date="'+xDate+'" style="cursor:pointer;font-size:14px;margin-left:4px;" title="申请豁免投票">🗳</span>' : '';
+      html += '<td class="p-eff-cell'+(wEff>0?' has-points':' no-points')+'">'+(wEff>0?'+'+wEff:'')+voteBtn+'</td></tr>';
+    });
+    html += '<tr class="p-subtotal"><td colspan="3">'+pg.habits[0].emoji+' 小计</td><td colspan="2"></td>';
+    for (let d = 0; d < 7; d++) {
+      let cnt = 0;
+      pg.habits.forEach(h => { if (isDayApplicable(h,dates[d]) && getDayStatus(h,dates[d])==='✓') cnt++; });
+      html += '<td>'+(cnt||'')+'</td>';
+    }
+    html += '<td>+'+pEff+'</td></tr>';
+  });
+  html += '<tr class="p-subtotal" style="background:#ffeaa7;border-top:3px double #333;"><td colspan="3" style="font-size:12px;">🏆 本周合计</td><td colspan="2"></td>';
+  for (let d = 0; d < 7; d++) {
+    let cnt = 0;
+    HABITS.forEach(h => { if (isDayApplicable(h,dates[d]) && getDayStatus(h,dates[d])==='✓') cnt++; });
+    html += '<td>'+(cnt?cnt+'项':'')+'</td>';
+  }
+  html += '<td style="font-size:14px;color:#27ae60;font-weight:900;">+'+weekEff+'</td></tr>';
+  document.getElementById('pTableBody').innerHTML = html;
+
+  document.querySelectorAll('.p-day-cell:not(.na)').forEach(cell => {
+    cell.addEventListener('click', function() {
+      const hId = this.dataset.habit;
+      const dayIdx = parseInt(this.dataset.day);
+      const ds = this.dataset.date;
+      if (ds > today) { showToast('⏳ 不能记录未来'); return; }
+      const habit = HABITS.find(h => h.id === hId);
+      if (!habit || !isDayApplicable(habit, dates[dayIdx])) return;
+      cycleStatus(habit, dates[dayIdx]);
+      recomputeStreaks();
+      renderPrintableWeek();
+      showToast('✅');
+    });
+  });
+  bindVoteCheckboxesP();
+  document.querySelectorAll('.p-vote-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      showVoteModal(this.dataset.voteHabit, this.dataset.voteDate);
+    });
+  });
+  saveData();
+}
+
+function bindVoteCheckboxesP() {
+  const cbs = document.querySelectorAll('#pVoteGrid input[type="checkbox"]');
+  const st = document.getElementById('pVoteStatus');
+  function up() {
+    const t = cbs.length, c = Array.from(cbs).filter(x => x.checked).length;
+    if (c === t) { st.textContent='✅ 全票通过！可豁免断连'; st.style.color='#27ae60'; }
+    else { st.textContent='需7票全部同意（'+c+'/'+t+'）'; st.style.color='#e74c3c'; }
+  }
+  cbs.forEach(cb => { cb.removeEventListener('change', up); cb.addEventListener('change', up); });
+}
+
+// ===================================================================
+// 14. 视图切换与导航
+// ===================================================================
+function switchView(view) {
+  currentView = view;
+  if (isDesktop()) {
+    // 桌面端：只显示可打印周视图
+    if (view === 'points') { showPointsSheet(); return; }
+    if (view === 'vote') { showVoteModal(); return; }
+    if (!currentWeek) currentWeek = getMonday(new Date());
+    renderPrintableWeek();
+    updateHeader();
+    return;
+  }
+
+  // 手机端：单视图Tab切换
+  document.querySelectorAll('.month-view,.week-view,.day-view').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tabbar .tab').forEach(t => t.classList.remove('active'));
+
+  if (view === 'month') {
+    document.getElementById('monthView').classList.add('active');
+    document.querySelector('.tab[data-tab="month"]').classList.add('active');
+    renderMonthView();
+  } else if (view === 'week') {
+    document.getElementById('weekView').classList.add('active');
+    document.querySelector('.tab[data-tab="week"]').classList.add('active');
+    if (!currentWeek) currentWeek = getMonday(new Date());
+    renderWeekView();
+  } else if (view === 'points') {
+    showPointsSheet();
+    return;
+  }
+  updateHeader();
+}
+
+function goToWeek(date) {
+  currentWeek = getMonday(date);
+  if (isDesktop()) {
+    renderPrintableWeek();
+    updateHeader();
+  } else {
+    switchView('week');
+  }
+}
+
+function goToDay(date) {
+  currentDay = new Date(date);
+  if (isDesktop()) {
+    renderDayView();
+    updateHeader(true);
+  } else {
+    currentView = 'day';
+    document.querySelectorAll('.month-view,.week-view,.day-view').forEach(el => el.classList.remove('active'));
+    document.getElementById('dayView').classList.add('active');
+    renderDayView();
+    updateHeader(true);
+  }
+}
+
+function updateHeader(isDay) {
+  if (isDesktop()) {
+    if (!currentWeek) currentWeek = getMonday(new Date());
+    const end = new Date(currentWeek); end.setDate(currentWeek.getDate() + 6);
+    const mode = getModeForDate(currentWeek);
+    document.getElementById('headerTitle').innerHTML = fmtDate(currentWeek) + ' - ' + fmtDate(end) + ' <span class="title-sub">' + getModeLabel(mode) + '</span>';
+    document.getElementById('btnNavPrev').onclick = function() { changeWeek(-1); };
+    document.getElementById('btnNavNext').onclick = function() { changeWeek(1); };
+    document.getElementById('modeBadge').textContent = getModeLabel(mode);
+    document.getElementById('modeBadge').className = 'mode-badge ' + getModeClass(mode);
+    return;
+  }
+
+  if (isDay && currentDay) {
+    const mode = getModeForDate(currentDay);
+    document.getElementById('headerTitle').innerHTML = fmtDateCN(currentDay) + ' <span class="title-sub">' + getModeLabel(mode) + '</span>';
+    document.getElementById('btnNavPrev').onclick = function() { changeDay(-1); };
+    document.getElementById('btnNavNext').onclick = function() { changeDay(1); };
+    document.getElementById('modeBadge').textContent = getModeLabel(mode);
+    document.getElementById('modeBadge').className = 'mode-badge ' + getModeClass(mode);
+    return;
+  }
+  if (currentView === 'month') {
+    const m = currentMonth;
+    document.getElementById('headerTitle').textContent = m.getFullYear()+'年'+(m.getMonth()+1)+'月';
+    document.getElementById('btnNavPrev').onclick = function() { changeMonth(-1); };
+    document.getElementById('btnNavNext').onclick = function() { changeMonth(1); };
+    document.getElementById('modeBadge').textContent = getModeLabel(getModeForDate(new Date()));
+    document.getElementById('modeBadge').className = 'mode-badge ' + getModeClass(getModeForDate(new Date()));
+  } else if (currentView === 'week' && currentWeek) {
+    const end = new Date(currentWeek); end.setDate(currentWeek.getDate() + 6);
+    document.getElementById('headerTitle').innerHTML = fmtDate(currentWeek) + ' - ' + fmtDate(end);
+    document.getElementById('btnNavPrev').onclick = function() { changeWeek(-1); };
+    document.getElementById('btnNavNext').onclick = function() { changeWeek(1); };
+    const mode = getModeForDate(currentWeek);
+    document.getElementById('modeBadge').textContent = getModeLabel(mode);
+    document.getElementById('modeBadge').className = 'mode-badge ' + getModeClass(mode);
+  }
+}
+
+function changeMonth(delta) {
+  currentMonth.setMonth(currentMonth.getMonth() + delta);
+  renderMonthView();
+  updateHeader();
+}
+function changeWeek(delta) {
+  currentWeek.setDate(currentWeek.getDate() + delta * 7);
+  if (isDesktop()) {
+    renderPrintableWeek();
+    updateHeader();
+  } else {
+    renderWeekView();
+    updateHeader();
+  }
+}
+function changeDay(delta) {
+  currentDay.setDate(currentDay.getDate() + delta);
+  renderDayView();
+  updateHeader(true);
+}
+function goToday() {
+  if (isDesktop()) {
+    currentWeek = getMonday(new Date());
+    renderPrintableWeek();
+    updateHeader();
+    return;
+  }
+  if (currentView === 'day') {
+    currentDay = new Date();
+    renderDayView();
+    updateHeader(true);
+  } else if (currentView === 'week') {
+    currentWeek = getMonday(new Date());
+    renderWeekView();
+    updateHeader();
+  } else {
+    currentMonth = new Date(); currentMonth.setDate(1);
+    renderMonthView();
+    updateHeader();
+  }
+}
+
+// ===================================================================
+// 14. 积分面板
+// ===================================================================
+// ===================================================================
+// 15. 兑换项目管理
+// ===================================================================
+function getDefaultExchangeItems() {
+  return [{ id: 'game', name: '🎮 玩游戏', cost: 1, unit: '分钟' }];
+}
+
+function renderExchangeItems() {
+  if (exchangeItems.length === 0) exchangeItems = getDefaultExchangeItems();
+  const c = document.getElementById('psItems');
+  let html = '';
+  exchangeItems.forEach((item, i) => {
+    const total = item.cost;
+    html += '<div class="ps-item" data-idx="'+i+'">';
+    html += '<span class="psi-name">'+item.name+'</span>';
+    html += '<span class="psi-cost">每份 <input type="number" class="psi-cost-input" value="'+item.cost+'" min="1" data-idx="'+i+'" style="width:50px;padding:2px 4px;border:1px solid #ddd;border-radius:4px;font-size:13px;"> 分</span>';
+    html += '<span class="psi-qty"><input type="number" class="psi-qty-input" value="1" min="1" data-idx="'+i+'" style="width:40px;padding:2px 4px;border:1px solid #ddd;border-radius:4px;font-size:13px;"> '+item.unit+'</span>';
+    html += '<span class="psi-total" id="psiTotal'+i+'">= <b>'+total+'</b> 分</span>';
+    html += '<button class="psi-spend" data-idx="'+i+'" style="padding:4px 12px;font-size:12px;border:none;border-radius:6px;background:#e67e22;color:#fff;cursor:pointer;">兑换</button>';
+    html += '<button class="psi-del" data-idx="'+i+'" style="border:none;background:none;font-size:14px;cursor:pointer;color:#e74c3c;padding:4px;" title="删除项目">✕</button>';
+    html += '</div>';
+  });
+  // 添加新项目
+  html += '<div class="ps-add-item"><input id="newItemName" placeholder="项目名称（如：和妈妈一起睡）"><input id="newItemCost" type="number" placeholder="分值" min="1"><input id="newItemUnit" placeholder="单位（次/分钟）" value="次"><button id="btnAddItem">＋ 添加</button></div>';
+  c.innerHTML = html;
+
+  // 动态绑定事件
+  document.querySelectorAll('.psi-qty-input, .psi-cost-input').forEach(inp => {
+    inp.addEventListener('input', function() {
+      const idx = parseInt(this.dataset.idx);
+      const item = exchangeItems[idx]; if (!item) return;
+      const qty = parseInt(document.querySelector('.psi-qty-input[data-idx="'+idx+'"]').value) || 1;
+      const cost = parseInt(document.querySelector('.psi-cost-input[data-idx="'+idx+'"]').value) || item.cost;
+      const el = document.getElementById('psiTotal'+idx);
+      if (el) el.innerHTML = '= <b>'+(qty*cost)+'</b> 分';
+    });
+  });
+  document.querySelectorAll('.psi-spend').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const idx = parseInt(this.dataset.idx);
+      const item = exchangeItems[idx]; if (!item) return;
+      const qty = parseInt(document.querySelector('.psi-qty-input[data-idx="'+idx+'"]').value) || 1;
+      const cost = parseInt(document.querySelector('.psi-cost-input[data-idx="'+idx+'"]').value) || item.cost;
+      const total = qty * cost;
+      if (total <= 0 || total > getRemain()) { showToast(total<=0?'请输入有效数量':'😅 积分不够哦'); return; }
+      transactions.push({ id: Date.now().toString(36)+Math.random().toString(36).slice(2,5), date: fmtDateFull(new Date()), type: 'spend', amount: total, note: item.name+' ×'+qty });
+      saveData();
+      showToast('🎉 兑换成功！');
+      const mk = currentMonth.getFullYear()+'-'+String(currentMonth.getMonth()+1).padStart(2,'0');
+      document.getElementById('psEarned').textContent = getTotalEarned();
+      document.getElementById('psSpent').textContent = getTotalSpent();
+      document.getElementById('psRemain').textContent = getRemain();
+      renderPointsLog(mk);
+      renderExchangeItems();
+    });
+  });
+  document.querySelectorAll('.psi-del').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const idx = parseInt(this.dataset.idx);
+      if (confirm('删除「'+exchangeItems[idx].name+'」？')) { exchangeItems.splice(idx,1); saveData(); renderExchangeItems(); }
+    });
+  });
+  document.getElementById('btnAddItem').addEventListener('click', function() {
+    const name = document.getElementById('newItemName').value.trim();
+    const cost = parseInt(document.getElementById('newItemCost').value) || 0;
+    const unit = document.getElementById('newItemUnit').value.trim() || '次';
+    if (!name || cost <= 0) { showToast('请填写项目名称和分值'); return; }
+    exchangeItems.push({ id: 'item_'+Date.now().toString(36), name, cost, unit });
+    saveData(); showToast('✅ 已添加');
+    document.getElementById('newItemName').value = ''; document.getElementById('newItemCost').value = '';
+    renderExchangeItems();
+  });
+}
+
+// ===================================================================
+// 16. GitHub Gist 跨设备同步
+// ===================================================================
+function getSyncData() {
+  return { checks, streakState, effectiveLog, transactions, dateConfig, voteRecords, exchangeItems, gistConfig, _version: 1, _updatedAt: new Date().toISOString() };
+}
+let gistSyncTimer = null;
+function debounceSyncToGist() {
+  clearTimeout(gistSyncTimer);
+  if (!gistConfig.token) return;
+  gistSyncTimer = setTimeout(syncToGist, 3000);
+}
+async function syncToGist() {
+  if (!gistConfig.token || gistSyncStatus === 'syncing') return;
+  gistSyncStatus = 'syncing'; updateSyncIndicator();
+  try {
+    const data = getSyncData();
+    const body = { description: '🌟 好习惯积分表 - 跨设备同步', files: { 'habit-tracker-data.json': { content: JSON.stringify(data, null, 2) } }, public: false };
+    let url = 'https://api.github.com/gists', method = 'POST';
+    if (gistConfig.gistId) { url += '/' + gistConfig.gistId; method = 'PATCH'; }
+    const res = await fetch(url, { method, headers: { 'Authorization': 'Bearer ' + gistConfig.token, 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    if (!res.ok) { const e = await res.json(); throw new Error(e.message || res.status); }
+    const gist = await res.json();
+    if (!gistConfig.gistId) { gistConfig.gistId = gist.id; saveData(); }
+    localStorage.setItem('habitTableV3_lastUpdate', data._updatedAt);
+    gistSyncStatus = 'ok'; updateSyncIndicator();
+  } catch(e) { console.warn('Gist sync fail:', e); gistSyncStatus = 'error'; updateSyncIndicator(); }
+}
+async function loadFromGist() {
+  if (!gistConfig.token || !gistConfig.gistId) { gistSyncStatus='idle'; updateSyncIndicator(); return false; }
+  try {
+    const res = await fetch('https://api.github.com/gists/'+gistConfig.gistId, { headers: { 'Authorization': 'Bearer '+gistConfig.token } });
+    if (!res.ok) throw new Error('fetch fail');
+    const gist = await res.json();
+    const fc = gist.files['habit-tracker-data.json'];
+    if (!fc||!fc.content) return false;
+    const r = JSON.parse(fc.content);
+    const lu = localStorage.getItem('habitTableV3_lastUpdate')||'';
+    if (r._updatedAt > lu) {
+      ['checks','streakState','effectiveLog','transactions','dateConfig','voteRecords','exchangeItems'].forEach(k => { if (r[k]) eval(k+'=r[k]'); });
+      localStorage.setItem('habitTableV3_lastUpdate', r._updatedAt);
+      gistSyncStatus='ok'; updateSyncIndicator();
+      return true;
+    }
+    gistSyncStatus='ok'; updateSyncIndicator();
+  } catch(e) { console.warn('Gist load fail:', e); gistSyncStatus='error'; updateSyncIndicator(); }
+  return false;
+}
+function updateSyncIndicator() {
+  const el = document.getElementById('syncStatus');
+  if (!el) return;
+  if (!gistConfig.token) { el.textContent=''; el.style.display='none'; return; }
+  el.style.display='inline';
+  if (gistSyncStatus==='syncing') { el.textContent='🔄'; el.title='同步中...'; }
+  else if (gistSyncStatus==='ok') { el.textContent='✅'; el.title='已同步'; }
+  else if (gistSyncStatus==='error') { el.textContent='⚠️'; el.title='同步异常'; }
+  else { el.textContent='○'; }
+}
+async function initSync() {
+  if (!gistConfig.token) return;
+  const updated = await loadFromGist();
+  if (updated) {
+    recomputeStreaks();
+    if (isDesktop()) renderPrintableWeek();
+    else if (currentView==='month') renderMonthView();
+    else if (currentView==='week') renderWeekView();
+    else renderDayView();
+  }
+}
+
+function showPointsSheet() {
+  const monthKey = currentMonth.getFullYear()+'-'+String(currentMonth.getMonth()+1).padStart(2,'0');
+  document.getElementById('psEarned').textContent = getTotalEarned();
+  document.getElementById('psSpent').textContent = getTotalSpent();
+  document.getElementById('psRemain').textContent = getRemain();
+  renderExchangeItems();
+  renderPointsLog(monthKey);
+  document.getElementById('pointsOverlay').classList.add('show');
+  document.getElementById('pointsSheet').classList.add('show');
+}
+
+function hidePointsSheet() {
+  document.getElementById('pointsOverlay').classList.remove('show');
+  document.getElementById('pointsSheet').classList.remove('show');
+}
+
+function renderPointsLog(monthKey) {
+  const log = transactions.filter(t => t.date.startsWith(monthKey)).sort((a, b) => b.date.localeCompare(a.date) || b.id.localeCompare(a.id));
+  const container = document.getElementById('psLog');
+  let html = '<div class="psl-title">📋 本月流水</div>';
+  if (log.length === 0) {
+    html += '<div style="font-size:13px;color:var(--text2);padding:8px 0;">暂无记录</div>';
+  } else {
+    log.forEach(t => {
+      const amtCls = t.type === 'spend' || t.type === 'deduct' ? 'negative' : 'positive';
+      const sign = t.type === 'spend' || t.type === 'deduct' ? '-' : '+';
+      const label = t.type === 'spend' ? '🎮 兑换' : t.type === 'deduct' ? '⚠️ 扣分' : '✅ 达标';
+      html += `<div class="psl-item"><span class="psl-date">${t.date.slice(5)}</span><span class="psl-note">${label} ${t.note||''}</span><span class="psl-amount ${amtCls}">${sign}${t.amount}</span></div>`;
+    });
+  }
+  container.innerHTML = html;
+}
+
+// ===================================================================
+// 15. 导出
+// ===================================================================
+function exportMonth() {
+  const m = currentMonth;
+  const monthKey = m.getFullYear()+'-'+String(m.getMonth()+1).padStart(2,'0');
+  const daysInMonth = getMonthDays(m.getFullYear(), m.getMonth());
+
+  let csv = '﻿'; // BOM for Excel
+  csv += '好习惯积分表,' + m.getFullYear()+'年'+(m.getMonth()+1)+'月\n';
+  csv += '导出日期,' + fmtDateFull(new Date()) + '\n\n';
+  csv += '日期,星期,模式,习惯,状态,分值,细则\n';
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const date = new Date(m.getFullYear(), m.getMonth(), d);
+    const ds = fmtDateFull(date);
+    const mode = getModeLabel(getModeForDate(date));
+    const dow = ['一','二','三','四','五','六','日'][getDayOfWeek(date)];
+
+    HABITS.forEach(h => {
+      const status = getDayStatus(h, date);
+      const cls = status === '✓' ? '完成' : status === '✗' ? '未完成' : status === '○' ? '待做' : '不适用';
+      const rule = getRuleText(h, date);
+      const pts = status === '✓' ? h.pts : 0;
+      csv += `${ds},${dow},${mode},${h.name},${cls},${pts},"${rule}"\n`;
+    });
+  }
+
+  csv += '\n积分流水\n日期,类型,金额,备注\n';
+  transactions.filter(t => t.date.startsWith(monthKey)).sort((a,b) => a.date.localeCompare(b.date)).forEach(t => {
+    const label = t.type === 'spend' ? '兑换' : t.type === 'deduct' ? '扣分' : '达标';
+    const sign = t.type === 'spend' || t.type === 'deduct' ? '-' : '+';
+    csv += `${t.date},${label},${sign}${t.amount},${t.note||''}\n`;
+  });
+
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `好习惯积分表_${monthKey}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('📤 导出成功');
+}
+
+// ===================================================================
+// 16. Toast
+// ===================================================================
+let toastTimer;
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 1200);
+}
+
+// ===================================================================
+// 17. 初始化
+// ===================================================================
+function init() {
+  loadData();
+  recomputeStreaks();
+  currentMonth = new Date(); currentMonth.setDate(1);
+  currentWeek = getMonday(new Date());
+
+  // Tab切换
+  document.querySelectorAll('.tabbar .tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      const v = this.dataset.tab;
+      if (v === 'points') { showPointsSheet(); return; }
+      if (v === 'vote') { showVoteModal(); return; }
+      switchView(v);
+    });
+  });
+
+  // 日视图返回
+  document.getElementById('dayBack').addEventListener('click', function() {
+    switchView('week');
+  });
+  document.getElementById('dayGoToday').addEventListener('click', function() {
+    goToday();
+  });
+  document.getElementById('dayPrev').addEventListener('click', function() { changeDay(-1); });
+  document.getElementById('dayNext').addEventListener('click', function() { changeDay(1); });
+
+  // 日视图触摸滑动
+  let touchStartX = 0, touchEndX = 0;
+  function addSwipe(el, cbLeft, cbRight) {
+    el.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    el.addEventListener('touchend', function(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) cbLeft(); else cbRight();
+      }
+    }, { passive: true });
+  }
+  addSwipe(document.getElementById('dayHabits'), () => changeDay(1), () => changeDay(-1));
+  addSwipe(document.getElementById('weekCards'), () => changeWeek(1), () => changeWeek(-1));
+  addSwipe(document.getElementById('monthCalendar'), () => changeMonth(1), () => changeMonth(-1));
+
+  // 窗口缩放宽高切换时自动适配视图
+  let resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      if (isDesktop()) {
+        if (!currentWeek) currentWeek = getMonday(new Date());
+        renderPrintableWeek();
+        updateHeader();
+      } else {
+        const v = currentView || 'month';
+        document.querySelectorAll('.month-view,.week-view,.day-view').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tabbar .tab').forEach(t => t.classList.remove('active'));
+        if (v === 'month' || v === 'week') {
+          document.getElementById(v+'View').classList.add('active');
+          document.querySelector('.tab[data-tab="'+v+'"]').classList.add('active');
+          if (v === 'month') renderMonthView(); else renderWeekView();
+        } else {
+          document.getElementById('monthView').classList.add('active');
+          document.querySelector('.tab[data-tab="month"]').classList.add('active');
+          renderMonthView();
+        }
+        updateHeader();
+      }
+    }, 150);
+  });
+
+  // 积分面板
+  document.getElementById('pointsOverlay').addEventListener('click', hidePointsSheet);
+  // PS tabs
+  document.querySelectorAll('[data-ps-tab]').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('[data-ps-tab]').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const t = this.dataset.psTab;
+      document.getElementById('psFormSpend').style.display = t === 'spend' ? 'block' : 'none';
+      document.getElementById('psFormDeduct').style.display = t === 'deduct' ? 'block' : 'none';
+      if (t === 'items') { const mk = currentMonth.getFullYear()+'-'+String(currentMonth.getMonth()+1).padStart(2,'0'); renderPointsLog(mk); }
+      if (t === 'spend') renderExchangeItems();
+    });
+  });
+
+  // 扣分
+  document.getElementById('btnDeduct').addEventListener('click', function() {
+    const pts = parseInt(document.getElementById('psDeductPts').value) || 0;
+    if (pts <= 0) { showToast('请输入有效分值'); return; }
+    if (pts > getRemain()) { showToast('😅 积分不够扣'); return; }
+    const reason = document.getElementById('psDeductReason').value;
+    transactions.push({
+      id: Date.now().toString(36) + Math.random().toString(36).slice(2,5),
+      date: fmtDateFull(new Date()),
+      type: 'deduct', amount: pts,
+      note: reason
+    });
+    saveData();
+    showToast('⚠️ 已扣分');
+    document.getElementById('psDeductPts').value = '';
+    const monthKey = currentMonth.getFullYear()+'-'+String(currentMonth.getMonth()+1).padStart(2,'0');
+    renderPointsLog(monthKey);
+    document.getElementById('psEarned').textContent = getTotalEarned();
+    document.getElementById('psSpent').textContent = getTotalSpent();
+    document.getElementById('psRemain').textContent = getRemain();
+  });
+
+  // 积分按钮（桌面端顶部）
+  document.getElementById('btnPoints').addEventListener('click', showPointsSheet);
+
+  // 投票
+  document.getElementById('voteOverlay').addEventListener('click', hideVoteModal);
+  document.getElementById('btnSaveVote').addEventListener('click', saveVoteResult);
+
+  // 设置
+  document.getElementById('btnSettings').addEventListener('click', function() {
+    renderSettings();
+    document.getElementById('settingsOverlay').classList.add('show');
+    document.getElementById('settingsSheet').classList.add('show');
+  });
+  document.getElementById('settingsOverlay').addEventListener('click', function() {
+    document.getElementById('settingsOverlay').classList.remove('show');
+    document.getElementById('settingsSheet').classList.remove('show');
+  });
+
+  // 同步 - 测试连接
+  document.getElementById('btnTestSync').addEventListener('click', async function() {
+    const token = document.getElementById('gistTokenInput').value.trim();
+    if (!token) { showToast('请先填入 GitHub Token'); return; }
+    gistConfig.token = token; gistSyncStatus = 'syncing'; updateSyncIndicator();
+    document.getElementById('gistSyncInfo').textContent = '🔄 正在测试...';
+    try {
+      const res = await fetch('https://api.github.com/gists', { method: 'GET', headers: { 'Authorization': 'Bearer '+token } });
+      if (res.ok) { document.getElementById('gistSyncInfo').textContent = '✅ 连接成功！'; showToast('✅ GitHub 连接成功'); gistSyncStatus='ok'; updateSyncIndicator(); }
+      else { const e = await res.json(); document.getElementById('gistSyncInfo').textContent = '❌ '+ (e.message||res.status); gistSyncStatus='error'; updateSyncIndicator(); }
+    } catch(e) { document.getElementById('gistSyncInfo').textContent = '❌ '+e.message; gistSyncStatus='error'; updateSyncIndicator(); }
+  });
+  // 同步 - 清除 Token
+  document.getElementById('btnClearToken').addEventListener('click', function() {
+    document.getElementById('gistTokenInput').value = ''; gistConfig.token=''; gistConfig.gistId=''; gistSyncStatus='idle';
+    updateSyncIndicator(); document.getElementById('gistSyncInfo').textContent='已清除'; saveData(); showToast('已清除 Token');
+  });
+
+  // 设置 - 保存
+  document.getElementById('btnSettingsSave').addEventListener('click', function() {
+    const name = document.getElementById('childNameInput').value.trim();
+    if (name) localStorage.setItem('habitTable_childName', name);
+    // 收集假期数据
+    const ranges = [];
+    document.querySelectorAll('.vacation-row').forEach(row => {
+      const nameEl = row.querySelector('.v-name');
+      const startEl = row.querySelector('.v-start');
+      const endEl = row.querySelector('.v-end');
+      if (nameEl && startEl && endEl && startEl.value && endEl.value) {
+        const name = nameEl.tagName === 'INPUT' ? nameEl.value : nameEl.textContent;
+        ranges.push({ name: name, start: startEl.value, end: endEl.value });
+      }
+    });
+    dateConfig.vacationRanges = ranges;
+    const token = document.getElementById('gistTokenInput').value.trim();
+    if (token !== gistConfig.token) { gistConfig.token = token; if (!token) gistConfig.gistId = ''; gistSyncStatus = 'idle'; }
+    saveData();
+    document.getElementById('settingsOverlay').classList.remove('show');
+    document.getElementById('settingsSheet').classList.remove('show');
+    showToast('✅ 设置已保存');
+    updateHeader();
+    if (currentView === 'month') renderMonthView();
+  });
+
+  // 导出按钮添加到header
+  const exportBtn = document.createElement('button');
+  exportBtn.textContent = '📤';
+  exportBtn.title = '导出本月';
+  exportBtn.onclick = exportMonth;
+  document.querySelector('.header .actions').insertBefore(exportBtn, document.getElementById('btnSettings'));
+
+  // 月视图初始显示
+  switchView('month');
+  setTimeout(initSync, 1000);
+}
+
+// 设置渲染
+function renderSettings() {
+  const savedName = localStorage.getItem('habitTable_childName') || '小美';
+  document.getElementById('childNameInput').value = savedName;
+
+  const container = document.getElementById('vacationList');
+  container.innerHTML = '';
+  if (dateConfig.vacationRanges.length === 0) {
+    // 默认寒暑假
+    dateConfig.vacationRanges = [
+      { name: '暑假', start: '2026-07-01', end: '2026-08-31' },
+      { name: '寒假', start: '2027-01-18', end: '2027-02-28' },
+    ];
+  }
+  dateConfig.vacationRanges.forEach((r, i) => {
+    const row = document.createElement('div');
+    row.className = 'vacation-row';
+    row.innerHTML = `
+      <span class="v-name">${r.name}</span>
+      <input type="date" class="v-start" value="${r.start}">
+      <span>至</span>
+      <input type="date" class="v-end" value="${r.end}">
+      <button class="del-vacation" data-idx="${i}">✕</button>
+    `;
+    container.appendChild(row);
+    row.querySelector('.del-vacation').addEventListener('click', function() {
+      row.remove();
+    });
+  });
+
+  document.getElementById('addVacation').onclick = function() {
+    const row = document.createElement('div');
+    row.className = 'vacation-row';
+    const idx = container.children.length;
+    row.innerHTML = `
+      <input class="v-name" value="自定义假期" style="width:80px;border:2px solid var(--border);border-radius:8px;padding:6px;font-size:13px;">
+      <input type="date" class="v-start" value="">
+      <span>至</span>
+      <input type="date" class="v-end" value="">
+      <button class="del-vacation">✕</button>
+    `;
+    container.appendChild(row);
+    row.querySelector('.del-vacation').addEventListener('click', function() { row.remove(); });
+  };
+
+  // Gist Token
+  document.getElementById('gistTokenInput').value = gistConfig.token || '';
+  const info = document.getElementById('gistSyncInfo');
+  if (gistConfig.token && gistConfig.gistId) info.textContent = '✅ 已连接，Gist ID: ' + gistConfig.gistId.slice(0,12)+'...';
+  else if (gistConfig.token && !gistConfig.gistId) info.textContent = '⏳ Token 已设置，等待首次同步...';
+  else info.textContent = '未设置同步';
+}
+
+// 月视图点击进入周视图（已经在renderMonthView中绑定）
+// 额外：键盘/触摸滑动支持 - 简单处理用鼠标拖拽
+
+// 启动
+init();
+</script>
+</body>
+</html>

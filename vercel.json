@@ -1,6 +1,7 @@
 {
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/ht", "destination": "/habit-tracker.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
